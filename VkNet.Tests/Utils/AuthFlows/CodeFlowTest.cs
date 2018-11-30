@@ -48,20 +48,22 @@ namespace VkNet.Tests.Utils.AuthFlows
 			});
 		}
 
+		private const string TEST_AUTH_CODE = "7a6fa4dff77a228eeda56603b8f53806c883f011c40b72630bb50df056f6479e52a";
+
 		[Test]
 		public void ShouldAuthorize()
 		{
-			Url = Api.AuthorizationFlow.CreateAuthorizeUrl().AbsoluteUri;
+			var uri = Api.AuthorizationFlow.CreateAuthorizeUrl();
+			Url = $"{uri.Scheme}://{uri.Host}{uri.AbsolutePath}"; // Authorize using POST method so parameters must be skipped
 
 			Json = @"{
 					  'access_token': 'token',
 					  'expires_in': 0,
 					  'user_id': 12345
 					}";
-
-			((CodeFlow) Api.AuthorizationFlow)
-				.SetResponseUri(new Uri(
-					$"{Api.AuthorizationFlow.GetAuthParams().RedirectUri}?code=7a6fa4dff77a228eeda56603b8f53806c883f011c40b72630bb50df056f6479e52a"));
+			CodeFlow flow = (CodeFlow)Api.AuthorizationFlow;
+			var respUri = new Uri($"{Api.AuthorizationFlow.GetAuthParams().RedirectUri}?code={TEST_AUTH_CODE}");
+			flow.SetResponseUri(respUri);
 
 			Assert.DoesNotThrow(() => Api.Authorize());
 			Assert.That(Api.AccessToken.Token, Is.EqualTo("token"));

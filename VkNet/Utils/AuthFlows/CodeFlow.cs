@@ -70,7 +70,7 @@ namespace VkNet.Utils.AuthFlows
 				throw new VkApiException($"{result.Error}{Environment.NewLine}{result.ErrorDescription}");
 			}
 
-			var response = _restClient.PostAsync(new Uri("https://oauth.vk.com/access_token"),
+			var response = _restClient.PostAsync(new Uri("https://oauth.vk.com/authorize"),
 					new VkParameters
 					{
 						{ "client_id", _authParams.ClientId },
