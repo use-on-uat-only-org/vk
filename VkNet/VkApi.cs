@@ -42,6 +42,8 @@ namespace VkNet
 	/// </summary>
 	public class VkApi : IVkApi
 	{
+		private readonly IServiceProvider _serviceProvider;
+
 		/// <summary>
 		/// Обработчик ошибки капчи
 		/// </summary>
@@ -65,6 +67,9 @@ namespace VkNet
 
 	#pragma warning restore S1104 // Fields should not have public accessibility
 
+		/// TODO: Add required services explicitly outside VkApi ctor
+		/// Transfer to ctor only end-using services and prevent initializing pipe on every instance creation
+
 		/// <inheritdoc />
 		public VkApi(ILogger<VkApi> logger, ICaptchaSolver captchaSolver = null, IAuthorizationFlow authorizationFlow = null)
 		{
@@ -87,9 +92,9 @@ namespace VkNet
 
 			container.RegisterDefaultDependencies();
 
-			IServiceProvider serviceProvider = container.BuildServiceProvider();
+			_serviceProvider = container.BuildServiceProvider();
 
-			Initialization(serviceProvider);
+			Initialization(_serviceProvider);
 		}
 
 		/// <inheritdoc />
@@ -99,9 +104,9 @@ namespace VkNet
 
 			container.RegisterDefaultDependencies();
 
-			IServiceProvider serviceProvider = container.BuildServiceProvider();
+			_serviceProvider = container.BuildServiceProvider();
 
-			Initialization(serviceProvider);
+			Initialization(_serviceProvider);
 		}
 
 		/// <summary>
@@ -154,7 +159,8 @@ namespace VkNet
 
 					return authorizationFlow.Authorize();
 				});
-			} else
+			}
+			else
 			{
 				authorizationResult = authorizationFlow.Authorize();
 			}
@@ -169,7 +175,8 @@ namespace VkNet
 			_logger?.LogDebug("Авторизация прошла успешно");
 		}
 		/// <inheritdoc />
-		public void Authorize(ApiAuthParams @params) => Authorize((IApiAuthParams)@params);
+		public void Authorize(ApiAuthParams @params)
+			=> Authorize(new Browser(_serviceProvider.GetService<ILogger<Browser>>(), VkApiVersion));
 
 		/// <inheritdoc cref="IVkApiAuth.Authorize"/>
 		public void Authorize()

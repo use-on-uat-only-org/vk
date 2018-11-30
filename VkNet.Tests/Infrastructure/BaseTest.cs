@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
@@ -146,9 +146,9 @@ namespace VkNet.Tests
 
 		protected void SetupIRestClient(Mock<IRestClient> restClient)
 		{
-			restClient.Setup(x =>
-					x.PostAsync(It.Is<Uri>(s => s == new Uri(Url)),
-						It.IsAny<IEnumerable<KeyValuePair<string, string>>>()))
+			restClient
+				.Setup(x => x.PostAsync(It.Is<Uri>(s => s == new Uri(Url)),
+					It.IsAny<IEnumerable<KeyValuePair<string, string>>>()))
 				.Callback(Callback)
 				.Returns(() =>
 				{
@@ -160,7 +160,8 @@ namespace VkNet.Tests
 					return Task.FromResult(HttpResponse<string>.Success(HttpStatusCode.OK, Json, Url));
 				});
 
-			restClient.Setup(x => x.PostAsync(It.Is<Uri>(s => string.IsNullOrWhiteSpace(Url)),
+			restClient
+				.Setup(x => x.PostAsync(It.Is<Uri>(s => string.IsNullOrWhiteSpace(Url)),
 					It.IsAny<IEnumerable<KeyValuePair<string, string>>>()))
 				.Throws<ArgumentException>();
 		}

@@ -19,7 +19,7 @@ namespace VkNet.Utils
 		/// Логгер
 		/// </summary>
 		[CanBeNull]
-		private readonly ILogger<Browser> _logger;
+		private readonly ILogger _logger;
 
 		/// <summary>
 		/// Менеджер версий VkApi
