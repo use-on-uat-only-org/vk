@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
@@ -92,11 +92,11 @@ namespace VkNet.Utils.AuthFlows
 
 			var parameters = new VkParameters
 			{
-				{ "client_id", _authParams.ClientId },
+				{ "client_id", _authParams.ApplicationId },
 				{ "redirect_uri", _authParams.RedirectUri },
 				{ "display", _authParams.Display },
 				{ "response_type", "token" },
-				{ "scope", _authParams.Scope?.ToUInt64() },
+				{ "scope", _authParams.Settings?.ToUInt64() },
 				{ "state", _authParams.State },
 				{ "v", _versionManager.Version },
 				{ "revoke", 1 }

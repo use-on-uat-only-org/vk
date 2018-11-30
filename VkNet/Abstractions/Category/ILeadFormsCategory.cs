@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using VkNet.Abstractions.Category.Async;
 using VkNet.Model.LeadForms;
 
-namespace VkNet.Abstractions.Category
+namespace VkNet.Abstractions
 {
 	/// <summary>
 	/// Формы сбора заявок  Подойдут для записи клиентов, предварительной регистрации, подписки на рассылки, запросов информации, подключения услуг, оформления заказов и многого другого.

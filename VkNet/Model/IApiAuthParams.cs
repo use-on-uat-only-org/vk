@@ -31,7 +31,7 @@ namespace VkNet.Model
 		/// <summary>
 		/// Идентификатор Вашего приложения.
 		/// </summary>
-		long ClientId { get; set; }
+		ulong? ApplicationId { get; set; }
 
 		/// <summary>
 		/// Адрес, на который будет переадресован пользователь после прохождения
@@ -54,7 +54,7 @@ namespace VkNet.Model
 		/// ВНИМАНИЕ!!! Settings.All по умолчанию не содержит Settings.Offline
 		/// </remarks>
 		[CanBeNull]
-		Settings Scope { get; set; }
+		Settings Settings { get; set; }
 
 		/// <summary>
 		/// Произвольная строка, которая будет возвращена вместе с результатом авторизации.

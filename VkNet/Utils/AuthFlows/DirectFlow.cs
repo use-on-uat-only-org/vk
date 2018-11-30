@@ -130,12 +130,12 @@ namespace VkNet.Utils.AuthFlows
 
 			var parameters = new VkParameters
 			{
-				{ "client_id", _authParams.ClientId },
+				{ "client_id", _authParams.ApplicationId },
 				{ "client_secret", _authParams.ClientSecret },
 				{ "grant_type", "password" },
 				{ "username", _authParams.Login },
 				{ "password", _authParams.Password },
-				{ "scope", _authParams.Scope?.ToUInt64() },
+				{ "scope", _authParams.Settings?.ToUInt64() },
 				{ "2fa_supported", _authParams.TwoFactorSupported },
 				{ "code", _authParams.Code },
 				{ "v", _versionManager.Version }

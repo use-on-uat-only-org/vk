@@ -99,7 +99,7 @@ namespace VkNet.Utils.AuthFlows
 
 			var parameters = new VkParameters
 			{
-				{ "client_id", _authParams.ClientId },
+				{ "client_id", _authParams.ApplicationId },
 				{ "client_secret", _authParams.ClientSecret },
 				{ "grant_type", "client_credentials" },
 				{ "v", _versionManager.Version }

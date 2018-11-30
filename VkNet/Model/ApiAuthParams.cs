@@ -22,7 +22,7 @@ namespace VkNet.Model
 		public string ClientSecret { get; set; }
 
 		/// <inheritdoc />
-		public long ClientId { get; set; }
+		public ulong? ApplicationId { get; set; }
 
 		/// <inheritdoc />
 		public Uri RedirectUri { get; set; }
@@ -32,7 +32,7 @@ namespace VkNet.Model
 		public Display Display { get; set; }
 
 		/// <inheritdoc />
-		public Settings Scope { get; set; }
+		public Settings Settings { get; set; }
 
 		/// <inheritdoc />
 		public string State { get; set; }
@@ -48,5 +48,24 @@ namespace VkNet.Model
 
 		/// <inheritdoc />
 		public string CaptchaKey { get; set; }
+
+		/// <summary>
+		/// Формирует параметры авторизации по минимальному набору необходимых полей для авторизации по логину и паролю
+		/// </summary>
+		/// <param name="appId">Id приложения ВК</param>
+		/// <param name="login">Логин</param>
+		/// <param name="password">Пароль</param>
+		/// <param name="scopeSettings">Права доступа</param>
+		/// <returns></returns>
+		public static ApiAuthParams Format(ulong appId, string login, string password, Settings scopeSettings)
+		{
+			return new ApiAuthParams()
+			{
+				ApplicationId = appId,
+				Login = login,
+				Password = password,
+				Settings = scopeSettings
+			};
+		}
 	}
 }

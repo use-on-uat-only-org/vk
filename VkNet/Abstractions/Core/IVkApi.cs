@@ -1,7 +1,7 @@
 using System;
 using VkNet.Abstractions.Authorization;
-using VkNet.Abstractions.Core;
 using VkNet.Enums;
+using VkNet.Infrastructure;
 
 namespace VkNet.Abstractions
 {
@@ -25,7 +25,12 @@ namespace VkNet.Abstractions
 		/// <summary>
 		/// Текущая сессия.
 		/// </summary>
-		ITokenManager AccessToken { get; set; }
+		TokenManager AccessToken { get; set; }
+
+		/// <summary>
+		/// Id авторизованного пользователя
+		/// </summary>
+		long? UserId { get; }
 
 	#endregion
 

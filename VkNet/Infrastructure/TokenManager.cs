@@ -1,13 +1,24 @@
 using System;
 using System.Threading;
+using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 using VkNet.Abstractions;
 using VkNet.Abstractions.Core;
 
 namespace VkNet.Infrastructure
 {
-	/// <inheritdoc />
-	public class TokenManager : ITokenManager
+	/// <summary>
+	/// Служит для оповещения об истечении токена.
+	/// </summary>
+	/// <param name="sender">
+	/// Экземпляр API у которого истекло время токена.
+	/// </param>
+	public delegate void VkApiDelegate(IVkApi sender);
+
+	/// <summary>
+	/// Менеджер управления токеном приложения
+	/// </summary>
+	public class TokenManager : IDisposable
 	{
 		private readonly IVkApi _api;
 
@@ -41,7 +52,9 @@ namespace VkNet.Infrastructure
 		/// </summary>
 		private DateTime ExpiresInDateTime => DateTime.Now.Add(TimeSpan.FromSeconds(ExpireTime));
 
-		/// <inheritdoc />
+		/// <summary>
+		/// Идентификатор пользователя, от имени которого была проведена авторизация.
+		/// </summary>
 		public long? UserId { get; set; }
 
 		/// <inheritdoc />
@@ -51,16 +64,28 @@ namespace VkNet.Infrastructure
 			GC.SuppressFinalize(this);
 		}
 
-		/// <inheritdoc />
+		/// <summary>
+		/// Оповещает об истечении срока токена доступа
+		/// </summary>
+		[UsedImplicitly]
 		public event VkApiDelegate OnTokenExpires;
 
-		/// <inheritdoc />
+		/// <summary>
+		/// Токен приложения
+		/// </summary>
 		public string Token { get; internal set; }
 
-		/// <inheritdoc />
+		/// <summary>
+		/// <c> true </c> - если была произведена авторизация.
+		/// </summary>
 		public bool IsAuthorized => !string.IsNullOrWhiteSpace(Token);
 
-		/// <inheritdoc />
+		/// <summary>
+		/// Время истечения токена
+		/// </summary>
+		/// <remarks>
+		/// В секундах, 0 - бесконечный токен
+		/// </remarks>
 		public int ExpireTime
 		{
 			get => _expireTime;
@@ -71,10 +96,15 @@ namespace VkNet.Infrastructure
 			}
 		}
 
-		/// <inheritdoc />
+		/// <summary>
+		/// <c> true </c> - если токен приложения истек
+		/// </summary>
 		public bool IsExpired => ExpireTime != 0 && DateTime.Now > ExpiresInDateTime;
 
-		/// <inheritdoc />
+		/// <summary>
+		/// Обновить токен
+		/// </summary>
+		/// <returns> <c> true </c> - если обновление токена прошло успешно </returns>
 		public bool RefreshToken()
 		{
 			if (_api?.AccessToken == null || _api?.AuthorizationFlow == null)
@@ -89,7 +119,10 @@ namespace VkNet.Infrastructure
 			return _api.AccessToken.IsAuthorized;
 		}
 
-		/// <inheritdoc />
+		/// <summary>
+		/// Установить значение токена приложения
+		/// </summary>
+		/// <param name="token"> Токен приложения </param>
 		public void SetToken(string token)
 		{
 			Token = token;
@@ -149,6 +182,11 @@ namespace VkNet.Infrastructure
 				null,
 				expireTime > 0 ? expireTime : Timeout.Infinite,
 				Timeout.Infinite);
+		}
+
+		public static implicit operator string(TokenManager tokenManager)
+		{
+			return tokenManager?.Token;
 		}
 	}
 }

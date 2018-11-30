@@ -73,7 +73,7 @@ namespace VkNet.Utils.AuthFlows
 			var response = _restClient.PostAsync(new Uri("https://oauth.vk.com/authorize"),
 					new VkParameters
 					{
-						{ "client_id", _authParams.ClientId },
+						{ "client_id", _authParams.ApplicationId },
 						{ "client_secret", _authParams.ClientSecret },
 						{ "redirect_uri", _authParams.RedirectUri },
 						{ "code", result.Code }
@@ -103,11 +103,11 @@ namespace VkNet.Utils.AuthFlows
 
 			var parameters = new VkParameters
 			{
-				{ "client_id", _authParams.ClientId },
+				{ "client_id", _authParams.ApplicationId },
 				{ "redirect_uri", _authParams.RedirectUri },
 				{ "display", _authParams.Display },
 				{ "response_type", "code" },
-				{ "scope", _authParams.Scope?.ToUInt64() },
+				{ "scope", _authParams.Settings?.ToUInt64() },
 				{ "state", _authParams.State },
 				{ "v", _versionManager.Version }
 			};

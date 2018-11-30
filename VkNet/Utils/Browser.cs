@@ -29,6 +29,14 @@ namespace VkNet.Utils
 		private IApiAuthParams _authParams;
 
 		/// <inheritdoc />
+		public Browser([CanBeNull] ILogger<Browser> logger, IVkApiVersionManager versionManager, IApiAuthParams authParams)
+		{
+			_logger = logger;
+			_versionManager = versionManager;
+			_authParams = authParams;
+		}
+
+		/// <inheritdoc />
 		public Browser([CanBeNull] ILogger<Browser> logger, IVkApiVersionManager versionManager)
 		{
 			_logger = logger;
@@ -36,7 +44,7 @@ namespace VkNet.Utils
 		}
 
 		/// <inheritdoc />
-		public void SetAuthParams(IApiAuthParams authParams)
+		public void SetAuthParams(IApiAuthParams authParams)	// TODO: remove this behavior. Find a way to 
 		{
 			_authParams = authParams;
 		}
@@ -81,10 +89,10 @@ namespace VkNet.Utils
 		{
 			var builder = new StringBuilder("https://oauth.vk.com/authorize?");
 
-			builder.Append($"client_id={_authParams.ClientId}&");
+			builder.Append($"client_id={_authParams.ApplicationId}&");
 			builder.Append("redirect_uri=https://oauth.vk.com/blank.html&");
 			builder.Append($"display={Display.Mobile}&");
-			builder.Append($"scope={_authParams.Scope}&");
+			builder.Append($"scope={_authParams.Settings}&");
 			builder.Append("response_type=token&");
 			builder.Append($"v={_versionManager.Version}&");
 			builder.Append("state=123456&");
