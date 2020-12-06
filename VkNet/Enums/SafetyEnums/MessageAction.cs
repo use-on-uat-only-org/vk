@@ -51,17 +51,5 @@ namespace VkNet.Enums.SafetyEnums
 		/// пользователь присоединился к беседе по ссылке.
 		/// </summary>
 		public static readonly MessageAction ChatInviteUserByLink = RegisterPossibleValue(value: "chat_invite_user_by_link");
-
-		/// <summary>
-		/// Преобразовать из VkResponse
-		/// </summary>
-		/// <param name="response"> Ответ. </param>
-		/// <returns>
-		/// Результат преобразования.
-		/// </returns>
-		public static implicit operator MessageAction(VkResponse response)
-		{
-			return response?.HasToken() != null ? FromJson(response: response) : null;
-		}
 	}
 }

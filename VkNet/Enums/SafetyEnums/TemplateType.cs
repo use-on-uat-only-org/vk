@@ -1,6 +1,4 @@
-﻿using VkNet.Utils;
-
-namespace VkNet.Enums.SafetyEnums
+﻿namespace VkNet.Enums.SafetyEnums
 {
 	/// <summary>
 	/// Тип шаблона.
@@ -11,19 +9,5 @@ namespace VkNet.Enums.SafetyEnums
 		/// Карусель
 		/// </summary>
 		public static readonly TemplateType Carousel = RegisterPossibleValue("carousel");
-
-		/// <summary>
-		/// Преобразовать из VkResponse
-		/// </summary>
-		/// <param name="response"> Ответ. </param>
-		/// <returns>
-		/// Результат преобразования.
-		/// </returns>
-		public static implicit operator TemplateType(VkResponse response)
-		{
-			return response != null && response.HasToken()
-				? FromJson(response)
-				: null;
-		}
 	}
 }

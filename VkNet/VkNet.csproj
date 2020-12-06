@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>net45;net461;netstandard2.0;net5.0</TargetFrameworks>
+		<TargetFrameworks>net461;netstandard2.0;net5.0</TargetFrameworks>
 		<AssemblyName>VkNet</AssemblyName>
 		<VersionPrefix>1.59.0</VersionPrefix>
 		<VersionSufix>
@@ -88,5 +88,9 @@
 	<ItemGroup>
 		<None Include="..\tools\vknet-icon.PNG" Pack="true" PackagePath="\" />
 		<None Include="..\LICENCE" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\VkNet.SourceGenerator\VkNet.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
 	</ItemGroup>
 </Project>
