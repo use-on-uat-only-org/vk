@@ -5,11 +5,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using VkNet.Enums;
 using VkNet.Enums.SafetyEnums;
-using VkNet.Model.Attachments;
 using VkNet.Utils;
 using VkNet.Utils.JsonConverter;
 
-namespace VkNet.Model
+namespace VkNet.Model.Group
 {
 	/// <summary>
 	/// Информация о сообществе (группе).
@@ -369,7 +368,7 @@ namespace VkNet.Model
 		/// Объект аудиозаписи, установленной в статус (если аудиозапись транслируется в текущей момент).
 		/// </summary>
 		[JsonProperty("status_audio")]
-		public Audio StatusAudio { get; set; }
+		public Attachments.Audio StatusAudio { get; set; }
 
 		/// <summary>
 		/// Время окончания встречи (возвращаются только для встреч).

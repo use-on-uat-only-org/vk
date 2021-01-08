@@ -49,7 +49,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static PageVersion FromJson(VkResponse response)
 		{
-			return new PageVersion
+			return new()
 			{
 					Id = response[key: "id"]
 					, Length = response[key: "length"]

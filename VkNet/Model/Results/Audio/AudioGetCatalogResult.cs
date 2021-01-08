@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
+using VkNet.Model.Audio;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Audio
 {
 	/// <summary>
 	/// Результат выполнения метода Audio.getCatalog
@@ -32,6 +33,6 @@ namespace VkNet.Model
 		/// Массив групп/сообществ
 		/// </summary>
 		[JsonProperty("groups")]
-		public ReadOnlyCollection<Group> Groups { get; set; }
+		public ReadOnlyCollection<Group.Group> Groups { get; set; }
 	}
 }

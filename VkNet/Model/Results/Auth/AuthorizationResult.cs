@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Auth
 {
 	/// <summary>
 	/// Результат авторизаци

@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using VkNet.Model;
-using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Places;
 using VkNet.Utils;
 
 namespace VkNet.Abstractions

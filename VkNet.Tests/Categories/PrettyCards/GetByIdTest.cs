@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.PrettyCards;
 using VkNet.Tests.Infrastructure;
 
 namespace VkNet.Tests.Categories.PrettyCards

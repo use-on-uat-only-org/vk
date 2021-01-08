@@ -28,7 +28,7 @@ namespace VkNet.Model
 		/// <summary>
 		/// ������ ���������.
 		/// </summary>
-		public ReadOnlyCollection<Group> Groups { get; set; }
+		public ReadOnlyCollection<Group.Group> Groups { get; set; }
 
 		/// <summary>
 		/// ��������� �� json.
@@ -42,7 +42,7 @@ namespace VkNet.Model
 				Comments = response["items"].ToReadOnlyCollectionOf<Comment>(x => x),
 				Count = response["count"],
 				Profiles = response["profiles"].ToReadOnlyCollectionOf<User>(x => x),
-				Groups = response["groups"].ToReadOnlyCollectionOf<Group>(x => x)
+				Groups = response["groups"].ToReadOnlyCollectionOf<Group.Group>(x => x)
 			};
 
 			return item;

@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using VkNet.Model;
+using VkNet.Model.RequestParams.Auth;
 
 namespace VkNet.Infrastructure.Authorization.ImplicitFlow.Forms
 {

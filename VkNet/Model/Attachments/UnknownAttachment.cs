@@ -19,27 +19,10 @@ namespace VkNet.Model.Attachments
 		/// <returns> </returns>
 		public static UnknownAttachment FromJson(VkResponse response)
 		{
-			return new UnknownAttachment
+			return new()
 			{
 				Id = response["id"]
 			};
-		}
-
-		/// <summary>
-		/// Преобразование класса <see cref="MoneyTransfer" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="MoneyTransfer" /></returns>
-		public static implicit operator UnknownAttachment(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 	}
 }

@@ -166,7 +166,7 @@ namespace VkNet.Model.Attachments
 				return null;
 			}
 
-			var res = new Post()
+			var res = new Post
 			{
 				Id = response["id"],
 				OwnerId = response["owner_id"],
@@ -190,38 +190,22 @@ namespace VkNet.Model.Attachments
 				CanEdit = response["can_edit"],
 				CanPin = response["can_pin"],
 				MarkedAsAds = response["marked_as_ads"],
-				AccessKey = response["access_key"]
+				AccessKey = response["access_key"],
+				Comments = response["comments"],
+				Likes = response["likes"],
+				Reposts = response["reposts"],
+				PostType = response["post_type"],
+				PostSource = response["post_source"],
+				Geo = response["geo"],
+				Attachments = response["attachments"].ToReadOnlyCollectionOf<Attachment>(x => x),
+				CopyHistory = response["copy_history"].ToReadOnlyCollectionOf<Post>(x => x),
+				Views = response["views"],
+				Donut = response["donut"]
 			};
-			res.Comments = response["comments"];
-			res.Likes = response["likes"];
-			res.Reposts = response["reposts"];
-			res.PostType = response["post_type"];
-			res.PostSource = response["post_source"];
-			res.Geo = response["geo"];
-			res.Attachments = response["attachments"].ToReadOnlyCollectionOf<Attachment>(x => x);
-			res.CopyHistory = response["copy_history"].ToReadOnlyCollectionOf<Post>(x => x);
-			res.Views = response["views"];
-			res.Donut = response["donut"];
 
 			return res;
 		}
 
-		/// <summary>
-		/// Преобразование класса <see cref="Post" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="Post" /></returns>
-		public static implicit operator Post(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
-		}
 	#endregion
 
 	#region Поля, установленные экспериментально

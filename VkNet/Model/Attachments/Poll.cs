@@ -123,7 +123,7 @@ namespace VkNet.Model.Attachments
 		/// <returns> </returns>
 		public static Poll FromJson(VkResponse response)
 		{
-			return new Poll
+			return new()
 			{
 				Id = response["id"] ?? response["poll_id"],
 				OwnerId = response["owner_id"],
@@ -147,23 +147,6 @@ namespace VkNet.Model.Attachments
 				Friends = response["friends"].ToReadOnlyCollectionOf<User>(x => x),
 				AnswerIds = response["answer_ids"].ToReadOnlyCollectionOf<long>(x => x)
 			};
-		}
-
-		/// <summary>
-		/// Преобразование класса <see cref="Poll" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="Poll" /></returns>
-		public static implicit operator Poll(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 
 	#endregion

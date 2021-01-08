@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using VkNet.Model;
+using VkNet.Model.Results.Secure;
 using VkNet.Utils;
 
 namespace VkNet.Categories

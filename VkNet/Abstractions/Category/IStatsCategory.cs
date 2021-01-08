@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using VkNet.Model;
+using VkNet.Model.RequestParams.Stats;
 
 namespace VkNet.Abstractions
 {

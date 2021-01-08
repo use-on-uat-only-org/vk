@@ -30,7 +30,7 @@ namespace VkNet.Model.GroupUpdate
 		/// <param name="response"> Ответ сервера. </param>
 		public static BoardPostDelete FromJson(VkResponse response)
 		{
-			return new BoardPostDelete
+			return new()
 			{
 				Id = response["id"],
 				TopicId = response["topic_id"],

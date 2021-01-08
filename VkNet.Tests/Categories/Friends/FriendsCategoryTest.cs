@@ -6,6 +6,7 @@ using VkNet.Enums;
 using VkNet.Enums.Filters;
 using VkNet.Exception;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Friends;
 using VkNet.Tests.Infrastructure;
 
 namespace VkNet.Tests.Categories.Friends

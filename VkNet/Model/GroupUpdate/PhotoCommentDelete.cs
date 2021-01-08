@@ -40,7 +40,7 @@ namespace VkNet.Model.GroupUpdate
 		/// <param name="response"> Ответ сервера. </param>
 		public static PhotoCommentDelete FromJson(VkResponse response)
 		{
-			return new PhotoCommentDelete
+			return new()
 			{
 				Id = response["id"],
 				PhotoId = response["photo_id"],

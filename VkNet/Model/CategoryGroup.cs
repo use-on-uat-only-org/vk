@@ -28,7 +28,7 @@ namespace VkNet.Model
 		/// <summary>
 		/// Массив объектов сообществ для предпросмотра.
 		/// </summary>
-		public IEnumerable<Group> PagePreviews { get; set; }
+		public IEnumerable<Group.Group> PagePreviews { get; set; }
 
 		/// <summary>
 		/// Идентификатор.
@@ -52,13 +52,13 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static CategoryGroup FromJson(VkResponse response)
 		{
-			return new CategoryGroup
+			return new()
 			{
 				Id = response[key: "id"],
 				Name = response[key: "name"],
 				Subcategories = response[key: "subcategories"].ToReadOnlyCollectionOf<CategoryGroup>(selector: o => o),
 				PageCount = response[key: "page_count"],
-				PagePreviews = response[key: "page_previews"].ToReadOnlyCollectionOf<Group>(selector: o => o)
+				PagePreviews = response[key: "page_previews"].ToReadOnlyCollectionOf<Group.Group>(selector: o => o)
 			};
 		}
 	}

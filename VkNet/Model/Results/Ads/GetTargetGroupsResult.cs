@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Ads
 {
 	/// <summary>
 	///
@@ -91,7 +91,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static GetTargetGroupsResult FromJson(VkResponse response)
 		{
-			return new GetTargetGroupsResult
+			return new()
 			{
 				Id = response["id"],
 				Name = response["name"],

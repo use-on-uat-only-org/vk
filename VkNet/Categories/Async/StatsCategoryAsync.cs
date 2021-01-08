@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using VkNet.Model;
+using VkNet.Model.RequestParams.Stats;
 using VkNet.Utils;
 
 namespace VkNet.Categories

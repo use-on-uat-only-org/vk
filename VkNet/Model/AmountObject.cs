@@ -35,29 +35,12 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static AmountObject FromJson(VkResponse response)
 		{
-			return new AmountObject
+			return new()
 			{
 				Text = response["text"],
 				Amount = response["amount"],
 				Currency = response["currency"]
 			};
-		}
-
-		/// <summary>
-		/// Преобразование класса <see cref="Model.AmountObject" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="Model.AmountObject" /></returns>
-		public static implicit operator AmountObject(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 	}
 }

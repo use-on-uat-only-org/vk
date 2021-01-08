@@ -65,22 +65,5 @@ namespace VkNet.Model.Attachments
 
 			return wallReply;
 		}
-
-		/// <summary>
-		/// Преобразование класса <see cref="WallReply" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="WallReply" /></returns>
-		public static implicit operator WallReply(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
-		}
 	}
 }

@@ -2,7 +2,7 @@ using System;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Groups
 {
 	/// <summary>
 	/// Права токена

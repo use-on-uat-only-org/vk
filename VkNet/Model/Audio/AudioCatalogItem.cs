@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 
-namespace VkNet.Model
+namespace VkNet.Model.Audio
 {
 	/// <summary>
 	/// Информация о пользователе/сообществе.

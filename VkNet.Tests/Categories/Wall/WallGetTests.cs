@@ -2,6 +2,7 @@ using System.Linq;
 using NUnit.Framework;
 using VkNet.Model.Attachments;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Wall;
 using VkNet.Tests.Infrastructure;
 
 namespace VkNet.Tests.Categories.Wall

@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Ads
 {
 	/// <summary>
 	/// Результат запроса LookALikeRequest
@@ -23,7 +23,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static CreateLookALikeRequestResult FromJson(VkResponse response)
 		{
-			return new CreateLookALikeRequestResult
+			return new()
 			{
 				RequestId = response["request_id"]
 			};

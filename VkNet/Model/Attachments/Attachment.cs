@@ -1,6 +1,5 @@
 ﻿using System;
 using VkNet.Utils;
-using VkNet.UWP.Model.Attachments;
 
 namespace VkNet.Model.Attachments
 {

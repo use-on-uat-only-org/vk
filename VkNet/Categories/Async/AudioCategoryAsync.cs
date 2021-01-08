@@ -6,6 +6,8 @@ using VkNet.Enums.Filters;
 using VkNet.Model;
 using VkNet.Model.Attachments;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Audio;
+using VkNet.Model.Results.Audio;
 using VkNet.Utils;
 
 namespace VkNet.Categories

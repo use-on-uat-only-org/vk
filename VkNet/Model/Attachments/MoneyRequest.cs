@@ -50,7 +50,7 @@ namespace VkNet.Model.Attachments
 		/// <returns> </returns>
 		public static MoneyRequest FromJson(VkResponse response)
 		{
-			return new MoneyRequest
+			return new()
 			{
 				Id = response["id"],
 				FromId = response["from_id"],
@@ -59,23 +59,6 @@ namespace VkNet.Model.Attachments
 				Processed = response["processed"],
 				InitUrl = response["init_url"]
 			};
-		}
-
-		/// <summary>
-		/// Преобразование класса <see cref="MoneyTransfer" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="MoneyTransfer" /></returns>
-		public static implicit operator MoneyRequest(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 	}
 }

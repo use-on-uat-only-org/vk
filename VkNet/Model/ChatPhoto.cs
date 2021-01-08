@@ -37,7 +37,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static ChatPhoto FromJson(VkResponse response)
 		{
-			return new ChatPhoto
+			return new()
 			{
 					Photo50 = response[key: "photo_50"]
 					, Photo100 = response[key: "photo_100"]

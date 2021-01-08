@@ -5,6 +5,7 @@ using VkNet.Enums;
 using VkNet.Model;
 using VkNet.Model.Attachments;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Pages;
 using VkNet.Utils;
 
 namespace VkNet.Categories

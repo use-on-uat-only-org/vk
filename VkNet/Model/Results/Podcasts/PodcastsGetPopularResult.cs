@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Podcasts
 {
 	/// <summary>
 	/// Результат метода Podcasts.getPopular

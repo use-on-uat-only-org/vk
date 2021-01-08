@@ -1,8 +1,8 @@
-﻿﻿using System;
+﻿using System;
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Ads
 {
 	/// <summary>
 	/// Результат метода Ads.UploadUrl
@@ -29,7 +29,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static UploadUrlResult FromJson(VkResponse response)
 		{
-			return new UploadUrlResult
+			return new()
 			{
 				Photo = response["photo"],
 				ErrCode = response["errcode"]

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using VkNet.Model.Attachments;
 using VkNet.Utils;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Global
@@ -48,7 +49,7 @@ namespace VkNet.Model
 		/// <summary>
 		/// Колекция профилей.
 		/// </summary>
-		public ReadOnlyCollection<Group> Groups { get; set; }
+		public ReadOnlyCollection<Group.Group> Groups { get; set; }
 
 		/// <summary>
 		/// Последнее значение параметра new_pts, полученное от Long Poll сервера,
@@ -75,7 +76,7 @@ namespace VkNet.Model
 				UnreadMessages = response[key: "messages"][key: "count"],
 				Messages = response[key: "messages"][key: "items"].ToReadOnlyCollectionOf<Message>(selector: x => x),
 				Profiles = response[key: "profiles"].ToReadOnlyCollectionOf<User>(selector: x => x),
-				Groups = response[key: "groups"].ToReadOnlyCollectionOf<Group>(selector: x => x),
+				Groups = response[key: "groups"].ToReadOnlyCollectionOf<Group.Group>(selector: x => x),
 				NewPts = response[key: "new_pts"],
 				More = response[key: "more"]
 			};

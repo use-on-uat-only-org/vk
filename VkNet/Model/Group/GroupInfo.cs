@@ -6,7 +6,7 @@ using Newtonsoft.Json.Converters;
 using VkNet.Enums;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Group
 {
 	/// <summary>
 	/// Информация о сообществе (группе).
@@ -172,7 +172,7 @@ namespace VkNet.Model
 		/// Список тематик
 		/// </summary>
 		[UsedImplicitly]
-		public readonly Dictionary<int, string> Subjects = new Dictionary<int, string>
+		public readonly Dictionary<int, string> Subjects = new()
 		{
 			{ 1, "Авто/мото" },
 			{ 2, "Активный отдых" },

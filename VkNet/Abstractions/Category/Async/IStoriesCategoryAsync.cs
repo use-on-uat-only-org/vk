@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using VkNet.Model;
 using VkNet.Model.Attachments;
 using VkNet.Model.RequestParams.Stories;
+using VkNet.Model.Results.Stories;
 using VkNet.Utils;
 
 namespace VkNet.Abstractions.Category

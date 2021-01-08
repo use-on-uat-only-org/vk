@@ -48,7 +48,7 @@ namespace VkNet.Model.GroupUpdate
 		/// <returns> </returns>
 		public static MessageEvent FromJson(VkResponse response)
 		{
-			return new MessageEvent
+			return new()
 			{
 				UserId = response["user_id"],
 				PeerId = response["peer_id"],
@@ -56,23 +56,6 @@ namespace VkNet.Model.GroupUpdate
 				Payload = response["payload"].ToString(),
 				ConversationMessageId = response["conversation_message_id"]
 			};
-		}
-
-		/// <summary>
-		/// Преобразование класса <see cref="MessageEvent" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="MessageEvent" /></returns>
-		public static implicit operator MessageEvent(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 
 	#endregion

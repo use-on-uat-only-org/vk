@@ -27,7 +27,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static GroupCover FromJson(VkResponse response)
 		{
-			return new GroupCover
+			return new()
 			{
 					Enabled = response[key: "enabled"]
 					, Images = response[key: "images"].ToReadOnlyCollectionOf<GroupCoverImage>(selector: o => o)

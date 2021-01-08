@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using VkNet.Model;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Podcasts;
+using VkNet.Model.Results.Podcasts;
 using VkNet.Utils;
 
 namespace VkNet.Categories

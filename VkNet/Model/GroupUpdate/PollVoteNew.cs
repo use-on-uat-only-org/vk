@@ -35,7 +35,7 @@ namespace VkNet.Model.GroupUpdate
 		/// <param name="response"> Ответ сервера. </param>
 		public static PollVoteNew FromJson(VkResponse response)
 		{
-			return new PollVoteNew
+			return new()
 			{
 				UserId = response["user_id"],
 				PollId = response["poll_id"],

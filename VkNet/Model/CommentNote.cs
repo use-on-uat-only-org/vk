@@ -50,12 +50,12 @@ namespace VkNet.Model
 
 		/// <summary>
 		/// идентификатор пользователя, в ответ на комментарий которого
-		/// был оставлен текущий комментарий (если доступно). 
+		/// был оставлен текущий комментарий (если доступно).
 		/// </summary>
 		[JsonProperty(propertyName: "reply_to")]
 		public long? ReplyTo { get; set; }
 
-		#region Методы
+	#region Методы
 
 		/// <summary>
 		/// Разобрать из json.
@@ -64,7 +64,7 @@ namespace VkNet.Model
 		/// <returns>Результат преобразования.</returns>
 		public static CommentNote FromJson(VkResponse response)
 		{
-			return new CommentNote
+			return new()
 			{
 				Id = response[key: "id"],
 				UserId = response[key: "uid "],
@@ -76,19 +76,6 @@ namespace VkNet.Model
 			};
 		}
 
-		/// <summary>
-		/// Преобразовать из VkResponse
-		/// </summary>
-		/// <param name="response"> Ответ. </param>
-		/// <returns>
-		/// Результат преобразования.
-		/// </returns>
-		public static implicit operator CommentNote(VkResponse response)
-		{
-			return !response.HasToken()
-					? null
-					: FromJson(response: response);
-		}
-		#endregion
+	#endregion
 	}
 }

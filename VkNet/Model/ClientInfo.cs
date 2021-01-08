@@ -47,30 +47,13 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static ClientInfo FromJson(VkResponse response)
 		{
-			return new ClientInfo
+			return new()
 			{
 				ButtonActions = response["button_actions"].ToReadOnlyCollectionOf<KeyboardButtonActionType>(x => x),
 				Keyboard = response["keyboard"],
 				InlineKeyboard = response["inline_keyboard"],
 				LangId = response["lang_id"].ToEnum<Language>()
 			};
-		}
-
-		/// <summary>
-		/// Преобразование класса <see cref="ClientInfo" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="MessageNew" /></returns>
-		public static implicit operator ClientInfo(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 
 	#endregion

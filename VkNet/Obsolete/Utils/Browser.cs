@@ -10,7 +10,8 @@ using VkNet.Enums.SafetyEnums;
 using VkNet.Exception;
 using VkNet.Infrastructure;
 using VkNet.Infrastructure.Authorization.ImplicitFlow;
-using VkNet.Model;
+using VkNet.Model.RequestParams.Auth;
+using VkNet.Model.Results.Auth;
 using VkNet.Utils.AntiCaptcha;
 
 // ReSharper disable once CheckNamespace

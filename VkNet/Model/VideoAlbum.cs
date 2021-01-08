@@ -77,19 +77,5 @@ namespace VkNet.Model
 				? JsonConvert.DeserializeObject<VideoAlbum>(response.ToString())
 				: null;
 		}
-
-		/// <summary>
-		/// Преобразовать из VkResponse
-		/// </summary>
-		/// <param name="response"> Ответ. </param>
-		/// <returns>
-		/// Результат преобразования.
-		/// </returns>
-		public static implicit operator VideoAlbum(VkResponse response)
-		{
-			return response.HasToken()
-				? FromJson(response)
-				: null;
-		}
 	}
 }

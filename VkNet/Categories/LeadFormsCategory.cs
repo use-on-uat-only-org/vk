@@ -2,8 +2,8 @@ using System;
 using System.Collections.ObjectModel;
 using VkNet.Abstractions;
 using VkNet.Abstractions.Category;
-using VkNet.Model;
-using VkNet.Model.LeadForms;
+using VkNet.Model.RequestParams.LeadForms;
+using VkNet.Model.Results.LeadForms;
 using VkNet.Utils;
 
 namespace VkNet.Categories

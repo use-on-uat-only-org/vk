@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using VkNet.Enums.SafetyEnums;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.Video
 {
 	/// <summary>
 	/// Параметры метода video.edit

@@ -6,7 +6,7 @@ using VkNet.Enums.SafetyEnums;
 using VkNet.Utils;
 using VkNet.Utils.JsonConverter;
 
-namespace VkNet.Model
+namespace VkNet.Model.Ads
 {
 	/// <summary>
 	/// Массив объектов CampaignSpecification
@@ -72,7 +72,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static CampaignSpecification FromJson(VkResponse response)
 		{
-			return new CampaignSpecification
+			return new()
 			{
 
 				AllLimit = response["all_limit"],

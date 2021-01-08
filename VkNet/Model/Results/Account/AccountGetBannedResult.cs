@@ -1,11 +1,13 @@
 using System;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
+using VkNet.Abstractions;
+using VkNet.Abstractions.Category;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Account
 {
 	/// <summary>
-	/// Результат вызова метода <see cref="VkNet.Abstractions.IAccountCategory.GetBanned"/>
+	/// Результат вызова метода <see cref="IAccountCategory.GetBanned"/>
 	/// </summary>
 	[Serializable]
 	public class AccountGetBannedResult
@@ -32,6 +34,6 @@ namespace VkNet.Model
 		/// Группы.
 		/// </summary>
 		[JsonProperty("groups")]
-		public ReadOnlyCollection<Group> Groups { get; set; }
+		public ReadOnlyCollection<Group.Group> Groups { get; set; }
 	}
 }

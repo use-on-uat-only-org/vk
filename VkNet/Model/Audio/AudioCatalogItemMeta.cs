@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Utils.JsonConverter;
 
-namespace VkNet.Model
+namespace VkNet.Model.Audio
 {
 	/// <summary>
 	/// Информация о метаданных пользователя/сообщества.

@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Utils.JsonConverter;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.Video
 {
 	/// <summary>
 	/// Параметры запроса Video.GetCatalog

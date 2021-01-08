@@ -11,7 +11,7 @@ namespace VkNet.Utils
 	[UsedImplicitly]
 	public class LeadFormsQuestionBuilder : ILeadFormsQuestionBuilder
 	{
-		private readonly List<LeadFormsQuestionInfo> _list = new List<LeadFormsQuestionInfo>();
+		private readonly List<LeadFormsQuestionInfo> _list = new();
 
 		/// <inheritdoc />
 		public ILeadFormsQuestionBuilder AddStandard(StandardQuestion question)

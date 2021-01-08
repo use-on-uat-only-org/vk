@@ -52,7 +52,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static Comments FromJson(VkResponse response)
 		{
-			return new Comments
+			return new()
 			{
 				Count = response["count"],
 				CanPost = response["can_post"],
@@ -62,9 +62,5 @@ namespace VkNet.Model
                 List = response["list"].ToReadOnlyCollectionOf<Comment>(x => x),
 			};
 		}
-
-	#region Методы
-
-	#endregion
 	}
 }

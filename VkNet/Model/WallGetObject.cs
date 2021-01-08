@@ -29,7 +29,7 @@ namespace VkNet.Model
 		/// <summary>
 		/// Группы.
 		/// </summary>
-		public ReadOnlyCollection<Group> Groups { get; set; }
+		public ReadOnlyCollection<Group.Group> Groups { get; set; }
 
 		/// <summary>
 		/// Разобрать из json.
@@ -46,7 +46,7 @@ namespace VkNet.Model
 				{
 					WallPosts = response[key: "items"].ToReadOnlyCollectionOf<Post>(selector: r => r),
 					Profiles = response[key: "profiles"].ToReadOnlyCollectionOf<User>(selector: r => r),
-					Groups = response[key: "groups"].ToReadOnlyCollectionOf<Group>(selector: r => r),
+					Groups = response[key: "groups"].ToReadOnlyCollectionOf<Group.Group>(selector: r => r),
 					TotalCount = response[key: "count"] ?? 1UL
 				};
 			}

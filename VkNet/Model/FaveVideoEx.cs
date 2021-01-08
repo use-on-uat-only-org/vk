@@ -34,7 +34,7 @@ namespace VkNet.Model
 		/// Группы.
 		/// </summary>
 		[JsonProperty(propertyName: "groups")]
-		public ReadOnlyCollection<Group> Groups { get; set; }
+		public ReadOnlyCollection<Group.Group> Groups { get; set; }
 
 		/// <summary>
 		/// Разобрать из json.
@@ -48,7 +48,7 @@ namespace VkNet.Model
 					Count = response[key: "count"]
 					, Videos = response[key: "items"].ToReadOnlyCollectionOf<Video>(selector: r => r)
 					, Profiles = response[key: "profiles"].ToReadOnlyCollectionOf<User>(selector: r => r)
-					, Groups = response[key: "groups"].ToReadOnlyCollectionOf<Group>(selector: r => r)
+					, Groups = response[key: "groups"].ToReadOnlyCollectionOf<Group.Group>(selector: r => r)
 			};
 
 			return wallGetObject;

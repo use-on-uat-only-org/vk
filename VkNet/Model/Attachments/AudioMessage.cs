@@ -60,7 +60,7 @@ namespace VkNet.Model.Attachments
 		/// <returns> </returns>
 		public static AudioMessage FromJson(VkResponse response)
 		{
-			return new AudioMessage
+			return new()
 			{
 				Id = response["id"],
 				OwnerId = response["owner_id"],
@@ -72,23 +72,6 @@ namespace VkNet.Model.Attachments
 				Transcript = response["transcript"],
 				TranscriptState = response["transcript_state"]
 			};
-		}
-
-		/// <summary>
-		/// Преобразование класса <see cref="AudioMessage" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="AudioMessage" /></returns>
-		public static implicit operator AudioMessage(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 	}
 }

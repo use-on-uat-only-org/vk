@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using VkNet.Exception;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Wall;
 using VkNet.Tests.Infrastructure;
 using VkNet.Utils;
 

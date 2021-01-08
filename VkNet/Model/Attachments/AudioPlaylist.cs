@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using VkNet.Enums.SafetyEnums;
+using VkNet.Model.Audio;
 using VkNet.Utils;
 using VkNet.Utils.JsonConverter;
 
@@ -192,24 +193,6 @@ namespace VkNet.Model.Attachments
 			};
 
 			return playlist;
-		}
-
-		/// <summary>
-		/// Преобразование класса <see cref="AudioPlaylist" /> в
-		/// <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns> Результат преобразования в <see cref="AudioPlaylist" /> </returns>
-		public static implicit operator AudioPlaylist(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 
 	#endregion

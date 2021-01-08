@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Ads
 {
 	/// <summary>
 	///
@@ -47,7 +47,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static GetSuggestionsResult FromJson(VkResponse response)
 		{
-			return new GetSuggestionsResult
+			return new()
 			{
 				Id = response["id"],
 				Name = response["name"],

@@ -5,7 +5,7 @@ using Newtonsoft.Json.Converters;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Utils.JsonConverter;
 
-namespace VkNet.Model
+namespace VkNet.Model.Fave
 {
 	/// <summary>
 	/// Ответ метода fave.getPages
@@ -43,8 +43,8 @@ namespace VkNet.Model
 		[JsonProperty("user")]
 		public User User { get; set; }
 
-		/// <inheritdoc cref="Model.Group"/>
+		/// <inheritdoc cref="Model.Group.Group"/>
 		[JsonProperty("group")]
-		public Group Group { get; set; }
+		public Group.Group Group { get; set; }
 	}
 }

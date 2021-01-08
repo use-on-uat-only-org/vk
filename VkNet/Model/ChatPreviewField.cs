@@ -50,7 +50,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static ChatPreviewField FromJson(VkResponse response)
 		{
-			return new ChatPreviewField
+			return new()
 			{
 					AdminId = response[key: "admin_id"]
 					, Members = response[key: "members"].ToReadOnlyCollectionOf<long>(selector: x => x)

@@ -1,6 +1,7 @@
 using System.Linq;
 using NUnit.Framework;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Groups;
 
 namespace VkNet.Tests.Categories.BotsLongPoll
 {
@@ -27,9 +28,9 @@ namespace VkNet.Tests.Categories.BotsLongPoll
 			var update = botsLongPollHistory.Updates.First();
 
 			Assert.AreEqual(groupId, update.GroupId);
-			Assert.AreEqual(userId, update.MarketComment.FromId);
-			Assert.AreEqual(text, update.MarketComment.Text);
-			Assert.AreEqual(-groupId, update.MarketComment.MarketOwnerId);
+			Assert.AreEqual(userId, update.UpdateMarketComment.FromId);
+			Assert.AreEqual(text, update.UpdateMarketComment.Text);
+			Assert.AreEqual(-groupId, update.UpdateMarketComment.MarketOwnerId);
 		}
 
 		[Test]
@@ -52,9 +53,9 @@ namespace VkNet.Tests.Categories.BotsLongPoll
 			var update = botsLongPollHistory.Updates.First();
 
 			Assert.AreEqual(groupId, update.GroupId);
-			Assert.AreEqual(userId, update.MarketComment.FromId);
-			Assert.AreEqual(text, update.MarketComment.Text);
-			Assert.AreEqual(-groupId, update.MarketComment.MarketOwnerId);
+			Assert.AreEqual(userId, update.UpdateMarketComment.FromId);
+			Assert.AreEqual(text, update.UpdateMarketComment.Text);
+			Assert.AreEqual(-groupId, update.UpdateMarketComment.MarketOwnerId);
 		}
 
 		[Test]
@@ -77,9 +78,9 @@ namespace VkNet.Tests.Categories.BotsLongPoll
 			var update = botsLongPollHistory.Updates.First();
 
 			Assert.AreEqual(groupId, update.GroupId);
-			Assert.AreEqual(userId, update.MarketComment.FromId);
-			Assert.AreEqual(text, update.MarketComment.Text);
-			Assert.AreEqual(-groupId, update.MarketComment.MarketOwnerId);
+			Assert.AreEqual(userId, update.UpdateMarketComment.FromId);
+			Assert.AreEqual(text, update.UpdateMarketComment.Text);
+			Assert.AreEqual(-groupId, update.UpdateMarketComment.MarketOwnerId);
 		}
 
 		[Test]

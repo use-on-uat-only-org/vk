@@ -1,6 +1,7 @@
 using System;
 using Newtonsoft.Json;
 using VkNet.Abstractions;
+using VkNet.Abstractions.Category;
 using VkNet.Enums.Filters;
 
 namespace VkNet.Model.RequestParams.Groups

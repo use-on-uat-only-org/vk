@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
+using VkNet.Model.Attachments;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Messages
 {
 	/// <summary>
 	/// Результат метода messages.search
@@ -33,7 +34,7 @@ namespace VkNet.Model
 		/// Сообщества
 		/// </summary>
 		[JsonProperty("groups")]
-		public ReadOnlyCollection<Group> Groups { get; set; }
+		public ReadOnlyCollection<Group.Group> Groups { get; set; }
 
 		/// <summary>
 		/// Беседы

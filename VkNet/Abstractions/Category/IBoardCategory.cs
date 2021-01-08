@@ -1,5 +1,6 @@
 ﻿using VkNet.Model;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Board;
 using VkNet.Utils;
 
 namespace VkNet.Abstractions

@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model
 {
 	/// <summary>
 	/// настройки блока товаров.
@@ -60,7 +60,7 @@ namespace VkNet.Model.RequestParams
 		/// <returns> </returns>
 		public static GroupMarketSettings FromJson(VkResponse response)
 		{
-			return new GroupMarketSettings
+			return new()
 			{
 				Enabled = response["enabled"],
 				CommentsEnabled = response["comments_enabled"],

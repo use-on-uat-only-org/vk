@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Ads
 {
 	/// <summary>
 	/// Cтатистика объекта за один временной период
@@ -169,7 +169,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static StatisticsStats FromJson(VkResponse response)
 		{
-			return new StatisticsStats
+			return new()
 			{
 				Day = response["day"],
 				Month = response["month"],

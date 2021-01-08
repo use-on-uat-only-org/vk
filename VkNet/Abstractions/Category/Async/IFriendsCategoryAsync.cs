@@ -8,6 +8,8 @@ using VkNet.Enums.Filters;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Friends;
+using VkNet.Model.Results.Friends;
 using VkNet.Utils;
 
 namespace VkNet.Abstractions

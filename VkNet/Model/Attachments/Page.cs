@@ -112,7 +112,7 @@ namespace VkNet.Model.Attachments
 		/// <returns> </returns>
 		public static Page FromJson(VkResponse response)
 		{
-			return new Page
+			return new()
 			{
 				Id = response["page_id"] ?? response["pid"] ?? response["id"],
 				GroupId = response["group_id"] ?? response["gid"],
@@ -138,26 +138,7 @@ namespace VkNet.Model.Attachments
 		/// <inheritdoc />
 		public override string ToString()
 		{
-			return string.Format("page-{0}_{1}",
-				GroupId,
-				Id);
-		}
-
-		/// <summary>
-		/// Преобразование класса <see cref="Page" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="Page" /></returns>
-		public static implicit operator Page(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
+			return $"page-{GroupId}_{Id}";
 		}
 
 	#endregion

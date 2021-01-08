@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using VkNet.Enums;
 using VkNet.Utils;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.Groups
 {
 	/// <summary>
 	/// Параметры метода groups.edit

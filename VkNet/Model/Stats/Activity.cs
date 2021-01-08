@@ -1,8 +1,8 @@
-using Newtonsoft.Json;
 using System;
+using Newtonsoft.Json;
 using VkNet.Utils.JsonConverter;
 
-namespace VkNet.Model
+namespace VkNet.Model.Stats
 {
 	/// <summary>
 	/// Activity

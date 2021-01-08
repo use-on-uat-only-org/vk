@@ -1,8 +1,9 @@
 using System;
 using Newtonsoft.Json;
+using VkNet.Model.Attachments;
 using VkNet.Utils;
 
-namespace VkNet.Model.Attachments
+namespace VkNet.Model
 {
 	/// <summary>
 	/// Информация для предварительного просмотра документа
@@ -35,29 +36,12 @@ namespace VkNet.Model.Attachments
 		/// <returns> </returns>
 		public static DocumentPreview FromJson(VkResponse response)
 		{
-			return new DocumentPreview
+			return new()
 			{
 				Photo = response["photo"],
 				Graffiti = response["graffiti"],
 				AudioMessage = response["audio_message"]
 			};
-		}
-
-		/// <summary>
-		/// Преобразование класса <see cref="Document" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="Document" /></returns>
-		public static implicit operator DocumentPreview(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 	}
 }

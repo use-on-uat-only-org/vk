@@ -4,7 +4,7 @@ using Newtonsoft.Json.Converters;
 using VkNet.Enums;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Ads
 {
 	/// <summary>
 	/// Массив объектов CampaignModSpecification
@@ -63,7 +63,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static CampaignModSpecification FromJson(VkResponse response)
 		{
-			return new CampaignModSpecification
+			return new()
 			{
 
 				AllLimit = response["all_limit"],

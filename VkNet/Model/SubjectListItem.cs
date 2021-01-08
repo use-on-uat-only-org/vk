@@ -1,7 +1,7 @@
 ﻿using System;
 using VkNet.Utils;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model
 {
 	/// <summary>
 	/// Элемент списка возможных тематик
@@ -26,7 +26,7 @@ namespace VkNet.Model.RequestParams
 		/// <returns> </returns>
 		public static SubjectListItem FromJson(VkResponse response)
 		{
-			return new SubjectListItem
+			return new()
 			{
 				Id = response["id"],
 				Name = response["name"]

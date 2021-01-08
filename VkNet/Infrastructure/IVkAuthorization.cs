@@ -1,5 +1,6 @@
 using System;
 using VkNet.Model;
+using VkNet.Model.Results.Auth;
 
 namespace VkNet.Utils
 {

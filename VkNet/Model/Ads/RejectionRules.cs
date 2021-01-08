@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Ads
 {
 	/// <summary>
 	///
@@ -29,7 +29,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static RejectionRules FromJson(VkResponse response)
 		{
-			return new RejectionRules
+			return new()
 			{
 				Title = response["title"],
 				Paragraphs = response["paragraphs"]

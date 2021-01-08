@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using VkNet.Enums;
 using VkNet.Model;
+using VkNet.Model.Ads;
 using VkNet.Model.RequestParams.Ads;
 using VkNet.Tests.Infrastructure;
 

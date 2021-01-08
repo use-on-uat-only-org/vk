@@ -1,8 +1,8 @@
-using Newtonsoft.Json;
 using System;
+using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Account
 {
 	/// <summary>
 	/// Хранит информацию о текущем аккаунте. Подробнее:
@@ -74,7 +74,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static AccountInfo FromJson(VkResponse response)
 		{
-			return new AccountInfo
+			return new()
 			{
 				Country = response[key: "country"],
 				HttpsRequired = response[key: "https_required"],

@@ -4,7 +4,7 @@ using Newtonsoft.Json.Converters;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Utils.JsonConverter;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.Photo
 {
 	/// <summary>
 	/// Список параметров для метода photos.search

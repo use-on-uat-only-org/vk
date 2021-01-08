@@ -25,7 +25,7 @@ namespace VkNet.Model.GroupUpdate
 		/// <param name="response"> Ответ сервера. </param>
 		public static GroupLeave FromJson(VkResponse response)
 		{
-			return new GroupLeave
+			return new()
 			{
 				UserId = response["user_id"],
 				IsSelf = response["self"]

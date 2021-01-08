@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Ads
 {
 	/// <summary>
 	///
@@ -60,7 +60,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static DemographicsStats FromJson(VkResponse response)
 		{
-			return new DemographicsStats
+			return new()
 			{
 				Day = response["day"],
 				Month = response["month"],

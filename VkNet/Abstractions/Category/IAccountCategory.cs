@@ -2,7 +2,10 @@
 using JetBrains.Annotations;
 using VkNet.Enums.Filters;
 using VkNet.Model;
+using VkNet.Model.Account;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Account;
+using VkNet.Model.Results.Account;
 
 namespace VkNet.Abstractions
 {

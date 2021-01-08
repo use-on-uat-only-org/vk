@@ -23,7 +23,6 @@ namespace VkNet.Model.Attachments
 		[CanBeNull]
 		public string Photo200 { get; set; }
 
-
 		/// <summary>
 		/// Адрес полноразмерного изображения.
 		/// </summary>
@@ -60,7 +59,7 @@ namespace VkNet.Model.Attachments
 		/// <returns> </returns>
 		public static Graffiti FromJson(VkResponse response)
 		{
-			return new Graffiti
+			return new()
 			{
 				Id = response["id"],
 				OwnerId = response["owner_id"],
@@ -70,23 +69,6 @@ namespace VkNet.Model.Attachments
 				Width = response["width"],
 				Height = response["height"]
 			};
-		}
-
-		/// <summary>
-		/// Преобразование класса <see cref="Graffiti" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="Graffiti" /></returns>
-		public static implicit operator Graffiti(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 
 	#endregion

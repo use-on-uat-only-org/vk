@@ -1,7 +1,7 @@
 ﻿using System;
 using VkNet.Enums;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.Photo
 {
 	/// <summary>
 	/// Список параметров для метода photos.getUserPhotos

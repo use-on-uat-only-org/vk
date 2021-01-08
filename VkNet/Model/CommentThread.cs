@@ -51,7 +51,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static CommentThread FromJson(VkResponse response)
 		{
-			return new CommentThread
+			return new()
 			{
 				Count = response["count"],
 				Items = response["items"].ToReadOnlyCollectionOf<Comment>(x => x),
@@ -59,23 +59,6 @@ namespace VkNet.Model
 				ShowReplyButton = response["show_reply_button"],
 				GroupsCanPost = response["groups_can_post"]
 			};
-		}
-
-		/// <summary>
-		/// Преобразование класса <see cref="CommentThread" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="CommentThread" /></returns>
-		public static implicit operator CommentThread(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 	}
 }

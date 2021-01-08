@@ -5,6 +5,8 @@ using VkNet.Enums.Filters;
 using VkNet.Model;
 using VkNet.Model.Attachments;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Wall;
+using VkNet.Model.Results.Wall;
 
 namespace VkNet.Abstractions
 {

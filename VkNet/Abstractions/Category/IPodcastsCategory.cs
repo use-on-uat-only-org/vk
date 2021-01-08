@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using VkNet.Model;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Podcasts;
+using VkNet.Model.Results.Podcasts;
 
 namespace VkNet.Abstractions
 {

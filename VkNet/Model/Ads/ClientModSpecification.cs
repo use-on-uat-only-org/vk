@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Ads
 {
 	/// <summary>
 	/// Массив объектов ClientModSpecification
@@ -41,7 +41,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static ClientModSpecification FromJson(VkResponse response)
 		{
-			return new ClientModSpecification
+			return new()
 			{
 				AllLimit = response["all_limit"],
 				DayLimit = response["day_limit"],

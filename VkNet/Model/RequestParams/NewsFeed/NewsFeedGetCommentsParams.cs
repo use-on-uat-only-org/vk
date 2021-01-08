@@ -4,7 +4,7 @@ using Newtonsoft.Json.Converters;
 using VkNet.Enums.Filters;
 using VkNet.Utils.JsonConverter;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.NewsFeed
 {
 	/// <summary>
 	/// Список параметров запроса newsfeed.get

@@ -56,7 +56,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static CallbackServerItem FromJson(VkResponse response)
 		{
-			return new CallbackServerItem
+			return new()
 			{
 					Id = response[key: "id"]
 					, Title = response[key: "title"]

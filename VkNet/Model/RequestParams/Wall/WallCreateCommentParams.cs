@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 using VkNet.Model.Attachments;
 using VkNet.Utils;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.Wall
 {
 	/// <summary>
 	/// Параметры метода wall.addComment

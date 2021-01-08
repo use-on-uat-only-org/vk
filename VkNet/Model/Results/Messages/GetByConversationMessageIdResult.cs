@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
+using VkNet.Model.Attachments;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Messages
 {
 	/// <summary>
 	/// Результат метода messages.getByConversationMessageId
@@ -32,6 +33,6 @@ namespace VkNet.Model
 		/// Массив объектов сообществ.
 		/// </summary>
 		[JsonProperty("groups")]
-		public ReadOnlyCollection<Group> Groups { get; set; }
+		public ReadOnlyCollection<Group.Group> Groups { get; set; }
 	}
 }

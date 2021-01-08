@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using VkNet.Abstractions;
 using VkNet.Enums.Filters;
 using VkNet.Model;
+using VkNet.Model.Donut;
 using VkNet.Utils;
 
 namespace VkNet.Categories

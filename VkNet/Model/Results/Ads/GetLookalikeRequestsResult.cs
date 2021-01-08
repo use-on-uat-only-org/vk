@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
+using VkNet.Model.Ads;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Ads
 {
 	/// <summary>
 	/// Возвращает список запросов на поиск похожей аудитории.
@@ -30,7 +31,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static GetLookalikeRequestsResult FromJson(VkResponse response)
 		{
-			return new GetLookalikeRequestsResult
+			return new()
 			{
 				Count = response["count"],
 				Items = response["items"].ToReadOnlyCollectionOf<LookalikeRequestItem>(x=>x)

@@ -17,9 +17,9 @@ namespace VkNet.Model.Keyboard
 
 		private bool IsInline { get; set; }
 
-		private readonly List<List<MessageKeyboardButton>> _fullKeyboard = new List<List<MessageKeyboardButton>>();
+		private readonly List<List<MessageKeyboardButton>> _fullKeyboard = new();
 
-		private List<MessageKeyboardButton> _currentLine = new List<MessageKeyboardButton>();
+		private List<MessageKeyboardButton> _currentLine = new();
 
 		private readonly string _type;
 

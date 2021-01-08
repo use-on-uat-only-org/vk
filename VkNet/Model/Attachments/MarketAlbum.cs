@@ -42,7 +42,7 @@ namespace VkNet.Model.Attachments
 		/// <returns> </returns>
 		public static MarketAlbum FromJson(VkResponse response)
 		{
-			return new MarketAlbum
+			return new()
 			{
 				Id = response["id"],
 				OwnerId = response["owner_id"],
@@ -51,23 +51,6 @@ namespace VkNet.Model.Attachments
 				Count = response["count"],
 				UpdatedTime = response["updated_time"]
 			};
-		}
-
-		/// <summary>
-		/// Преобразование класса <see cref="MarketAlbum" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="MarketAlbum" /></returns>
-		public static implicit operator MarketAlbum(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 	}
 }

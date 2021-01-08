@@ -12,6 +12,8 @@ using VkNet.Infrastructure;
 using VkNet.Infrastructure.Authorization.ImplicitFlow;
 using VkNet.Infrastructure.Authorization.ImplicitFlow.Forms;
 using VkNet.Model;
+using VkNet.Model.RequestParams.Auth;
+using VkNet.Model.Results.Auth;
 using VkNet.Utils;
 
 namespace VkNet.Tests.Infrastructure

@@ -35,7 +35,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static Currency FromJson(VkResponse response)
 		{
-			return new Currency
+			return new()
 			{
 				Id = response[key: "id"],
 				Сurrency = response[key: "currency"],

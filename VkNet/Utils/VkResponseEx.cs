@@ -20,7 +20,7 @@ namespace VkNet.Utils
 		/// <returns> Коллекция данных. </returns>
 		public static Collection<T> ToCollection<T>(this IEnumerable<T> source)
 		{
-			return new Collection<T>(new List<T>(source));
+			return new(new List<T>(source));
 		}
 
 		/// <summary>
@@ -59,7 +59,7 @@ namespace VkNet.Utils
 		/// <returns> Коллекция данных только для чтения. </returns>
 		public static ReadOnlyCollection<T> ToReadOnlyCollection<T>(this IEnumerable<T> source)
 		{
-			return new ReadOnlyCollection<T>(new List<T>(source));
+			return new(new List<T>(source));
 		}
 
 		/// <summary>

@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Ads
 {
 	/// <summary>
 	/// Описание рекламного аккаунта.
@@ -32,7 +32,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static GetFloodStatsResult FromJson(VkResponse response)
 		{
-			return new GetFloodStatsResult
+			return new()
 			{
 				Left = response["left"],
 				Refresh = response["refresh"]

@@ -38,7 +38,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static UserSpecification FromJson(VkResponse response)
 		{
-			return new UserSpecification
+			return new()
 			{
 				UserId = response[key: "user_id"]
 				, Role = response[key: "role"]

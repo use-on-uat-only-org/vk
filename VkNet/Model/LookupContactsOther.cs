@@ -26,7 +26,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static LookupContactsOther FromJson(VkResponse response)
 		{
-			return new LookupContactsOther
+			return new()
 			{
 					Contact = response[key: "contact"]
 					, CommonCount = response[key: "common_count"]

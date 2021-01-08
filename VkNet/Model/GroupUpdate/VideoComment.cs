@@ -28,7 +28,7 @@ namespace VkNet.Model.GroupUpdate
 		/// <param name="response"> Ответ сервера. </param>
 		public new static VideoComment FromJson(VkResponse response)
 		{
-			return new VideoComment
+			return new()
 			{
 				Id = response[key: "id"],
 				FromId = response[key: "from_id"],

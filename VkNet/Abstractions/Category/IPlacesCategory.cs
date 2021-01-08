@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using VkNet.Model;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Places;
 using VkNet.Utils;
 
 namespace VkNet.Abstractions

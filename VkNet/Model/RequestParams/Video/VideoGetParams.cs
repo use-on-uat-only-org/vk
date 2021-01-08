@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using VkNet.Model.Attachments;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.Video
 {
 	/// <summary>
 	/// Параметры метода video.get
@@ -39,7 +38,7 @@ namespace VkNet.Model.RequestParams
 		/// имеют видеозаписи, возвращаемые
 		/// методом newsfeed.get. список строк, разделенных через запятую.
 		/// </summary>
-		public IEnumerable<Video> Videos { get; set; }
+		public IEnumerable<Attachments.Video> Videos { get; set; }
 
 		/// <summary>
 		/// Идентификатор альбома, видеозаписи из которого нужно вернуть. целое число.

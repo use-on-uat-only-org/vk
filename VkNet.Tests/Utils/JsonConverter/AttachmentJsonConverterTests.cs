@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using NUnit.Framework;
 using VkNet.Model;
+using VkNet.Model.Attachments;
 using VkNet.Utils;
 
 namespace VkNet.Tests.Utils.JsonConverter

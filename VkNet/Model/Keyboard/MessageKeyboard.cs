@@ -37,30 +37,13 @@ namespace VkNet.Model.Keyboard
 		/// <returns> </returns>
 		public static MessageKeyboard FromJson(VkResponse response)
 		{
-			return new MessageKeyboard
+			return new()
 			{
 				OneTime = response[key: "one_time"],
 				Inline = response[key: "inline"],
 				Buttons = response[key: "buttons"]
 					.ToReadOnlyCollectionOf(x => x.ToReadOnlyCollectionOf<MessageKeyboardButton>(y => y))
 			};
-		}
-
-		/// <summary>
-		/// Преобразовать из VkResponse
-		/// </summary>
-		/// <param name="response"> Ответ. </param>
-		/// <returns>
-		/// Результат преобразования.
-		/// </returns>
-		public static implicit operator MessageKeyboard(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken() ? FromJson(response) : null;
 		}
 	}
 }

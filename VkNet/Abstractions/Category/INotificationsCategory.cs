@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using VkNet.Model;
+using VkNet.Model.Results.Notifications;
 
 namespace VkNet.Abstractions
 {

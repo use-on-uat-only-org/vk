@@ -23,7 +23,7 @@ namespace VkNet.Model
 		/// </summary>
 		public double Longitude { get; set; }
 
-		#region Методы
+	#region Методы
 
 		/// <summary>
 		/// Разобрать из json.
@@ -36,12 +36,12 @@ namespace VkNet.Model
 
 			double latitude;
 			double longitude;
+
 			if (response.ContainsKey("latitude") && response.ContainsKey("longitude")) //приходит в messages.geo
 			{
 				latitude = response["latitude"];
 				longitude = response["longitude"];
-			}
-			else //geo со стены 
+			} else //geo со стены
 			{
 				var latitudeWithLongitude = ((string) response).Split(' ');
 
@@ -60,14 +60,16 @@ namespace VkNet.Model
 					throw new VkApiException(message: "Invalid longitude!");
 				}
 			}
+
 			var coordinates = new Coordinates
 			{
 				Latitude = latitude,
 				Longitude = longitude
 			};
+
 			return coordinates;
 		}
 
-		#endregion
+	#endregion
 	}
 }

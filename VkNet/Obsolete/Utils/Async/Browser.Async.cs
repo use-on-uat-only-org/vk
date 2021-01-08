@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 using VkNet.Exception;
 using VkNet.Infrastructure.Authorization.ImplicitFlow;
-using VkNet.Model;
+using VkNet.Model.Results.Auth;
 
 // ReSharper disable once CheckNamespace
 namespace VkNet.Utils

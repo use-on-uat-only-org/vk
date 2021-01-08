@@ -124,7 +124,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static Comment FromJson(VkResponse response)
 		{
-			return new Comment
+			return new()
 			{
 				Id = response["id"],
 				FromId = response["from_id"],
@@ -141,23 +141,6 @@ namespace VkNet.Model
 				ParentsStack = response["parents_stack"].ToReadOnlyCollectionOf<long>(x => x),
 				Thread = response["thread"]
 			};
-		}
-
-		/// <summary>
-		/// Преобразование класса <see cref="Comment" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="Comment" /></returns>
-		public static implicit operator Comment(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 
 	#endregion

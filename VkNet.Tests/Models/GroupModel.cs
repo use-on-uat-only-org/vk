@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using VkNet.Model;
+using VkNet.Model.Group;
 
 namespace VkNet.Tests.Models
 {

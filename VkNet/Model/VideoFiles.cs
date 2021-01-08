@@ -48,7 +48,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static VideoFiles FromJson(VkResponse response)
 		{
-			return new VideoFiles
+			return new()
 			{
 					Mp4_240 = response[key: "mp4_240"]
 					, Mp4_360 = response[key: "mp4_360"]

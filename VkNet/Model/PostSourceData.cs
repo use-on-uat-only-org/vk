@@ -42,7 +42,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static PostSourceData FromJson(VkResponse response)
 		{
-			return new PostSourceData
+			return new()
 			{
 					ProfileActivity = response[key: "profile_activity"]
 					, ProfilePhoto = response[key: "profile_photo"]

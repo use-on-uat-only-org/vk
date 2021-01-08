@@ -1,6 +1,7 @@
 ﻿using VkNet.Abstractions;
 using VkNet.Model;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Search;
 using VkNet.Utils;
 
 namespace VkNet.Categories

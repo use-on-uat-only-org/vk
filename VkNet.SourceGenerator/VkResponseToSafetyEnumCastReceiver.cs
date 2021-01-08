@@ -8,13 +8,17 @@ namespace VkNet.SourceGenerator
 {
 	public class VkResponseToSafetyEnumCastReceiver : ISyntaxReceiver
 	{
-		public List<string> CandidateClasses { get; } = new List<string>();
+		public List<string> CandidateClasses { get; } = new();
+
+		public List<string> CandidateUsingList { get; } = new();
 
 		/// <inheritdoc />
 		public void OnVisitSyntaxNode(SyntaxNode syntaxNode)
 		{
-			if (syntaxNode is ClassDeclarationSyntax classDeclarationSyntax
-				&& classDeclarationSyntax.BaseList != null
+			if (syntaxNode is ClassDeclarationSyntax { BaseList: {} } classDeclarationSyntax
+				&& SyntaxNodeHelper.TryGetParentSyntax<NamespaceDeclarationSyntax>(classDeclarationSyntax,
+					out var namespaceDeclarationSyntax)
+				&& namespaceDeclarationSyntax.Name.ToString().StartsWith("VkNet.Enums.SafetyEnum")
 				&& !classDeclarationSyntax.BaseList.IsMissing
 				&& classDeclarationSyntax.BaseList.Types.Any(x =>
 					x.Type is GenericNameSyntax syntax
@@ -22,6 +26,13 @@ namespace VkNet.SourceGenerator
 					&& syntax.Identifier.Text == "SafetyEnum")
 			)
 			{
+				var namespaceName = namespaceDeclarationSyntax.Name.ToString();
+
+				if (!CandidateUsingList.Contains(namespaceName))
+				{
+					CandidateUsingList.Add(namespaceName);
+				}
+
 				CandidateClasses.Add(classDeclarationSyntax.Identifier.Text);
 			}
 		}

@@ -27,7 +27,7 @@ namespace VkNet.Model
 		/// Массив объектов сообществ
 		/// </summary>
 		[JsonProperty(propertyName: "groups")]
-		public IEnumerable<Group> Groups { get; set; }
+		public IEnumerable<Group.Group> Groups { get; set; }
 
 		/// <summary>
 		/// Массив объектов, описывающих e-mail.
@@ -44,11 +44,11 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static ChatPreview FromJson(VkResponse response)
 		{
-			return new ChatPreview
+			return new()
 			{
 					Preview = response[key: "preview"]
 					, Profiles = response[key: "profiles"].ToReadOnlyCollectionOf<User>(selector: x => x)
-					, Groups = response[key: "groups"].ToReadOnlyCollectionOf<Group>(selector: x => x)
+					, Groups = response[key: "groups"].ToReadOnlyCollectionOf<Group.Group>(selector: x => x)
 					, Emails = response[key: "emails"].ToReadOnlyCollectionOf<Email>(selector: x => x)
 			};
 		}

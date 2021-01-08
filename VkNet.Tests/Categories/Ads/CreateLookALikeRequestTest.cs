@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
+using VkNet.Model.RequestParams.Ads;
 using VkNet.Tests.Infrastructure;
 
 namespace VkNet.Tests.Categories.Ads

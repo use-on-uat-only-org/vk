@@ -39,7 +39,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static LinkButtonAction FromJson(VkResponse response)
 		{
-			return new LinkButtonAction
+			return new()
 			{
 					Type = response[key: "type"]
 					, Uri = response[key: "url"]

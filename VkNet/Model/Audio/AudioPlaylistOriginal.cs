@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Audio
 {
 	/// <summary>
 	/// Неизвестно.
@@ -45,24 +45,6 @@ namespace VkNet.Model
 			};
 
 			return playlistOriginal;
-		}
-
-		/// <summary>
-		/// Преобразование класса <see cref="AudioPlaylistOriginal" /> в
-		/// <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns> Результат преобразования в <see cref="AudioPlaylistOriginal" /> </returns>
-		public static implicit operator AudioPlaylistOriginal(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 
 	#endregion

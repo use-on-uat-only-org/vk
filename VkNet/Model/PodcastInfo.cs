@@ -47,7 +47,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static PodcastInfo FromJson(VkResponse response)
 		{
-			return new PodcastInfo
+			return new()
 			{
 				Cover = response["cover"],
 				Plays = response["plays"],
@@ -55,23 +55,6 @@ namespace VkNet.Model
 				Description = response["description"],
 				Position = response["position"]
 			};
-		}
-
-		/// <summary>
-		/// Разобрать из json.
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns> </returns>
-		public static implicit operator PodcastInfo(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 	}
 }

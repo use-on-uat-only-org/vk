@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Ads
 {
 
 	/// <summary>
@@ -24,7 +24,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static RemoveTargetContactsResult FromJson(VkResponse response)
 		{
-			return new RemoveTargetContactsResult
+			return new()
 			{
 				Result = response["result"]
 			};

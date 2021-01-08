@@ -9,6 +9,8 @@ using VkNet.Abstractions.Core;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Exception;
 using VkNet.Model;
+using VkNet.Model.RequestParams.Auth;
+using VkNet.Model.Results.Auth;
 using VkNet.Utils;
 
 namespace VkNet.Infrastructure.Authorization.ImplicitFlow

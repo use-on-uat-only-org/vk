@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.PrettyCards
 {
 	/// <summary>
 	/// Список параметров для метода prettyCards.edit

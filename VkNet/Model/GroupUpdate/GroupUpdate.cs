@@ -43,7 +43,7 @@ namespace VkNet.Model.GroupUpdate
 		/// <summary>
 		/// Аудиозапись
 		/// </summary>
-		public Audio Audio { get; set; }
+		public Attachments.Audio Audio { get; set; }
 
 		/// <summary>
 		/// Видеозапись
@@ -117,7 +117,7 @@ namespace VkNet.Model.GroupUpdate
 		/// Добавление/редактирование/восстановление комментария к товару
 		/// (<c>MarketCommentNew</c>, <c>MarketCommentEdit</c>, <c>MarketCommentRestore</c>)
 		/// </summary>
-		public MarketComment MarketComment { get; set; }
+		public UpdateMarketComment UpdateMarketComment { get; set; }
 
 		/// <summary>
 		/// Удаление комментария к товару (<c>MarketCommentDelete</c>)
@@ -244,7 +244,7 @@ namespace VkNet.Model.GroupUpdate
 						|| fromJson.Type == GroupUpdateType.MarketCommentEdit
 						|| fromJson.Type == GroupUpdateType.MarketCommentRestore)
 			{
-				fromJson.MarketComment = MarketComment.FromJson(resObj);
+				fromJson.UpdateMarketComment = UpdateMarketComment.FromJson(resObj);
 			} else if (fromJson.Type == GroupUpdateType.MarketCommentDelete)
 			{
 				fromJson.MarketCommentDelete = MarketCommentDelete.FromJson(resObj);

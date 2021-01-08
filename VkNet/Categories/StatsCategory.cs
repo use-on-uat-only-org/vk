@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using VkNet.Abstractions;
 using VkNet.Model;
+using VkNet.Model.RequestParams.Stats;
 using VkNet.Utils;
 
 namespace VkNet.Categories

@@ -27,7 +27,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static HistoryAttachment FromJson(VkResponse response)
 		{
-			return new HistoryAttachment
+			return new()
 			{
 					MessageId = response[key: "message_id"]
 					, Attachment = response[key: "attachment"]

@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using VkNet.Model;
+using VkNet.Model.RequestParams.Auth;
+using VkNet.Model.Results.Auth;
 
 namespace VkNet.Abstractions.Authorization
 {

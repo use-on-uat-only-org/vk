@@ -40,20 +40,6 @@ namespace VkNet.Model
 			return link;
 		}
 
-		/// <summary>
-		/// Преобразовать из VkResponse
-		/// </summary>
-		/// <param name="response"> Ответ. </param>
-		/// <returns>
-		/// Результат преобразования.
-		/// </returns>
-		public static implicit operator StoryLink(VkResponse response)
-		{
-			return response != null && response.HasToken()
-				? FromJson(response)
-				: null;
-		}
-
 	#endregion
 	}
 }

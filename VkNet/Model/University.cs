@@ -64,7 +64,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static University FromJson(VkResponse response)
 		{
-			return new University
+			return new()
 			{
 					Id = response[key: "id"]
 					, Country = response[key: "country"]

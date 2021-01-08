@@ -86,7 +86,7 @@ namespace VkNet.Utils
 		/// <returns> Информация об авторизации. </returns>
 		public static VkAuthorization2 From(string uriFragment)
 		{
-			return new VkAuthorization2(uriFragment: uriFragment);
+			return new(uriFragment: uriFragment);
 		}
 
 		/// <summary>

@@ -4,7 +4,10 @@ using System.Threading.Tasks;
 using VkNet.Enums.Filters;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
+using VkNet.Model.Attachments;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Messages;
+using VkNet.Model.Results.Messages;
 using VkNet.Utils;
 
 namespace VkNet.Categories

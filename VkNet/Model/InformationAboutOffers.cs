@@ -64,7 +64,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static InformationAboutOffers FromJson(VkResponse response)
 		{
-			return new InformationAboutOffers
+			return new()
 			{
 					Id = response[key: "id"]
 					, Title = response[key: "title"]

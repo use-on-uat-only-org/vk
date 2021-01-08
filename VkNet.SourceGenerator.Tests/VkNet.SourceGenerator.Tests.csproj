@@ -2,11 +2,14 @@
 
 	<PropertyGroup>
 		<TargetFramework>net5</TargetFramework>
-
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 		<IsPackable>false</IsPackable>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="FluentAssertions" Version="5.10.3" />
+		<PackageReference Include="FluentAssertions.Analyzers" Version="0.11.4" />
+		<PackageReference Include="JetBrains.Annotations" Version="2020.3.0" />
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.8.0" />
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Features" Version="3.8.0" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
@@ -24,14 +27,51 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\VkNet.SourceGenerator\VkNet.SourceGenerator.csproj" />
-		<ProjectReference Include="..\VkNet\VkNet.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Include="..\VkNet\**\*.*">
+			<Link>\VkNet\%(RecursiveDir)%(FileName)%(Extension)</Link>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Compile>
+		<Compile Remove="..\VkNet\**\*.*" />
+		<Compile Remove="..\VkNet\bin\**\*.*" />
+		<Compile Remove="..\VkNet\VkNet.csproj" />
+		<Compile Remove="..\VkNet\VkNet.ruleset" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Include="..\VkNet\Enums\SafetyEnums\AppType.cs">
-	    <Link>AppType.cs</Link>
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Compile>
+		<Folder Include="..\VkNet\">
+			<Link>VkNet</Link>
+		</Folder>
 	</ItemGroup>
+
+
+	<ItemGroup>
+		<PackageReference Include="AsyncFixer" Version="1.3.0" PrivateAssets="all" />
+		<PackageReference Include="HtmlAgilityPack" Version="1.11.28" />
+		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+		<PackageReference Include="Microsoft.DotNet.Analyzers.Compatibility" Version="0.2.12-alpha" PrivateAssets="all" />
+		<PackageReference Include="SonarAnalyzer.CSharp" Version="8.15.0.24505" PrivateAssets="all" />
+		<PackageReference Include="JetBrains.Annotations" Version="2020.3.0" PrivateAssets="all" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' OR '$(TargetFramework)' == 'net461'">
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.1.0" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="[5.0.0,)" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="[5.0.0,)" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net45'">
+		<PackageReference Include="NetFx.Extensions.DependencyInjection" Version="[2.2.0]" />
+		<PackageReference Include="NetFx.Extensions.Logging.Abstractions" Version="[2.2.0]" />
+
+		<!--Должен быть именно Package так как могут возникать конфликты-->
+		<Reference Include="System.Net.Http" />
+	</ItemGroup>
+
 
 </Project>

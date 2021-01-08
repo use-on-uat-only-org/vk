@@ -104,7 +104,7 @@ namespace VkNet.Utils
 		/// <returns> WEB форма. </returns>
 		public static WebForm From(HttpResponse<string> result)
 		{
-			return new WebForm(result);
+			return new(result);
 		}
 
 		/// <summary>

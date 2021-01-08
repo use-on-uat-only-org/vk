@@ -1,7 +1,7 @@
 ﻿using System;
 using VkNet.Enums;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.Account
 {
 	/// <summary>
 	/// Параметры метода account.saveProfileInfo

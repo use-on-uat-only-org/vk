@@ -6,6 +6,8 @@ using Moq;
 using NUnit.Framework;
 using VkNet.Enums;
 using VkNet.Model;
+using VkNet.Model.RequestParams.Auth;
+using VkNet.Model.Results.Friends;
 using VkNet.Tests.Infrastructure;
 using VkNet.Utils;
 

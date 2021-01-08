@@ -6,6 +6,7 @@ using VkNet.Enums.Filters;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Exception;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Video;
 using VkNet.Tests.Helper;
 using VkNet.Tests.Infrastructure;
 using VkNet.Utils;

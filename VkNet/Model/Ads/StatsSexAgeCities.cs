@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Ads
 {
 	/// <summary>
 	///
@@ -41,7 +41,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static StatsSexAgeCities FromJson(VkResponse response)
 		{
-			return new StatsSexAgeCities
+			return new()
 			{
 				Name = response["name"],
 				Value = response["value"],

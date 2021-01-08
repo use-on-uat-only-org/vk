@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Ads
 {
 	/// <summary>
 	/// Список доступных размеров аудитории для сохранения.
@@ -29,7 +29,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static SaveAudienceLevels FromJson(VkResponse response)
 		{
-			return new SaveAudienceLevels
+			return new()
 			{
 				Level = response["level"],
 				AudienceCount = response["audience_count"],

@@ -6,7 +6,7 @@ using VkNet.Enums.SafetyEnums;
 using VkNet.Utils;
 using VkNet.Utils.JsonConverter;
 
-namespace VkNet.Model
+namespace VkNet.Model.RequestParams.Stats
 {
 	/// <summary>
 	/// Параметры метода Stats.Get

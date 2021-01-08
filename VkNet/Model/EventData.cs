@@ -59,7 +59,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static EventData FromJson(VkResponse response)
 		{
-			return new EventData
+			return new()
 			{
 				Type = response["type"],
 				Link = response["link"],

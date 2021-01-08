@@ -1,8 +1,8 @@
-using Newtonsoft.Json;
 using System;
+using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Account
 {
 	/// <summary>
 	/// Результат метода account.changePassword

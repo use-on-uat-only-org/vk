@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using VkNet.Enums;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Friends
 {
 	/// <summary>
 	/// Результат запроса Friends.AreFriends
@@ -51,7 +51,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static AreFriendsResult FromJson(VkResponse response)
 		{
-			return new AreFriendsResult
+			return new()
 			{
 					UserId = response[key: "user_id"]
 					, FriendStatus = response[key: "friend_status"]

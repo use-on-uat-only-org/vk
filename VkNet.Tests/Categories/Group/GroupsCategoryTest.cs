@@ -9,6 +9,7 @@ using VkNet.Enums.SafetyEnums;
 using VkNet.Exception;
 using VkNet.Model;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Groups;
 using VkNet.Tests.Infrastructure;
 
 namespace VkNet.Tests.Categories.Group

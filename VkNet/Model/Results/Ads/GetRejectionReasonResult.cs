@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
+using VkNet.Model.Ads;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Ads
 {
 	/// <summary>
 	///
@@ -30,7 +31,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static GetRejectionReasonResult FromJson(VkResponse response)
 		{
-			return new GetRejectionReasonResult
+			return new()
 			{
 				Comment = response["comment"],
 				Rules = response["rules"].ToReadOnlyCollectionOf<RejectionRules>()

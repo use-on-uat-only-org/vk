@@ -4,6 +4,7 @@ using System.Linq;
 using JetBrains.Annotations;
 using VkNet.Exception;
 using VkNet.Model;
+using VkNet.Model.Results.Auth;
 using VkNet.Utils;
 
 namespace VkNet.Infrastructure.Authorization.ImplicitFlow

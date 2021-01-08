@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Notifications
 {
 	/// <summary>
 	/// Результат запроса
@@ -33,7 +33,7 @@ namespace VkNet.Model
 		/// Информация о сообществах, которые находятся в списке оповещений.
 		/// </summary>
 		[JsonProperty(propertyName: "groups")]
-		public List<Group> Groups { get; set; }
+		public List<Group.Group> Groups { get; set; }
 
 		/// <summary>
 		/// Время последнего просмотра пользователем раздела оповещений в формате Unixtime.

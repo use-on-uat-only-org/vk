@@ -8,7 +8,7 @@ using VkNet.Model.Attachments;
 using VkNet.Utils;
 using VkNet.Utils.JsonConverter;
 
-namespace VkNet.Model
+namespace VkNet.Model.Apps
 {
 	/// <summary>
 	/// Приложение.
@@ -161,7 +161,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static App FromJson(VkResponse response)
 		{
-			return new App
+			return new()
 			{
 				Id = response["id"],
 				Title = response["title"],

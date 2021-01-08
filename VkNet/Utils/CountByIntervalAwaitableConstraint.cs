@@ -14,7 +14,7 @@ namespace VkNet.Utils
 
 		private TimeSpan _timeSpan;
 
-		private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
+		private readonly SemaphoreSlim _semaphore = new(1, 1);
 
 		/// <inheritdoc />
 		/// <summary>

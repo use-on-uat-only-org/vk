@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.Board
 {
 	/// <summary>
 	/// Параметры метода wall.addComment

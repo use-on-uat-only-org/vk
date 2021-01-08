@@ -22,7 +22,7 @@ namespace VkNet.Model.GroupUpdate
 		/// <param name="response"> Ответ сервера. </param>
 		public new static WallPost FromJson(VkResponse response)
 		{
-			return new WallPost
+			return new()
 			{
 				Id = response[key: "id"],
 				OwnerId = response[key: "owner_id"],

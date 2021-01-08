@@ -1,8 +1,8 @@
 using System;
 using System.Collections.ObjectModel;
 using VkNet.Abstractions.Category.Async;
-using VkNet.Model;
-using VkNet.Model.LeadForms;
+using VkNet.Model.RequestParams.LeadForms;
+using VkNet.Model.Results.LeadForms;
 
 namespace VkNet.Abstractions.Category
 {

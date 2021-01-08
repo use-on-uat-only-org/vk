@@ -26,7 +26,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static LinkButton FromJson(VkResponse response)
 		{
-			return new LinkButton
+			return new()
 			{
 					Title = response[key: "title"]
 					, Uri = response[key: "url"]

@@ -3,7 +3,9 @@ using System.Collections.ObjectModel;
 using VkNet.Enums;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
+using VkNet.Model.Ads;
 using VkNet.Model.RequestParams.Ads;
+using VkNet.Model.Results.Ads;
 
 namespace VkNet.Abstractions
 {

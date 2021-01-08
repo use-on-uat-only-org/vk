@@ -203,7 +203,7 @@ namespace VkNet.Model.Attachments
 		/// <param name="post"> </param>
 		public static explicit operator Wall(Post post)
 		{
-			return new Wall
+			return new()
 			{
 				Id = post.Id,
 				OwnerId = post.OwnerId,
@@ -237,23 +237,6 @@ namespace VkNet.Model.Attachments
 				Views = post.Views,
 				MarkedAsAds = post.MarkedAsAds
 			};
-		}
-
-		/// <summary>
-		/// Преобразование класса <see cref="Wall" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="Wall" /></returns>
-		public static implicit operator Wall(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 
 	#region Поля, установленные экспериментально

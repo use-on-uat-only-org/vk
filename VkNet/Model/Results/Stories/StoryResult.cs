@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Stories
 {
 	/// <summary>
 	/// Ответ на методы stories
@@ -32,6 +32,6 @@ namespace VkNet.Model
 		/// Сообщества
 		/// </summary>
 		[JsonProperty("groups")]
-		public IEnumerable<Group> Groups { get; set; }
+		public IEnumerable<Group.Group> Groups { get; set; }
 	}
 }

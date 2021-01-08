@@ -19,7 +19,7 @@ namespace VkNet.Model
 		/// <summary>
 		/// Информация об играющей в текущей момент у пользователя аудиокомпозиции.
 		/// </summary>
-		public Audio Audio { get; set; }
+		public Attachments.Audio Audio { get; set; }
 
 	#region Методы
 

@@ -4,7 +4,7 @@ using VkNet.Enums.SafetyEnums;
 using VkNet.Utils;
 using VkNet.Utils.JsonConverter;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.Wall
 {
 	/// <summary>
 	/// Список параметров для метода Wall.Get

@@ -2,7 +2,7 @@ using System;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Wall
 {
 	/// <summary>
 	/// Ответ на запрос wall.getComments
@@ -32,7 +32,7 @@ namespace VkNet.Model
 		/// Массив групп
 		/// </summary>
 		[JsonProperty("groups")]
-		public ReadOnlyCollection<Group> Groups { get; set; }
+		public ReadOnlyCollection<Group.Group> Groups { get; set; }
 
 		/// <summary>
 		/// Массив групп

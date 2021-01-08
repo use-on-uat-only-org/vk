@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Audio
 {
 	/// <summary>
 	/// Обложка аудиоальбома.
@@ -80,24 +80,6 @@ namespace VkNet.Model
 			};
 
 			return album;
-		}
-
-		/// <summary>
-		/// Преобразование класса <see cref="AudioCover" /> в
-		/// <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns> Результат преобразования в <see cref="AudioCover" /> </returns>
-		public static implicit operator AudioCover(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 
 	#endregion

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
+using VkNet.Model.Ads;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Ads
 {
 	/// <summary>
 	/// Описание рекламного аккаунта.
@@ -33,7 +34,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static GetOfficeUsersResult FromJson(VkResponse response)
 		{
-			return new GetOfficeUsersResult
+			return new()
 			{
 				UserId = response["user_id"],
 				Accesses = response["accesses"].ToReadOnlyCollectionOf<OfficeUsersAccesses>()

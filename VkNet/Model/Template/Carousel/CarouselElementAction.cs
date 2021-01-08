@@ -35,28 +35,11 @@ namespace VkNet.Model.Template.Carousel
 		/// <returns> </returns>
 		public static CarouselElementAction FromJson(VkResponse response)
 		{
-			return new CarouselElementAction
+			return new()
 			{
 				Type = response[key: "type"],
 				Link = response[key: "link"]
 			};
-		}
-
-		/// <summary>
-		/// Преобразовать из VkResponse
-		/// </summary>
-		/// <param name="response"> Ответ. </param>
-		/// <returns>
-		/// Результат преобразования.
-		/// </returns>
-		public static implicit operator CarouselElementAction(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken() ? FromJson(response) : null;
 		}
 	}
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using VkNet.Model;
+using VkNet.Model.Results.Secure;
 
 namespace VkNet.Abstractions.Category
 {

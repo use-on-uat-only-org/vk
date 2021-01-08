@@ -231,23 +231,6 @@ namespace VkNet.Model.Attachments
 				: null;
 		}
 
-		/// <summary>
-		/// Преобразование класса <see cref="Video" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="Video" /></returns>
-		public static implicit operator Video(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
-		}
-
 	#endregion
 
 	#region Недокументированные

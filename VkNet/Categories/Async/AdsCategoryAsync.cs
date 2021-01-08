@@ -1,10 +1,13 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using VkNet.Enums;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
+using VkNet.Model.Ads;
 using VkNet.Model.RequestParams.Ads;
+using VkNet.Model.Results.Ads;
 using VkNet.Utils;
 
 namespace VkNet.Categories
@@ -15,6 +18,13 @@ namespace VkNet.Categories
 		/// <inheritdoc/>
 		public Task<ReadOnlyCollection<bool>> AddOfficeUsersAsync(AdsDataSpecificationParams<UserSpecification> adsDataSpecification)
 		{
+			return _vk.CallAsync<ReadOnlyCollection<bool>>("ads.addOfficeUsers",
+				new VkParameters
+				{
+					{ "account_id", adsDataSpecification.AccountId },
+					{ "data", JsonConvert.SerializeObject(adsDataSpecification.Data) }
+				});
+
 			return TypeHelper.TryInvokeMethodAsync(() => AddOfficeUsers(adsDataSpecification));
 		}
 

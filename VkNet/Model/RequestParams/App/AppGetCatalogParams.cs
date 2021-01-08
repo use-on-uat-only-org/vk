@@ -4,7 +4,7 @@ using VkNet.Enums.Filters;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Utils.JsonConverter;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.App
 {
 	/// <summary>
 	/// Параметры запроса для приложений

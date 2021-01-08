@@ -13,6 +13,8 @@ using VkNet.Abstractions.Core;
 using VkNet.Abstractions.Utils;
 using VkNet.Enums.Filters;
 using VkNet.Model;
+using VkNet.Model.RequestParams.Auth;
+using VkNet.Model.Results.Auth;
 using VkNet.Utils;
 using VkNet.Utils.AntiCaptcha;
 

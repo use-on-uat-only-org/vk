@@ -1,6 +1,4 @@
-using VkNet.Enums.SafetyEnums;
-
-namespace VkNet.Enums.Filters
+namespace VkNet.Enums.SafetyEnums
 {
 	/// <summary>
 	/// Тип объекта, добавленного в закладки.

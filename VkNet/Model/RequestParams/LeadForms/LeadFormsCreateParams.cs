@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using VkNet.Abstractions.Utils;
 
-namespace VkNet.Model.LeadForms
+namespace VkNet.Model.RequestParams.LeadForms
 {
 	/// <summary>
 	/// Параметры запроса <c>leadForms.createParams</c>

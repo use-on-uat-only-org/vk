@@ -97,9 +97,9 @@ namespace VkNet.Model.Attachments
 		/// </summary>
 		/// <param name="response"> Ответ сервера. </param>
 		/// <returns> </returns>
-		private static Article FromJson(VkResponse response)
+		public static Article FromJson(VkResponse response)
 		{
-			return new Article
+			return new()
 			{
 				Id = response["id"],
 				OwnerId = response["owner_id"],
@@ -118,23 +118,6 @@ namespace VkNet.Model.Attachments
 				PublishedDate = response["published_date"],
 				Photo = response["photo"]
 			};
-		}
-
-		/// <summary>
-		/// Преобразование класса <see cref="Article" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="Article" /></returns>
-		public static implicit operator Article(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 	}
 }

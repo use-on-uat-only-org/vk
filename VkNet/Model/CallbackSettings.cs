@@ -284,7 +284,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static CallbackSettings FromJson(VkResponse response)
 		{
-			return new CallbackSettings
+			return new()
 			{
 				MessageNew = response[key: "message_new"],
 				MessageReply = response[key: "message_reply"],

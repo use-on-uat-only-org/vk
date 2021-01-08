@@ -49,7 +49,8 @@ namespace VkNet.Enums.SafetyEnums
 		/// </exception>
 		public static TFilter RegisterPossibleValue(string value)
 		{
-			return new TFilter { _value = value };
+			return new()
+				{ _value = value };
 		}
 
 		/// <summary>

@@ -23,6 +23,8 @@ using VkNet.Enums;
 using VkNet.Exception;
 using VkNet.Infrastructure;
 using VkNet.Model;
+using VkNet.Model.RequestParams.Auth;
+using VkNet.Model.Results.Auth;
 using VkNet.Utils;
 using VkNet.Utils.AntiCaptcha;
 using VkNet.Utils.JsonConverter;

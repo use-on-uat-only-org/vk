@@ -5,7 +5,7 @@ using VkNet.Enums.SafetyEnums;
 using VkNet.Utils;
 using VkNet.Utils.JsonConverter;
 
-namespace VkNet.Model
+namespace VkNet.Model.Apps
 {
 	/// <summary>
 	///  Массив объектов, описывающих изображения
@@ -39,30 +39,12 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static AppImage FromJson(VkResponse response)
 		{
-			return new AppImage
+			return new()
 			{
 				Id = response[key: "id"],
 				Type = response[key: "type"],
 				Images = response[key: "images"].ToReadOnlyCollectionOf<Image>(x => x)
 			};
 		}
-
-		/// <summary>
-		/// Разобрать из json.
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns> </returns>
-		public static implicit operator AppImage(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response: response)
-				: null;
-		}
-
 	}
 }

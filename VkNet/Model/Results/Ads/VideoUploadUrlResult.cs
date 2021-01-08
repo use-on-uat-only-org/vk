@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Ads
 {
 	/// <summary>
 	/// Результат метода Ads.VideoUploadUrl
@@ -30,7 +30,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static VideoUploadUrlResult FromJson(VkResponse response)
 		{
-			return new VideoUploadUrlResult
+			return new()
 			{
 				Video = response["video"],
 				ErrCode = response["errcode"]

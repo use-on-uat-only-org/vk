@@ -5,7 +5,7 @@ using VkNet.Utils.JsonConverter;
 
 // ReSharper disable MemberCanBePrivate.Global
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Friends
 {
 	/// <summary>
 	/// Friends Get Requests Result
@@ -39,29 +39,12 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static FriendsGetRequestsResult FromJson(VkResponse response)
 		{
-			return new FriendsGetRequestsResult
+			return new()
 			{
 				UserId = response[key: "user_id"],
 				Mutual = response[key: "mutual"].ToVkCollectionOf<long>(selector: x => x, arrayName: "users"),
 				Message = response[key: "message"]
 			};
-		}
-
-		/// <summary>
-		/// Преобразовать из VkResponse
-		/// </summary>
-		/// <param name="response"> Ответ. </param>
-		/// <returns>
-		/// Результат преобразования.
-		/// </returns>
-		public static implicit operator FriendsGetRequestsResult(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken() ? FromJson(response: response) : null;
 		}
 	}
 }

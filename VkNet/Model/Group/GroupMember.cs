@@ -1,7 +1,7 @@
 using System;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Group
 {
 	/// <summary>
 	/// Информация о участнике сообщества (группы).

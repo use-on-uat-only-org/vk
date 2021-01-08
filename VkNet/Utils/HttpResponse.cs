@@ -68,7 +68,7 @@ namespace VkNet.Utils
 		/// <returns> The HTTP response. </returns>
 		public static HttpResponse<TResponse> Success(HttpStatusCode httpStatusCode, TResponse value, Uri requestUri = null, Uri responseUri = null)
 		{
-			return new HttpResponse<TResponse>
+			return new()
 			{
 				Value = value,
 				IsSuccess = true,
@@ -89,7 +89,7 @@ namespace VkNet.Utils
 		/// </returns>
 		public static HttpResponse<TResponse> Fail(HttpStatusCode httpStatusCode, string message, Uri requestUri = null, Uri responseUri = null)
 		{
-			return new HttpResponse<TResponse>
+			return new()
 			{
 				Message = message,
 				StatusCode = httpStatusCode,

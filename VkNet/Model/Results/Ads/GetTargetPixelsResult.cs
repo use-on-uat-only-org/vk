@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Ads
 {
 	/// <summary>
 	///
@@ -55,7 +55,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static GetTargetPixelsResult FromJson(VkResponse response)
 		{
-			return new GetTargetPixelsResult
+			return new()
 			{
 				TargetPixelId = response["target_pixel_id"],
 				Name = response["name"],

@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 using VkNet.Model.Attachments;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.PrettyCards
 {
 	/// <summary>
 	/// Результат выполнения метода PrettyCards.getById

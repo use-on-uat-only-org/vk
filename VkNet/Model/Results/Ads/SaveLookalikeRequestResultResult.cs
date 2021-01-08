@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Ads
 {
 	/// <summary>
 	/// Результат запроса SaveLookalikeRequestResult
@@ -29,7 +29,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static SaveLookALikeRequestResultResult FromJson(VkResponse response)
 		{
-			return new SaveLookALikeRequestResultResult
+			return new()
 			{
 				RetargetingGroupId = response["retargeting_group_id"],
 				AudienceCount = response["audience_count"]

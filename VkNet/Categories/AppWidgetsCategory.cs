@@ -2,6 +2,8 @@ using System.Collections.ObjectModel;
 using VkNet.Abstractions;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
+using VkNet.Model.Apps;
+using VkNet.Model.Results.Apps;
 using VkNet.Utils;
 
 namespace VkNet.Categories

@@ -92,23 +92,6 @@ namespace VkNet.Model.Attachments
 			return document;
 		}
 
-		/// <summary>
-		/// Преобразование класса <see cref="Document" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="Document" /></returns>
-		public static implicit operator Document(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
-		}
-
 	#endregion
 	}
 }

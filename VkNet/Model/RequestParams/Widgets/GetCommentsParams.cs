@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.Widgets
 {
 	/// <summary>
 	/// Параметры запроса widgets.getComments

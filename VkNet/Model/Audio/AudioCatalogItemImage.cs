@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace VkNet.Model
+namespace VkNet.Model.Audio
 {
 	/// <summary>
 	/// Информация о фото пользователя/сообщества

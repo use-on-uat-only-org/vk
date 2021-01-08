@@ -5,7 +5,7 @@ using VkNet.Enums.SafetyEnums;
 using VkNet.Model.Attachments;
 using VkNet.Utils.JsonConverter;
 
-namespace VkNet.Model
+namespace VkNet.Model.Audio
 {
 	/// <summary>
 	/// Информация о каталоге.

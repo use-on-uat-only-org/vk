@@ -26,7 +26,7 @@ namespace VkNet.Model.GroupUpdate
 		/// <param name="response"> Ответ сервера. </param>
 		public static GroupChangePhoto FromJson(VkResponse response)
 		{
-			return new GroupChangePhoto
+			return new()
 			{
 				UserId = response["user_id"],
 				Photo = response["photo"]

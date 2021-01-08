@@ -1,7 +1,10 @@
 ﻿using VkNet.Enums.Filters;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
+using VkNet.Model.Apps;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.App;
+using VkNet.Model.Results.Apps;
 using VkNet.Utils;
 
 namespace VkNet.Abstractions

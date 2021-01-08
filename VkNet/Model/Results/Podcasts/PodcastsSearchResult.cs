@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 using VkNet.Model.Attachments;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Podcasts
 {
 	/// <summary>
 	/// Результат метода Podcasts.search
@@ -33,6 +33,6 @@ namespace VkNet.Model
 		/// Группы.
 		/// </summary>
 		[JsonProperty("groups")]
-		public ReadOnlyCollection<Group> Groups { get; set; }
+		public ReadOnlyCollection<Group.Group> Groups { get; set; }
 	}
 }

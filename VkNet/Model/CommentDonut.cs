@@ -30,7 +30,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static CommentDonut FromJson(VkResponse response)
 		{
-			return new CommentDonut
+			return new()
 			{
 				IsDon = response["is_don"],
 				Placeholder = response["placeholder"]

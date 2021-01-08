@@ -62,29 +62,15 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static CommentBoard FromJson(VkResponse response)
 		{
-			return new CommentBoard
+			return new()
 			{
-					Id = response[key: "id"]
-					, FromId = response[key: "from_id"]
-					, Date = response[key: "date"]
-					, Text = response[key: "text"]
-					, Likes = response[key: "likes"]
-					, Attachments = response[key: "attachments"].ToReadOnlyCollectionOf<Attachment>(selector: x => x)
+				Id = response[key: "id"],
+				FromId = response[key: "from_id"],
+				Date = response[key: "date"],
+				Text = response[key: "text"],
+				Likes = response[key: "likes"],
+				Attachments = response[key: "attachments"].ToReadOnlyCollectionOf<Attachment>(selector: x => x)
 			};
-		}
-
-		/// <summary>
-		/// Преобразовать из VkResponse
-		/// </summary>
-		/// <param name="response"> Ответ. </param>
-		/// <returns>
-		/// Результат преобразования.
-		/// </returns>
-		public static implicit operator CommentBoard(VkResponse response)
-		{
-			return !response.HasToken()
-					? null
-					: FromJson(response: response);
 		}
 
 	#endregion

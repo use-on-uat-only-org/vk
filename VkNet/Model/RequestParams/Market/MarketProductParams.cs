@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using VkNet.Abstractions;
+using VkNet.Abstractions.Category;
 
 namespace VkNet.Model.RequestParams.Market
 {

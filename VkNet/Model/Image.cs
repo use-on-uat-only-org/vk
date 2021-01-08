@@ -35,7 +35,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static Image FromJson(VkResponse response)
 		{
-			return new Image
+			return new()
 			{
 				Url = response[key: "url"],
 				Width = response[key: "width"],

@@ -8,6 +8,8 @@ using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
 using VkNet.Model.Attachments;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Wall;
+using VkNet.Model.Results.Wall;
 using VkNet.Utils;
 
 namespace VkNet.Categories

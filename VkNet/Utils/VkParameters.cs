@@ -32,7 +32,7 @@ namespace VkNet.Utils
 		/// <summary>
 		/// Параметры для запроса без параметров.
 		/// </summary>
-		public static VkParameters Empty => new VkParameters();
+		public static VkParameters Empty => new();
 
 		/// <summary>
 		/// Добавляет параметр запроса.

@@ -5,7 +5,7 @@ using Newtonsoft.Json.Converters;
 using VkNet.Enums;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Group
 {
 	/// <summary>
 	/// Информация о забанненом (добавленном в черный список) пользователе сообщества.

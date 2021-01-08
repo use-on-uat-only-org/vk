@@ -4,6 +4,8 @@ using VkNet.Abstractions;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Utils;
+using VkNet.Model.Results.Utils;
 using VkNet.Utils;
 
 namespace VkNet.Categories

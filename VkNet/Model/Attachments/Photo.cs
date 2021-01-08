@@ -173,22 +173,6 @@ namespace VkNet.Model.Attachments
 			return photo;
 		}
 
-		/// <summary>
-		/// Преобразование класса <see cref="Photo" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="Photo" /></returns>
-		public static implicit operator Photo(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
-		}
 
 	#endregion
 

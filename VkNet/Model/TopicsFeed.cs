@@ -27,6 +27,6 @@ namespace VkNet.Model
 		/// <summary>
 		/// Информация о группах, которые находятся в списке комментариев.
 		/// </summary>
-		public ReadOnlyCollection<Group> Groups { get; set; }
+		public ReadOnlyCollection<Group.Group> Groups { get; set; }
 	}
 }

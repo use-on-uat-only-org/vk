@@ -4,8 +4,10 @@ using System.Collections.ObjectModel;
 using VkNet.Enums.Filters;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
+using VkNet.Model.Group;
 using VkNet.Model.RequestParams;
 using VkNet.Model.RequestParams.Groups;
+using VkNet.Model.Results.Groups;
 using VkNet.Utils;
 
 namespace VkNet.Abstractions

@@ -57,7 +57,7 @@ namespace VkNet.Model.Attachments
 		/// <returns> </returns>
 		public static Note FromJson(VkResponse response)
 		{
-			return new Note
+			return new()
 			{
 				Id = response["id"],
 				OwnerId = response["user_id"],
@@ -68,23 +68,6 @@ namespace VkNet.Model.Attachments
 				ReadCommentsCount = response["read_comments"],
 				ViewUrl = response["view_url"]
 			};
-		}
-
-		/// <summary>
-		/// Преобразование класса <see cref="Note" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="Note" /></returns>
-		public static implicit operator Note(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 
 	#endregion

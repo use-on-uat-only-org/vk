@@ -3,6 +3,7 @@ using System.Globalization;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Messages;
 using VkNet.Utils;
 using VkNet.Utils.JsonConverter;
 

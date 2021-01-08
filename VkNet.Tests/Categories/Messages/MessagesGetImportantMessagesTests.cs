@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Messages;
 
 namespace VkNet.Tests.Categories.Messages
 {

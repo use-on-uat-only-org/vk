@@ -2,6 +2,7 @@
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Likes;
 using VkNet.Utils;
 
 namespace VkNet.Abstractions

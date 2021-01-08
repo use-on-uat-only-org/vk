@@ -64,7 +64,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static GiftItem FromJson(VkResponse response)
 		{
-			return new GiftItem
+			return new()
 			{
 				Id = response["id"],
 				FromId = response["from_id"],

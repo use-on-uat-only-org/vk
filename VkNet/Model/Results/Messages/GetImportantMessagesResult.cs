@@ -1,10 +1,11 @@
 using System;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
+using VkNet.Model.Attachments;
 using VkNet.Utils;
 using VkNet.Utils.JsonConverter;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Messages
 {
 	/// <summary>
 	/// Параметры метода Messages.GetImportantMessages

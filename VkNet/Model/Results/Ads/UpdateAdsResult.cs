@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Ads
 {
 	/// <summary>
 	/// Результат метода UpdateAds
@@ -35,7 +35,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static UpdateAdsResult FromJson(VkResponse response)
 		{
-			return new UpdateAdsResult
+			return new()
 			{
 				Id = response["id"],
 				ErrorCode = response["error_code"],

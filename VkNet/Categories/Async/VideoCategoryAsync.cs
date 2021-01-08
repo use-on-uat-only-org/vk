@@ -6,6 +6,7 @@ using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
 using VkNet.Model.Attachments;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Video;
 using VkNet.Utils;
 
 namespace VkNet.Categories

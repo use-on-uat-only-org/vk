@@ -36,31 +36,12 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static MutualFriend FromJson(VkResponse response)
 		{
-			return new MutualFriend
+			return new()
 			{
 				Id = response["id"],
 				CommonFriends = response["common_friends"].ToReadOnlyCollectionOf<ulong>(x => x),
 				CommonCount = response["common_count"]
 			};
-		}
-
-		/// <summary>
-		/// Преобразовать из VkResponse
-		/// </summary>
-		/// <param name="response"> Ответ. </param>
-		/// <returns>
-		/// Результат преобразования.
-		/// </returns>
-		public static implicit operator MutualFriend(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 	}
 }

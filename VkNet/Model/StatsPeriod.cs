@@ -1,6 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using VkNet.Model.Stats;
 
 namespace VkNet.Model
 {

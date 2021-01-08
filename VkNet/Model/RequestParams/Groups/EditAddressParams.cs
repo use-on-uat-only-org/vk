@@ -1,6 +1,8 @@
 using System;
 using Newtonsoft.Json;
 using VkNet.Abstractions;
+using VkNet.Abstractions.Category;
+using VkNet.Abstractions.Category.Async;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Utils.JsonConverter;
 

@@ -1,6 +1,7 @@
 using System;
 using Newtonsoft.Json;
 using VkNet.Enums.Filters;
+using VkNet.Enums.SafetyEnums;
 using VkNet.Utils.JsonConverter;
 
 namespace VkNet.Model.RequestParams.Fave
@@ -46,7 +47,7 @@ namespace VkNet.Model.RequestParams.Fave
 		public ulong? Offset { get; set; }
 
 		/// <summary>
-		/// Количество возвращаемых закладок. 
+		/// Количество возвращаемых закладок.
 		/// </summary>
 		/// <remarks>
 		/// По умолчанию 50, минимальное значение 1, максимальное значение 100.

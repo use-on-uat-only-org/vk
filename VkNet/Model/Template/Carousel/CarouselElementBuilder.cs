@@ -29,7 +29,7 @@ namespace VkNet.Model.Template.Carousel
 		public CarouselElementAction Action { get; private set; }
 
 		/// <inheritdoc />
-		public List<MessageKeyboardButton> Buttons { get; private set; } = new List<MessageKeyboardButton>();
+		public List<MessageKeyboardButton> Buttons { get; private set; } = new();
 
 		private readonly string _type;
 
@@ -138,7 +138,7 @@ namespace VkNet.Model.Template.Carousel
 		/// <inheritdoc />
 		public CarouselElement Build()
 		{
-			return new CarouselElement()
+			return new()
 			{
 				Title = Title,
 				Description = Description,

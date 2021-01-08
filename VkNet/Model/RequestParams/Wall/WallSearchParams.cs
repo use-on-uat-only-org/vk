@@ -1,7 +1,7 @@
 ﻿using System;
 using VkNet.Enums.Filters;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.Wall
 {
 	/// <summary>
 	/// Параметры метода wall.search

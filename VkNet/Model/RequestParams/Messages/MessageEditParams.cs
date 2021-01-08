@@ -5,7 +5,7 @@ using VkNet.Model.Attachments;
 using VkNet.Model.Keyboard;
 using VkNet.Model.Template;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.Messages
 {
 	/// <summary>
 	/// Параметры запроса Messages.Edit

@@ -62,7 +62,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static PollBackground FromJson(VkResponse response)
 		{
-			return new PollBackground
+			return new()
 			{
 				Id = response["id"],
 				Type = response["type"],
@@ -73,23 +73,6 @@ namespace VkNet.Model
 				Images = response["images"].ToReadOnlyCollectionOf<Photo>(),
 				Points = response["points"].ToReadOnlyCollectionOf<PollBackgroundPoint>()
 			};
-		}
-
-		/// <summary>
-		/// Преобразование класса <see cref="PollBackground" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="PollBackground" /></returns>
-		public static implicit operator PollBackground(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 	}
 }

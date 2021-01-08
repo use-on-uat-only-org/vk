@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using VkNet.Abstractions.Core;
 using VkNet.Model;
+using VkNet.Model.Results.Auth;
 
 namespace VkNet.Infrastructure
 {

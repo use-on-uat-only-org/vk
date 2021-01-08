@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using VkNet.Utils.JsonConverter;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.PrettyCards
 {
 
 	/// <summary>

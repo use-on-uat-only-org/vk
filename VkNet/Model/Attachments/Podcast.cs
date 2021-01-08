@@ -94,7 +94,7 @@ namespace VkNet.Model.Attachments
 		/// <returns> </returns>
 		public static Podcast FromJson(VkResponse response)
 		{
-			return new Podcast
+			return new()
 			{
 				Id = response["id"],
 				OwnerId = response["owner_id"],
@@ -111,23 +111,6 @@ namespace VkNet.Model.Attachments
 				PodcastTitle = response["podcast_title"],
 				TrackCode = response["track_code"]
 			};
-		}
-
-		/// <summary>
-		/// Преобразование класса <see cref="Podcast" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="Podcast" /></returns>
-		public static implicit operator Podcast(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 	}
 }

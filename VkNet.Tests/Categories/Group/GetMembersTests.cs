@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Groups;
 using VkNet.Tests.Infrastructure;
 
 namespace VkNet.Tests.Categories.Group

@@ -31,7 +31,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static GroupCoverImage FromJson(VkResponse response)
 		{
-			return new GroupCoverImage
+			return new()
 			{
 					Url = response[key: "url"]
 					, Width = response[key: "width"]

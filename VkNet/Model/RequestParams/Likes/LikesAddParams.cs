@@ -4,7 +4,7 @@ using VkNet.Enums.SafetyEnums;
 using VkNet.Utils;
 using VkNet.Utils.JsonConverter;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.Likes
 {
 	/// <summary>
 	/// Параметры метода likes.add

@@ -56,7 +56,7 @@ namespace VkNet.Model.Attachments
 		/// <returns> </returns>
 		public static Album FromJson(VkResponse response)
 		{
-			return new Album
+			return new()
 			{
 				Id = response["album_id"] ?? response["aid"] ?? response["id"],
 				Thumb = response["thumb"],
@@ -67,23 +67,6 @@ namespace VkNet.Model.Attachments
 				UpdateTime = response["updated"],
 				Size = response["size"]
 			};
-		}
-
-		/// <summary>
-		/// Преобразование класса <see cref="Album" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="Album" /></returns>
-		public static implicit operator Album(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 
 	#endregion

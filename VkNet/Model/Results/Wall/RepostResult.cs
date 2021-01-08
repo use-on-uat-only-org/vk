@@ -1,7 +1,7 @@
 using System;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Wall
 {
 	/// <summary>
 	/// Результат запроса wall.Repost

@@ -4,6 +4,7 @@ using NUnit.Framework;
 using VkNet.Enums.Filters;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.App;
 using VkNet.Tests.Infrastructure;
 
 namespace VkNet.Tests.Categories.Apps

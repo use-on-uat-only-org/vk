@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using VkNet.Model.Fave;
 using VkNet.Utils;
 
 namespace VkNet.Model.Attachments
@@ -102,7 +103,7 @@ namespace VkNet.Model.Attachments
 		/// <returns> </returns>
 		public static Link FromJson(VkResponse response)
 		{
-			return new Link
+			return new()
 			{
 				Id = response["id"],
 				Uri = response["url"],
@@ -121,22 +122,6 @@ namespace VkNet.Model.Attachments
 			};
 		}
 
-		/// <summary>
-		/// Преобразование класса <see cref="Link" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="Link" /></returns>
-		public static implicit operator Link(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
-		}
 	#endregion
 	}
 }

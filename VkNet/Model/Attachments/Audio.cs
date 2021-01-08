@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using VkNet.Enums;
+using VkNet.Model.Audio;
 using VkNet.Utils;
 
 namespace VkNet.Model.Attachments
@@ -147,7 +148,7 @@ namespace VkNet.Model.Attachments
 		/// <returns> </returns>
 		public static Audio FromJson(VkResponse response)
 		{
-			return new Audio
+			return new()
 			{
 				Id = response["id"],
 				OwnerId = response["owner_id"],
@@ -168,23 +169,6 @@ namespace VkNet.Model.Attachments
 				FeaturedArtists = response["featured_artists"].ToReadOnlyCollectionOf<AudioArtist>(x => x),
 				Subtitle = response["subtitle"]
 			};
-		}
-
-		/// <summary>
-		/// Преобразование класса <see cref="Audio" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="Audio" /></returns>
-		public static implicit operator Audio(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 
 	#endregion

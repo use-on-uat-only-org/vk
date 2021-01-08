@@ -4,11 +4,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using VkNet.Enums;
 using VkNet.Enums.SafetyEnums;
-using VkNet.Model.Attachments;
 using VkNet.Utils;
 using VkNet.Utils.JsonConverter;
 
-namespace VkNet.Model
+namespace VkNet.Model.Attachments
 {
 	/// <summary>
 	/// Информация о продукте.
@@ -93,7 +92,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static Market FromJson(VkResponse response)
 		{
-			return new Market
+			return new()
 			{
 				Id = response["id"] ?? -1,
 				OwnerId = response["owner_id"],

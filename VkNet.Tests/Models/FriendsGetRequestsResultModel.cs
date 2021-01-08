@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using VkNet.Model;
+using VkNet.Model.Results.Friends;
 using VkNet.Tests.Infrastructure;
 
 namespace VkNet.Tests.Models

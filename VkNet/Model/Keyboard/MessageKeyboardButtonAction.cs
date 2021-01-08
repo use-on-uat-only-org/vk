@@ -98,7 +98,7 @@ namespace VkNet.Model.Keyboard
 		/// <returns> </returns>
 		public static MessageKeyboardButtonAction FromJson(VkResponse response)
 		{
-			return new MessageKeyboardButtonAction
+			return new()
 			{
 				Type = response["type"],
 				Payload = response["payload"],
@@ -108,23 +108,6 @@ namespace VkNet.Model.Keyboard
 				OwnerId = response["owner_id"],
 				Hash = response["hash"]
 			};
-		}
-
-		/// <summary>
-		/// Преобразовать из VkResponse
-		/// </summary>
-		/// <param name="response"> Ответ. </param>
-		/// <returns>
-		/// Результат преобразования.
-		/// </returns>
-		public static implicit operator MessageKeyboardButtonAction(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken() ? FromJson(response) : null;
 		}
 	}
 }

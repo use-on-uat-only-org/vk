@@ -4,12 +4,11 @@ using System.Diagnostics;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using VkNet.Enums;
-using VkNet.Model.Attachments;
 using VkNet.Model.Keyboard;
 using VkNet.Utils;
 using VkNet.Utils.JsonConverter;
 
-namespace VkNet.Model
+namespace VkNet.Model.Attachments
 {
 	/// <summary>
 	/// Личное сообщение пользователя.
@@ -85,23 +84,6 @@ namespace VkNet.Model
 			};
 
 			return message;
-		}
-
-		/// <summary>
-		/// Преобразование класса <see cref="Message" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns> Результат преобразования в <see cref="Message" /> </returns>
-		public static implicit operator Message(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 
 	#endregion

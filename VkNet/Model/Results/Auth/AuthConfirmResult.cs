@@ -1,7 +1,7 @@
 ﻿using System;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Auth
 {
 	/// <summary>
 	/// Результат метода auth.confirm
@@ -26,7 +26,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static AuthConfirmResult FromJson(VkResponse response)
 		{
-			return new AuthConfirmResult
+			return new()
 			{
 					Success = response[key: "success"]
 					, UserId = response[key: "uid"]

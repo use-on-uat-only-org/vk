@@ -31,7 +31,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static Email FromJson(VkResponse response)
 		{
-			return new Email
+			return new()
 			{
 					Id = response[key: "id"]
 					, Address = response[key: "address"]

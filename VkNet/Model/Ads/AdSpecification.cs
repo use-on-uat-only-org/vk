@@ -3,10 +3,11 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using VkNet.Enums;
 using VkNet.Enums.SafetyEnums;
+using VkNet.Model.Results.Ads;
 using VkNet.Utils;
 using VkNet.Utils.JsonConverter;
 
-namespace VkNet.Model
+namespace VkNet.Model.Ads
 {
 	/// <summary>
 	/// Массив объектов UserSpecification
@@ -235,7 +236,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static AdSpecification FromJson(VkResponse response)
 		{
-			return new AdSpecification
+			return new()
 			{
 				CampaignId = response["campaign_id"],
 				AdFormat = response["ad_format"],

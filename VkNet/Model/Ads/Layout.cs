@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using VkNet.Enums;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Ads
 {
 	/// <summary>
 	///
@@ -126,7 +126,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static Layout FromJson(VkResponse response)
 		{
-			return new Layout
+			return new()
 			{
 				Id = response["id"],
 				CampaignId = response["campaign_id"],

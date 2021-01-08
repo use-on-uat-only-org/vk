@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Audio
 {
 	/// <summary>
 	/// Информация об аудиоальбоме.
@@ -49,7 +49,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static AudioAlbum FromJson(VkResponse response)
 		{
-			return new AudioAlbum
+			return new()
 			{
 				Id = response["id"],
 				OwnerId = response["owner_id"],

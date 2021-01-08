@@ -57,7 +57,7 @@ namespace VkNet.Model.Template.Carousel
 		/// <returns> </returns>
 		public static CarouselElement FromJson(VkResponse response)
 		{
-			return new CarouselElement
+			return new()
 			{
 				Title = response[key: "title"],
 				Description = response[key: "description"],
@@ -65,23 +65,6 @@ namespace VkNet.Model.Template.Carousel
 				PhotoId = response[key: "photo_id"],
 				Buttons = response[key: "buttons"].ToReadOnlyCollectionOf<MessageKeyboardButton>(selector: x => x)
 			};
-		}
-
-		/// <summary>
-		/// Преобразовать из VkResponse
-		/// </summary>
-		/// <param name="response"> Ответ. </param>
-		/// <returns>
-		/// Результат преобразования.
-		/// </returns>
-		public static implicit operator CarouselElement(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken() ? FromJson(response) : null;
 		}
 	}
 }

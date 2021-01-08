@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using VkNet.Enums.Filters;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.Search
 {
 	/// <summary>
 	/// Параметры запроса Search.GetHints

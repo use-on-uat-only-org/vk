@@ -3,6 +3,7 @@ using Moq;
 using NUnit.Framework;
 using VkNet.Abstractions.Core;
 using VkNet.Model;
+using VkNet.Model.Attachments;
 using VkNet.Utils;
 
 namespace VkNet.Tests.Utils

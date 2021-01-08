@@ -24,7 +24,7 @@ namespace VkNet.Model
 		/// <summary>
 		/// Список групп.
 		/// </summary>
-		public List<Group> Groups { get; set; }
+		public List<Group.Group> Groups { get; set; }
 
 		/// <summary>
 		/// Разобрать из json.
@@ -40,7 +40,7 @@ namespace VkNet.Model
 			var userOrGroup = new UserOrGroup
 			{
 					Users = new List<User>()
-					, Groups = new List<Group>()
+					, Groups = new List<Group.Group>()
 			};
 
 			if (response.ContainsKey(key: "count"))
@@ -57,7 +57,7 @@ namespace VkNet.Model
 					case "group":
 
 					{
-						Group group = item;
+						Group.Group group = item;
 						userOrGroup.Groups.Add(item: group);
 					}
 

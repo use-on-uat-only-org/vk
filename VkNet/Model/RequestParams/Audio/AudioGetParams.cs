@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.Audio
 {
 	/// <summary>
 	/// Параметры метода audio.get

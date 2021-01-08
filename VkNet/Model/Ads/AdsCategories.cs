@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Ads
 {
 	/// <summary>
 	/// Категории для каталога сообществ
@@ -32,7 +32,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static AdsCategories FromJson(VkResponse response)
 		{
-			return new AdsCategories
+			return new()
 			{
 				Id = response[key: "id"],
 				Name = response[key: "name"],

@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Ads
 {
 	/// <summary>
 	/// Параметры запроса ads.addOfficeUsers
@@ -35,7 +35,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static CreateAdsResult FromJson(VkResponse response)
 		{
-			return new CreateAdsResult
+			return new()
 			{
 				Id = response["id"],
 				ErrorCode = response["error_code"],

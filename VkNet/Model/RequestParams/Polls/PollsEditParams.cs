@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.Polls
 {
 	/// <summary>
 	/// Список параметров для метода polls.edit

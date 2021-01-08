@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using VkNet.Enums;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.Groups
 {
 	/// <summary>
 	/// Параметры метода groups.banUser

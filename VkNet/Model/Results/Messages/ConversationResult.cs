@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Messages
 {
 	/// <summary>
 	/// Результат запроса о получении беседы
@@ -32,6 +32,6 @@ namespace VkNet.Model
 		/// Группы
 		/// </summary>
 		[JsonProperty("groups")]
-		public IEnumerable<Group> Groups { get; set; }
+		public IEnumerable<Group.Group> Groups { get; set; }
 	}
 }

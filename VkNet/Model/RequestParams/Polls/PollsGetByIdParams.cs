@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.Polls
 {
 	/// <summary>
 	/// Список параметров для метода polls.getById

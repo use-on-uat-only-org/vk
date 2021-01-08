@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using VkNet.Abstractions.Utils;
 using VkNet.Exception;
 using VkNet.Model;
+using VkNet.Model.RequestParams.Auth;
 using VkNet.Utils.AntiCaptcha;
 
 namespace VkNet.Infrastructure.Authorization.ImplicitFlow.Forms

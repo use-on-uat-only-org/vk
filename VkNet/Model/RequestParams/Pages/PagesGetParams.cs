@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.Pages
 {
 	/// <summary>
 	/// Параметры метода pages.get

@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Ads
 {
 	/// <summary>
 	/// Массив объектов ClientSpecification
@@ -35,7 +35,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static CreateClientResult FromJson(VkResponse response)
 		{
-			return new CreateClientResult
+			return new()
 			{
 				Id = response["id"],
 				ErrorCode = response["error_code"],

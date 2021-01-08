@@ -109,7 +109,7 @@ namespace VkNet.Model
 		/// массив groups
 		/// </summary>
 		[JsonProperty("groups")]
-		public ReadOnlyCollection<Group> Groups { get; set; }
+		public ReadOnlyCollection<Group.Group> Groups { get; set; }
 
 		/// <summary>
 		/// Информация информацию о том, каким образом (через интерфейс сайта, виджет и

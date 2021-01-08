@@ -5,7 +5,9 @@ using VkNet.Abstractions;
 using VkNet.Enums;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
+using VkNet.Model.Ads;
 using VkNet.Model.RequestParams.Ads;
+using VkNet.Model.Results.Ads;
 using VkNet.Utils;
 
 namespace VkNet.Categories

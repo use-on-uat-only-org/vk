@@ -21,7 +21,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static PostView FromJson(VkResponse response)
 		{
-			return new PostView
+			return new()
 			{
 					Count = response[key: "count"]
 			};

@@ -20,7 +20,7 @@ namespace VkNet.Model.Template
 		public TemplateType Type { get; private set; } = TemplateType.Carousel;
 
 		/// <inheritdoc />
-		public List<CarouselElement> Elements { get; private set; } = new List<CarouselElement>();
+		public List<CarouselElement> Elements { get; private set; } = new();
 
 		private string _tooMuchElementsExceptionTemplate = "Максимальное количество элементов в шаблоне 10";
 
@@ -56,7 +56,7 @@ namespace VkNet.Model.Template
 		/// <inheritdoc />
 		public MessageTemplate Build()
 		{
-			return new MessageTemplate()
+			return new()
 			{
 				Type = Type,
 				Elements = Elements

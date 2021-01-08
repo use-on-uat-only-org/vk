@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Account
 {
 	/// <summary>
 	/// </summary>
@@ -40,7 +40,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static AccountPushSettings FromJson(VkResponse response)
 		{
-			return new AccountPushSettings
+			return new()
 			{
 					Disabled = response[key: "disabled"]
 					, DisabledUntil = response[key: "disabled_until"]

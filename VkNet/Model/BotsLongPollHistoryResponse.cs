@@ -69,22 +69,5 @@ namespace VkNet.Model
 
 			return fromJson;
 		}
-
-		/// <summary>
-		/// Преобразовать из VkResponse
-		/// </summary>
-		/// <param name="response"> Ответ. </param>
-		/// <returns>
-		/// Результат преобразования.
-		/// </returns>
-		public static implicit operator BotsLongPollHistoryResponse(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken() ? FromJson(response: response) : null;
-		}
 	}
 }

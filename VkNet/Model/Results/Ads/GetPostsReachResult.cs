@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Ads
 {
 	/// <summary>
 	/// Описание рекламного аккаунта.
@@ -110,7 +110,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static GetPostsReachResult FromJson(VkResponse response)
 		{
-			return new GetPostsReachResult
+			return new()
 			{
 				Id = response["user_id"],
 				ReachSubscribers = response["reach_subscribers"],

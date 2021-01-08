@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.NewsFeed
 {
 	/// <summary>
 	/// Список параметров запроса newsfeed.getRecommended

@@ -19,7 +19,7 @@ namespace VkNet.Model
 		/// <summary>
 		/// Предложения по группам.
 		/// </summary>
-		public List<Group> Groups { get; set; }
+		public List<Group.Group> Groups { get; set; }
 
 		/// <summary>
 		/// Разобрать из json.
@@ -31,7 +31,7 @@ namespace VkNet.Model
 			var newsSuggestions = new NewsSuggestions
 			{
 					Users = new List<User>()
-					, Groups = new List<Group>()
+					, Groups = new List<Group.Group>()
 			};
 
 			VkResponseArray result = response;
@@ -44,7 +44,7 @@ namespace VkNet.Model
 					case "group":
 
 					{
-						Group group = item;
+						Group.Group group = item;
 						newsSuggestions.Groups.Add(item: group);
 					}
 

@@ -4,7 +4,7 @@ using VkNet.Enums.Filters;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Utils.JsonConverter;
 
-namespace VkNet.Model
+namespace VkNet.Model.RequestParams.Auth
 {
 	/// <summary>
 	/// Параметры авторизации

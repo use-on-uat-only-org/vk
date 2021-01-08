@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
+using VkNet.Model.Ads;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Ads
 {
 	/// <summary>
 	/// Результат метода GetCategories
@@ -30,7 +31,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static GetCategoriesResult FromJson(VkResponse response)
 		{
-			return new GetCategoriesResult
+			return new()
 			{
 				V1 = response["v1"].ToReadOnlyCollectionOf<AdsCategories>(x=>x),
 				V2 = response["v2"].ToReadOnlyCollectionOf<AdsCategories>(x=>x)

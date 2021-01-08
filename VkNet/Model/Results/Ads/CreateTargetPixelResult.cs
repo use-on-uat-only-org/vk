@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Ads
 {
 	/// <summary>
 	/// Результат метода Ads.CreateTargetPixel
@@ -29,7 +29,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static CreateTargetPixelResult FromJson(VkResponse response)
 		{
-			return new CreateTargetPixelResult
+			return new()
 			{
 				Id = response["id"],
 				Pixel = response["pixel"]

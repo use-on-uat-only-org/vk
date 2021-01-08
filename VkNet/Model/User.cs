@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using VkNet.Enums;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model.Attachments;
+using VkNet.Model.Group;
 using VkNet.Utils;
 using VkNet.Utils.JsonConverter;
 
@@ -155,7 +156,7 @@ namespace VkNet.Model
 			user.BirthdayVisibility = birthdayParts.Length > 2
 				? Enums.BirthdayVisibility.Full
 				: Enums.BirthdayVisibility.OnlyDayAndMonth;
-		
+
 			switch (response["role"]?.ToString()) {
 				case "creator":
 					user.Role = ManagerRole.Creator;
@@ -708,7 +709,7 @@ namespace VkNet.Model
 		/// Объект аудиозаписи, установленной в статус (если аудиозапись транслируется в текущей момент).
 		/// </summary>
 		[JsonProperty("status_audio")]
-		public Audio StatusAudio { get; set; }
+		public Attachments.Audio StatusAudio { get; set; }
 
 		/// <summary>
 		/// Часовой пояс пользователя.

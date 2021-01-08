@@ -1,5 +1,6 @@
 using System;
 using VkNet.Model;
+using VkNet.Model.RequestParams.Auth;
 
 namespace VkNet.Abstractions
 {

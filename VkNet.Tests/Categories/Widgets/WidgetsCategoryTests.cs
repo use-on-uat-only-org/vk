@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Widgets;
 using VkNet.Tests.Infrastructure;
 
 namespace VkNet.Tests.Categories.Widgets

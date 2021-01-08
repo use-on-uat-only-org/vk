@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using VkNet.Model.Attachments;
+using VkNet.Model.Group;
 
 namespace VkNet.Model
 {
@@ -41,6 +43,6 @@ namespace VkNet.Model
 		/// <remarks>Возвращается, если был передан параметр Extended=<c>true</c></remarks>
 		/// </summary>
 		[JsonProperty("groups")]
-		public IEnumerable<Group> Groups { get; set; }
+		public IEnumerable<Group.Group> Groups { get; set; }
 	}
 }

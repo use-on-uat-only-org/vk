@@ -26,7 +26,7 @@ namespace VkNet.Model
 		/// Информация о группах, которые находятся в списке новостей.
 		/// </summary>
 		[JsonProperty("groups")]
-		public IEnumerable<Group> Groups { get; set; }
+		public IEnumerable<Group.Group> Groups { get; set; }
 
 		/// <summary>
 		/// Содержит offset, который необходимо передать, для того, чтобы получить

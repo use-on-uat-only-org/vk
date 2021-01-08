@@ -71,21 +71,5 @@ namespace VkNet.Model.Attachments
 				: null;
 		}
 
-		/// <summary>
-		/// Преобразование класса <see cref="Event" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="Event" /></returns>
-		public static implicit operator Event(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
-		}
 	}
 }

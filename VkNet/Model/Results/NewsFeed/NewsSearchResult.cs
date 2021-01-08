@@ -2,7 +2,7 @@ using System;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.NewsFeed
 {
 	/// <summary>
 	/// Результат поиска метода newsfeed.search
@@ -38,7 +38,7 @@ namespace VkNet.Model
 		/// Сообщества
 		/// </summary>
 		[JsonProperty("groups")]
-		public ReadOnlyCollection<Group> Groups { get; set; }
+		public ReadOnlyCollection<Group.Group> Groups { get; set; }
 
 		/// <summary>
 		/// Ключ для следующего поиска

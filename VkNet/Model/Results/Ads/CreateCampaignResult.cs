@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Ads
 {
 	/// <summary>
 	/// Массив объектов CampaignSpecification
@@ -35,7 +35,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static CreateCampaignResult FromJson(VkResponse response)
 		{
-			return new CreateCampaignResult
+			return new()
 			{
 				Id = response["id"],
 				ErrorCode = response["error_code"],

@@ -32,7 +32,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static Lyrics FromJson(VkResponse response)
 		{
-			return new Lyrics
+			return new()
 			{
 				Id = response[key: "lyrics_id"],
 				Text = response[key: "text"]

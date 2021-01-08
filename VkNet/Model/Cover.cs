@@ -24,27 +24,10 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static Cover FromJson(VkResponse response)
 		{
-			return new Cover
+			return new()
 			{
 				Sizes = response["sizes"].ToReadOnlyCollectionOf<CoverSize>(x => x)
 			};
-		}
-
-		/// <summary>
-		/// Разобрать из json.
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns> </returns>
-		public static implicit operator Cover(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 	}
 }

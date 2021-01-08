@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using VkNet.Model.Attachments;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.Video
 {
 	/// <summary>
 	/// Параметры метода video.createComment

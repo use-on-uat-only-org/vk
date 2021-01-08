@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using VkNet.Model.Apps;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Apps
 {
 	/// <summary>
 	/// Копия изображения обложки.
@@ -30,29 +31,11 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static AppImageResult FromJson(VkResponse response)
 		{
-			return new AppImageResult
+			return new()
 			{
 				Count = response[key: "count"],
 				Items = response[key: "items"].ToReadOnlyCollectionOf<AppImage>(x => x)
 			};
 		}
-
-		/// <summary>
-		/// Разобрать из json.
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns> </returns>
-		public static implicit operator AppImageResult(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response: response)
-				: null;
-		}
-
 	}
 }

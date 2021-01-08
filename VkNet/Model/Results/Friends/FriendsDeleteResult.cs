@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Friends
 {
 	/// <summary>
 	/// Результат запроса Friends.Delete
@@ -49,7 +49,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static FriendsDeleteResult FromJson(VkResponse response)
 		{
-			return new FriendsDeleteResult
+			return new()
 			{
 					Success = response[key: "success"]
 					, FriendDeleted = response[key: "friend_deleted"]

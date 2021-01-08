@@ -10,7 +10,7 @@ namespace VkNet.Model.GroupUpdate
 	/// (<c>Comment</c> с дополнительными полями)
 	/// </summary>
 	[Serializable]
-	public class MarketComment : Comment
+	public class UpdateMarketComment : Comment
 	{
 		/// <summary>
 		/// Идентификатор товара
@@ -26,9 +26,9 @@ namespace VkNet.Model.GroupUpdate
 		/// Разобрать из json.
 		/// </summary>
 		/// <param name="response"> Ответ сервера. </param>
-		public new static MarketComment FromJson(VkResponse response)
+		public new static UpdateMarketComment FromJson(VkResponse response)
 		{
-			return new MarketComment
+			return new()
 			{
 				Id = response[key: "id"],
 				FromId = response[key: "from_id"],

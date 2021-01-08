@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.Auth
 {
 	/// <summary>
 	/// Параметры запроса метода auth.confirm

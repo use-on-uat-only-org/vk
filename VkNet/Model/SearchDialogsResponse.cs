@@ -24,7 +24,7 @@ namespace VkNet.Model
 		/// <summary>
 		/// Список найденных сообществ.
 		/// </summary>
-		public IList<Group> Groups { get; set; }
+		public IList<Group.Group> Groups { get; set; }
 
 	#region Методы
 
@@ -39,7 +39,7 @@ namespace VkNet.Model
 			{
 					Users = new List<User>()
 					, Chats = new List<Chat>()
-					, Groups = new List<Group>()
+					, Groups = new List<Group.Group>()
 			};
 
 			VkResponseArray responseArray = response;

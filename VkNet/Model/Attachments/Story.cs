@@ -130,7 +130,7 @@ namespace VkNet.Model.Attachments
 		/// <returns> </returns>
 		public static Story FromJson(VkResponse response)
 		{
-			return new Story
+			return new()
 			{
 				Id = response["id"],
 				OwnerId = response["owner_id"],
@@ -153,23 +153,6 @@ namespace VkNet.Model.Attachments
 				Views = response["views"],
 				AccessKey = response["access_key"]
 			};
-		}
-
-		/// <summary>
-		/// Преобразование класса <see cref="Story" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="Story" /></returns>
-		public static implicit operator Story(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 
 	#endregion

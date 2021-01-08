@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Donut
 {
 	/// <summary>
 	/// Subscriptions
@@ -32,7 +32,7 @@ namespace VkNet.Model
 		/// Массив объектов сообществ.
 		/// </summary>
 		[JsonProperty("groups")]
-		public VkCollection<Group> Groups { get; set; }
+		public VkCollection<Group.Group> Groups { get; set; }
 
 		public static SubscriptionsInfo FromJson(VkResponse response)
 		{
@@ -41,7 +41,7 @@ namespace VkNet.Model
 				Subscriptions = response[key: "subscritions"].ToVkCollectionOf<Subscription>(selector: r => r),
 				Count = response[key: "count"],
 				Profiles = response[key: "profiles"].ToVkCollectionOf<User>(selector: r => r),
-				Groups = response[key: "groups"].ToVkCollectionOf<Group>(selector: r => r)
+				Groups = response[key: "groups"].ToVkCollectionOf<Group.Group>(selector: r => r)
 			};
 
 			return subscriptions;

@@ -55,7 +55,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static ShortLink FromJson(VkResponse response)
 		{
-			return new ShortLink
+			return new()
 			{
 					Timestamp = response[key: "timestamp"]
 					, ShortUrl = response[key: "short_url"]

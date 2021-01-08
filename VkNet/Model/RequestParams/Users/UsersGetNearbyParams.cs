@@ -5,7 +5,7 @@ using VkNet.Enums.Filters;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Utils.JsonConverter;
 
-namespace VkNet.Model.RequestParams
+namespace VkNet.Model.RequestParams.Users
 {
 	/// <summary>
 	/// Параметры метода users.getNearby

@@ -27,7 +27,7 @@ namespace VkNet.Model.GroupUpdate
 		/// <param name="response"> Ответ сервера. </param>
 		public new static BoardPost FromJson(VkResponse response)
 		{
-			return new BoardPost
+			return new()
 			{
 				Id = response[key: "id"],
 				FromId = response[key: "from_id"],

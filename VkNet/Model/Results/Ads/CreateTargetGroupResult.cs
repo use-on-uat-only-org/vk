@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Ads
 {
 	/// <summary>
 	/// Результат метода Ads.CreateTargetGroup
@@ -23,7 +23,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static CreateTargetGroupResult FromJson(VkResponse response)
 		{
-			return new CreateTargetGroupResult
+			return new()
 			{
 				Id = response["id"]
 			};

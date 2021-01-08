@@ -4,7 +4,7 @@ using VkNet.Enums.Filters;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Utils.JsonConverter;
 
-namespace VkNet.Model
+namespace VkNet.Model.RequestParams.Auth
 {
 	/// <inheritdoc />
 	[Serializable]
@@ -104,7 +104,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static ApiAuthParams Format(ulong appId, string login, string password, Settings settings)
 		{
-			return new ApiAuthParams
+			return new()
 			{
 				ApplicationId = appId,
 				Login = login,

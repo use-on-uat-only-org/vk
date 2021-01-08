@@ -30,7 +30,7 @@ namespace VkNet.Model.GroupUpdate
 		/// <param name="response"> Ответ сервера. </param>
 		public static UserUnblock FromJson(VkResponse response)
 		{
-			return new UserUnblock
+			return new()
 			{
 				UserId = response["user_id"],
 				AdminId = response["admin_id"],

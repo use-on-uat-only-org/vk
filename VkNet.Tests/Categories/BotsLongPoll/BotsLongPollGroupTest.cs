@@ -3,6 +3,7 @@ using System.Linq;
 using NUnit.Framework;
 using VkNet.Enums;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Groups;
 
 namespace VkNet.Tests.Categories.BotsLongPoll
 {

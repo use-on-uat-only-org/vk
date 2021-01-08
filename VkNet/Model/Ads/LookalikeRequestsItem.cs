@@ -6,7 +6,7 @@ using VkNet.Enums.SafetyEnums;
 using VkNet.Utils;
 using VkNet.Utils.JsonConverter;
 
-namespace VkNet.Model
+namespace VkNet.Model.Ads
 {
 	/// <summary>
 	/// Объект-запроса на поиск похожей аудитории.
@@ -86,7 +86,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static LookalikeRequestItem FromJson(VkResponse response)
 		{
-			return new LookalikeRequestItem
+			return new()
 			{
 				Id = response["id"],
 				CreateTime = response["create_time"],

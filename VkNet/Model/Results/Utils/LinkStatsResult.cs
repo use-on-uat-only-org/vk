@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Utils
 {
 	/// <summary>
 	/// Данные о статистике.

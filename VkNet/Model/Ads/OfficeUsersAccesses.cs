@@ -4,7 +4,7 @@ using VkNet.Enums.SafetyEnums;
 using VkNet.Utils;
 using VkNet.Utils.JsonConverter;
 
-namespace VkNet.Model
+namespace VkNet.Model.Ads
 {
 	/// <summary>
 	/// Описание рекламного аккаунта.
@@ -35,7 +35,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static OfficeUsersAccesses FromJson(VkResponse response)
 		{
-			return new OfficeUsersAccesses
+			return new()
 			{
 				ClientId = response["client_id"],
 				Role = response["role"]

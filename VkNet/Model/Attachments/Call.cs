@@ -67,23 +67,6 @@ namespace VkNet.Model.Attachments
 			return call;
 		}
 
-		/// <summary>
-		/// Преобразование класса <see cref="Call" /> в <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns>Результат преобразования в <see cref="Call" /></returns>
-		public static implicit operator Call(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
-		}
-
 	#endregion
 	}
 }

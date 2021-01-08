@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using VkNet.Abstractions.Utils;
 using VkNet.Exception;
 using VkNet.Model;
+using VkNet.Model.RequestParams.Auth;
 
 namespace VkNet.Infrastructure.Authorization.ImplicitFlow.Forms
 {

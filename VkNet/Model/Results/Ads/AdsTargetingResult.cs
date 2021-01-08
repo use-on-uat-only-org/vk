@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Ads
 {
 	/// <summary>
 	///
@@ -59,7 +59,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static AdsTargetingResult FromJson(VkResponse response)
 		{
-			return new AdsTargetingResult
+			return new()
 			{
 				CampaignId = response["campaign_id"],
 				Id = response["id"],

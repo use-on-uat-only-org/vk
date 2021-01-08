@@ -1,6 +1,6 @@
 using System;
 using NUnit.Framework;
-using VkNet.Model.LeadForms;
+using VkNet.Model.RequestParams.LeadForms;
 using VkNet.Tests.Infrastructure;
 
 namespace VkNet.Tests.Categories.LeadForms

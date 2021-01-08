@@ -25,7 +25,7 @@ namespace VkNet.Model.GroupUpdate
 		/// <param name="response"> Ответ сервера. </param>
 		public static MessageAllow FromJson(VkResponse response)
 		{
-			return new MessageAllow
+			return new()
 			{
 				UserId = response["user_id"],
 				Key = response["key"]

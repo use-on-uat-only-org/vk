@@ -2,10 +2,11 @@
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 using VkNet.Enums.SafetyEnums;
+using VkNet.Model.Ads;
 using VkNet.Utils;
 using VkNet.Utils.JsonConverter;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Ads
 {
 	/// <summary>
 	///
@@ -39,7 +40,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static GetDemographicsResult FromJson(VkResponse response)
 		{
-			return new GetDemographicsResult
+			return new()
 			{
 				Id = response["id"],
 				Type = response["type"],

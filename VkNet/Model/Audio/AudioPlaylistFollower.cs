@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Audio
 {
 	/// <summary>
 	/// Подписчик плейлиста.
@@ -21,7 +21,7 @@ namespace VkNet.Model
 		/// </summary>
 		[JsonProperty("playlist_id")]
 		public long PlaylistId { get; set; }
-		
+
 	#region Методы
 
 		/// <summary>
@@ -38,24 +38,6 @@ namespace VkNet.Model
 			};
 
 			return playlistFollower;
-		}
-
-		/// <summary>
-		/// Преобразование класса <see cref="AudioPlaylistFollower" /> в
-		/// <see cref="VkParameters" />
-		/// </summary>
-		/// <param name="response"> Ответ сервера. </param>
-		/// <returns> Результат преобразования в <see cref="AudioPlaylistFollower" /> </returns>
-		public static implicit operator AudioPlaylistFollower(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken()
-				? FromJson(response)
-				: null;
 		}
 
 	#endregion

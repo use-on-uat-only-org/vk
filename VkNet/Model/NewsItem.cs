@@ -181,7 +181,7 @@ namespace VkNet.Model
 		/// с данной новостью.
 		/// </summary>
 		[JsonProperty("audio")]
-		public VkCollection<Audio> Audios { get; set; }
+		public VkCollection<Attachments.Audio> Audios { get; set; }
 
 		/// <summary>
 		/// Содержат информацию о количестве объектов и до 5 последних объектов, связанных

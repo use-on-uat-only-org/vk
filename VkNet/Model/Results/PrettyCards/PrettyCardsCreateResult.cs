@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.PrettyCards
 {
 	/// <summary>
 	/// Результат метода PrettyCardds.Create

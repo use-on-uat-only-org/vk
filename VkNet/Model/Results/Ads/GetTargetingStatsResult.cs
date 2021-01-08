@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Ads
 {
 	/// <summary>
 	///
@@ -71,7 +71,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static GetTargetingStatsResult FromJson(VkResponse response)
 		{
-			return new GetTargetingStatsResult
+			return new()
 			{
 				AudienceCount = response["audience_count"],
 				RecommendedCpc = response["recommended_cpc"],

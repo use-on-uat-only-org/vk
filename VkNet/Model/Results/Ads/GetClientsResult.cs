@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using VkNet.Utils;
 
-namespace VkNet.Model
+namespace VkNet.Model.Results.Ads
 {
 	/// <summary>
 	/// Описание рекламного аккаунта.
@@ -32,7 +32,7 @@ namespace VkNet.Model
 		/// <returns> </returns>
 		public static GetClientsResult FromJson(VkResponse response)
 		{
-			return new GetClientsResult
+			return new()
 			{
 				Id = response["id"],
 				AllLimit = response["all_limit"]

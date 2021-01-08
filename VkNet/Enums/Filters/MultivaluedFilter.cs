@@ -25,7 +25,7 @@ namespace VkNet.Enums.Filters
 		/// <summary>
 		/// Выбранные элементы
 		/// </summary>
-		private List<string> Selected { get; set; } = new List<string>();
+		private List<string> Selected { get; set; } = new();
 
 		/// <inheritdoc />
 		public bool Equals(MultivaluedFilter<TFilter> x, MultivaluedFilter<TFilter> y)
@@ -133,7 +133,8 @@ namespace VkNet.Enums.Filters
 		/// <returns> Объединенный набор фильтров </returns>
 		public static TFilter operator |(MultivaluedFilter<TFilter> a, MultivaluedFilter<TFilter> b)
 		{
-			return new TFilter { Selected = a.Selected.Union(second: b.Selected).OrderBy(keySelector: x => x).ToList() };
+			return new()
+				{ Selected = a.Selected.Union(second: b.Selected).OrderBy(keySelector: x => x).ToList() };
 		}
 
 		/// <inheritdoc />

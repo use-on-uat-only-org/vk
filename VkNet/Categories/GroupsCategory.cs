@@ -7,8 +7,9 @@ using VkNet.Abstractions;
 using VkNet.Enums.Filters;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
-using VkNet.Model.RequestParams;
+using VkNet.Model.Group;
 using VkNet.Model.RequestParams.Groups;
+using VkNet.Model.Results.Groups;
 using VkNet.Utils;
 
 namespace VkNet.Categories
@@ -363,7 +364,7 @@ namespace VkNet.Categories
 				{ "group_id", groupId }
 			};
 
-			GroupsEditParams result = _vk.Call("groups.getSettings", parameters);
+			var result = _vk.Call<GroupsEditParams>("groups.getSettings", parameters);
 			result.GroupId = groupId; // Требует метод edit но getSettings не возвращает
 
 			return result;

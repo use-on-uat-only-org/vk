@@ -5,6 +5,8 @@ using VkNet.Enums.Filters;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.NewsFeed;
+using VkNet.Model.Results.NewsFeed;
 using VkNet.Utils;
 
 namespace VkNet.Abstractions

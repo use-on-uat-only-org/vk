@@ -4,7 +4,9 @@ using JetBrains.Annotations;
 using VkNet.Enums.Filters;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
+using VkNet.Model.Group;
 using VkNet.Model.RequestParams;
+using VkNet.Model.RequestParams.Users;
 using VkNet.Utils;
 
 namespace VkNet.Abstractions

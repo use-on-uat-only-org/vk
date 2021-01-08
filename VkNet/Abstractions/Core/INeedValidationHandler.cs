@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using VkNet.Model;
+using VkNet.Model.Results.Auth;
 using VkNet.Utils;
 
 namespace VkNet.Abstractions.Core
