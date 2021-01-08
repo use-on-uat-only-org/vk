@@ -3,7 +3,7 @@ using System.Net;
 using JetBrains.Annotations;
 using Newtonsoft.Json.Linq;
 using VkNet.Enums;
-using VkNet.Model;
+using VkNet.Model.Attachments;
 
 namespace VkNet.Utils
 {
@@ -109,7 +109,6 @@ namespace VkNet.Utils
 		{
 			return _token.ToString();
 		}
-
 
 	#region System types
 
@@ -350,7 +349,14 @@ namespace VkNet.Utils
 		/// <returns> </returns>
 		public static DateTime TimestampToDateTime(long unixTimeStamp)
 		{
-			var dt = new DateTime(year: 1970, month: 1, day: 1, hour: 0, minute: 0, second: 0, millisecond: 0, kind: DateTimeKind.Utc);
+			var dt = new DateTime(year: 1970,
+				month: 1,
+				day: 1,
+				hour: 0,
+				minute: 0,
+				second: 0,
+				millisecond: 0,
+				kind: DateTimeKind.Utc);
 
 			return dt.AddSeconds(value: unixTimeStamp);
 		}
@@ -365,6 +371,18 @@ namespace VkNet.Utils
 		public static implicit operator Uri(VkResponse response)
 		{
 			return Uri.TryCreate(uriString: response, uriKind: UriKind.Absolute, result: out var uriResult) ? uriResult : null;
+		}
+
+		/// <summary>
+		/// Преобразовать из VkResponse
+		/// </summary>
+		/// <param name="response"> Ответ. </param>
+		/// <returns>
+		/// Результат преобразования.
+		/// </returns>
+		public static implicit operator Attachment(VkResponse response)
+		{
+			return response?._token == null || !response._token.HasValues ? null : Attachment.FromJson(response);
 		}
 
 	#endregion
