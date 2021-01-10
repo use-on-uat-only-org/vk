@@ -11,7 +11,7 @@ namespace VkNet.Enums.SafetyEnums
 		/// <summary>
 		/// Видеозаписи сообщества.
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		public static readonly VideoCatalogType Channel = RegisterPossibleValue(value: "channel");
 
 		/// <summary>

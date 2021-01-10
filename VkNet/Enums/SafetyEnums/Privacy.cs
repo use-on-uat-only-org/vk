@@ -11,7 +11,7 @@ namespace VkNet.Enums.SafetyEnums
 		/// <summary>
 		/// Доступно всем пользователям.
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		public static readonly Privacy All = RegisterPossibleValue(value: "all");
 
 		/// <summary>

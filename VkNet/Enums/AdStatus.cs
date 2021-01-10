@@ -10,7 +10,7 @@ namespace VkNet.Enums
 		/// <summary>
 		/// Объявление остановлено
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		Stopped = 0,
 
 		/// <summary>

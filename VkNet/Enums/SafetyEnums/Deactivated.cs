@@ -22,7 +22,7 @@ namespace VkNet.Enums.SafetyEnums
 		/// <summary>
 		/// Активно.
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		public static readonly Deactivated Activated = RegisterPossibleValue(value: "activated");
 	}
 }

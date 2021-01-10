@@ -10,7 +10,7 @@ namespace VkNet.Enums
 		/// <summary>
 		/// Не зацикливать.
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		NotRepeat = 0,
 
 		/// <summary>

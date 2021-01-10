@@ -10,7 +10,7 @@ namespace VkNet.Enums.SafetyEnums
 		/// <summary>
 		/// Популярные за день (по умолчанию);
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		public static readonly AppSort PopularToday = RegisterPossibleValue(value: "popular_today");
 
 		/// <summary>

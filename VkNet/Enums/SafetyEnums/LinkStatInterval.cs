@@ -15,7 +15,7 @@ namespace VkNet.Enums.SafetyEnums
 		/// <summary>
 		/// День
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		public static readonly LinkStatInterval Day = RegisterPossibleValue(value: "day");
 
 		/// <summary>

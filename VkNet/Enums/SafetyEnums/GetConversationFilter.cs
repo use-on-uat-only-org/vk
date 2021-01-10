@@ -12,7 +12,7 @@ namespace VkNet.Enums.SafetyEnums
 		/// <summary>
 		/// Все беседы.
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		public static readonly GetConversationFilter All = RegisterPossibleValue(value: "all");
 		/// <summary>
 		/// Беседы с непрочитанными сообщениями;

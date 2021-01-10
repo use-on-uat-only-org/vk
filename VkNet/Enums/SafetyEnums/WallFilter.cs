@@ -20,7 +20,7 @@ namespace VkNet.Enums.SafetyEnums
 		/// <summary>
 		/// Необходимо получить все сообщения на стене (Owner + Others).
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		public static readonly WallFilter All = RegisterPossibleValue(value: "all");
 
 		/// <summary>

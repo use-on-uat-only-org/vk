@@ -10,7 +10,7 @@ namespace VkNet.Enums
 		/// <summary>
 		/// Выключены
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		Off = 0,
 
 		/// <summary>

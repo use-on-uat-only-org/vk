@@ -34,7 +34,7 @@ namespace VkNet.Enums
 		/// <summary>
 		/// приглашен
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		Invited = 5
 	}
 }

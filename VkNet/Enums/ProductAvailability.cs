@@ -22,7 +22,7 @@ namespace VkNet.Enums
 		/// <summary>
 		/// Товар недоступен
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		Unavailable
 	}
 }

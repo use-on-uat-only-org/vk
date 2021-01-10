@@ -10,7 +10,7 @@ namespace VkNet.Enums
 		/// <summary>
 		/// Показы.
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		Cpc = 1,
 
 		/// <summary>

@@ -10,7 +10,7 @@ namespace VkNet.Enums
 		/// <summary>
 		/// Не поддерживается
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		NotSupported = 0,
 
 		/// <summary>

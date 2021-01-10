@@ -14,7 +14,7 @@ namespace VkNet.Enums
 		/// </summary>
 
 		// ReSharper disable once S2346
-		[DefaultValue]
+		[VkNetDefaultValue]
 		Unknown = 0,
 
 		/// <summary>

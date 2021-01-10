@@ -45,7 +45,7 @@ namespace VkNet.Enums
 		/// <summary>
 		/// запись в сообществе.
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		Public = 9
 	}
 }

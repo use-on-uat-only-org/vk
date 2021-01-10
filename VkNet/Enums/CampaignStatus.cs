@@ -10,7 +10,7 @@ namespace VkNet.Enums
 		/// <summary>
 		/// Кампания остановлена
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		Stopped = 0,
 
 		/// <summary>

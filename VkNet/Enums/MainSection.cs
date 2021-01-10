@@ -10,7 +10,7 @@ namespace VkNet.Enums
 		/// <summary>
 		/// Главная секция отсутствует
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		NoSection = 0,
 
 		/// <summary>

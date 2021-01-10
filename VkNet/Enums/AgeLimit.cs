@@ -10,7 +10,7 @@ namespace VkNet.Enums
 		/// <summary>
 		/// Нет ограничений
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		Withoutlimit = 1,
 
 		/// <summary>

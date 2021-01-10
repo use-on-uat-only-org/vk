@@ -12,7 +12,7 @@ namespace VkNet.Enums.SafetyEnums
 		/// <summary>
 		/// Сообщество не онлайн
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		public static readonly OnlineStatusType None = RegisterPossibleValue("none");
 
 		/// <summary>

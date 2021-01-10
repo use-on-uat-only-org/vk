@@ -10,7 +10,7 @@ namespace VkNet.Enums.SafetyEnums
 		/// <summary>
 		/// Адрес не задан;
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		public static readonly CallbackServerStatus Unconfigured = RegisterPossibleValue(value: "unconfigured");
 
 		/// <summary>

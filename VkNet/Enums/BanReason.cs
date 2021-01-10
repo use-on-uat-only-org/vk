@@ -10,7 +10,7 @@ namespace VkNet.Enums
 		/// <summary>
 		/// Другое.
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		Other = 0,
 
 		/// <summary>

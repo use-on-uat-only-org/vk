@@ -10,7 +10,7 @@ namespace VkNet.Enums
 		/// <summary>
 		/// Не указаны.
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		Unknown = 0,
 
 		/// <summary>

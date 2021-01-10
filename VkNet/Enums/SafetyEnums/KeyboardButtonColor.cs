@@ -10,7 +10,7 @@ namespace VkNet.Enums.SafetyEnums
 		/// <summary>
 		/// обычная белая кнопка. #FFFFFF
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		public static readonly KeyboardButtonColor Default = RegisterPossibleValue(value: "default");
 
 		/// <summary>

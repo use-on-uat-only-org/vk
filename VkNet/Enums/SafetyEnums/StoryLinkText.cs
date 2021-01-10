@@ -60,7 +60,7 @@ namespace VkNet.Enums.SafetyEnums
 		/// <summary>
 		/// Подробнее
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		public static readonly StoryLinkText LearnMore = RegisterPossibleValue(value: "learn_more");
 		/// <summary>
 		/// Посмотреть

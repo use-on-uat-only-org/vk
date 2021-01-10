@@ -10,7 +10,7 @@ namespace VkNet.Enums
 		/// <summary>
 		/// 0 — пользовательская расстановка
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		UserSort = 0,
 
 		/// <summary>

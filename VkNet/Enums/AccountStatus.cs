@@ -15,7 +15,7 @@ namespace VkNet.Enums
 		/// <summary>
 		/// Неактивен
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		Inactive = 0
 	}
 }

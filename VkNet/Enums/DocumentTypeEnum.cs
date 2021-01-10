@@ -38,7 +38,7 @@ namespace VkNet.Enums
 		/// <summary>
 		/// Неизвестно
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		Unknown
 	}
 }

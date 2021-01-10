@@ -15,7 +15,7 @@ namespace VkNet.Enums
 		/// <summary>
 		/// 0+
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		ZeroPlus = 1,
 
 		/// <summary>

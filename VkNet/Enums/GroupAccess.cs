@@ -12,7 +12,7 @@ namespace VkNet.Enums
 		/// <summary>
 		/// 0 — открытая;
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		Open = 0,
 
 		/// <summary>

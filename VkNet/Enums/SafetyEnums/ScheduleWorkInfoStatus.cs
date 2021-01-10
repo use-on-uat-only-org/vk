@@ -12,7 +12,7 @@ namespace VkNet.Enums.SafetyEnums
 		/// <summary>
 		/// Нет информации о расписании
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		public static readonly ScheduleWorkInfoStatus NoInformation = RegisterPossibleValue("no_information");
 
 		/// <summary>

@@ -6,7 +6,7 @@ namespace VkNet.Utils
 	/// Значение enum, используемое по умолчанию.
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Field)]
-	public class DefaultValueAttribute : Attribute
+	public class VkNetDefaultValueAttribute : Attribute
 	{
 	}
 }

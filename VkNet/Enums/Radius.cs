@@ -12,7 +12,7 @@ namespace VkNet.Enums
 		/// <summary>
 		/// 300 метров;
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		ThreeHundredMeters = 1
 
 		, /// <summary>

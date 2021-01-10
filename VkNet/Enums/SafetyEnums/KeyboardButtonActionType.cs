@@ -10,7 +10,7 @@ namespace VkNet.Enums.SafetyEnums
 		/// <summary>
 		/// Text
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		public static readonly KeyboardButtonActionType Text = RegisterPossibleValue("text");
 
 		/// <summary>

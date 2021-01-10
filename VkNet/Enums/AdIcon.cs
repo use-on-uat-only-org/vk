@@ -14,7 +14,7 @@ namespace VkNet.Enums
 		/// <summary>
 		/// Не получать URL для загрузки логотипа, а не основного изображения
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		AdIconNo = 0
 	}
 }

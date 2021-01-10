@@ -10,7 +10,7 @@ namespace VkNet.Enums
 		/// <summary>
 		/// Оплата за переходы
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		Cpc = 0,
 
 		/// <summary>

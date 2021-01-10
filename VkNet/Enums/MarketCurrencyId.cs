@@ -10,7 +10,7 @@ namespace VkNet.Enums
 		/// <summary>
 		/// 643 — российский рубль;
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		Rub = 643,
 
 		/// <summary>

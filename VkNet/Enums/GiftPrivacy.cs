@@ -22,7 +22,7 @@ namespace VkNet.Enums
 		/// <summary>
 		/// 2 — имя отправителя скрыто, сообщение видно только получателю
 		/// </summary>
-		[DefaultValue]
+		[VkNetDefaultValue]
 		NameHideMessageUser
 	}
 }
