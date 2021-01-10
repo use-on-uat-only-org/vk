@@ -12,8 +12,8 @@ namespace VkNet.Enums.SafetyEnums
 	[Serializable]
 	[SuppressMessage(category: "ReSharper", checkId: "StaticMemberInGenericType")]
 	public abstract class SafetyEnum<TFilter>
-			: IEqualityComparer<SafetyEnum<TFilter>>, IEquatable<SafetyEnum<TFilter>>
-			where TFilter : SafetyEnum<TFilter>, new()
+		: IEqualityComparer<SafetyEnum<TFilter>>, IEquatable<SafetyEnum<TFilter>>
+		where TFilter : SafetyEnum<TFilter>, new()
 	{
 		/// <summary>
 		/// Значение
@@ -50,7 +50,9 @@ namespace VkNet.Enums.SafetyEnums
 		public static TFilter RegisterPossibleValue(string value)
 		{
 			return new()
-				{ _value = value };
+			{
+				_value = value
+			};
 		}
 
 		/// <summary>
@@ -119,8 +121,9 @@ namespace VkNet.Enums.SafetyEnums
 				return null;
 			}
 
-			var result = new TFilter { _value = response };
-			Activator.CreateInstance(type: result.GetType());
+			var result = PerformanceActivator.CreateInstance<TFilter>();
+
+			result._value = response;
 
 			return result;
 		}
