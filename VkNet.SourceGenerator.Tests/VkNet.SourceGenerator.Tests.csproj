@@ -19,7 +19,7 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
-		<PackageReference Include="coverlet.collector" Version="1.3.0">
+		<PackageReference Include="coverlet.collector" Version="3.0.0">
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
@@ -48,10 +48,9 @@
 
 	<ItemGroup>
 		<PackageReference Include="AsyncFixer" Version="1.3.0" PrivateAssets="all" />
-		<PackageReference Include="HtmlAgilityPack" Version="1.11.28" />
 		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
 		<PackageReference Include="Microsoft.DotNet.Analyzers.Compatibility" Version="0.2.12-alpha" PrivateAssets="all" />
-		<PackageReference Include="SonarAnalyzer.CSharp" Version="8.15.0.24505" PrivateAssets="all" />
+		<PackageReference Include="SonarAnalyzer.CSharp" Version="8.16.0.25740" PrivateAssets="all" />
 		<PackageReference Include="JetBrains.Annotations" Version="2020.3.0" PrivateAssets="all" />
 	</ItemGroup>
 
