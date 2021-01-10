@@ -58,22 +58,5 @@ namespace VkNet.Enums.SafetyEnums
 		/// Стандартный интент, подставляется автоматически если не указан другой.
 		/// </summary>
 		public static readonly Intent Default = RegisterPossibleValue(value: "default");
-
-		/// <summary>
-		/// Преобразовать из VkResponse
-		/// </summary>
-		/// <param name="response"> Ответ. </param>
-		/// <returns>
-		/// Результат преобразования.
-		/// </returns>
-		public static implicit operator Intent(VkResponse response)
-		{
-			if (response == null)
-			{
-				return null;
-			}
-
-			return response.HasToken() ? FromJson(response) : null;
-		}
 	}
 }
