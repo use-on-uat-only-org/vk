@@ -27,7 +27,7 @@ namespace VkNet.SourceGenerator
 
 			foreach (var (className, value) in Receiver.CandidateClasses.Distinct().Select(x => (x.Key, x.Value)))
 			{
-				if (!string.IsNullOrWhiteSpace(value))
+				if (string.IsNullOrWhiteSpace(value))
 				{
 					continue;
 				}

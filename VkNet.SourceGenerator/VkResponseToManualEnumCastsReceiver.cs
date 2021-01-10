@@ -10,6 +10,8 @@ namespace VkNet.SourceGenerator
 	{
 		private const string VkNetIgnoreDefaultValue = "VkNetIgnoreDefaultValue";
 
+		private const string VkNetDefaultValue = "VkNetDefaultValue";
+
 		private const string VkNetEnumsNamespace = "VkNet.Enums";
 
 		public Dictionary<string, string> CandidateClasses { get; } = new();
@@ -22,10 +24,17 @@ namespace VkNet.SourceGenerator
 			if (syntaxNode is EnumDeclarationSyntax enumDeclarationSyntax
 				&& enumDeclarationSyntax.AttributeLists.SelectMany(al => al.Attributes)
 					.All(x => x.Name.ToString() != $"{VkNetIgnoreDefaultValue}Attribute" && x.Name.ToString() != VkNetIgnoreDefaultValue)
+				&& enumDeclarationSyntax.ChildNodes()
+					.OfType<EnumMemberDeclarationSyntax>()
+					.Any(x =>
+						x.AttributeLists.SelectMany(al => al.Attributes)
+							.Any(x => x.Name.ToString() == $"{VkNetDefaultValue}Attribute"
+									|| x.Name.ToString() == VkNetDefaultValue))
 				&& SyntaxNodeHelper.TryGetParentSyntax<NamespaceDeclarationSyntax>(enumDeclarationSyntax,
 					out var namespaceDeclarationSyntax)
 				&& namespaceDeclarationSyntax.Name.ToString().StartsWith(VkNetEnumsNamespace)
 			)
+
 			{
 				var namespaceName = namespaceDeclarationSyntax.Name.ToString();
 
@@ -40,8 +49,8 @@ namespace VkNet.SourceGenerator
 					.OfType<EnumMemberDeclarationSyntax>()
 					.FirstOrDefault(x =>
 						x.AttributeLists.SelectMany(al => al.Attributes)
-							.Any(x => x.Name.ToString() == $"{VkNetIgnoreDefaultValue}Attribute"
-									|| x.Name.ToString() == VkNetIgnoreDefaultValue));
+							.Any(x => x.Name.ToString() == $"{VkNetDefaultValue}Attribute"
+									|| x.Name.ToString() == VkNetDefaultValue));
 
 				if (field == null)
 				{
