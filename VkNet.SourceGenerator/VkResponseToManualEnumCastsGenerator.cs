@@ -25,9 +25,9 @@ namespace VkNet.SourceGenerator
 			sb.AppendLine("\tpublic partial class VkResponse");
 			sb.AppendLine("\t{");
 
-			foreach (var className in Receiver.CandidateClasses.Distinct())
+			foreach (var (className, value) in Receiver.CandidateClasses.Distinct().Select(x => (x.Key, x.Value)))
 			{
-				if (!Receiver.DefaultValues.ContainsKey(className))
+				if (!string.IsNullOrWhiteSpace(value))
 				{
 					continue;
 				}
@@ -42,8 +42,7 @@ namespace VkNet.SourceGenerator
 				sb.AppendLine($"\t\tpublic static implicit operator {className}(VkResponse response)");
 				sb.AppendLine("\t\t{");
 
-				sb.AppendLine(
-					$"\t\t\treturn response == null ? {className}.{Receiver.DefaultValues[className]} : Utilities.EnumFrom<{className}>(response);");
+				sb.AppendLine($"\t\t\treturn response == null ? {className}.{value} : Utilities.EnumFrom<{className}>(response);");
 
 				sb.AppendLine("\t\t}");
 				sb.AppendLine();

@@ -7,6 +7,12 @@ namespace VkNet.SourceGenerator
 {
 	public class VkResponseToModelCastsReceiver : ISyntaxReceiver
 	{
+		private const string ModelsNamespace = "VkNet.Model";
+
+		private const string AttachmentsNamespace = "VkNet.Model.Attachments";
+
+		private const string RequestParamsNamespace = "VkNet.Model.RequestParams";
+
 		public List<string> CandidateClasses { get; } = new();
 
 		public List<string> CandidateUsingList { get; } = new();
@@ -18,9 +24,9 @@ namespace VkNet.SourceGenerator
 				&& classDeclarationSyntax.ChildNodes().OfType<MethodDeclarationSyntax>().Any(x => x.Identifier.Text == "FromJson")
 				&& SyntaxNodeHelper.TryGetParentSyntax<NamespaceDeclarationSyntax>(classDeclarationSyntax,
 					out var namespaceDeclarationSyntax)
-				&& !namespaceDeclarationSyntax.Name.ToString().StartsWith("VkNet.Model.RequestParams")
-				&& !namespaceDeclarationSyntax.Name.ToString().StartsWith("VkNet.Model.Attachments")
-				&& namespaceDeclarationSyntax.Name.ToString().StartsWith("VkNet.Model"))
+				&& !namespaceDeclarationSyntax.Name.ToString().StartsWith(RequestParamsNamespace)
+				&& !namespaceDeclarationSyntax.Name.ToString().StartsWith(AttachmentsNamespace)
+				&& namespaceDeclarationSyntax.Name.ToString().StartsWith(ModelsNamespace))
 			{
 				var namespaceName = namespaceDeclarationSyntax.Name.ToString();
 

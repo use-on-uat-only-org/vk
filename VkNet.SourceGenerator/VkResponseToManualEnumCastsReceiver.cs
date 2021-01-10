@@ -1,28 +1,30 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace VkNet.SourceGenerator
 {
 	public class VkResponseToManualEnumCastsReceiver : ISyntaxReceiver
 	{
-		public List<string> CandidateClasses { get; } = new();
+		private const string VkNetIgnoreDefaultValue = "VkNetIgnoreDefaultValue";
+
+		private const string VkNetEnumsNamespace = "VkNet.Enums";
+
+		public Dictionary<string, string> CandidateClasses { get; } = new();
 
 		public List<string> CandidateUsingList { get; } = new();
-
-		public Dictionary<string, string> DefaultValues { get; } = new();
 
 		/// <inheritdoc />
 		public void OnVisitSyntaxNode(SyntaxNode syntaxNode)
 		{
 			if (syntaxNode is EnumDeclarationSyntax enumDeclarationSyntax
 				&& enumDeclarationSyntax.AttributeLists.SelectMany(al => al.Attributes)
-					.All(x => x.Name.ToString() != "VkNetIgnoreDefaultValueAttribute" && x.Name.ToString() != "VkNetIgnoreDefaultValue")
+					.All(x => x.Name.ToString() != $"{VkNetIgnoreDefaultValue}Attribute" && x.Name.ToString() != VkNetIgnoreDefaultValue)
 				&& SyntaxNodeHelper.TryGetParentSyntax<NamespaceDeclarationSyntax>(enumDeclarationSyntax,
 					out var namespaceDeclarationSyntax)
-				&& namespaceDeclarationSyntax.Name.ToString().StartsWith("VkNet.Enums")
+				&& namespaceDeclarationSyntax.Name.ToString().StartsWith(VkNetEnumsNamespace)
 			)
 			{
 				var namespaceName = namespaceDeclarationSyntax.Name.ToString();
@@ -33,23 +35,24 @@ namespace VkNet.SourceGenerator
 				}
 
 				var enumName = enumDeclarationSyntax.Identifier.Text;
-				CandidateClasses.Add(enumName);
 
 				var field = enumDeclarationSyntax.ChildNodes()
 					.OfType<EnumMemberDeclarationSyntax>()
 					.FirstOrDefault(x =>
 						x.AttributeLists.SelectMany(al => al.Attributes)
-							.Any(x => x.Name.ToString() == "VkNetDefaultValueAttribute"
-									|| x.Name.ToString() == "VkNetDefaultValue"));
+							.Any(x => x.Name.ToString() == $"{VkNetIgnoreDefaultValue}Attribute"
+									|| x.Name.ToString() == VkNetIgnoreDefaultValue));
 
 				if (field == null)
 				{
+					CandidateClasses.Add(enumName, string.Empty);
+
 					return;
 				}
 
-				if (!DefaultValues.ContainsKey(enumName))
+				if (!CandidateClasses.ContainsKey(enumName))
 				{
-					DefaultValues.Add(enumName, field.Identifier.Text);
+					CandidateClasses.Add(enumName, field.Identifier.Text);
 				}
 			}
 		}
