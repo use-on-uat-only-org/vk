@@ -13,14 +13,14 @@ namespace VkNet.Enums
 		/// 0 — открытая;
 		/// </summary>
 		[DefaultValue]
-		Open = 0
+		Open = 0,
 
-		, /// <summary>
+		/// <summary>
 		/// Закрытая
 		/// </summary>
-		Closed
+		Closed,
 
-		, /// <summary>
+		/// <summary>
 		/// Частная
 		/// </summary>
 		Private

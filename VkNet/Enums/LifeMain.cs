@@ -11,44 +11,44 @@ namespace VkNet.Enums
 		/// Не указано.
 		/// </summary>
 		[DefaultValue]
-		Unknown = 0
+		Unknown = 0,
 
-		, /// <summary>
+		/// <summary>
 		/// Семья и дети.
 		/// </summary>
-		FamilyAndChildren = 1
+		FamilyAndChildren = 1,
 
-		, /// <summary>
+		/// <summary>
 		/// Карьера и деньги.
 		/// </summary>
-		CareerAndMoney = 2
+		CareerAndMoney = 2,
 
-		, /// <summary>
+		/// <summary>
 		/// Развлечения и отдых.
 		/// </summary>
-		Activities = 3
+		Activities = 3,
 
-		, /// <summary>
+		/// <summary>
 		/// Наука и исследования.
 		/// </summary>
-		ScienceAndResearch = 4
+		ScienceAndResearch = 4,
 
-		, /// <summary>
+		/// <summary>
 		/// Совершенствование мира.
 		/// </summary>
-		ImprovingTheWorld = 5
+		ImprovingTheWorld = 5,
 
-		, /// <summary>
+		/// <summary>
 		/// Саморазвитие.
 		/// </summary>
-		SelfDevelopment = 6
+		SelfDevelopment = 6,
 
-		, /// <summary>
+		/// <summary>
 		/// Красота и искусство.
 		/// </summary>
-		BeautyAndArt = 7
+		BeautyAndArt = 7,
 
-		, /// <summary>
+		/// <summary>
 		/// Слава и влияние.
 		/// </summary>
 		FameAndInfluence = 8

@@ -1,4 +1,6 @@
-﻿namespace VkNet.Enums
+﻿using VkNet.Utils;
+
+namespace VkNet.Enums
 {
 	/// <summary>
 	/// Автоматическое управление ценой.
@@ -8,9 +10,10 @@
 		/// <summary>
 		/// Выключено.
 		/// </summary>
-		Off = 0
+		[DefaultValue]
+		Off = 0,
 
-		, /// <summary>
+		/// <summary>
 		/// Включено.
 		/// </summary>
 		On = 1

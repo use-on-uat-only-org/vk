@@ -11,19 +11,19 @@ namespace VkNet.Enums
 		/// 0 — пользовательская расстановка
 		/// </summary>
 		[DefaultValue]
-		UserSort = 0
+		UserSort = 0,
 
-		, /// <summary>
+		/// <summary>
 		/// 1 — по дате добавления товара
 		/// </summary>
-		ByAdd
+		ByAdd,
 
-		, /// <summary>
+		/// <summary>
 		/// 2 — по цене
 		/// </summary>
-		ByCost
+		ByCost,
 
-		, /// <summary>
+		/// <summary>
 		/// 3 — по популярности
 		/// </summary>
 		ByPopularity

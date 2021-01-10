@@ -1,4 +1,6 @@
-﻿namespace VkNet.Enums
+﻿using VkNet.Utils;
+
+namespace VkNet.Enums
 {
 	/// <summary>
 	/// Статус кампании.
@@ -8,14 +10,15 @@
 		/// <summary>
 		/// Кампания остановлена
 		/// </summary>
-		Stopped = 0
+		[DefaultValue]
+		Stopped = 0,
 
-		, /// <summary>
+		/// <summary>
 		/// Кампания запущена
 		/// </summary>
-		Started = 1
+		Started = 1,
 
-		, /// <summary>
+		/// <summary>
 		/// Кампания удалена
 		/// </summary>
 		Deleted = 2

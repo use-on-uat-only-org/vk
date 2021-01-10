@@ -1,3 +1,5 @@
+using VkNet.Utils;
+
 namespace VkNet.Enums
 {
 	/// <summary>
@@ -43,6 +45,7 @@ namespace VkNet.Enums
 		/// <summary>
 		/// запись в сообществе.
 		/// </summary>
+		[DefaultValue]
 		Public = 9
 	}
 }

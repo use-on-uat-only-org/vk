@@ -1,4 +1,6 @@
-﻿namespace VkNet.Enums
+﻿using VkNet.Utils;
+
+namespace VkNet.Enums
 {
 	/// <summary>
 	/// Статус рекламного кабинета.
@@ -8,11 +10,12 @@
 		/// <summary>
 		/// Активен
 		/// </summary>
-		Active = 1
+		Active = 1,
 
-		, /// <summary>
+		/// <summary>
 		/// Неактивен
 		/// </summary>
+		[DefaultValue]
 		Inactive = 0
 	}
 }

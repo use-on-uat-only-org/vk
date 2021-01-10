@@ -1,4 +1,6 @@
-﻿namespace VkNet.Enums
+﻿using VkNet.Utils;
+
+namespace VkNet.Enums
 {
 	/// <summary>
 	/// Возрастные ограничения
@@ -8,14 +10,15 @@
 		/// <summary>
 		/// Нет ограничений
 		/// </summary>
-		Withoutlimit = 1
+		[DefaultValue]
+		Withoutlimit = 1,
 
-		, /// <summary>
+		/// <summary>
 		/// 16+
 		/// </summary>
-		Sixteen = 2
+		Sixteen = 2,
 
-		, /// <summary>
+		/// <summary>
 		/// 18+
 		/// </summary>
 		Eighteen

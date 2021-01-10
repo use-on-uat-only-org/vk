@@ -12,14 +12,14 @@ namespace VkNet.Enums
 		/// <summary>
 		/// 0 — имя отправителя и сообщение видно всем
 		/// </summary>
-		All = 0
+		All = 0,
 
-		, /// <summary>
+		/// <summary>
 		/// 1 — имя отправителя видно всем, сообщение видно только получателю
 		/// </summary>
-		NameAllMessageUser
+		NameAllMessageUser,
 
-		, /// <summary>
+		/// <summary>
 		/// 2 — имя отправителя скрыто, сообщение видно только получателю
 		/// </summary>
 		[DefaultValue]

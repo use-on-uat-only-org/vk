@@ -12,14 +12,14 @@ namespace VkNet.Enums
 		/// <summary>
 		/// Товар доступен
 		/// </summary>
-		Available = 0
+		Available = 0,
 
-		, /// <summary>
+		/// <summary>
 		/// Товар удален
 		/// </summary>
-		Removed
+		Removed,
 
-		, /// <summary>
+		/// <summary>
 		/// Товар недоступен
 		/// </summary>
 		[DefaultValue]

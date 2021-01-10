@@ -11,34 +11,34 @@ namespace VkNet.Enums
 		/// Не указано.
 		/// </summary>
 		[DefaultValue]
-		Unknown = 0
+		Unknown = 0,
 
-		, /// <summary>
+		/// <summary>
 		/// Ум и креативность.
 		/// </summary>
-		MindAndCreativity = 1
+		MindAndCreativity = 1,
 
-		, /// <summary>
+		/// <summary>
 		/// Доброта и честность.
 		/// </summary>
-		KindnessAndHonesty = 2
+		KindnessAndHonesty = 2,
 
-		, /// <summary>
+		/// <summary>
 		/// Красота и здоровье.
 		/// </summary>
-		HealthAndBeauty = 3
+		HealthAndBeauty = 3,
 
-		, /// <summary>
+		/// <summary>
 		/// Власть и богатство.
 		/// </summary>
-		PowerAndWealth = 4
+		PowerAndWealth = 4,
 
-		, /// <summary>
+		/// <summary>
 		/// Смелость и упорство.
 		/// </summary>
-		CourageAndPersistence = 5
+		CourageAndPersistence = 5,
 
-		, /// <summary>
+		/// <summary>
 		/// Юмор и жизнелюбие.
 		/// </summary>
 		HumorAndLoveForLife = 6

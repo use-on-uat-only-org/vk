@@ -1,3 +1,5 @@
+using VkNet.Utils;
+
 namespace VkNet.Enums
 {
 	/// <summary>
@@ -36,6 +38,7 @@ namespace VkNet.Enums
 		/// <summary>
 		/// Неизвестно
 		/// </summary>
+		[DefaultValue]
 		Unknown
 	}
 }

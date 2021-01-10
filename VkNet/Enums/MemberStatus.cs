@@ -1,4 +1,6 @@
-﻿namespace VkNet.Enums
+﻿using VkNet.Utils;
+
+namespace VkNet.Enums
 {
 	/// <summary>
 	/// </summary>
@@ -32,6 +34,7 @@
 		/// <summary>
 		/// приглашен
 		/// </summary>
+		[DefaultValue]
 		Invited = 5
 	}
 }

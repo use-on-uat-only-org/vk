@@ -13,44 +13,44 @@ namespace VkNet.Enums
 		/// Не указано.
 		/// </summary>
 		[DefaultValue]
-		Unknown = 0
+		Unknown = 0,
 
-		, /// <summary>
+		/// <summary>
 		/// Не женат/не замужем.
 		/// </summary>
-		NotMarried = 1
+		NotMarried = 1,
 
-		, /// <summary>
+		/// <summary>
 		/// Встречаюсь.
 		/// </summary>
-		HasFriend = 2
+		HasFriend = 2,
 
-		, /// <summary>
+		/// <summary>
 		/// Помолвлен/помолвлена.
 		/// </summary>
-		Engaged = 3
+		Engaged = 3,
 
-		, /// <summary>
+		/// <summary>
 		/// Женат/замужем.
 		/// </summary>
-		Married = 4
+		Married = 4,
 
-		, /// <summary>
+		/// <summary>
 		/// Всё сложно.
 		/// </summary>
-		ItsComplex = 5
+		ItsComplex = 5,
 
-		, /// <summary>
+		/// <summary>
 		/// В активном поиске.
 		/// </summary>
-		InActiveSearch = 6
+		InActiveSearch = 6,
 
-		, /// <summary>
+		/// <summary>
 		/// Влюблен/влюблена.
 		/// </summary>
-		Amorous = 7
+		Amorous = 7,
 
-		, /// <summary>
+		/// <summary>
 		/// В гражданском браке
 		/// </summary>
 		CivilMarriage = 8

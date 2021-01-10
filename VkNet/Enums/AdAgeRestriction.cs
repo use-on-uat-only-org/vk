@@ -1,3 +1,5 @@
+using VkNet.Utils;
+
 namespace VkNet.Enums
 {
 	/// <summary>
@@ -13,6 +15,7 @@ namespace VkNet.Enums
 		/// <summary>
 		/// 0+
 		/// </summary>
+		[DefaultValue]
 		ZeroPlus = 1,
 
 		/// <summary>
@@ -33,6 +36,6 @@ namespace VkNet.Enums
 		/// <summary>
 		/// 18+
 		/// </summary>
-		EighteeenPlus
+		EighteenPlus
 	}
 }

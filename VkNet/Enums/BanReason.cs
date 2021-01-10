@@ -11,24 +11,24 @@ namespace VkNet.Enums
 		/// Другое.
 		/// </summary>
 		[DefaultValue]
-		Other = 0
+		Other = 0,
 
-		, /// <summary>
+		/// <summary>
 		/// Спам.
 		/// </summary>
-		Spam = 1
+		Spam = 1,
 
-		, /// <summary>
+		/// <summary>
 		/// Оскорбление участников.
 		/// </summary>
-		VerbalAbuse = 2
+		VerbalAbuse = 2,
 
-		, /// <summary>
+		/// <summary>
 		/// Нецензурные выражения.
 		/// </summary>
-		StrongLanguage = 3
+		StrongLanguage = 3,
 
-		, /// <summary>
+		/// <summary>
 		/// Сообщения не по теме.
 		/// </summary>
 		IrrelevantMessages = 4

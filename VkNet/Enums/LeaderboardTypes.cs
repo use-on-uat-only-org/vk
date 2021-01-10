@@ -11,14 +11,14 @@ namespace VkNet.Enums
 		/// Не поддерживается
 		/// </summary>
 		[DefaultValue]
-		NotSupported = 0
+		NotSupported = 0,
 
-		, /// <summary>
+		/// <summary>
 		/// По уровню
 		/// </summary>
-		ByLevel
+		ByLevel,
 
-		, /// <summary>
+		/// <summary>
 		/// По очкам
 		/// </summary>
 		ByPoints

@@ -11,19 +11,19 @@ namespace VkNet.Enums
 		/// Неопределенный статус ответа
 		/// </summary>
 		[DefaultValue]
-		Unknown = 0
+		Unknown = 0,
 
-		, /// <summary>
+		/// <summary>
 		/// Пользователь удален из списка друзей
 		/// </summary>
-		UserIsDeleted = 1
+		UserIsDeleted = 1,
 
-		, /// <summary>
+		/// <summary>
 		/// Заявка на добавление в друзья от данного пользователя отклонена
 		/// </summary>
-		RequestRejected = 2
+		RequestRejected = 2,
 
-		, /// <summary>
+		/// <summary>
 		/// Рекомендация добавить в друзья данного пользователя удалена
 		/// </summary>
 		RecommendationDeleted = 3

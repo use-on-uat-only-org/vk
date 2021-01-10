@@ -52,7 +52,7 @@ namespace VkNet.Tests.Categories.Ads
 			Assert.That(ad.CreateTime, Is.EqualTo(new DateTime(2018, 5, 23, 9, 59, 18)));
 			Assert.That(ad.UpdateTime, Is.EqualTo(new DateTime(2018, 6, 16, 14, 48, 42)));
 			Assert.That(ad.DayLimit, Is.EqualTo(0));
-			Assert.That(ad.AgeRestriction, Is.EqualTo(AdAgeRestriction.EighteeenPlus));
+			Assert.That(ad.AgeRestriction, Is.EqualTo(AdAgeRestriction.EighteenPlus));
 
 			Assert.That(ad.EventsRetargetingGroups[26897268][0],
 				Is.EqualTo(EventsRetargetingGroup.PublicNewsUnsubscription));

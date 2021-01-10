@@ -11,49 +11,49 @@ namespace VkNet.Enums
 		/// Не указаны.
 		/// </summary>
 		[DefaultValue]
-		Unknown = 0
+		Unknown = 0,
 
-		, /// <summary>
+		/// <summary>
 		/// Коммунистические.
 		/// </summary>
-		Communist = 1
+		Communist = 1,
 
-		, /// <summary>
+		/// <summary>
 		/// Социалистические.
 		/// </summary>
-		Socialist = 2
+		Socialist = 2,
 
-		, /// <summary>
+		/// <summary>
 		/// Умеренные.
 		/// </summary>
-		Moderate = 3
+		Moderate = 3,
 
-		, /// <summary>
+		/// <summary>
 		/// Либеральные.
 		/// </summary>
-		Liberal = 4
+		Liberal = 4,
 
-		, /// <summary>
+		/// <summary>
 		/// Консервативные.
 		/// </summary>
-		Conservative = 5
+		Conservative = 5,
 
-		, /// <summary>
+		/// <summary>
 		/// Монархические.
 		/// </summary>
-		Monarchist = 6
+		Monarchist = 6,
 
-		, /// <summary>
+		/// <summary>
 		/// Ультраконсервативные.
 		/// </summary>
-		Ultraconservative = 7
+		Ultraconservative = 7,
 
-		, /// <summary>
+		/// <summary>
 		/// Индифферентные.
 		/// </summary>
-		Apathetic = 8
+		Apathetic = 8,
 
-		, /// <summary>
+		/// <summary>
 		/// Либертантские.
 		/// </summary>
 		Libertarian = 9

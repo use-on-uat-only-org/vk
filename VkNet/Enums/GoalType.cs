@@ -1,4 +1,6 @@
-﻿namespace VkNet.Enums
+﻿using VkNet.Utils;
+
+namespace VkNet.Enums
 {
 	/// <summary>
 	/// Тип цели.
@@ -8,12 +10,13 @@
 		/// <summary>
 		/// Показы.
 		/// </summary>
+		[DefaultValue]
 		Cpc = 1,
 
 		/// <summary>
 		/// Переходы.
 		/// </summary>
-		Cpm = 1,
+		Cpm = 2,
 
 		/// <summary>
 		/// Отправка заявок

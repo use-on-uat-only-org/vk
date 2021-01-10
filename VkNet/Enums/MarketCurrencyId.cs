@@ -11,24 +11,24 @@ namespace VkNet.Enums
 		/// 643 — российский рубль;
 		/// </summary>
 		[DefaultValue]
-		Rub = 643
+		Rub = 643,
 
-		, /// <summary>
+		/// <summary>
 		/// 980 — украинская гривна;
 		/// </summary>
-		Uah = 980
+		Uah = 980,
 
-		, /// <summary>
+		/// <summary>
 		/// 398 — казахстанский тенге;
 		/// </summary>
-		Kzt = 398
+		Kzt = 398,
 
-		, /// <summary>
+		/// <summary>
 		/// 978 — евро;
 		/// </summary>
-		Eur = 978
+		Eur = 978,
 
-		, /// <summary>
+		/// <summary>
 		/// 840 — доллар США.
 		/// </summary>
 		Usd = 840
