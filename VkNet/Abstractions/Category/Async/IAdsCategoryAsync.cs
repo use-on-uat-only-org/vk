@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 using VkNet.Enums;
 using VkNet.Enums.SafetyEnums;
@@ -21,18 +22,20 @@ namespace VkNet.Abstractions
 		/// <param name = "adsDataSpecification">
 		/// Идентификатор рекламного кабинета. обязательный параметр, целое число
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает массив значений - ответов на каждый запрос в массиве data. Соответствующее значение в выходном массиве равно true, если администратор успешно добавлен, и false в другом случае.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.addOfficeUsers
 		/// </remarks>
-		Task<ReadOnlyCollection<bool>> AddOfficeUsersAsync(AdsDataSpecificationParams<UserSpecification> adsDataSpecification);
+		Task<ReadOnlyCollection<bool>> AddOfficeUsersAsync(AdsDataSpecificationParams<UserSpecification> adsDataSpecification, CancellationToken token = default);
 
 		/// <summary>
 		/// Проверяет ссылку на рекламируемый объект.
 		/// </summary>
 		/// <param name="checkLinkParams"></param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращается структура со следующими полями:
 		/// status — статус ссылки:
@@ -45,55 +48,59 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.checkLink
 		/// </remarks>
-		Task<LinkStatus> CheckLinkAsync(CheckLinkParams checkLinkParams);
+		Task<LinkStatus> CheckLinkAsync(CheckLinkParams checkLinkParams, CancellationToken token = default);
 
 		/// <summary>
 		/// Создает рекламные объявления.
 		/// </summary>
 		/// <param name="adsDataSpecification"></param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает массив объектов - ответов на каждый запрос в массиве data. Соответствующий объект в выходном массиве имеет свойство id, соответствующее id созданного объявления (или 0 в случае неудачи), а также, возможно, поля error_code и error_desc, описывающие ошибку, при ее возникновении. Наличие одновременно ненулевого id и error_code говорит о том, что объявление было создано, однако, возможно, не все параметры установлены (например, объявление не запущено).
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.createAds
 		/// </remarks>
-		Task<ReadOnlyCollection<CreateAdsResult>> CreateAdsAsync(AdsDataSpecificationParams<AdSpecification> adsDataSpecification);
+		Task<ReadOnlyCollection<CreateAdsResult>> CreateAdsAsync(AdsDataSpecificationParams<AdSpecification> adsDataSpecification, CancellationToken token = default);
 
 		/// <summary>
 		/// Создает рекламные кампании.
 		/// </summary>
 		/// <param name="campaignsDataSpecification"></param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает массив ответов на запросы в массиве data. Соответствующий объект в выходном массиве содержит id созданной кампании (ноль в случае неудачи), и поля error_code и error_desc в случае возникновения ошибки. Ненулевой id и наличие error_code 602 говорит о том, что кампания создана, но, возможно, некоторые поля не были ей присвоены по причине их некорректности.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.createCampaigns
 		/// </remarks>
-		Task<ReadOnlyCollection<CreateCampaignResult>> CreateCampaignsAsync(AdsDataSpecificationParams<CampaignSpecification> campaignsDataSpecification);
+		Task<ReadOnlyCollection<CreateCampaignResult>> CreateCampaignsAsync(AdsDataSpecificationParams<CampaignSpecification> campaignsDataSpecification, CancellationToken token = default);
 
 		/// <summary>
 		/// Создаёт клиентов рекламного агентства.
 		/// </summary>
 		/// <param name="clientDataSpecification"></param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает массив ответов на запросы в массиве data. Соответствующий объект в выходном массиве содержит id созданного клиента (ноль в случае неудачи), и поля error_code и error_desc в случае возникновения ошибки. Ненулевой id и наличие error_code 602 говорит о том, что клиент создан, но, возможно, некоторые поля не были ему присвоены по причине их некорректности.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.createClients
 		/// </remarks>
-		Task<ReadOnlyCollection<CreateClientResult>> CreateClientsAsync(AdsDataSpecificationParams<ClientSpecification> clientDataSpecification);
+		Task<ReadOnlyCollection<CreateClientResult>> CreateClientsAsync(AdsDataSpecificationParams<ClientSpecification> clientDataSpecification, CancellationToken token = default);
 
 		/// <summary>
 		/// Создаёт запрос на поиск похожей аудитории.
 		/// </summary>
 		/// <param name="createLookALikeRequestParams"></param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Поле request_id, в котором указан идентификатор созданного запроса на поиск похожей аудитории.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.createLookalikeRequest
 		/// </remarks>
-		Task<CreateLookALikeRequestResult> CreateLookalikeRequestAsync(CreateLookALikeRequestParams createLookALikeRequestParams);
+		Task<CreateLookALikeRequestResult> CreateLookalikeRequestAsync(CreateLookALikeRequestParams createLookALikeRequestParams, CancellationToken token = default);
 
 		/// <summary>
 		/// Создает аудиторию для ретаргетинга рекламных объявлений на пользователей, которые посетили сайт рекламодателя (просмотрели информации о товаре, зарегистрировались и т.д.).
@@ -101,6 +108,7 @@ namespace VkNet.Abstractions
 		/// <param name = "createTargetGroupParams">
 		/// Входные параметры запроса.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает объект со следующими полями:
 		/// id — идентификатор аудитории.
@@ -108,12 +116,13 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.createTargetGroup
 		/// </remarks>
-		Task<CreateTargetGroupResult> CreateTargetGroupAsync(CreateTargetGroupParams createTargetGroupParams);
+		Task<CreateTargetGroupResult> CreateTargetGroupAsync(CreateTargetGroupParams createTargetGroupParams, CancellationToken token = default);
 
 		/// <summary>
 		/// Создаёт пиксель ретаргетинга.
 		/// </summary>
 		/// <param name="createTargetPixelParams"></param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает объект со следующими полями:
 		/// id — идентификатор пикселя
@@ -122,71 +131,77 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.createTargetPixel
 		/// </remarks>
-		Task<CreateTargetPixelResult> CreateTargetPixelAsync(CreateTargetPixelParams createTargetPixelParams);
+		Task<CreateTargetPixelResult> CreateTargetPixelAsync(CreateTargetPixelParams createTargetPixelParams, CancellationToken token = default);
 
 		/// <summary>
 		/// Архивирует рекламные объявления.
 		/// </summary>
 		/// <param name="deleteAdsParams"></param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает массив ответов на каждый запрос. Каждый ответ является либо 0, что означает успешное удаление, либо код ошибки.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.deleteAds
 		/// </remarks>
-		Task<ReadOnlyCollection<bool>> DeleteAdsAsync(DeleteAdsParams deleteAdsParams);
+		Task<ReadOnlyCollection<bool>> DeleteAdsAsync(DeleteAdsParams deleteAdsParams, CancellationToken token = default);
 
 		/// <summary>
 		/// Архивирует рекламные кампании.
 		/// </summary>
 		/// <param name="deleteCampaignsParams"></param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает массив ответов на каждый запрос. Каждый ответ является либо 0, что означает успешное удаление, либо код ошибки.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.deleteCampaigns
 		/// </remarks>
-		Task<ReadOnlyCollection<bool>> DeleteCampaignsAsync(DeleteCampaignsParams deleteCampaignsParams);
+		Task<ReadOnlyCollection<bool>> DeleteCampaignsAsync(DeleteCampaignsParams deleteCampaignsParams, CancellationToken token = default);
 
 		/// <summary>
 		/// Архивирует клиентов рекламного агентства.
 		/// </summary>
 		/// <param name="deleteClientsParams"></param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает массив ответов на каждый запрос. Каждый ответ является либо 0, что означает успешное удаление, либо код ошибки.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.deleteClients
 		/// </remarks>
-		Task<ReadOnlyCollection<bool>> DeleteClientsAsync(DeleteClientsParams deleteClientsParams);
+		Task<ReadOnlyCollection<bool>> DeleteClientsAsync(DeleteClientsParams deleteClientsParams, CancellationToken token = default);
 
 		/// <summary>
 		/// Удаляет аудиторию ретаргетинга.
 		/// </summary>
 		/// <param name="deleteTargetGroupParams"></param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успеха метод возвратит 1.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.deleteTargetGroup
 		/// </remarks>
-		Task<bool> DeleteTargetGroupAsync(DeleteTargetGroupParams deleteTargetGroupParams);
+		Task<bool> DeleteTargetGroupAsync(DeleteTargetGroupParams deleteTargetGroupParams, CancellationToken token = default);
 
 		/// <summary>
 		/// Удаляет пиксель ретаргетинга.
 		/// </summary>
 		/// <param name="deleteTargetPixelParams"></param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успеха метод возвратит 1.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.deleteTargetPixel
 		/// </remarks>
-		Task<bool> DeleteTargetPixelAsync(DeleteTargetPixelParams deleteTargetPixelParams);
+		Task<bool> DeleteTargetPixelAsync(DeleteTargetPixelParams deleteTargetPixelParams, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список рекламных кабинетов.
 		/// </summary>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает массив объектов, описывающих рекламные кабинеты. Каждый объект содержит следующие поля:
 		/// account_id
@@ -205,7 +220,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.getAccounts
 		/// </remarks>
-		Task<ReadOnlyCollection<AdsAccount>> GetAccountsAsync();
+		Task<ReadOnlyCollection<AdsAccount>> GetAccountsAsync(CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список рекламных объявлений.
@@ -213,6 +228,7 @@ namespace VkNet.Abstractions
 		/// <param name = "getAdsParams">
 		/// Входные параметры запроса.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает массив объектов, описывающих объявления. Каждый объект содержит следующие поля:
 		/// id
@@ -280,7 +296,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.getAds
 		/// </remarks>
-		Task<ReadOnlyCollection<Ad>> GetAdsAsync(GetAdsParams getAdsParams);
+		Task<ReadOnlyCollection<Ad>> GetAdsAsync(GetAdsParams getAdsParams, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает описания внешнего вида рекламных объявлений.
@@ -288,6 +304,7 @@ namespace VkNet.Abstractions
 		/// <param name = "getAdsLayoutParams">
 		/// Входные параметры запроса.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает массив объектов, описывающих объявления. Каждый объект содержит следующие поля:
 		/// id
@@ -319,7 +336,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.getAdsLayout
 		/// </remarks>
-		Task<ReadOnlyCollection<Layout>> GetAdsLayoutAsync(GetAdsLayoutParams getAdsLayoutParams);
+		Task<ReadOnlyCollection<Layout>> GetAdsLayoutAsync(GetAdsLayoutParams getAdsLayoutParams, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает параметры таргетинга рекламных объявлений
@@ -327,6 +344,7 @@ namespace VkNet.Abstractions
 		/// <param name = "getAdsTargetingParams">
 		/// Входные параметры запроса.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает массив объектов - описаний таргетинга объявлений.
 		/// Отрицательные id в поле cities означают id регионов, взятых с обратным знаком.
@@ -335,7 +353,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.getAdsTargeting
 		/// </remarks>
-		Task<ReadOnlyCollection<AdsTargetingResult>> GetAdsTargetingAsync(GetAdsTargetingParams getAdsTargetingParams);
+		Task<ReadOnlyCollection<AdsTargetingResult>> GetAdsTargetingAsync(GetAdsTargetingParams getAdsTargetingParams, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает текущий бюджет рекламного кабинета.
@@ -343,18 +361,20 @@ namespace VkNet.Abstractions
 		/// <param name = "accountId">
 		/// Идентификатор рекламного кабинета. обязательный параметр, целое число
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает единственное число — оставшийся бюджет в указанном рекламном кабинете.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.getBudget
 		/// </remarks>
-		Task<double> GetBudgetAsync(long accountId);
+		Task<double> GetBudgetAsync(long accountId, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список кампаний рекламного кабинета.
 		/// </summary>
 		/// <param name="adsGetCampaignsParams"></param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает массив объектов campaign, каждый из которых содержит следующие поля:
 		/// id — идентификатор кампании
@@ -380,7 +400,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.getCampaigns
 		/// </remarks>
-		Task<ReadOnlyCollection<AdsCampaign>> GetCampaignsAsync(AdsGetCampaignsParams adsGetCampaignsParams);
+		Task<ReadOnlyCollection<AdsCampaign>> GetCampaignsAsync(AdsGetCampaignsParams adsGetCampaignsParams, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет получить возможные тематики рекламных объявлений.
@@ -388,6 +408,7 @@ namespace VkNet.Abstractions
 		/// <param name = "lang">
 		/// Язык, на котором нужно вернуть результаты. Список поддерживаемых языков Вы можете найти на странице Запросы к API. строка
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает два массива объектов — v1 и v2, каждый из которых содержит объекты, описывающие тематики в следующем формате:
 		/// id — идентификатор тематики;
@@ -400,7 +421,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.getCategories
 		/// </remarks>
-		Task<GetCategoriesResult> GetCategoriesAsync(Language lang);
+		Task<GetCategoriesResult> GetCategoriesAsync(Language lang, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список клиентов рекламного агентства.
@@ -408,6 +429,7 @@ namespace VkNet.Abstractions
 		/// <param name = "accountId">
 		/// Идентификатор рекламного кабинета. обязательный параметр, целое число
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает массив объектов client — клиентов агентства с номером account_id, каждый из которых содержит следующие поля:
 		/// id — идентификатор клиента;
@@ -418,7 +440,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.getClients
 		/// </remarks>
-		Task<ReadOnlyCollection<GetClientsResult>> GetClientsAsync(long accountId);
+		Task<ReadOnlyCollection<GetClientsResult>> GetClientsAsync(long accountId, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает демографическую статистику по рекламным объявлениям или кампаниям.
@@ -426,6 +448,7 @@ namespace VkNet.Abstractions
 		/// <param name = "getDemographicsParams">
 		/// Входные параметры запроса.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Каждый запрашиваемый объект имеет следующие поля:
 		/// id — id объекта из параметра ids
@@ -452,7 +475,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.getDemographics
 		/// </remarks>
-		Task<ReadOnlyCollection<GetDemographicsResult>> GetDemographicsAsync(GetDemographicsParams getDemographicsParams);
+		Task<ReadOnlyCollection<GetDemographicsResult>> GetDemographicsAsync(GetDemographicsParams getDemographicsParams, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает информацию о текущем состоянии счетчика — количество оставшихся запусков методов и время до следующего обнуления счетчика в секундах.
@@ -460,6 +483,7 @@ namespace VkNet.Abstractions
 		/// <param name = "accountId">
 		/// Идентификатор рекламного кабинета. обязательный параметр, целое число
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает объект, содержащий следующие поля:
 		/// left — количество оставшихся методов;
@@ -468,7 +492,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.getFloodStats
 		/// </remarks>
-		Task<GetFloodStatsResult> GetFloodStatsAsync(long accountId);
+		Task<GetFloodStatsResult> GetFloodStatsAsync(long accountId, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список запросов на поиск похожей аудитории.
@@ -476,6 +500,7 @@ namespace VkNet.Abstractions
 		/// <param name = "getLookalikeRequestsParams">
 		/// Входные параметры запроса.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Если limit не равен 0, то возвращается объект с двумя полями:
 		///
@@ -499,7 +524,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.getLookalikeRequests
 		/// </remarks>
-		Task<GetLookalikeRequestsResult> GetLookalikeRequestsAsync(GetLookalikeRequestsParams getLookalikeRequestsParams);
+		Task<GetLookalikeRequestsResult> GetLookalikeRequestsAsync(GetLookalikeRequestsParams getLookalikeRequestsParams, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список администраторов и наблюдателей рекламного кабинета.
@@ -507,13 +532,14 @@ namespace VkNet.Abstractions
 		/// <param name = "accountId">
 		/// Идентификатор рекламного кабинета. обязательный параметр, целое число
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает массив объектов - описаний пользователей рекламного кабинета. Каждый объект содержит массив описаний прав доступа к конкретным клиентам. Описание содержит два поля: client_id — id клиента и role — строка admin, manager или reports. Для admin client_id не указывается.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.getOfficeUsers
 		/// </remarks>
-		Task<ReadOnlyCollection<GetOfficeUsersResult>> GetOfficeUsersAsync(long accountId);
+		Task<ReadOnlyCollection<GetOfficeUsersResult>> GetOfficeUsersAsync(long accountId, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает подробную статистику по охвату рекламных записей из объявлений и кампаний для продвижения записей сообщества.
@@ -530,6 +556,7 @@ namespace VkNet.Abstractions
 		/// <param name = "ids">
 		/// Перечисленные через запятую id запрашиваемых объявлений или кампаний, в зависимости от того, что указано в параметре ids_type. Максимум 100 объектов. обязательный параметр, строка
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает массив объектов, описывающих охват. Каждый объект содержит следующие поля:
 		/// id
@@ -553,7 +580,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.getPostsReach
 		/// </remarks>
-		Task<ReadOnlyCollection<GetPostsReachResult>> GetPostsReachAsync(long accountId, IdsType idsType, string ids);
+		Task<ReadOnlyCollection<GetPostsReachResult>> GetPostsReachAsync(long accountId, IdsType idsType, string ids, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает причину, по которой указанному объявлению было отказано в прохождении премодерации.
@@ -564,13 +591,14 @@ namespace VkNet.Abstractions
 		/// <param name = "adId">
 		/// Идентификатор рекламного объявления. обязательный параметр, целое число
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает объект, который может содержать поле comment, содержащее текстовый комментарий модератора, и/или массив rules, содержащий описание нарушенных объявлением правил. Ответ обязательно содержит хотя бы одно из полей comment или rules. Каждый элемент массива rules состоит из поля title (текстового пояснения) и массива paragraphs, каждый элемент которого содержит отдельный пункт правил. Элементы массива paragraphs могут содержать простую html-разметку.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.getRejectionReason
 		/// </remarks>
-		Task<GetRejectionReasonResult> GetRejectionReasonAsync(long accountId, long adId);
+		Task<GetRejectionReasonResult> GetRejectionReasonAsync(long accountId, long adId, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает статистику показателей эффективности по рекламным объявлениям, кампаниям, клиентам или всему кабинету.
@@ -578,6 +606,7 @@ namespace VkNet.Abstractions
 		/// <param name = "getStatisticsParams">
 		/// Входные параметры запроса.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Каждый запрашиваемый объект имеет следующие поля:
 		/// id — id объекта из параметра ids
@@ -600,7 +629,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.getStatistics
 		/// </remarks>
-		Task<ReadOnlyCollection<GetStatisticsResult>> GetStatisticsAsync(GetStatisticsParams getStatisticsParams);
+		Task<ReadOnlyCollection<GetStatisticsResult>> GetStatisticsAsync(GetStatisticsParams getStatisticsParams, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает набор подсказок для различных параметров таргетинга.
@@ -608,6 +637,7 @@ namespace VkNet.Abstractions
 		/// <param name = "getSuggestionsParams">
 		/// Входные параметры запроса.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает список объектов (подсказок), удовлетворяющих запросу.
 		/// Для разделов countries, positions, interest_categories, religions, user_devices, user_os, user_browsers ответ возвращается в виде массива объектов со следующими полями:
@@ -636,7 +666,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.getSuggestions
 		/// </remarks>
-		Task<ReadOnlyCollection<GetSuggestionsResult>> GetSuggestionsAsync(GetSuggestionsParams getSuggestionsParams);
+		Task<ReadOnlyCollection<GetSuggestionsResult>> GetSuggestionsAsync(GetSuggestionsParams getSuggestionsParams, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список аудиторий ретаргетинга.
@@ -652,6 +682,7 @@ namespace VkNet.Abstractions
 		/// Если 1, в результатах будет указан код для размещения на сайте.
 		/// Устаревший параметр. Используется только для старых групп ретаргетинга, которые пополнялись без помощи пикселя. Для новых аудиторий его следует опускать. флаг, может принимать значения 1 или 0
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает массив объектов, описывающих группы ретаргетинга. Каждый объект содержит следующие поля:
 		/// id (integer) — идентификатор аудитории;
@@ -670,7 +701,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.getTargetGroups
 		/// </remarks>
-		Task<ReadOnlyCollection<GetTargetGroupsResult>> GetTargetGroupsAsync(long accountId, long? clientId = null, bool? extended = null);
+		Task<ReadOnlyCollection<GetTargetGroupsResult>> GetTargetGroupsAsync(long accountId, long? clientId = null, bool? extended = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список пикселей ретаргетинга.
@@ -682,6 +713,7 @@ namespace VkNet.Abstractions
 		/// Только для рекламных агентств.
 		/// id клиента, в рекламном кабинете которого находятся пиксели. целое число
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает массив объектов, каждый из которых содержит следующие поля:
 		/// target_pixel_id (integer) — идентификатор пикселя;
@@ -694,7 +726,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.getTargetPixels
 		/// </remarks>
-		Task<ReadOnlyCollection<GetTargetPixelsResult>> GetTargetPixelsAsync(long accountId, long? clientId = null);
+		Task<ReadOnlyCollection<GetTargetPixelsResult>> GetTargetPixelsAsync(long accountId, long? clientId = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает размер целевой аудитории таргетинга, а также рекомендованные значения CPC и CPM.
@@ -702,6 +734,7 @@ namespace VkNet.Abstractions
 		/// <param name = "getTargetingStatsParams">
 		/// Входные параметры запроса.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает объект, описывающий целевую аудиторию и содержащий следующие поля:
 		/// audience_count (integer) — размер целевой аудитории
@@ -712,71 +745,77 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.getTargetingStats
 		/// </remarks>
-		Task<GetTargetingStatsResult> GetTargetingStatsAsync(GetTargetingStatsParams getTargetingStatsParams);
+		Task<GetTargetingStatsResult> GetTargetingStatsAsync(GetTargetingStatsParams getTargetingStatsParams, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает URL-адрес для загрузки фотографии рекламного объявления.
 		/// </summary>
 		/// <param name="getUploadUrlParams"></param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает url-адрес для загрузки изображения.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.getUploadURl
 		/// </remarks>
-		Task<Uri> GetUploadUrlAsync(GetUploadUrlParams getUploadUrlParams);
+		Task<Uri> GetUploadUrlAsync(GetUploadUrlParams getUploadUrlParams, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает URL-адрес для загрузки видеозаписи рекламного объявления.
 		/// </summary>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает url-адрес для загрузки видеоролика.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.getVideoUploadURl
 		/// </remarks>
-		Task<Uri> GetVideoUploadUrlAsync();
+		Task<Uri> GetVideoUploadUrlAsync(CancellationToken token = default);
 
 		/// <summary>
 		/// Импортирует список контактов рекламодателя для учета зарегистрированных во ВКонтакте пользователей в аудитории ретаргетинга.
 		/// </summary>
 		/// <param name="importTargetContactsParams"></param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает количество обработанных контактов.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.importTargetContacts
 		/// </remarks>
-		Task<long> ImportTargetContactsAsync(ImportTargetContactsParams importTargetContactsParams);
+		Task<long> ImportTargetContactsAsync(ImportTargetContactsParams importTargetContactsParams, CancellationToken token = default);
 
 		/// <summary>
 		/// Удаляет администраторов и/или наблюдателей из рекламного кабинета.
 		/// </summary>
 		/// <param name="removeOfficeUsersParams"></param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает массив значений - ответов на каждый запрос в массиве data. Соответствующее значение в выходном массиве равно true, если администратор успешно удален, и false в другом случае.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.removeOfficeUsers
 		/// </remarks>
-		Task<ReadOnlyCollection<bool>> RemoveOfficeUsersAsync(RemoveOfficeUsersParams removeOfficeUsersParams);
+		Task<ReadOnlyCollection<bool>> RemoveOfficeUsersAsync(RemoveOfficeUsersParams removeOfficeUsersParams, CancellationToken token = default);
 
 		/// <summary>
 		/// Принимает запрос на исключение контактов рекламодателя из аудитории ретаргетинга.
 		/// </summary>
 		/// <param name="removeTargetContactsParams"></param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает 1 в случае успешного принятия заявки на исключение аудитории.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.removeTargetContacts
 		/// </remarks>
-		Task<RemoveTargetContactsResult> RemoveTargetContactsAsync(RemoveTargetContactsParams removeTargetContactsParams);
+		Task<RemoveTargetContactsResult> RemoveTargetContactsAsync(RemoveTargetContactsParams removeTargetContactsParams, CancellationToken token = default);
 
 		/// <summary>
 		/// Сохраняет результат поиска похожей аудитории.
 		/// </summary>
 		/// <param name="saveLookalikeRequestResultParams"></param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает объект с полями:
 		///
@@ -786,12 +825,13 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.saveLookalikeRequestResult
 		/// </remarks>
-		Task<SaveLookALikeRequestResultResult> SaveLookalikeRequestResultAsync(SaveLookalikeRequestResultParams saveLookalikeRequestResultParams);
+		Task<SaveLookALikeRequestResultResult> SaveLookalikeRequestResultAsync(SaveLookalikeRequestResultParams saveLookalikeRequestResultParams, CancellationToken token = default);
 
 		/// <summary>
 		/// Предоставляет доступ к аудитории ретаргетинга другому рекламному кабинету. В результате выполнения метода возвращается идентификатор аудитории для указанного кабинета.
 		/// </summary>
 		/// <param name="shareTargetGroupParams"></param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает объект со следующими полями:
 		/// id — идентификатор аудитории.
@@ -799,43 +839,46 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.shareTargetGroup
 		/// </remarks>
-		Task<ShareTargetGroupResult> ShareTargetGroupAsync(ShareTargetGroupParams shareTargetGroupParams);
+		Task<ShareTargetGroupResult> ShareTargetGroupAsync(ShareTargetGroupParams shareTargetGroupParams, CancellationToken token = default);
 
 		/// <summary>
 		/// Редактирует рекламные объявления.
 		/// </summary>
 		/// <param name="adEditDataSpecification"></param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает массив ответов на каждый запрос в массиве data. Соответствующий объект в выходном массиве содержит идентификатор изменяемого объявления и, в случае возникновения ошибки, поля error_code и error_desc.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.updateAds
 		/// </remarks>
-		Task<ReadOnlyCollection<UpdateAdsResult>> UpdateAdsAsync(AdsDataSpecificationParams<AdEditSpecification> adEditDataSpecification);
+		Task<ReadOnlyCollection<UpdateAdsResult>> UpdateAdsAsync(AdsDataSpecificationParams<AdEditSpecification> adEditDataSpecification, CancellationToken token = default);
 
 		/// <summary>
 		/// Редактирует рекламные кампании.
 		/// </summary>
 		/// <param name="campaignModDataSpecification"></param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает массив ответов на каждый запрос в массиве data. Соответствующий объект в выходном массиве содержит идентификатор изменяемого клиента и, в случае возникновения ошибки, поля error_code и error_desc.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.updateCampaigns
 		/// </remarks>
-		Task<ReadOnlyCollection<UpdateCampaignsResult>> UpdateCampaignsAsync(AdsDataSpecificationParams<CampaignModSpecification> campaignModDataSpecification);
+		Task<ReadOnlyCollection<UpdateCampaignsResult>> UpdateCampaignsAsync(AdsDataSpecificationParams<CampaignModSpecification> campaignModDataSpecification, CancellationToken token = default);
 
 		/// <summary>
 		/// Редактирует клиентов рекламного агентства.
 		/// </summary>
 		/// <param name="clientModDataSpecification"></param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает массив ответов на каждый запрос в массиве data. Соответствующий объект в выходном массиве содержит id изменяемого клиента и, в случае возникновения ошибки, поля error_code и error_desc.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.updateClients
 		/// </remarks>
-		Task<ReadOnlyCollection<UpdateClientsResult>> UpdateClientsAsync(AdsDataSpecificationParams<ClientModSpecification> clientModDataSpecification);
+		Task<ReadOnlyCollection<UpdateClientsResult>> UpdateClientsAsync(AdsDataSpecificationParams<ClientModSpecification> clientModDataSpecification, CancellationToken token = default);
 
 		/// <summary>
 		/// Редактирует аудиторию ретаргетинга.
@@ -843,13 +886,14 @@ namespace VkNet.Abstractions
 		/// <param name = "updateTargetGroupParams">
 		/// Входные параметры запроса.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успеха метод возвратит 1.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.updateTargetGroup
 		/// </remarks>
-		Task<bool> UpdateTargetGroupAsync(UpdateTargetGroupParams updateTargetGroupParams);
+		Task<bool> UpdateTargetGroupAsync(UpdateTargetGroupParams updateTargetGroupParams, CancellationToken token = default);
 
 		/// <summary>
 		/// Редактирует пиксель ретаргетинга.
@@ -857,12 +901,13 @@ namespace VkNet.Abstractions
 		/// <param name = "updateTargetPixelParams">
 		/// Входные параметры запроса.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает 1.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/ads.updateTargetPixel
 		/// </remarks>
-		Task<bool> UpdateTargetPixelAsync(UpdateTargetPixelParams updateTargetPixelParams);
+		Task<bool> UpdateTargetPixelAsync(UpdateTargetPixelParams updateTargetPixelParams, CancellationToken token = default);
 	}
 }
