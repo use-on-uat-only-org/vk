@@ -3,7 +3,6 @@ using JetBrains.Annotations;
 using VkNet.Enums.Filters;
 using VkNet.Model;
 using VkNet.Model.Account;
-using VkNet.Model.RequestParams;
 using VkNet.Model.RequestParams.Account;
 using VkNet.Model.Results.Account;
 
@@ -79,10 +78,10 @@ namespace VkNet.Abstractions
 		/// <inheritdoc cref="IAccountCategoryAsync.GetProfileInfoAsync"/>
 		AccountSaveProfileInfoParams GetProfileInfo();
 
-		/// <inheritdoc cref="IAccountCategoryAsync.SaveProfileInfoAsync(int)"/>
+		/// <inheritdoc cref="IAccountCategoryAsync.SaveProfileInfoAsync(int,System.Threading.CancellationToken)"/>
 		bool SaveProfileInfo(int cancelRequestId);
 
-		/// <inheritdoc cref="IAccountCategoryAsync.SaveProfileInfoAsync(AccountSaveProfileInfoParams)"/>
+		/// <inheritdoc cref="IAccountCategoryAsync.SaveProfileInfoAsync(VkNet.Model.RequestParams.Account.AccountSaveProfileInfoParams,System.Threading.CancellationToken)"/>
 		bool SaveProfileInfo(out ChangeNameRequest changeNameRequest, AccountSaveProfileInfoParams @params);
 
 		/// <inheritdoc cref="IAccountCategoryAsync.GetPrivacySettingsAsync" />

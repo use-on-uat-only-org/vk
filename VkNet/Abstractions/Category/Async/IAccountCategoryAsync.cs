@@ -5,7 +5,6 @@ using JetBrains.Annotations;
 using VkNet.Enums.Filters;
 using VkNet.Model;
 using VkNet.Model.Account;
-using VkNet.Model.RequestParams;
 using VkNet.Model.RequestParams.Account;
 using VkNet.Model.Results.Account;
 
@@ -25,6 +24,7 @@ namespace VkNet.Abstractions
 		/// videos, notes, gifts, events, groups, notifications, sdk, app_requests).
 		/// список слов, разделенных через запятую
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает объект, который может содержать поля friends, messages, photos,
 		/// videos, notes, gifts, events, groups, notifications, sdk, app_requests.
@@ -32,17 +32,18 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/account.getCounters
 		/// </remarks>
-		Task<Counters> GetCountersAsync(CountersFilter filter);
+		Task<Counters> GetCountersAsync(CountersFilter filter, CancellationToken token = default);
 
 		/// <summary>
 		/// Устанавливает короткое название приложения (до 17 символов), которое
 		/// выводится пользователю в левом меню.
 		/// </summary>
+		/// <param name="name"> Короткое название приложения. строка </param>
 		/// <param name="userId">
 		/// Идентификатор пользователя. положительное число, по умолчанию идентификатор
 		/// текущего пользователя, обязательный параметр
 		/// </param>
-		/// <param name="name"> Короткое название приложения. строка </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает 1 в случае успешной установки короткого названия.
 		/// Если пользователь не установил приложение в левое меню, метод вернет ошибку 148
@@ -52,7 +53,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/account.setNameInMenu
 		/// </remarks>
-		Task<bool> SetNameInMenuAsync([NotNull] string name, long userId);
+		Task<bool> SetNameInMenuAsync([NotNull] string name, long userId, CancellationToken token = default);
 
 		/// <summary>
 		/// Помечает текущего пользователя как online на 15 минут.
@@ -61,30 +62,33 @@ namespace VkNet.Abstractions
 		/// Возможны ли видеозвонки для данного устройства флаг,
 		/// может принимать значения 1 или 0
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успешного выполнения метода будет возвращён код 1.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/account.setOnline
 		/// </remarks>
-		Task<bool> SetOnlineAsync(bool? voip = null);
+		Task<bool> SetOnlineAsync(bool? voip = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Помечает текущего пользователя как offline.
 		/// </summary>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/account.setOffline
 		/// </remarks>
-		Task<bool> SetOfflineAsync();
+		Task<bool> SetOfflineAsync(CancellationToken token = default);
 
 		/// <summary>
 		/// Подписывает устройство на базе iOS, Android или Windows Phone на получение
 		/// Push-уведомлений.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает 1 в случае успешного выполнения метода.
 		/// На iOS и Windows Phone push-уведомления будут отображены без какой либо
@@ -94,7 +98,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/account.registerDevice
 		/// </remarks>
-		Task<bool> RegisterDeviceAsync(AccountRegisterDeviceParams @params);
+		Task<bool> RegisterDeviceAsync(AccountRegisterDeviceParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Отписывает устройство от Push уведомлений.
@@ -108,13 +112,14 @@ namespace VkNet.Abstractions
 		/// отправки push-уведомлений, 0 — отписать устройство, не использующее sandbox
 		/// сервер флаг, может принимать значения 1 или 0, по умолчанию 0
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает <c> true </c> в случае успешного выполнения метода.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/account.unregisterDevice
 		/// </remarks>
-		Task<bool> UnregisterDeviceAsync(string deviceId, bool? sandbox = null);
+		Task<bool> UnregisterDeviceAsync(string deviceId, bool? sandbox = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Отключает push-уведомления на заданный промежуток времени.
@@ -130,13 +135,15 @@ namespace VkNet.Abstractions
 		/// 1 - включить звук в данном диалоге, 0 - отключить звук (параметр работает
 		/// только если указан в peer_id передан идентификатор групповой беседы или пользователя)
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает результат выполнения метода.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/account.setSilenceMode
 		/// </remarks>
-		Task<bool> SetSilenceModeAsync([NotNull] string deviceId, int? time = null, int? peerId = null, bool? sound = null);
+		Task<bool> SetSilenceModeAsync([NotNull] string deviceId, int? time = null, int? peerId = null, bool? sound = null,
+										CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет получать настройки Push уведомлений.
@@ -144,6 +151,7 @@ namespace VkNet.Abstractions
 		/// <param name="deviceId">
 		/// Уникальный идентификатор устройства. строка, доступен начиная с версии 5.31
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает объект, содержащий поля:
 		/// disabled — отключены ли уведомления.
@@ -156,7 +164,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/account.getPushSettings
 		/// </remarks>
-		Task<AccountPushSettings> GetPushSettingsAsync(string deviceId);
+		Task<AccountPushSettings> GetPushSettingsAsync(string deviceId, CancellationToken token = default);
 
 		/// <summary>
 		/// Изменяет настройку Push-уведомлений.
@@ -173,13 +181,15 @@ namespace VkNet.Abstractions
 		/// Новое значение уведомления в специальном формате.
 		/// список слов, разделенных через запятую
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает 1 в случае успешного выполнения метода.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/account.setPushSettings
 		/// </remarks>
-		Task<bool> SetPushSettingsAsync(string deviceId, PushSettings settings, string key, List<string> value);
+		Task<bool> SetPushSettingsAsync(string deviceId, PushSettings settings, string key, List<string> value,
+										CancellationToken token = default);
 
 		/// <summary>
 		/// Получает настройки текущего пользователя в данном приложении.
@@ -189,6 +199,7 @@ namespace VkNet.Abstractions
 		/// получить. По умолчанию — текущий пользователь.
 		/// положительное число, обязательный параметр
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает битовую маску настроек текущего
 		/// пользователя в данном приложении.
@@ -202,7 +213,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/account.getAppPermissions
 		/// </remarks>
-		Task<long> GetAppPermissionsAsync(long userId);
+		Task<long> GetAppPermissionsAsync(long userId, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список активных рекламных предложений (офферов), выполнив
@@ -217,6 +228,7 @@ namespace VkNet.Abstractions
 		/// Количество офферов, которое необходимо получить положительное число, по
 		/// умолчанию 100, максимальное значение 100
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает массив, состоящий из общего количества старгетированных на текущего
 		/// пользователя специальных предложений (первый элемент), и списка объектов
@@ -226,10 +238,10 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/account.getActiveOffers
 		/// </remarks>
-		Task<InformationAboutOffers> GetActiveOffersAsync(ulong? offset = null, ulong? count = null);
+		Task<InformationAboutOffers> GetActiveOffersAsync(ulong? offset = null, ulong? count = null, CancellationToken token = default);
 
 		/// <inheritdoc cref="BanAsync"/>
-		Task<bool> BanUserAsync(long ownerId);
+		Task<bool> BanUserAsync(long ownerId, CancellationToken token = default);
 
 		/// <summary>
 		/// Добавляет пользователя в черный список.
@@ -238,16 +250,17 @@ namespace VkNet.Abstractions
 		/// Идентификатор пользователя или сообщества, которое будет добавлено в черный список.
 		/// положительное число, обязательный параметр
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успеха метод вернет <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/account.banUser
 		/// </remarks>
-		Task<bool> BanAsync(long ownerId);
+		Task<bool> BanAsync(long ownerId, CancellationToken token = default);
 
 		/// <inheritdoc cref="UnbanAsync"/>
-		Task<bool> UnbanUserAsync(long ownerId);
+		Task<bool> UnbanUserAsync(long ownerId, CancellationToken token = default);
 
 		/// <summary>
 		/// Убирает пользователя из черного списка.
@@ -256,13 +269,14 @@ namespace VkNet.Abstractions
 		/// Идентификатор пользователя или группы, которого нужно удалить из черного списка.
 		/// положительное число, обязательный параметр
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успеха метод вернет <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/account.unbanUser
 		/// </remarks>
-		Task<bool> UnbanAsync(long ownerId);
+		Task<bool> UnbanAsync(long ownerId, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список пользователей, находящихся в черном списке.
@@ -275,13 +289,14 @@ namespace VkNet.Abstractions
 		/// Количество записей, которое необходимо вернуть. положительное число, по
 		/// умолчанию 20, максимальное значение 200
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает набор объектов пользователей, находящихся в черном списке.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/account.getBanned
 		/// </remarks>
-		Task<AccountGetBannedResult> GetBannedAsync(int? offset = null, int? count = null);
+		Task<AccountGetBannedResult> GetBannedAsync(int? offset = null, int? count = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает информацию о текущем аккаунте.
@@ -292,6 +307,7 @@ namespace VkNet.Abstractions
 		/// own_posts_default, no_wall_replies, intro, lang
 		/// По умолчанию будут возвращены все поля. список слов, разделенных через запятую
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Метод возвращает объект, содержащий следующие поля:
 		/// country – строковой код страны, определенный по IP адресу, с которого сделан
@@ -314,25 +330,31 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/account.getInfo
 		/// </remarks>
-		Task<AccountInfo> GetInfoAsync(AccountFields fields = null);
+		Task<AccountInfo> GetInfoAsync(AccountFields fields = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет редактировать информацию о текущем аккаунте.
 		/// </summary>
 		/// <param name="name"> Имя настройки. </param>
 		/// <param name="value"> Значение настройки. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В результате успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/account.setInfo
 		/// </remarks>
-		Task<bool> SetInfoAsync([NotNull] string name, [NotNull] string value);
+		Task<bool> SetInfoAsync([NotNull] string name, [NotNull] string value, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет сменить пароль пользователя после успешного восстановления доступа к
 		/// аккаунту через СМС, используя метод auth.restore.
 		/// </summary>
+		/// <param name="oldPassword"> Текущий пароль пользователя. строка </param>
+		/// <param name="newPassword">
+		/// Новый пароль, который будет установлен в качестве текущего.
+		/// строка, минимальная длина 6, обязательный параметр
+		/// </param>
 		/// <param name="restoreSid">
 		/// Идентификатор сессии, полученный при восстановлении доступа используя метод
 		/// auth.restore. (В случае если пароль меняется сразу после восстановления доступа)
@@ -343,11 +365,7 @@ namespace VkNet.Abstractions
 		/// (В случае если пароль меняется сразу после восстановления доступа)
 		/// строка
 		/// </param>
-		/// <param name="oldPassword"> Текущий пароль пользователя. строка </param>
-		/// <param name="newPassword">
-		/// Новый пароль, который будет установлен в качестве текущего.
-		/// строка, минимальная длина 6, обязательный параметр
-		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В результате выполнения этого метода будет возвращен объект с полем token,
 		/// содержащим новый токен, и полем secret в случае, если токен был nohttps.
@@ -356,16 +374,17 @@ namespace VkNet.Abstractions
 		/// Страница документации ВКонтакте http://vk.com/dev/account.changePassword
 		/// </remarks>
 		Task<AccountChangePasswordResult> ChangePasswordAsync(string oldPassword, string newPassword, string restoreSid = null,
-															string changePasswordHash = null);
+															string changePasswordHash = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает информацию о текущем профиле.
 		/// </summary>
+		/// <param name="token"></param>
 		/// <returns> Информация о текущем профиле в виде Model.User </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/account.getProfileInfo
 		/// </remarks>
-		Task<AccountSaveProfileInfoParams> GetProfileInfoAsync();
+		Task<AccountSaveProfileInfoParams> GetProfileInfoAsync(CancellationToken token = default);
 
 		/// <summary>
 		/// Редактирует информацию текущего профиля.
@@ -373,6 +392,7 @@ namespace VkNet.Abstractions
 		/// <param name="cancelRequestId">
 		/// Идентификатор заявки на смену имени, которую необходимо отменить.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns> Результат отмены заявки. </returns>
 		/// <remarks>
 		/// Метод вынесен как отдельный, потому что если в запросе передан параметр
@@ -382,19 +402,20 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/account.saveProfileInfo
 		/// </remarks>
-		Task<bool> SaveProfileInfoAsync(int cancelRequestId);
+		Task<bool> SaveProfileInfoAsync(int cancelRequestId, CancellationToken token = default);
 
 		/// <summary>
 		/// Редактирует информацию текущего профиля.
 		/// </summary>
 		/// <param name="params"> The parameters. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Результат отмены заявки.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/account.saveProfileInfo
 		/// </remarks>
-		Task<bool> SaveProfileInfoAsync(AccountSaveProfileInfoParams @params);
+		Task<bool> SaveProfileInfoAsync(AccountSaveProfileInfoParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Получить список приватных настроек
@@ -407,7 +428,8 @@ namespace VkNet.Abstractions
 		/// </summary>
 		/// <param name="key"> Ключ </param>
 		/// <param name="value"> Значение </param>
+		/// <param name="token"></param>
 		/// <returns> Значение параметра <see cref="value" /> </returns>
-		Task<PrivacySettingsValue> SetPrivacyAsync(string key, string value);
+		Task<PrivacySettingsValue> SetPrivacyAsync(string key, string value, CancellationToken token = default);
 	}
 }
