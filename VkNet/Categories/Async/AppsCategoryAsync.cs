@@ -1,9 +1,9 @@
+using System.Threading;
 using System.Threading.Tasks;
 using VkNet.Enums.Filters;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
 using VkNet.Model.Apps;
-using VkNet.Model.RequestParams;
 using VkNet.Model.RequestParams.App;
 using VkNet.Model.Results.Apps;
 using VkNet.Utils;
@@ -14,52 +14,49 @@ namespace VkNet.Categories
 	public partial class AppsCategory
 	{
 		/// <inheritdoc />
-		public Task<VkCollection<App>> GetCatalogAsync(AppGetCatalogParams @params, bool skipAuthorization = false)
+		public Task<VkCollection<App>> GetCatalogAsync(AppGetCatalogParams @params, bool skipAuthorization = false,
+														CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				GetCatalog(@params: @params, skipAuthorization: skipAuthorization));
+			return TypeHelper.TryInvokeMethodAsync(() => GetCatalog(@params, skipAuthorization), token);
 		}
 
 		/// <inheritdoc />
-		public Task<AppGetObject> GetAsync(AppGetParams @params, bool skipAuthorization = false)
+		public Task<AppGetObject> GetAsync(AppGetParams @params, bool skipAuthorization = false, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => Get(@params: @params, skipAuthorization: skipAuthorization));
+			return TypeHelper.TryInvokeMethodAsync(() => Get(@params, skipAuthorization), token);
 		}
 
 		/// <inheritdoc />
-		public Task<long> SendRequestAsync(AppSendRequestParams @params)
+		public Task<long> SendRequestAsync(AppSendRequestParams @params, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => SendRequest(@params: @params));
+			return TypeHelper.TryInvokeMethodAsync(() => SendRequest(@params: @params), token);
 		}
 
 		/// <inheritdoc />
-		public Task<bool> DeleteAppRequestsAsync()
+		public Task<bool> DeleteAppRequestsAsync(CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => DeleteAppRequests());
+			return TypeHelper.TryInvokeMethodAsync(DeleteAppRequests, token);
 		}
 
 		/// <inheritdoc />
-		public Task<VkCollection<User>> GetFriendsListAsync(AppRequestType type
-															, bool? extended = null
-															, long? count = null
-															, long? offset = null
-															, UsersFields fields = null)
+		public Task<VkCollection<User>> GetFriendsListAsync(AppRequestType type, bool? extended = null, long? count = null,
+															long? offset = null, UsersFields fields = null,
+															CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				GetFriendsList(type: type, extended: extended, count: count, offset: offset));
+			return TypeHelper.TryInvokeMethodAsync(() => GetFriendsList(type, extended, count, offset), token);
 		}
 
 		/// <inheritdoc />
-		public Task<LeaderboardResult> GetLeaderboardAsync(AppRatingType type, bool? global = null, bool? extended = null)
+		public Task<LeaderboardResult> GetLeaderboardAsync(AppRatingType type, bool? global = null, bool? extended = null,
+															CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				GetLeaderboard(type: type, global: global, extended: extended));
+			return TypeHelper.TryInvokeMethodAsync(() => GetLeaderboard(type, global, extended), token);
 		}
 
 		/// <inheritdoc />
-		public Task<long> GetScoreAsync(long userId)
+		public Task<long> GetScoreAsync(long userId, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => GetScore(userId: userId));
+			return TypeHelper.TryInvokeMethodAsync(() => GetScore(userId: userId), token);
 		}
 	}
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -31,11 +32,11 @@ namespace VkNet.Utils
 			container.TryAddSingleton<HttpClient>();
 			container.TryAddSingleton(typeof(ILogger<>), typeof(NullLogger<>));
 			container.TryAddSingleton<IRestClient, RestClient>();
-			container.TryAddSingleton<IWebProxy>(t => null);
+			container.TryAddSingleton<IWebProxy>(_ => null);
 			container.TryAddSingleton<IVkApiVersionManager, VkApiVersionManager>();
 			container.TryAddSingleton<ICaptchaHandler, CaptchaHandler>();
 			container.TryAddSingleton<ILanguageService, LanguageService>();
-			container.TryAddSingleton<ICaptchaSolver>(sp => null);
+			container.TryAddSingleton<ICaptchaSolver>(_ => null);
 			container.TryAddSingleton<IRateLimiter, RateLimiter>();
 			container.TryAddSingleton<IAwaitableConstraint, CountByIntervalAwaitableConstraint>();
 			container.RegisterImplicitFlowAuthorization();
@@ -45,21 +46,23 @@ namespace VkNet.Utils
 		/// Попытаться асинхронно выполнить метод.
 		/// </summary>
 		/// <param name="func"> Синхронный метод. </param>
+		/// <param name="token"></param>
 		/// <typeparam name="T"> Тип ответа </typeparam>
 		/// <returns> Результат выполнения функции. </returns>
-		public static Task<T> TryInvokeMethodAsync<T>(Func<T> func)
+		public static Task<T> TryInvokeMethodAsync<T>(Func<T> func, CancellationToken token = default)
 		{
-			return Task.Run(func);
+			return Task.Run(func, token);
 		}
 
 		/// <summary>
 		/// Попытаться асинхронно выполнить метод.
 		/// </summary>
 		/// <param name="func"> Синхронный метод. </param>
+		/// <param name="token"></param>
 		/// <returns> Результат выполнения функции. </returns>
-		public static Task TryInvokeMethodAsync(Action func)
+		public static Task TryInvokeMethodAsync(Action func, CancellationToken token = default)
 		{
-			return Task.Run(func);
+			return Task.Run(func, token);
 		}
 
 		private static void RegisterImplicitFlowAuthorization(this IServiceCollection services)

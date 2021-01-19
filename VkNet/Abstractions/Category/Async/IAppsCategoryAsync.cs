@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using VkNet.Enums.Filters;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
 using VkNet.Model.Apps;
-using VkNet.Model.RequestParams;
 using VkNet.Model.RequestParams.App;
 using VkNet.Model.Results.Apps;
 using VkNet.Utils;
@@ -21,6 +21,7 @@ namespace VkNet.Abstractions
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
 		/// <param name="skipAuthorization"> Если <c> true </c>, то пропустить авторизацию </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает общее число найденных приложений и массив
 		/// объектов приложений.
@@ -29,26 +30,29 @@ namespace VkNet.Abstractions
 		/// К методу можно делать не более 60 запросов в минуту с одного IP или id.
 		/// Страница документации ВКонтакте http://vk.com/dev/apps.getCatalog
 		/// </remarks>
-		Task<VkCollection<App>> GetCatalogAsync(AppGetCatalogParams @params, bool skipAuthorization = false);
+		Task<VkCollection<App>> GetCatalogAsync(AppGetCatalogParams @params, bool skipAuthorization = false,
+												CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает данные о запрошенном приложении на платформе ВКонтакте
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
 		/// <param name="skipAuthorization"> Если <c> true </c>, то пропустить авторизацию </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает объект приложения.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/apps.get
 		/// </remarks>
-		Task<AppGetObject> GetAsync(AppGetParams @params, bool skipAuthorization = false);
+		Task<AppGetObject> GetAsync(AppGetParams @params, bool skipAuthorization = false, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет отправить запрос другому пользователю в приложении, использующем
 		/// авторизацию ВКонтакте.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае удачного выполнения метод возвращает идентификатор созданного запроса,
 		/// например:
@@ -57,18 +61,19 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/apps.sendRequest
 		/// </remarks>
-		Task<long> SendRequestAsync(AppSendRequestParams @params);
+		Task<long> SendRequestAsync(AppSendRequestParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Удаляет все уведомления о запросах, отправленных из текущего приложения.
 		/// </summary>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/apps.deleteAppRequests
 		/// </remarks>
-		Task<bool> DeleteAppRequestsAsync();
+		Task<bool> DeleteAppRequestsAsync(CancellationToken token = default);
 
 		/// <summary>
 		/// Создает список друзей, который будет использоваться при отправке пользователем
@@ -92,17 +97,15 @@ namespace VkNet.Abstractions
 		/// Список дополнительных полей профилей, которые необходимо вернуть. См. подробное
 		/// описание.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает список пользователей.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/apps.getFriendsList
 		/// </remarks>
-		Task<VkCollection<User>> GetFriendsListAsync(AppRequestType type
-													, bool? extended = null
-													, long? count = null
-													, long? offset = null
-													, UsersFields fields = null);
+		Task<VkCollection<User>> GetFriendsListAsync(AppRequestType type, bool? extended = null, long? count = null, long? offset = null,
+													UsersFields fields = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает рейтинг пользователей в игре.
@@ -125,6 +128,7 @@ namespace VkNet.Abstractions
 		/// значения 1 или 0,
 		/// по умолчанию 0 Async(Флаг, может принимать значения 1 или 0, по умолчанию 0).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает список друзей с текущим уровнем и
 		/// количеством очков в игре, отсортированный
@@ -133,7 +137,8 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/apps.getLeaderboard
 		/// </remarks>
-		Task<LeaderboardResult> GetLeaderboardAsync(AppRatingType type, bool? global = null, bool? extended = null);
+		Task<LeaderboardResult> GetLeaderboardAsync(AppRatingType type, bool? global = null, bool? extended = null,
+													CancellationToken token = default);
 
 		/// <summary>
 		/// Метод возвращает количество очков пользователя в этой игре.
@@ -145,12 +150,13 @@ namespace VkNet.Abstractions
 		/// текущего пользователя, обязательный
 		/// параметр).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает число очков для пользователя.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/apps.getScore
 		/// </remarks>
-		Task<long> GetScoreAsync(long userId);
+		Task<long> GetScoreAsync(long userId, CancellationToken token = default);
 	}
 }
