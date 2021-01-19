@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using VkNet.Enums;
 using VkNet.Enums.Filters;
 using VkNet.Model;
 using VkNet.Model.Attachments;
-using VkNet.Model.RequestParams;
+using VkNet.Model.Group;
 using VkNet.Model.RequestParams.Audio;
 using VkNet.Model.Results.Audio;
 using VkNet.Utils;
@@ -36,13 +37,15 @@ namespace VkNet.Abstractions
 		/// <param name="albumId">
 		/// Идентификатор альбома, в который нужно переместить аудиозапись.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает идентификатор созданной аудиозаписи.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/audio.add
 		/// </remarks>
-		Task<long> AddAsync(long audioId, long ownerId, string accessKey = null, long? groupId = null, long? albumId = null);
+		Task<long> AddAsync(long audioId, long ownerId, string accessKey = null, long? groupId = null, long? albumId = null,
+							CancellationToken token = default);
 
 		/// <summary>
 		/// Создает пустой плейлист.
@@ -60,13 +63,15 @@ namespace VkNet.Abstractions
 		/// Идентификаторы аудиозаписей, которые необходимо добавить в альбом, в виде
 		/// {owner_id}_{audio_id}.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <see cref="AudioPlaylist"/>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте -неизвестно-.
 		/// </remarks>
-		Task<AudioPlaylist> CreatePlaylistAsync(long ownerId, string title, string description = null, IEnumerable<string> audioIds = null);
+		Task<AudioPlaylist> CreatePlaylistAsync(long ownerId, string title, string description = null, IEnumerable<string> audioIds = null,
+												CancellationToken token = default);
 
 		/// <summary>
 		/// Удаляет аудиозапись со страницы пользователя или сообщества.
@@ -77,13 +82,14 @@ namespace VkNet.Abstractions
 		/// <param name="ownerId">
 		/// Идентификатор владельца аудиозаписи (пользователь или сообщество).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/audio.delete
 		/// </remarks>
-		Task<bool> DeleteAsync(long audioId, long ownerId);
+		Task<bool> DeleteAsync(long audioId, long ownerId, CancellationToken token = default);
 
 		/// <summary>
 		/// Удаляет альбом аудиозаписей.
@@ -94,18 +100,20 @@ namespace VkNet.Abstractions
 		/// <param name="playlistId">
 		/// Идентификатор плейлиста.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте -неизвестно-.
 		/// </remarks>
-		Task<bool> DeletePlaylistAsync(long ownerId, long playlistId);
+		Task<bool> DeletePlaylistAsync(long ownerId, long playlistId, CancellationToken token = default);
 
 		/// <summary>
 		/// Редактирует данные аудиозаписи на странице пользователя или сообщества.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает id текста, введенного пользователем
 		/// (lyrics_id), если текст не был введен, вернет 0.
@@ -113,7 +121,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/audio.edit
 		/// </remarks>
-		Task<long> EditAsync(AudioEditParams @params);
+		Task<long> EditAsync(AudioEditParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Редактирует плейлист.
@@ -136,6 +144,7 @@ namespace VkNet.Abstractions
 		/// идентификаторы всех имеющихся аудиозаписей в плейлисте + новые.
 		/// Не указывайте идентификаторы аудиозаписей, которые необходимо удалить.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
@@ -143,12 +152,13 @@ namespace VkNet.Abstractions
 		/// Страница документации ВКонтакте -неизвестно-.
 		/// </remarks>
 		Task<bool> EditPlaylistAsync(long ownerId, int playlistId, string title, string description = null,
-									IEnumerable<string> audioIds = null);
+									IEnumerable<string> audioIds = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список аудиозаписей пользователя или сообщества.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает список объектов <see cref="Audio"/>.
 		/// Обратите внимание, что ссылки на mp3 привязаны к ip-адресу.
@@ -156,7 +166,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/audio.get
 		/// </remarks>
-		Task<VkCollection<Audio>> GetAsync(AudioGetParams @params);
+		Task<VkCollection<Audio>> GetAsync(AudioGetParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список плейлистов пользователя или группы.
@@ -164,12 +174,13 @@ namespace VkNet.Abstractions
 		/// <param name="ownerId">
 		/// Идентификатор пользователя или сообщества.
 		/// </param>
-		/// <param name="offset">
-		/// Смещение, необходимое для выборки определенного подмножества плейлистов.
-		/// </param>
 		/// <param name="count">
 		/// Количество плейлистов, которое необходимо вернуть. По умолчанию -неизвестно-, максимальное значение -неизвестно-.
 		/// </param>
+		/// <param name="offset">
+		/// Смещение, необходимое для выборки определенного подмножества плейлистов.
+		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает общее количество альбомов с аудиозаписями
 		/// и массив объектов <see cref="AudioPlaylist"/>.
@@ -177,7 +188,8 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте -неизвестно-.
 		/// </remarks>
-		Task<VkCollection<AudioPlaylist>> GetPlaylistsAsync(long ownerId, uint? count = null, uint? offset = null);
+		Task<VkCollection<AudioPlaylist>> GetPlaylistsAsync(long ownerId, uint? count = null, uint? offset = null,
+															CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает <see cref="AudioPlaylist"/> пользователя или группы.
@@ -188,13 +200,14 @@ namespace VkNet.Abstractions
 		/// <param name="playlistId">
 		/// Идентификатор плейлиста.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <see cref="AudioPlaylist"/>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте -неизвестно-.
 		/// </remarks>
-		Task<AudioPlaylist> GetPlaylistByIdAsync(long ownerId, long playlistId);
+		Task<AudioPlaylist> GetPlaylistByIdAsync(long ownerId, long playlistId, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список друзей и сообществ пользователя, которые транслируют музыку в
@@ -207,6 +220,7 @@ namespace VkNet.Abstractions
 		/// true — будут возвращены только друзья и сообщества, которые транслируют музыку в
 		/// данный момент.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает список объектов <see cref="User"/> и <see cref="Group"/> с
 		/// дополнительным полем status_audio — объект аудиозаписи, установленной в статус
@@ -215,7 +229,8 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/audio.getBroadcastList
 		/// </remarks>
-		Task<IEnumerable<object>> GetBroadcastListAsync(AudioBroadcastFilter filter = null, bool? active = null);
+		Task<IEnumerable<object>> GetBroadcastListAsync(AudioBroadcastFilter filter = null, bool? active = null,
+														CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает информацию об аудиозаписях.
@@ -224,6 +239,7 @@ namespace VkNet.Abstractions
 		/// Идентификаторы аудиозаписей, информацию о которых необходимо вернуть, в виде
 		/// {owner_id}_{audio_id}.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает массив объектов <see cref="Audio"/>. Обратите внимание,
 		/// что ссылки на аудиозаписи привязаны
@@ -232,7 +248,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/audio.getById
 		/// </remarks>
-		Task<IEnumerable<Audio>> GetByIdAsync(IEnumerable<string> audios);
+		Task<IEnumerable<Audio>> GetByIdAsync(IEnumerable<string> audios, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает каталог пользователя.
@@ -246,6 +262,7 @@ namespace VkNet.Abstractions
 		/// <param name="fields">
 		/// Дополнительные поля
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает объект <see cref="AudioGetCatalogResult"/>. Обратите внимание,
 		/// что ссылки на аудиозаписи привязаны
@@ -254,7 +271,8 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/audio.getById
 		/// </remarks>
-		Task<AudioGetCatalogResult> GetCatalogAsync(uint? count, bool? extended, UsersFields fields = null);
+		Task<AudioGetCatalogResult> GetCatalogAsync(uint? count, bool? extended, UsersFields fields = null,
+													CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает количество аудиозаписей пользователя или сообщества.
@@ -266,6 +284,7 @@ namespace VkNet.Abstractions
 		/// "-" — например, owner_id=-1
 		/// соответствует идентификатору сообщества ВКонтакте API (club1).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает число, равное количеству аудиозаписей на
 		/// странице пользователя или сообщества.
@@ -273,7 +292,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/audio.getCount
 		/// </remarks>
-		Task<long> GetCountAsync(long ownerId);
+		Task<long> GetCountAsync(long ownerId, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает текст аудиозаписи.
@@ -281,13 +300,14 @@ namespace VkNet.Abstractions
 		/// <param name="lyricsId">
 		/// Идентификатор текста аудиозаписи, информацию о котором необходимо вернуть.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает объект <see cref="Lyrics"/>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/audio.getLyrics
 		/// </remarks>
-		Task<Lyrics> GetLyricsAsync(long lyricsId);
+		Task<Lyrics> GetLyricsAsync(long lyricsId, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список аудиозаписей из раздела "Популярное".
@@ -298,13 +318,14 @@ namespace VkNet.Abstractions
 		/// <param name="genre">
 		/// Идентификатор жанра из списка жанров.
 		/// </param>
-		/// <param name="offset">
-		/// Смещение, необходимое для выборки определенного подмножества аудиозаписей.
-		/// </param>
 		/// <param name="count">
 		/// Количество возвращаемых аудиозаписей. Максимальное
 		/// значение 1000, по умолчанию 100.
 		/// </param>
+		/// <param name="offset">
+		/// Смещение, необходимое для выборки определенного подмножества аудиозаписей.
+		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает список объектов <see cref="Audio"/>. Обратите внимание,
 		/// что ссылки на аудиозаписи привязаны
@@ -313,7 +334,8 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/audio.getPopular
 		/// </remarks>
-		Task<IEnumerable<Audio>> GetPopularAsync(bool onlyEng = false, AudioGenre? genre = null, uint? count = null, uint? offset = null);
+		Task<IEnumerable<Audio>> GetPopularAsync(bool onlyEng = false, AudioGenre? genre = null, uint? count = null, uint? offset = null,
+												CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список рекомендуемых аудиозаписей на основе списка воспроизведения
@@ -334,16 +356,17 @@ namespace VkNet.Abstractions
 		/// набора аудиозаписей (по
 		/// умолчанию — идентификатор текущего пользователя).
 		/// </param>
+		/// <param name="count">
+		/// Количество возвращаемых аудиозаписей. Максимальное значение 1000, по умолчанию 100.
+		/// </param>
 		/// <param name="offset">
 		/// Смещение относительно первой найденной аудиозаписи для выборки определенного
 		/// подмножества.
 		/// </param>
-		/// <param name="count">
-		/// Количество возвращаемых аудиозаписей. Максимальное значение 1000, по умолчанию 100.
-		/// </param>
 		/// <param name="shuffle">
 		/// true — включен случайный порядок.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает список объектов <see cref="Audio"/>. Обратите внимание,
 		/// что ссылки на аудиозаписи привязаны к ip адресу.
@@ -352,18 +375,19 @@ namespace VkNet.Abstractions
 		/// Страница документации ВКонтакте http://vk.com/dev/audio.getRecommendations
 		/// </remarks>
 		Task<VkCollection<Audio>> GetRecommendationsAsync(string targetAudio = null, long? userId = null, uint? count = null,
-														uint? offset = null, bool? shuffle = null);
+														uint? offset = null, bool? shuffle = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает адрес сервера для загрузки аудиозаписей.
 		/// </summary>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает объект с единственным полем upload_url.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/audio.getUploadServer
 		/// </remarks>
-		Task<Uri> GetUploadServerAsync();
+		Task<Uri> GetUploadServerAsync(CancellationToken token = default);
 
 		/// <summary>
 		/// Перемещает аудиозаписи в плейлист.
@@ -377,6 +401,7 @@ namespace VkNet.Abstractions
 		/// <param name="audioIds">
 		/// Идентификаторы аудиозаписей, которые требуется переместить, в виде {owner_id}_{audio_id}.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения список идентификаторов аудиозаписей.
 		/// Обратите внимание, в одном альбоме не может быть более 1000 аудиозаписей.
@@ -384,7 +409,8 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте -неизвестно-
 		/// </remarks>
-		Task<IEnumerable<long>> AddToPlaylistAsync(long ownerId, long playlistId, IEnumerable<string> audioIds);
+		Task<IEnumerable<long>> AddToPlaylistAsync(long ownerId, long playlistId, IEnumerable<string> audioIds,
+													CancellationToken token = default);
 
 		/// <summary>
 		/// Изменяет порядок аудиозаписи, перенося ее между аудиозаписями, идентификаторы
@@ -403,13 +429,14 @@ namespace VkNet.Abstractions
 		/// <param name="after">
 		/// Идентификатор аудиозаписи, после  которой нужно поместить композицию.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/audio.reorder
 		/// </remarks>
-		Task<bool> ReorderAsync(long audioId, long? ownerId, long? before, long? after);
+		Task<bool> ReorderAsync(long audioId, long? ownerId, long? before, long? after, CancellationToken token = default);
 
 		/// <summary>
 		/// Восстанавливает аудиозапись после удаления.
@@ -421,6 +448,7 @@ namespace VkNet.Abstractions
 		/// Идентификатор владельца аудиозаписи (пользователь или сообщество). По умолчанию
 		/// — идентификатор текущего пользователя.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успешного восстановления аудиозаписи возвращает объект <see cref="Audio"/>.
 		/// Если время хранения удаленной аудиозаписи истекло (обычно это 20 минут), сервер
@@ -429,7 +457,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/audio.restore
 		/// </remarks>
-		Task<Audio> RestoreAsync(long audioId, long? ownerId = null);
+		Task<Audio> RestoreAsync(long audioId, long? ownerId = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Сохраняет аудиозаписи после успешной загрузки.
@@ -440,16 +468,18 @@ namespace VkNet.Abstractions
 		/// </param>
 		/// <param name="artist"> Автор композиции. По умолчанию берется из ID3 тегов. </param>
 		/// <param name="title"> Название композиции. По умолчанию берется из ID3 тегов. </param>
+		/// <param name="token"></param>
 		/// <returns> Возвращает обьект загруженной аудиозаписи. </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/audio.save
 		/// </remarks>
-		Task<Audio> SaveAsync(string response, string artist = null, string title = null);
+		Task<Audio> SaveAsync(string response, string artist = null, string title = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список аудиозаписей в соответствии с заданным критерием поиска.
 		/// </summary>
 		/// <param name="params"> Критерии поиска </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Список объектов <see cref="Audio"/>.
 		/// </returns>
@@ -458,7 +488,7 @@ namespace VkNet.Abstractions
 		/// содержащей Settings.Audio
 		/// Страница документации ВКонтакте http://vk.com/dev/audio.search
 		/// </remarks>
-		Task<VkCollection<Audio>> SearchAsync(AudioSearchParams @params);
+		Task<VkCollection<Audio>> SearchAsync(AudioSearchParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Транслирует аудиозапись в статус пользователю или сообществу.
@@ -476,12 +506,14 @@ namespace VkNet.Abstractions
 		/// сообщества. Например, 1,-34384434. По умолчанию аудиозапись транслируется
 		/// текущему пользователю. (Количество элементов должно составлять не более 20).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает идентификаторы пользователя и сообществ для которых был установлен статус.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/audio.setBroadcast
 		/// </remarks>
-		Task<IEnumerable<long>> SetBroadcastAsync(string audio = null, IEnumerable<long> targetIds = null);
+		Task<IEnumerable<long>> SetBroadcastAsync(string audio = null, IEnumerable<long> targetIds = null,
+												CancellationToken token = default);
 	}
 }
