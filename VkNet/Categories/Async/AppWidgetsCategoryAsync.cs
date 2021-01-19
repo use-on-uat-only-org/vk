@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
@@ -12,51 +13,53 @@ namespace VkNet.Categories
 	public partial class AppWidgetsCategory
 	{
 		/// <inheritdoc/>
-		public Task<UploadServerInfo> GetAppImageUploadServerAsync(AppWidgetImageType imageType)
+		public Task<UploadServerInfo> GetAppImageUploadServerAsync(AppWidgetImageType imageType, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() => GetAppImageUploadServer(imageType));
+			return TypeHelper.TryInvokeMethodAsync(() => GetAppImageUploadServer(imageType), token);
 		}
 
 		/// <inheritdoc/>
-		public Task<AppImageResult> GetAppImagesAsync(int offset, int count, AppWidgetImageType imageType)
+		public Task<AppImageResult> GetAppImagesAsync(int offset, int count, AppWidgetImageType imageType,
+													CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() => GetAppImages(offset, count, imageType));
+			return TypeHelper.TryInvokeMethodAsync(() => GetAppImages(offset, count, imageType), token);
 		}
 
 		/// <inheritdoc/>
-		public Task<UploadServerInfo> GetGroupImageUploadServerAsync(AppWidgetImageType imageType)
+		public Task<UploadServerInfo> GetGroupImageUploadServerAsync(AppWidgetImageType imageType, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() => GetGroupImageUploadServer(imageType));
+			return TypeHelper.TryInvokeMethodAsync(() => GetGroupImageUploadServer(imageType), token);
 		}
 
 		/// <inheritdoc/>
-		public Task<AppImageResult> GetGroupImagesAsync(int offset, int count, AppWidgetImageType imageType)
+		public Task<AppImageResult> GetGroupImagesAsync(int offset, int count, AppWidgetImageType imageType,
+														CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() => GetGroupImages(offset, count, imageType));
+			return TypeHelper.TryInvokeMethodAsync(() => GetGroupImages(offset, count, imageType), token);
 		}
 
 		/// <inheritdoc/>
-		public Task<ReadOnlyCollection<AppImage>> GetImagesByIdAsync(string images)
+		public Task<ReadOnlyCollection<AppImage>> GetImagesByIdAsync(string images, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() => GetImagesById(images));
+			return TypeHelper.TryInvokeMethodAsync(() => GetImagesById(images), token);
 		}
 
 		/// <inheritdoc/>
-		public Task<AppImage> SaveAppImageAsync(string hash, string image)
+		public Task<AppImage> SaveAppImageAsync(string hash, string image, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() => SaveAppImage(hash, image));
+			return TypeHelper.TryInvokeMethodAsync(() => SaveAppImage(hash, image), token);
 		}
 
 		/// <inheritdoc/>
-		public Task<AppImage> SaveGroupImageAsync(string hash, string image)
+		public Task<AppImage> SaveGroupImageAsync(string hash, string image, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() => SaveGroupImage(hash, image));
+			return TypeHelper.TryInvokeMethodAsync(() => SaveGroupImage(hash, image), token);
 		}
 
 		/// <inheritdoc/>
-		public Task<bool> UpdateAsync(string code, AppWidgetType type)
+		public Task<bool> UpdateAsync(string code, AppWidgetType type, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync((() => Update(code, type)));
+			return TypeHelper.TryInvokeMethodAsync((() => Update(code, type)), token);
 		}
 	}
 }
