@@ -197,7 +197,7 @@ namespace VkNet
 		/// <inheritdoc />
 		public Task AuthorizeAsync(IApiAuthParams @params)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() => Authorize(@params));
+			return TypeHelper.TryInvokeMethodAsync(() => Authorize(@params), CancellationToken.None);
 		}
 
 		/// <inheritdoc />
@@ -227,13 +227,13 @@ namespace VkNet
 		/// <inheritdoc />
 		public Task RefreshTokenAsync(Func<string> code = null)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() => RefreshToken(code));
+			return TypeHelper.TryInvokeMethodAsync(() => RefreshToken(code), CancellationToken.None);
 		}
 
 		/// <inheritdoc />
 		public Task LogOutAsync()
 		{
-			return TypeHelper.TryInvokeMethodAsync(LogOut);
+			return TypeHelper.TryInvokeMethodAsync(LogOut, CancellationToken.None);
 		}
 
 		/// <inheritdoc />
