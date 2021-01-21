@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 using VkNet.Enums;
 using VkNet.Enums.SafetyEnums;
@@ -14,99 +14,73 @@ namespace VkNet.Categories
 	public partial class DocsCategory
 	{
 		/// <inheritdoc />
-		public Task<VkCollection<Document>> GetAsync(int? count = null
-													, int? offset = null
-													, long? ownerId = null
-													, DocFilter? type = null)
+		public Task<VkCollection<Document>> GetAsync(int? count = null, int? offset = null, long? ownerId = null, DocFilter? type = null,
+													CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				Get(count, offset, ownerId, type));
+			return TypeHelper.TryInvokeMethodAsync(() => Get(count, offset, ownerId, type), token);
 		}
 
 		/// <inheritdoc />
-		public Task<ReadOnlyCollection<Document>> GetByIdAsync(IEnumerable<Document> docs)
+		public Task<ReadOnlyCollection<Document>> GetByIdAsync(IEnumerable<Document> docs, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => GetById(docs: docs));
+			return TypeHelper.TryInvokeMethodAsync(() => GetById(docs: docs), token);
 		}
 
 		/// <inheritdoc />
-		public Task<UploadServerInfo> GetUploadServerAsync(long? groupId = null)
+		public Task<UploadServerInfo> GetUploadServerAsync(long? groupId = null, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => GetUploadServer(groupId: groupId));
+			return TypeHelper.TryInvokeMethodAsync(() => GetUploadServer(groupId: groupId), token);
 		}
 
 		/// <inheritdoc />
-		public Task<UploadServerInfo> GetWallUploadServerAsync(long? groupId = null)
+		public Task<UploadServerInfo> GetWallUploadServerAsync(long? groupId = null, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => GetWallUploadServer(groupId: groupId));
+			return TypeHelper.TryInvokeMethodAsync(() => GetWallUploadServer(groupId: groupId), token);
 		}
 
 		/// <inheritdoc />
-		public Task<ReadOnlyCollection<Attachment>> SaveAsync(string file, string title, string tags = null)
+		public Task<ReadOnlyCollection<Attachment>> SaveAsync(string file, string title, string tags = null,
+															CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => Save(file, title, tags));
+			return TypeHelper.TryInvokeMethodAsync(() => Save(file, title, tags), token);
 		}
 
 		/// <inheritdoc />
-		[Obsolete(ObsoleteText.CaptchaNeeded, true)]
-		public Task<ReadOnlyCollection<Attachment>> SaveAsync(string file
-															, string title
-															, string tags = null
-															, long? captchaSid = null
-															, string captchaKey = null)
+		public Task<bool> DeleteAsync(long ownerId, long docId, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				Save(file, title, tags, captchaSid, captchaKey));
+			return TypeHelper.TryInvokeMethodAsync(() => Delete(ownerId, docId), token);
 		}
 
 		/// <inheritdoc />
-		public Task<bool> DeleteAsync(long ownerId, long docId)
+		public Task<long> AddAsync(long ownerId, long docId, string accessKey = null, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => Delete(ownerId, docId));
+			return TypeHelper.TryInvokeMethodAsync(() => Add(ownerId, docId, accessKey), token);
 		}
 
 		/// <inheritdoc />
-		public Task<long> AddAsync(long ownerId, long docId, string accessKey = null)
+		public Task<VkCollection<DocumentType>> GetTypesAsync(long ownerId, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => Add(ownerId, docId, accessKey));
+			return TypeHelper.TryInvokeMethodAsync(() => GetTypes(ownerId: ownerId), token);
 		}
 
 		/// <inheritdoc />
-		[Obsolete(ObsoleteText.CaptchaNeeded, true)]
-		public Task<long> AddAsync(long ownerId
-									, long docId
-									, string accessKey = null
-									, long? captchaSid = null
-									, string captchaKey = null)
+		public Task<VkCollection<Document>> SearchAsync(string query, bool searchOwn, long? count = null, long? offset = null,
+														CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				Add(ownerId, docId, accessKey, captchaSid, captchaKey));
+			return TypeHelper.TryInvokeMethodAsync(() => Search(query, searchOwn, count, offset), token);
 		}
 
 		/// <inheritdoc />
-		public Task<VkCollection<DocumentType>> GetTypesAsync(long ownerId)
+		public Task<bool> EditAsync(long ownerId, long docId, string title, IEnumerable<string> tags, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => GetTypes(ownerId: ownerId));
+			return TypeHelper.TryInvokeMethodAsync(() => Edit(ownerId, docId, title, tags), token);
 		}
 
 		/// <inheritdoc />
-		public Task<VkCollection<Document>> SearchAsync(string query, bool searchOwn, long? count = null, long? offset = null)
+		public Task<UploadServerInfo> GetMessagesUploadServerAsync(long? peerId = null, DocMessageType type = null,
+																	CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				Search(query, searchOwn, count, offset));
-		}
-
-		/// <inheritdoc />
-		public Task<bool> EditAsync(long ownerId, long docId, string title, IEnumerable<string> tags)
-		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				Edit(ownerId, docId, title, tags));
-		}
-
-		/// <inheritdoc />
-		public Task<UploadServerInfo> GetMessagesUploadServerAsync(long? peerId = null, DocMessageType type = null)
-		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => GetMessagesUploadServer(peerId, type));
+			return TypeHelper.TryInvokeMethodAsync(() => GetMessagesUploadServer(peerId, type), token);
 		}
 	}
 }

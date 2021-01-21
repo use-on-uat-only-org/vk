@@ -24,7 +24,7 @@ namespace VkNet.Abstractions
 		/// <inheritdoc cref="IDocsCategoryAsync.GetWallUploadServerAsync"/>
 		UploadServerInfo GetWallUploadServer(long? groupId = null);
 
-		/// <inheritdoc cref="IDocsCategoryAsync.SaveAsync(string,string,string)"/>
+		/// <inheritdoc cref="IDocsCategoryAsync.SaveAsync(string,string,string,System.Threading.CancellationToken)"/>
 		ReadOnlyCollection<Attachment> Save(string file, string title, string tags = null);
 
 		/// <inheritdoc cref="IDocsCategoryAsync.SaveAsync(string,string,string,long?,string)"/>
@@ -35,10 +35,10 @@ namespace VkNet.Abstractions
 		/// <inheritdoc cref="IDocsCategoryAsync.DeleteAsync"/>
 		bool Delete(long ownerId, long docId);
 
-		/// <inheritdoc cref="IDocsCategoryAsync.AddAsync(long,long,string)"/>
+		/// <inheritdoc cref="IDocsCategoryAsync.AddAsync"/>
 		long Add(long ownerId, long docId, string accessKey = null);
 
-		/// <inheritdoc cref="IDocsCategoryAsync.AddAsync(long,long,string,long?,string)"/>
+		/// <inheritdoc cref="IDocsCategoryAsync.AddAsync"/>
 		[Obsolete(ObsoleteText.CaptchaNeeded, true)]
 		long Add(long ownerId, long docId, string accessKey = null, long? captchaSid = null, string captchaKey = null);
 
