@@ -1,12 +1,11 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 using VkNet.Enums;
 using VkNet.Enums.Filters;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
-using VkNet.Model.RequestParams;
 using VkNet.Model.RequestParams.Friends;
 using VkNet.Model.Results.Friends;
 using VkNet.Utils;
@@ -17,131 +16,128 @@ namespace VkNet.Categories
 	public partial class FriendsCategory
 	{
 		/// <inheritdoc />
-		public Task<VkCollection<User>> GetAsync(FriendsGetParams @params, bool skipAuthorization = false)
+		public Task<VkCollection<User>> GetAsync(FriendsGetParams @params, bool skipAuthorization = false,
+												CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() =>
-				Get(@params, skipAuthorization));
+			return TypeHelper.TryInvokeMethodAsync(() => Get(@params, skipAuthorization), token);
+		}
+
+		/// <param name="token"></param>
+		/// <inheritdoc />
+		public Task<ReadOnlyCollection<long>> GetAppUsersAsync(CancellationToken token = default)
+		{
+			return TypeHelper.TryInvokeMethodAsync(GetAppUsers, token);
 		}
 
 		/// <inheritdoc />
-		public Task<ReadOnlyCollection<long>> GetAppUsersAsync()
+		public Task<FriendOnline> GetOnlineAsync(FriendsGetOnlineParams @params, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(GetAppUsers);
+			return TypeHelper.TryInvokeMethodAsync(() => GetOnline(@params), token);
 		}
 
 		/// <inheritdoc />
-		public Task<FriendOnline> GetOnlineAsync(FriendsGetOnlineParams @params)
+		public Task<ReadOnlyCollection<MutualFriend>> GetMutualAsync(FriendsGetMutualParams @params, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() => GetOnline(@params));
+			return TypeHelper.TryInvokeMethodAsync(() => GetMutual(@params), token);
 		}
 
 		/// <inheritdoc />
-		public Task<ReadOnlyCollection<MutualFriend>> GetMutualAsync(FriendsGetMutualParams @params)
+		public Task<ReadOnlyCollection<AreFriendsResult>> AreFriendsAsync(IEnumerable<long> userIds, bool? needSign = null,
+																		CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() => GetMutual(@params));
+			return TypeHelper.TryInvokeMethodAsync(() => AreFriends(userIds, needSign), token);
 		}
 
 		/// <inheritdoc />
-		public Task<ReadOnlyCollection<AreFriendsResult>> AreFriendsAsync(IEnumerable<long> userIds, bool? needSign = null)
+		public Task<long> AddListAsync(string name, IEnumerable<long> userIds, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() => AreFriends(userIds, needSign));
+			return TypeHelper.TryInvokeMethodAsync(() => AddList(name, userIds), token);
 		}
 
 		/// <inheritdoc />
-		public Task<long> AddListAsync(string name, IEnumerable<long> userIds)
+		public Task<bool> DeleteListAsync(long listId, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() => AddList(name, userIds));
+			return TypeHelper.TryInvokeMethodAsync(() => DeleteList(listId), token);
 		}
 
 		/// <inheritdoc />
-		public Task<bool> DeleteListAsync(long listId)
+		public Task<VkCollection<FriendList>> GetListsAsync(long? userId = null, bool? returnSystem = null,
+															CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() => DeleteList(listId));
-		}
-
-		/// <inheritdoc />
-		public Task<VkCollection<FriendList>> GetListsAsync(long? userId = null, bool? returnSystem = null)
-		{
-			return TypeHelper.TryInvokeMethodAsync(() => GetLists(userId, returnSystem));
+			return TypeHelper.TryInvokeMethodAsync(() => GetLists(userId, returnSystem), token);
 		}
 
 		/// <inheritdoc />
 		public Task<bool> EditListAsync(long listId, string name = null, IEnumerable<long> userIds = null,
-										IEnumerable<long> addUserIds = null, IEnumerable<long> deleteUserIds = null)
+										IEnumerable<long> addUserIds = null, IEnumerable<long> deleteUserIds = null,
+										CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() =>
-				EditList(listId, name, userIds, addUserIds));
+			return TypeHelper.TryInvokeMethodAsync(() => EditList(listId, name, userIds, addUserIds), token);
+		}
+
+		/// <param name="token"></param>
+		/// <inheritdoc />
+		public Task<bool> DeleteAllRequestsAsync(CancellationToken token = default)
+		{
+			return TypeHelper.TryInvokeMethodAsync(DeleteAllRequests, token);
 		}
 
 		/// <inheritdoc />
-		public Task<bool> DeleteAllRequestsAsync()
+		public Task<AddFriendStatus> AddAsync(long userId, string text = "", bool? follow = null, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(DeleteAllRequests);
+			return TypeHelper.TryInvokeMethodAsync(() => Add(userId, text, follow), token);
 		}
 
 		/// <inheritdoc />
-		public Task<AddFriendStatus> AddAsync(long userId, string text = "", bool? follow = null)
+		public Task<FriendsDeleteResult> DeleteAsync(long userId, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() => Add(userId, text, follow));
+			return TypeHelper.TryInvokeMethodAsync(() => Delete(userId), token);
 		}
 
 		/// <inheritdoc />
-		[Obsolete(ObsoleteText.CaptchaNeeded, true)]
-		public Task<AddFriendStatus> AddAsync(long userId, string text = "", bool? follow = null, long? captchaSid = null,
-											string captchaKey = null)
+		public Task<bool> EditAsync(long userId, IEnumerable<long> listIds, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() =>
-				Add(userId, text, follow, captchaSid, captchaKey));
+			return TypeHelper.TryInvokeMethodAsync(() => Edit(userId, listIds), token);
 		}
 
 		/// <inheritdoc />
-		public Task<FriendsDeleteResult> DeleteAsync(long userId)
+		public Task<ReadOnlyCollection<long>> GetRecentAsync(long? count = null, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() => Delete(userId));
+			return TypeHelper.TryInvokeMethodAsync(() => GetRecent(count), token);
 		}
 
 		/// <inheritdoc />
-		public Task<bool> EditAsync(long userId, IEnumerable<long> listIds)
+		public Task<GetRequestsResult> GetRequestsAsync(FriendsGetRequestsParams @params, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() => Edit(userId, listIds));
+			return TypeHelper.TryInvokeMethodAsync(() => GetRequests(@params), token);
 		}
 
 		/// <inheritdoc />
-		public Task<ReadOnlyCollection<long>> GetRecentAsync(long? count = null)
+		public Task<VkCollection<FriendsGetRequestsResult>> GetRequestsExtendedAsync(
+			FriendsGetRequestsParams @params, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() => GetRecent(count));
-		}
-
-		/// <inheritdoc />
-		public Task<GetRequestsResult> GetRequestsAsync(FriendsGetRequestsParams @params)
-		{
-			return TypeHelper.TryInvokeMethodAsync(() => GetRequests(@params));
-		}
-
-		/// <inheritdoc />
-		public Task<VkCollection<FriendsGetRequestsResult>> GetRequestsExtendedAsync(FriendsGetRequestsParams @params)
-		{
-			return TypeHelper.TryInvokeMethodAsync(() => GetRequestsExtended(@params));
+			return TypeHelper.TryInvokeMethodAsync(() => GetRequestsExtended(@params), token);
 		}
 
 		/// <inheritdoc />
 		public Task<VkCollection<User>> GetSuggestionsAsync(FriendsFilter filter = null, long? count = null, long? offset = null,
-															UsersFields fields = null, NameCase nameCase = null)
+															UsersFields fields = null, NameCase nameCase = null,
+															CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() =>
-				GetSuggestions(filter, count, offset, fields, nameCase));
+			return TypeHelper.TryInvokeMethodAsync(() => GetSuggestions(filter, count, offset, fields, nameCase), token);
 		}
 
 		/// <inheritdoc />
-		public Task<ReadOnlyCollection<User>> GetByPhonesAsync(IEnumerable<string> phones, ProfileFields fields)
+		public Task<ReadOnlyCollection<User>> GetByPhonesAsync(IEnumerable<string> phones, ProfileFields fields,
+																CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() => GetByPhones(phones, fields));
+			return TypeHelper.TryInvokeMethodAsync(() => GetByPhones(phones, fields), token);
 		}
 
 		/// <inheritdoc />
-		public Task<VkCollection<User>> SearchAsync(FriendsSearchParams @params)
+		public Task<VkCollection<User>> SearchAsync(FriendsSearchParams @params, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() => Search(@params));
+			return TypeHelper.TryInvokeMethodAsync(() => Search(@params), token);
 		}
 	}
 }

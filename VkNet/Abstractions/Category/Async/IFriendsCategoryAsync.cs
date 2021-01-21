@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using VkNet.Enums;
@@ -26,6 +27,7 @@ namespace VkNet.Abstractions
 		/// </summary>
 		/// <param name="params"> Входные параметры выборки. </param>
 		/// <param name="skipAuthorization"> Если <c> true </c>, то пропустить авторизацию </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает список идентификаторов (id) друзей
 		/// пользователя, если параметр fields не
@@ -36,7 +38,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/friends.get
 		/// </remarks>
-		Task<VkCollection<User>> GetAsync(FriendsGetParams @params, bool skipAuthorization = false);
+		Task<VkCollection<User>> GetAsync(FriendsGetParams @params, bool skipAuthorization = false, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список идентификаторов друзей текущего пользователя, которые
@@ -50,12 +52,13 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/friends.getAppUsers
 		/// </remarks>
-		Task<ReadOnlyCollection<long>> GetAppUsersAsync();
+		Task<ReadOnlyCollection<long>> GetAppUsersAsync(CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список идентификаторов друзей пользователя, находящихся на сайте.
 		/// </summary>
 		/// <param name="params"> Входные параметры выборки. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает список идентификаторов (id) друзей,
 		/// находящихся сейчас на сайте, у
@@ -67,12 +70,13 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/friends.getOnline
 		/// </remarks>
-		Task<FriendOnline> GetOnlineAsync(FriendsGetOnlineParams @params);
+		Task<FriendOnline> GetOnlineAsync(FriendsGetOnlineParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список идентификаторов общих друзей между парой пользователей.
 		/// </summary>
 		/// <param name="params"> Входные параметры выборки. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает список идентификаторов (id) общих друзей
 		/// между пользователями с
@@ -81,7 +85,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/friends.getMutual
 		/// </remarks>
-		Task<ReadOnlyCollection<MutualFriend>> GetMutualAsync(FriendsGetMutualParams @params);
+		Task<ReadOnlyCollection<MutualFriend>> GetMutualAsync(FriendsGetMutualParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает информацию о том, добавлен ли текущий пользователь в друзья у
@@ -102,6 +106,7 @@ namespace VkNet.Abstractions
 		/// 0 – поле sign возвращать не нужно. флаг, может принимать значения 1 или 0
 		/// (Флаг, может принимать значения 1 или 0).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает массив объектов status, каждый из которых
 		/// содержит следующие поля:
@@ -121,7 +126,7 @@ namespace VkNet.Abstractions
 		/// Страница документации ВКонтакте http://vk.com/dev/friends.areFriends
 		/// </remarks>
 		Task<ReadOnlyCollection<AreFriendsResult>> AreFriendsAsync([NotNull] IEnumerable<long> userIds
-																	, bool? needSign = null);
+																	, bool? needSign = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Создает новый список друзей у текущего пользователя.
@@ -136,6 +141,7 @@ namespace VkNet.Abstractions
 		/// положительных чисел, разделенных запятыми (Список положительных чисел,
 		/// разделенных запятыми).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает идентификатор (list_id) созданного списка
 		/// друзей.
@@ -143,7 +149,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/friends.addList
 		/// </remarks>
-		Task<long> AddListAsync(string name, IEnumerable<long> userIds);
+		Task<long> AddListAsync(string name, IEnumerable<long> userIds, CancellationToken token = default);
 
 		/// <summary>
 		/// Удаляет существующий список друзей текущего пользователя.
@@ -153,13 +159,14 @@ namespace VkNet.Abstractions
 		/// обязательный
 		/// параметр (Положительное число, обязательный параметр).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает 1.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/friends.deleteList
 		/// </remarks>
-		Task<bool> DeleteListAsync(long listId);
+		Task<bool> DeleteListAsync(long listId, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список меток друзей текущего пользователя.
@@ -174,6 +181,7 @@ namespace VkNet.Abstractions
 		/// принимать
 		/// значения 1 или 0 (Флаг, может принимать значения 1 или 0).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает список объектов, каждый из которых
 		/// содержит следующие поля:
@@ -183,17 +191,17 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/friends.getLists
 		/// </remarks>
-		Task<VkCollection<FriendList>> GetListsAsync(long? userId = null, bool? returnSystem = null);
+		Task<VkCollection<FriendList>> GetListsAsync(long? userId = null, bool? returnSystem = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Редактирует существующий список друзей текущего пользователя.
 		/// </summary>
-		/// <param name="name"> Название списка друзей. строка (Строка). </param>
 		/// <param name="listId">
 		/// Идентификатор списка друзей. положительное число, обязательный параметр
 		/// (Положительное число,
 		/// обязательный параметр).
 		/// </param>
+		/// <param name="name"> Название списка друзей. строка (Строка). </param>
 		/// <param name="userIds">
 		/// Идентификаторы пользователей, включенных в список. список положительных чисел,
 		/// разделенных
@@ -212,6 +220,7 @@ namespace VkNet.Abstractions
 		/// положительных чисел, разделенных
 		/// запятыми).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает 1.
 		/// </returns>
@@ -219,18 +228,19 @@ namespace VkNet.Abstractions
 		/// Страница документации ВКонтакте http://vk.com/dev/friends.editList
 		/// </remarks>
 		Task<bool> EditListAsync(long listId, string name = null, IEnumerable<long> userIds = null, IEnumerable<long> addUserIds = null,
-								IEnumerable<long> deleteUserIds = null);
+								IEnumerable<long> deleteUserIds = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Отмечает все входящие заявки на добавление в друзья как просмотренные.
 		/// </summary>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает 1.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/friends.deleteAllRequests
 		/// </remarks>
-		Task<bool> DeleteAllRequestsAsync();
+		Task<bool> DeleteAllRequestsAsync(CancellationToken token = default);
 
 		/// <summary>
 		/// Одобряет или создает заявку на добавление в друзья.
@@ -250,14 +260,7 @@ namespace VkNet.Abstractions
 		/// Флаг, может принимать значения 1 или 0 (Флаг, может
 		/// принимать значения 1 или 0).
 		/// </param>
-		/// <param name="captchaSid">
-		/// Id капчи (только если для вызова метода необходимо
-		/// ввести капчу)
-		/// </param>
-		/// <param name="captchaKey">
-		/// Текст капчи (только если для вызова метода необходимо
-		/// ввести капчу)
-		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает одно из следующих значений:
 		/// 1 — заявка на добавление данного пользователя в друзья отправлена;
@@ -267,12 +270,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/friends.add
 		/// </remarks>
-		Task<AddFriendStatus> AddAsync(long userId, string text = "", bool? follow = null);
-
-		/// <inheritdoc cref="IFriendsCategoryAsync.AddAsync(long,string,bool?)" />
-		[Obsolete(ObsoleteText.CaptchaNeeded, true)]
-		Task<AddFriendStatus> AddAsync(long userId, string text = "", bool? follow = null, long? captchaSid = null,
-										string captchaKey = null);
+		Task<AddFriendStatus> AddAsync(long userId, string text = "", bool? follow = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Удаляет пользователя из списка друзей или отклоняет заявку в друзья.
@@ -283,6 +281,7 @@ namespace VkNet.Abstractions
 		/// необходимо отклонить. положительное число, обязательный параметр (Положительное
 		/// число, обязательный параметр).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения начиная с версии 5.28 возвращается объект с полями:
 		/// success — удалось успешно удалить друга
@@ -299,7 +298,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/friends.delete
 		/// </remarks>
-		Task<FriendsDeleteResult> DeleteAsync(long userId);
+		Task<FriendsDeleteResult> DeleteAsync(long userId, CancellationToken token = default);
 
 		/// <summary>
 		/// Редактирует списки друзей для выбранного друга.
@@ -315,13 +314,14 @@ namespace VkNet.Abstractions
 		/// положительных чисел,
 		/// разделенных запятыми (Список положительных чисел, разделенных запятыми).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает 1.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/friends.edit
 		/// </remarks>
-		Task<bool> EditAsync(long userId, IEnumerable<long> listIds);
+		Task<bool> EditAsync(long userId, IEnumerable<long> listIds, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список идентификаторов недавно добавленных друзей текущего
@@ -334,6 +334,7 @@ namespace VkNet.Abstractions
 		/// умолчанию 100, максимальное значение
 		/// 1000).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает отсортированный в антихронологическом
 		/// порядке список идентификаторов (id)
@@ -342,13 +343,14 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/friends.getRecent
 		/// </remarks>
-		Task<ReadOnlyCollection<long>> GetRecentAsync(long? count = null);
+		Task<ReadOnlyCollection<long>> GetRecentAsync(long? count = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает информацию о полученных или отправленных заявках на добавление в
 		/// друзья для текущего пользователя.
 		/// </summary>
 		/// <param name="params"> Входные параметры выборки. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Если не установлен параметр need_mutual, то в случае успеха возвращает
 		/// отсортированный в антихронологическом
@@ -366,13 +368,14 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/friends.getRequests
 		/// </remarks>
-		Task<GetRequestsResult> GetRequestsAsync(FriendsGetRequestsParams @params);
+		Task<GetRequestsResult> GetRequestsAsync(FriendsGetRequestsParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает информацию о полученных или отправленных заявках на добавление в
 		/// друзья для текущего пользователя.
 		/// </summary>
 		/// <param name="params"> Входные параметры выборки. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Если не установлен параметр need_mutual, то в случае успеха возвращает
 		/// отсортированный в антихронологическом
@@ -390,7 +393,8 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/friends.getRequests
 		/// </remarks>
-		Task<VkCollection<FriendsGetRequestsResult>> GetRequestsExtendedAsync(FriendsGetRequestsParams @params);
+		Task<VkCollection<FriendsGetRequestsResult>> GetRequestsExtendedAsync(FriendsGetRequestsParams @params,
+																			CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список профилей пользователей, которые могут быть друзьями текущего
@@ -428,6 +432,7 @@ namespace VkNet.Abstractions
 		/// предложный – abl. По умолчанию nom.
 		/// строка (строка).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает список объектов пользователей с
 		/// дополнительным полем found_with для
@@ -439,7 +444,7 @@ namespace VkNet.Abstractions
 		/// Страница документации ВКонтакте http://vk.com/dev/friends.getSuggestions
 		/// </remarks>
 		Task<VkCollection<User>> GetSuggestionsAsync(FriendsFilter filter = null, long? count = null, long? offset = null,
-													UsersFields fields = null, NameCase nameCase = null);
+													UsersFields fields = null, NameCase nameCase = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список друзей пользователя, у которых завалидированные или указанные
@@ -463,6 +468,7 @@ namespace VkNet.Abstractions
 		/// строк, разделенных через запятую
 		/// (Список строк, разделенных через запятую).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает список объектов пользователей с
 		/// дополнительным полем phone, в котором
@@ -471,18 +477,20 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/friends.getByPhones
 		/// </remarks>
-		Task<ReadOnlyCollection<User>> GetByPhonesAsync(IEnumerable<string> phones, ProfileFields fields);
+		Task<ReadOnlyCollection<User>> GetByPhonesAsync(IEnumerable<string> phones, ProfileFields fields,
+														CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет искать по списку друзей пользователей.
 		/// </summary>
 		/// <param name="params"> Входные параметры выборки. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения метод  возвращает список объектов пользователей.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/friends.search
 		/// </remarks>
-		Task<VkCollection<User>> SearchAsync(FriendsSearchParams @params);
+		Task<VkCollection<User>> SearchAsync(FriendsSearchParams @params, CancellationToken token = default);
 	}
 }

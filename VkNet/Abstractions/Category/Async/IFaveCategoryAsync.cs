@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using VkNet.Enums.SafetyEnums;
-using VkNet.Model;
 using VkNet.Model.Fave;
 using VkNet.Model.RequestParams.Fave;
 using VkNet.Utils;

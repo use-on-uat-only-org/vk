@@ -47,10 +47,10 @@ namespace VkNet.Abstractions
 		/// <inheritdoc cref="IFriendsCategoryAsync.DeleteAllRequestsAsync" />
 		bool DeleteAllRequests();
 
-		/// <inheritdoc cref="IFriendsCategoryAsync.AddAsync(long, string, bool?)" />
+		/// <inheritdoc cref="IFriendsCategoryAsync.AddAsync" />
 		AddFriendStatus Add(long userId, string text = "", bool? follow = null);
 
-		/// <inheritdoc cref="IFriendsCategoryAsync.AddAsync(long, string, bool?,long?,string)" />
+		/// <inheritdoc cref="IFriendsCategoryAsync.AddAsync" />
 		[Obsolete(ObsoleteText.CaptchaNeeded, true)]
 		AddFriendStatus Add(long userId, string text = "", bool? follow = null, long? captchaSid = null, string captchaKey = null);
 
