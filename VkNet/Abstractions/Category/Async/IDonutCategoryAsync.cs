@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 using VkNet.Enums.Filters;
 using VkNet.Model;
@@ -19,13 +20,14 @@ namespace VkNet.Abstractions
 		/// Идентификатор сообщества — владельца записи. Указывается
 		/// со знаком «минус».
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Если пользователь является доном, возвращается 1. Если нет, возвращается 0.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте https://vk.com/dev/donut.isDon
 		/// </remarks>
-		public Task<bool> IsDonAsync(long ownerId);
+		public Task<bool> IsDonAsync(long ownerId, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список донов, которые подписаны на определенные сообщества, из числа друзей пользователя.
@@ -44,13 +46,15 @@ namespace VkNet.Abstractions
 		/// Список дополнительных полей профилей, которые необходимо вернуть (через запятую).
 		/// См. https://vk.com/dev/objects/user.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает объект, содержащий число друзей в поле count и массив объектов пользователей в поле items.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте https://vk.com/dev/donut.getFriends
 		/// </remarks>
-		public Task<VkCollection<User>> GetFriendsAsync(long ownerId, ulong offset, byte count, UsersFields fields);
+		public Task<VkCollection<User>> GetFriendsAsync(long ownerId, ulong offset, byte count, UsersFields fields,
+														CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает информацию о подписке VK Donut.
@@ -59,13 +63,14 @@ namespace VkNet.Abstractions
 		/// Идентификатор сообщества — владельца записи. Указывается
 		/// со знаком «минус».
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает результат выполнения метода.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте https://vk.com/dev/donut.getSubscription
 		/// </remarks>
-		public Task<Subscription> GetSubscriptionAsync(long ownerId);
+		public Task<Subscription> GetSubscriptionAsync(long ownerId, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает информацию о подписке VK Donut.
@@ -80,12 +85,14 @@ namespace VkNet.Abstractions
 		/// <param name="count">
 		/// Соличество подписок, информацию о которых необходимо вернуть.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает результат выполнения метода.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте https://vk.com/dev/donut.getSubscriptions
 		/// </remarks>
-		public Task<SubscriptionsInfo> GetSubscriptionsAsync(UsersFields fields, ulong offset, byte count);
+		public Task<SubscriptionsInfo> GetSubscriptionsAsync(UsersFields fields, ulong offset, byte count,
+															CancellationToken token = default);
 	}
 }
