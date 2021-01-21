@@ -1,6 +1,5 @@
-﻿using System.Threading.Tasks;
-using VkNet.Model;
-using VkNet.Model.RequestParams;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using VkNet.Model.RequestParams.Auth;
 using VkNet.Model.Results.Auth;
 
@@ -19,19 +18,20 @@ namespace VkNet.Abstractions
 		/// (Строка, обязательный
 		/// параметр).
 		/// </param>
-		/// <param name="clientId">
-		/// Идентификатор Вашего приложения. целое число (Целое
-		/// число).
-		/// </param>
 		/// <param name="clientSecret">
 		/// Секретный ключ приложения, доступный в разделе редактирования приложения.
 		/// строка,
 		/// обязательный параметр (Строка, обязательный параметр).
 		/// </param>
+		/// <param name="clientId">
+		/// Идентификатор Вашего приложения. целое число (Целое
+		/// число).
+		/// </param>
 		/// <param name="authByPhone">
 		/// Флаг, может принимать значения 1 или 0 (Флаг, может
 		/// принимать значения 1 или 0).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае, если номер пользователя является правильным, будет возвращён
 		/// <c> true </c>.
@@ -39,44 +39,48 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/auth.checkPhone
 		/// </remarks>
-		Task<bool> CheckPhoneAsync(string phone, string clientSecret, long? clientId = null, bool? authByPhone = null);
+		Task<bool> CheckPhoneAsync(string phone, string clientSecret, long? clientId = null, bool? authByPhone = null,
+									CancellationToken token = default);
 
 		/// <summary>
 		/// Регистрирует нового пользователя по номеру телефона.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает результат выполнения метода.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте https://vk.com/dev/auth.signup
 		/// </remarks>
-		Task<string> SignupAsync(AuthSignupParams @params);
+		Task<string> SignupAsync(AuthSignupParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Завершает регистрацию нового пользователя, начатую методом auth.signup, по
 		/// коду, полученному через SMS.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает результат выполнения метода.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте https://vk.com/dev/auth.confirm
 		/// </remarks>
-		Task<AuthConfirmResult> ConfirmAsync(AuthConfirmParams @params);
+		Task<AuthConfirmResult> ConfirmAsync(AuthConfirmParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет восстановить доступ к аккаунту, используя код, полученный через SMS.
 		/// </summary>
 		/// <param name="phone"> Номер телефона пользователя. </param>
 		/// <param name="lastName"> Фамилия пользователя. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает результат выполнения метода.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте https://vk.com/dev/auth.restore
 		/// </remarks>
-		Task<string> RestoreAsync(string phone, string lastName);
+		Task<string> RestoreAsync(string phone, string lastName, CancellationToken token = default);
 	}
 }
