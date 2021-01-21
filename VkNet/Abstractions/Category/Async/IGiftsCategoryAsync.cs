@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using VkNet.Model;
 using VkNet.Utils;
 
@@ -21,6 +22,7 @@ namespace VkNet.Abstractions
 		/// Смещение, необходимое для выборки определенного
 		/// подмножества подарков.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успешного вступления в группу метод вернёт <c> true </c>, иначе
 		/// <c> false </c>.
@@ -45,6 +47,6 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/gifts.get
 		/// </remarks>
-		Task<VkCollection<GiftItem>> GetAsync(long? userId = null, int? count = null, int? offset = null);
+		Task<VkCollection<GiftItem>> GetAsync(long? userId = null, int? count = null, int? offset = null, CancellationToken token = default);
 	}
 }
