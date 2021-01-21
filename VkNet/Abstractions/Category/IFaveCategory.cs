@@ -14,7 +14,7 @@ namespace VkNet.Abstractions
 		/// <inheritdoc cref = "IFaveCategoryAsync.AddArticleAsync"/>
 		bool AddArticle(Uri url, string @ref = null, string trackCode = null, string source = null);
 
-		/// <inheritdoc cref = "IFaveCategoryAsync.AddLinkAsync(Uri)"/>
+		/// <inheritdoc cref = "IFaveCategoryAsync.AddLinkAsync(System.Uri,System.Threading.CancellationToken)"/>
 		bool AddLink(Uri link);
 
 		/// <inheritdoc cref = "IFaveCategoryAsync.AddPageAsync"/>
