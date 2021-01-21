@@ -26,7 +26,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/fave.addLink
 		/// </remarks>
-		[Obsolete(ObsoleteText.Obsolete + "Используйте вместо него Task<bool> AddLinkAsync(Uri link)")]
+		[Obsolete(ObsoleteText.Obsolete + "Используйте вместо него Task<bool> AddLinkAsync(Uri link)", true)]
 		Task<bool> AddLinkAsync(Uri link, string text);
 
 		/// <summary>
@@ -48,7 +48,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/fave.getUsers
 		/// </remarks>
-		[Obsolete(ObsoleteText.Obsolete)]
+		[Obsolete(ObsoleteText.Obsolete, true)]
 		Task<VkCollection<User>> GetUsersAsync(int? count = null, int? offset = null);
 
 		/// <summary>
@@ -76,7 +76,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/fave.getPhotos
 		/// </remarks>
-		[Obsolete(ObsoleteText.Obsolete)]
+		[Obsolete(ObsoleteText.Obsolete, true)]
 		Task<VkCollection<Photo>> GetPhotosAsync(int? count = null, int? offset = null, bool? photoSizes = null);
 
 		/// <summary>
@@ -104,7 +104,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/fave.getPosts
 		/// </remarks>
-		[Obsolete(ObsoleteText.Obsolete)]
+		[Obsolete(ObsoleteText.Obsolete, true)]
 		Task<WallGetObject> GetPostsAsync(int? count = null, int? offset = null, bool extended = false);
 
 		/// <summary>
@@ -131,7 +131,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/fave.getVideos
 		/// </remarks>
-		[Obsolete(ObsoleteText.Obsolete)]
+		[Obsolete(ObsoleteText.Obsolete, true)]
 		Task<FaveVideoEx> GetVideosAsync(int? count = null, int? offset = null, bool extended = false);
 
 		/// <summary>
@@ -155,7 +155,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/fave.getLinks
 		/// </remarks>
-		[Obsolete(ObsoleteText.Obsolete)]
+		[Obsolete(ObsoleteText.Obsolete, true)]
 		Task<VkCollection<ExternalLink>> GetLinksAsync(int? count = null, int? offset = null);
 
 		/// <summary>
@@ -172,7 +172,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/fave.addUser
 		/// </remarks>
-		[Obsolete(ObsoleteText.Obsolete)]
+		[Obsolete(ObsoleteText.Obsolete, true)]
 		Task<bool> AddUserAsync(long userId);
 
 		/// <summary>
@@ -189,7 +189,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/fave.removeUser
 		/// </remarks>
-		[Obsolete(ObsoleteText.Obsolete)]
+		[Obsolete(ObsoleteText.Obsolete, true)]
 		Task<bool> RemoveUserAsync(long userId);
 
 		/// <summary>
@@ -206,7 +206,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/fave.addGroup
 		/// </remarks>
-		[Obsolete(ObsoleteText.Obsolete)]
+		[Obsolete(ObsoleteText.Obsolete, true)]
 		Task<bool> AddGroupAsync(long groupId);
 
 		/// <summary>
@@ -223,7 +223,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/fave.removeGroup
 		/// </remarks>
-		[Obsolete(ObsoleteText.Obsolete)]
+		[Obsolete(ObsoleteText.Obsolete, true)]
 		Task<bool> RemoveGroupAsync(long groupId);
 
 		/// <summary>
@@ -251,7 +251,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/fave.getMarketItems
 		/// </remarks>
-		[Obsolete(ObsoleteText.Obsolete)]
+		[Obsolete(ObsoleteText.Obsolete, true)]
 		Task<VkCollection<Market>> GetMarketItemsAsync(ulong? count = null, ulong? offset = null, bool? extended = null);
 	}
 }
