@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 using VkNet.Enums;
 using VkNet.Model;
@@ -23,14 +24,15 @@ namespace VkNet.Abstractions
 		/// alpha-2
 		/// http://vk.com/dev/country_codes
 		/// </param>
-		/// <param name="offset">
-		/// Отступ, необходимый для выбора определенного подмножества
-		/// стран.
-		/// </param>
 		/// <param name="count">
 		/// Количество стран, которое необходимо вернуть (по умолчанию 100, максимальное
 		/// значение 1000).
 		/// </param>
+		/// <param name="offset">
+		/// Отступ, необходимый для выбора определенного подмножества
+		/// стран.
+		/// </param>
+		/// <param name="token"></param>
 		/// <remarks>
 		/// Если не заданы параметры needAll и code, то возвращается краткий список стран,
 		/// расположенных наиболее близко к
@@ -41,7 +43,7 @@ namespace VkNet.Abstractions
 		/// Страница документации ВКонтакте http://vk.com/dev/database.getCountries
 		/// </remarks>
 		Task<VkCollection<Country>> GetCountriesAsync(bool? needAll = null, IEnumerable<Iso3166> codes = null, int? count = null,
-													int? offset = null);
+													int? offset = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список регионов.
@@ -53,36 +55,41 @@ namespace VkNet.Abstractions
 		/// Отступ, необходимый для выбора определенного подмножества
 		/// регионов.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns> Список регионов. </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/database.getRegions
 		/// </remarks>
-		Task<VkCollection<Region>> GetRegionsAsync(int countryId, string query = "", int? count = null, int? offset = null);
+		Task<VkCollection<Region>> GetRegionsAsync(int countryId, string query = "", int? count = null, int? offset = null,
+													CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает информацию об улицах по их идентификаторам.
 		/// </summary>
 		/// <param name="streetIds"> Идентификаторы улиц. </param>
+		/// <param name="token"></param>
 		/// <returns> Информация об улицах. </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/database.getStreetsById
 		/// </remarks>
-		Task<ReadOnlyCollection<Street>> GetStreetsByIdAsync(params int[] streetIds);
+		Task<ReadOnlyCollection<Street>> GetStreetsByIdAsync(int[] streetIds, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает информацию о странах по их идентификаторам.
 		/// </summary>
 		/// <param name="countryIds"> Идентификаторы стран. </param>
+		/// <param name="token"></param>
 		/// <returns> Информация о странах. </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/database.getCountriesById
 		/// </remarks>
-		Task<ReadOnlyCollection<Country>> GetCountriesByIdAsync(params int[] countryIds);
+		Task<ReadOnlyCollection<Country>> GetCountriesByIdAsync(int[] countryIds, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список городов.
 		/// </summary>
 		/// <param name="getCitiesParams"> Параметры запроса database.getCities </param>
+		/// <param name="token"></param>
 		/// <returns> Cписок городов </returns>
 		/// <remarks>
 		/// Возвращает коллекцию городов, каждый из которых содержит поля City.Id
@@ -97,19 +104,20 @@ namespace VkNet.Abstractions
 		/// релевантны поисковому запросу.
 		/// Страница документации ВКонтакте http://vk.com/dev/database.getCities
 		/// </remarks>
-		Task<VkCollection<City>> GetCitiesAsync(GetCitiesParams getCitiesParams);
+		Task<VkCollection<City>> GetCitiesAsync(GetCitiesParams getCitiesParams, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает информацию о городах по их идентификаторам.
 		/// </summary>
 		/// <param name="cityIds"> Идентификаторы городов. </param>
+		/// <param name="token"></param>
 		/// <returns> Информация о городах. </returns>
 		/// <remarks>
 		/// Идентификаторы городов могут быть получены с помощью методов UsersCategory.Get,
 		/// places.getById, places.search, places.getCheckins.
 		/// Страница документации ВКонтакте http://vk.com/dev/database.getCitiesById
 		/// </remarks>
-		Task<ReadOnlyCollection<City>> GetCitiesByIdAsync(params int[] cityIds);
+		Task<ReadOnlyCollection<City>> GetCitiesByIdAsync(int[] cityIds, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список высших учебных заведений.
@@ -123,17 +131,18 @@ namespace VkNet.Abstractions
 		/// необходимо вернуть.
 		/// </param>
 		/// <param name="query"> Строка поискового запроса. Например, СПБ. </param>
+		/// <param name="count"> Количество учебных заведений, которое необходимо вернуть. </param>
 		/// <param name="offset">
 		/// Отступ, необходимый для получения определенного
 		/// подмножества учебных заведений.
 		/// </param>
-		/// <param name="count"> Количество учебных заведений, которое необходимо вернуть. </param>
+		/// <param name="token"></param>
 		/// <returns> Список высших учебных заведений, удовлетворяющих заданным условиям. </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/database.getUniversities
 		/// </remarks>
 		Task<VkCollection<University>> GetUniversitiesAsync(int countryId, int cityId, string query = "", int? count = null,
-															int? offset = null);
+															int? offset = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список школ.
@@ -145,11 +154,13 @@ namespace VkNet.Abstractions
 		/// подмножества школ.
 		/// </param>
 		/// <param name="count"> Количество школ, которое необходимо вернуть. </param>
+		/// <param name="token"></param>
 		/// <returns> Cписок школ. </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/database.getSchools
 		/// </remarks>
-		Task<VkCollection<School>> GetSchoolsAsync(int cityId, string query = "", int? offset = null, int? count = null);
+		Task<VkCollection<School>> GetSchoolsAsync(int cityId, string query = "", int? offset = null, int? count = null,
+													CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список факультетов.
@@ -163,11 +174,12 @@ namespace VkNet.Abstractions
 		/// подмножества факультетов.
 		/// </param>
 		/// <param name="offset"> Количество факультетов которое необходимо получить. </param>
+		/// <param name="token"></param>
 		/// <returns> Cписок факультетов. </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/database.getFaculties
 		/// </remarks>
-		Task<VkCollection<Faculty>> GetFacultiesAsync(long universityId, int? count = null, int? offset = null);
+		Task<VkCollection<Faculty>> GetFacultiesAsync(long universityId, int? count = null, int? offset = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список классов, характерных для школ определенной страны.
@@ -176,6 +188,7 @@ namespace VkNet.Abstractions
 		/// Идентификатор страны, доступные классы в которой
 		/// необходимо вернуть.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает массив, каждый элемент которого представляет собой пару:
 		/// идентификатор и строковое обозначение
@@ -184,7 +197,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/database.getSchoolClasses
 		/// </remarks>
-		Task<ReadOnlyCollection<SchoolClass>> GetSchoolClassesAsync(long countryId);
+		Task<ReadOnlyCollection<SchoolClass>> GetSchoolClassesAsync(long countryId, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список кафедр университета по указанному факультету.
@@ -198,6 +211,7 @@ namespace VkNet.Abstractions
 		/// Отступ, необходимый для получения определенного
 		/// подмножества кафедр.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает массив, каждый элемент которого представляет собой пару:
 		/// идентификатор и строковое обозначение класса.
@@ -205,7 +219,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/database.getChairs
 		/// </remarks>
-		Task<VkCollection<Chair>> GetChairsAsync(long facultyId, int? count = null, int? offset = null);
+		Task<VkCollection<Chair>> GetChairsAsync(long facultyId, int? count = null, int? offset = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает информацию об одной или нескольких станциях метро по их идентификаторам.
@@ -213,6 +227,7 @@ namespace VkNet.Abstractions
 		/// <param name = "stationIds">
 		/// Список идентификаторов станций метро список положительных чисел, разделенных запятыми
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает массив объектов, описывающих станции метро.
 		/// Каждый объект содержит следующие поля:
@@ -223,7 +238,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/database.getMetroStationsById
 		/// </remarks>
-		Task<ReadOnlyCollection<MetroStation>> GetMetroStationsByIdAsync(IEnumerable<ulong> stationIds);
+		Task<ReadOnlyCollection<MetroStation>> GetMetroStationsByIdAsync(IEnumerable<ulong> stationIds, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список станций метро
@@ -240,6 +255,7 @@ namespace VkNet.Abstractions
 		/// <param name = "extended">
 		/// Флаг, может принимать значения 1 или 0, по умолчанию
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает объект, содержащий число результатов в поле count и массив объектов, описывающих станции метро, в поле items.
 		/// Каждый объект содержит следующие поля:
@@ -250,6 +266,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/database.getMetroStations
 		/// </remarks>
-		Task<VkCollection<MetroStation>> GetMetroStationsAsync(ulong cityId, int? offset = null, int? count = null, bool extended = false);
+		Task<VkCollection<MetroStation>> GetMetroStationsAsync(ulong cityId, int? offset = null, int? count = null, bool extended = false,
+																CancellationToken token = default);
 	}
 }
