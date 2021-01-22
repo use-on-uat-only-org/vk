@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using VkNet.Model;
 using VkNet.Model.Results.Notifications;
@@ -49,6 +50,7 @@ namespace VkNet.Abstractions
 		/// пользователя. Если параметр не
 		/// задан, то он считается равным текущему времени. целое число
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает объект, содержащий поля:
 		/// items
@@ -250,16 +252,14 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/notifications.get
 		/// </remarks>
-		Task<IEnumerable<NotificationGetResult>> GetAsync(ulong? count = null
-														, string startFrom = null
-														, IEnumerable<string> filters = null
-														, long? startTime = null
-														, long? endTime = null);
+		Task<IEnumerable<NotificationGetResult>> GetAsync(ulong? count = null, string startFrom = null, IEnumerable<string> filters = null,
+														long? startTime = null, long? endTime = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Сбрасывает счетчик непросмотренных оповещений об ответах других пользователей
 		/// на записи текущего пользователя.
 		/// </summary>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Если у пользователя присутствовали непросмотренные ответы, возвращает 1 в
 		/// случае успешного завершения. В противном
@@ -268,6 +268,6 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/notifications.markAsViewed
 		/// </remarks>
-		Task<bool> MarkAsViewedAsync();
+		Task<bool> MarkAsViewedAsync(CancellationToken token = default);
 	}
 }
