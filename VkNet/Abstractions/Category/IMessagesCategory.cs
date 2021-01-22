@@ -63,10 +63,10 @@ namespace VkNet.Abstractions
 		/// <inheritdoc cref="IMessagesCategoryAsync.GetLastActivityAsync"/>
 		LastActivity GetLastActivity(long userId);
 
-		/// <inheritdoc cref="IMessagesCategoryAsync.GetChatAsync(long, ProfileFields,NameCase)"/>
+		/// <inheritdoc cref="IMessagesCategoryAsync.GetChatAsync(long,VkNet.Enums.Filters.ProfileFields,VkNet.Enums.SafetyEnums.NameCase,System.Threading.CancellationToken)"/>
 		Chat GetChat(long chatId, ProfileFields fields = null, NameCase nameCase = null);
 
-		/// <inheritdoc cref="IMessagesCategoryAsync.GetChatAsync(long, ProfileFields, NameCase)"/>
+		/// <inheritdoc cref="IMessagesCategoryAsync.GetChatAsync(long,VkNet.Enums.Filters.ProfileFields,VkNet.Enums.SafetyEnums.NameCase,System.Threading.CancellationToken)"/>
 		ReadOnlyCollection<Chat> GetChat(IEnumerable<long> chatIds, ProfileFields fields = null, NameCase nameCase = null);
 
 		/// <inheritdoc cref="IMessagesCategoryAsync.GetChatPreviewAsync"/>
