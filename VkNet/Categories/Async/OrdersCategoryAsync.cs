@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
@@ -10,51 +11,55 @@ namespace VkNet.Categories
     public partial class OrdersCategory
     {
         /// <inheritdoc/>
-        public Task<bool> CancelSubscriptionAsync(ulong userId, ulong subscriptionId, bool? pendingCancel = null)
+        public Task<bool> CancelSubscriptionAsync(ulong userId, ulong subscriptionId, bool? pendingCancel = null,
+												CancellationToken token = default)
         {
-            return TypeHelper.TryInvokeMethodAsync(() => CancelSubscription(userId, subscriptionId, pendingCancel));
+            return TypeHelper.TryInvokeMethodAsync(() => CancelSubscription(userId, subscriptionId, pendingCancel), token);
         }
 
         /// <inheritdoc/>
-        public Task<OrderState> ChangeStateAsync(ulong orderId, OrderStateAction action, ulong? appOrderId = null, bool? testMode = null)
+        public Task<OrderState> ChangeStateAsync(ulong orderId, OrderStateAction action, ulong? appOrderId = null, bool? testMode = null,
+												CancellationToken token = default)
         {
-            return TypeHelper.TryInvokeMethodAsync(() => ChangeState(orderId, action, appOrderId, testMode));
+            return TypeHelper.TryInvokeMethodAsync(() => ChangeState(orderId, action, appOrderId, testMode), token);
         }
 
         /// <inheritdoc/>
-        public Task<IEnumerable<Order>> GetAsync(ulong? offset = null, ulong? count = null, bool? testMode = null)
+        public Task<IEnumerable<Order>> GetAsync(ulong? offset = null, ulong? count = null, bool? testMode = null,
+												CancellationToken token = default)
         {
-            return TypeHelper.TryInvokeMethodAsync(() => Get(offset, count, testMode));
+            return TypeHelper.TryInvokeMethodAsync(() => Get(offset, count, testMode), token);
         }
 
         /// <inheritdoc/>
-        public Task<IEnumerable<VotesAmount>> GetAmountAsync(ulong userId, IEnumerable<string> votes)
+        public Task<IEnumerable<VotesAmount>> GetAmountAsync(ulong userId, IEnumerable<string> votes, CancellationToken token = default)
         {
-            return TypeHelper.TryInvokeMethodAsync(() => GetAmount(userId, votes));
+            return TypeHelper.TryInvokeMethodAsync(() => GetAmount(userId, votes), token);
         }
 
         /// <inheritdoc/>
-        public Task<IEnumerable<Order>> GetByIdAsync(IEnumerable<ulong> orderIds = null, bool? testMode = null)
+        public Task<IEnumerable<Order>> GetByIdAsync(IEnumerable<ulong> orderIds = null, bool? testMode = null,
+													CancellationToken token = default)
         {
-            return TypeHelper.TryInvokeMethodAsync(() => GetById(orderIds, testMode));
+            return TypeHelper.TryInvokeMethodAsync(() => GetById(orderIds, testMode), token);
         }
 
         /// <inheritdoc/>
-        public Task<SubscriptionItem> GetUserSubscriptionByIdAsync(ulong userId, ulong subscriptionId)
+        public Task<SubscriptionItem> GetUserSubscriptionByIdAsync(ulong userId, ulong subscriptionId, CancellationToken token = default)
         {
-            return TypeHelper.TryInvokeMethodAsync(() => GetUserSubscriptionById(userId, subscriptionId));
+            return TypeHelper.TryInvokeMethodAsync(() => GetUserSubscriptionById(userId, subscriptionId), token);
         }
 
         /// <inheritdoc/>
-        public Task<IEnumerable<SubscriptionItem>> GetUserSubscriptionsAsync(ulong userId)
+        public Task<IEnumerable<SubscriptionItem>> GetUserSubscriptionsAsync(ulong userId, CancellationToken token = default)
         {
-            return TypeHelper.TryInvokeMethodAsync(() => GetUserSubscriptions(userId));
+            return TypeHelper.TryInvokeMethodAsync(() => GetUserSubscriptions(userId), token);
         }
 
         /// <inheritdoc/>
-        public Task<bool> UpdateSubscriptionAsync(ulong userId, ulong subscriptionId, ulong price)
+        public Task<bool> UpdateSubscriptionAsync(ulong userId, ulong subscriptionId, ulong price, CancellationToken token = default)
         {
-            return TypeHelper.TryInvokeMethodAsync(() => UpdateSubscription(userId, subscriptionId, price));
+            return TypeHelper.TryInvokeMethodAsync(() => UpdateSubscription(userId, subscriptionId, price), token);
         }
     }
 }
