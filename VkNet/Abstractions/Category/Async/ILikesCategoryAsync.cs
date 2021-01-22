@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
@@ -20,6 +21,7 @@ namespace VkNet.Abstractions
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
 		/// <param name="skipAuthorization"> Если <c> true </c>, то пропустить авторизацию </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает список идентификаторов пользователей или сообществ, которые добавили
 		/// заданный объект в свой список Мне
@@ -28,7 +30,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/likes.getList
 		/// </remarks>
-		Task<VkCollection<long>> GetListAsync(LikesGetListParams @params, bool skipAuthorization = false);
+		Task<VkCollection<long>> GetListAsync(LikesGetListParams @params, bool skipAuthorization = false, CancellationToken token = default);
 
 		/// <summary>
 		/// Получает список идентификаторов пользователей или сообществ, которые добавили
@@ -36,6 +38,7 @@ namespace VkNet.Abstractions
 		/// нравится.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает список пользователей и сообществ, которые добавили заданный объект в
 		/// свой список Мне нравится.
@@ -43,12 +46,13 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/likes.getList
 		/// </remarks>
-		Task<UserOrGroup> GetListExAsync(LikesGetListParams @params);
+		Task<UserOrGroup> GetListExAsync(LikesGetListParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Добавляет указанный объект в список Мне нравится текущего пользователя.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успеха возвращает объект с полем likes, в котором находится текущее
 		/// количество пользователей, которые
@@ -57,7 +61,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/likes.add
 		/// </remarks>
-		Task<long> AddAsync(LikesAddParams @params);
+		Task<long> AddAsync(LikesAddParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Удаляет указанный объект из списка Мне нравится текущего пользователя
@@ -71,8 +75,7 @@ namespace VkNet.Abstractions
 		/// Идентификатор владельца объекта. целое число, по умолчанию идентификатор
 		/// текущего пользователя
 		/// </param>
-		/// <param name="captchaSid"> Идентификатор капчи </param>
-		/// <param name="captchaKey"> Текст, который ввел пользователь </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успеха возвращает объект с полем likes, в котором находится текущее
 		/// количество пользователей, которые
@@ -81,11 +84,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/likes.delete
 		/// </remarks>
-		Task<long> DeleteAsync(LikeObjectType type, long itemId, long? ownerId = null);
-
-		/// <inheritdoc cref="ILikesCategoryAsync.DeleteAsync(LikeObjectType,long,long?)" />
-		[Obsolete(ObsoleteText.CaptchaNeeded, true)]
-		Task<long> DeleteAsync(LikeObjectType type, long itemId, long? ownerId = null, long? captchaSid = null, string captchaKey = null);
+		Task<long> DeleteAsync(LikeObjectType type, long itemId, long? ownerId = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Проверяет, находится ли объект в списке Мне нравится заданного пользователя.
@@ -108,6 +107,7 @@ namespace VkNet.Abstractions
 		/// идентификатору текущего пользователя. целое число, по умолчанию идентификатор
 		/// текущего пользователя
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успеха возвращает одно из следующих числовых значений:
 		/// false — указанный Like-объект не входит в список Мне нравится пользователя с
@@ -118,6 +118,6 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/likes.isLiked
 		/// </remarks>
-		Task<bool> IsLikedAsync(LikeObjectType type, long itemId, long? userId = null, long? ownerId = null);
+		Task<bool> IsLikedAsync(LikeObjectType type, long itemId, long? userId = null, long? ownerId = null, CancellationToken token = default);
 	}
 }

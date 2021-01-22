@@ -1,8 +1,7 @@
-using System;
+using System.Threading;
 using System.Threading.Tasks;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
-using VkNet.Model.RequestParams;
 using VkNet.Model.RequestParams.Likes;
 using VkNet.Utils;
 
@@ -12,48 +11,35 @@ namespace VkNet.Categories
 	public partial class LikesCategory
 	{
 		/// <inheritdoc />
-		public Task<VkCollection<long>> GetListAsync(LikesGetListParams @params, bool skipAuthorization = false)
+		public Task<VkCollection<long>> GetListAsync(LikesGetListParams @params, bool skipAuthorization = false,
+													CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				GetList(@params, skipAuthorization));
+			return TypeHelper.TryInvokeMethodAsync(() => GetList(@params, skipAuthorization), token);
 		}
 
 		/// <inheritdoc />
-		public Task<UserOrGroup> GetListExAsync(LikesGetListParams @params)
+		public Task<UserOrGroup> GetListExAsync(LikesGetListParams @params, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => GetListEx(@params: @params));
+			return TypeHelper.TryInvokeMethodAsync(() => GetListEx(@params: @params), token);
 		}
 
 		/// <inheritdoc />
-		public Task<long> AddAsync(LikesAddParams @params)
+		public Task<long> AddAsync(LikesAddParams @params, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => Add(@params: @params));
+			return TypeHelper.TryInvokeMethodAsync(() => Add(@params: @params), token);
 		}
 
 		/// <inheritdoc />
-		public Task<long> DeleteAsync(LikeObjectType type, long itemId, long? ownerId = null)
+		public Task<long> DeleteAsync(LikeObjectType type, long itemId, long? ownerId = null, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				Delete(type, itemId, ownerId));
+			return TypeHelper.TryInvokeMethodAsync(() => Delete(type, itemId, ownerId), token);
 		}
 
 		/// <inheritdoc />
-		[Obsolete(ObsoleteText.CaptchaNeeded, true)]
-		public Task<long> DeleteAsync(LikeObjectType type
-									, long itemId
-									, long? ownerId = null
-									, long? captchaSid = null
-									, string captchaKey = null)
+		public Task<bool> IsLikedAsync(LikeObjectType type, long itemId, long? userId = null, long? ownerId = null,
+										CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				Delete(type, itemId, ownerId, captchaSid, captchaKey));
-		}
-
-		/// <inheritdoc />
-		public Task<bool> IsLikedAsync(LikeObjectType type, long itemId, long? userId = null, long? ownerId = null)
-		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				IsLiked(out var _, type, itemId, userId, ownerId));
+			return TypeHelper.TryInvokeMethodAsync(() => IsLiked(out var _, type, itemId, userId, ownerId), token);
 		}
 	}
 }

@@ -19,10 +19,10 @@ namespace VkNet.Abstractions
 		/// <inheritdoc cref="ILikesCategoryAsync.AddAsync" />
 		long Add(LikesAddParams @params);
 
-		/// <inheritdoc cref="ILikesCategoryAsync.DeleteAsync(LikeObjectType, long, long?)" />
+		/// <inheritdoc cref="ILikesCategoryAsync.DeleteAsync" />
 		long Delete(LikeObjectType type, long itemId, long? ownerId = null);
 
-		/// <inheritdoc cref="ILikesCategoryAsync.DeleteAsync(LikeObjectType, long, long?,long?,string)" />
+		/// <inheritdoc cref="ILikesCategoryAsync.DeleteAsync" />
 		[Obsolete(ObsoleteText.CaptchaNeeded, true)]
 		long Delete(LikeObjectType type, long itemId, long? ownerId = null, long? captchaSid = null, string captchaKey = null);
 
