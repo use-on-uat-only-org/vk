@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using VkNet.Enums.Filters;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
-using VkNet.Model.RequestParams;
 using VkNet.Model.RequestParams.NewsFeed;
 using VkNet.Model.Results.NewsFeed;
 using VkNet.Utils;
@@ -21,38 +21,41 @@ namespace VkNet.Abstractions
 		/// пользователя.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает результат выполнения метода.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/newsfeed.get
 		/// </remarks>
-		Task<NewsFeed> GetAsync(NewsFeedGetParams @params);
+		Task<NewsFeed> GetAsync(NewsFeedGetParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Получает список новостей, рекомендованных пользователю.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает результат выполнения метода.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/newsfeed.getRecommended
 		/// </remarks>
-		Task<NewsFeed> GetRecommendedAsync(NewsFeedGetRecommendedParams @params);
+		Task<NewsFeed> GetRecommendedAsync(NewsFeedGetRecommendedParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает данные, необходимые для показа раздела комментариев в новостях
 		/// пользователя.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает результат выполнения метода.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/newsfeed.getComments
 		/// </remarks>
-		Task<NewsFeed> GetCommentsAsync(NewsFeedGetCommentsParams @params);
+		Task<NewsFeed> GetCommentsAsync(NewsFeedGetCommentsParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список записей пользователей на своих стенах, в которых упоминается
@@ -79,27 +82,26 @@ namespace VkNet.Abstractions
 		/// равен 20.
 		/// Максимальное значение параметра 50.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает результат выполнения метода.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/newsfeed.getMentions
 		/// </remarks>
-		Task<VkCollection<Mention>> GetMentionsAsync(long? ownerId = null
-													, DateTime? startTime = null
-													, DateTime? endTime = null
-													, long? offset = null
-													, long? count = null);
+		Task<VkCollection<Mention>> GetMentionsAsync(long? ownerId = null, DateTime? startTime = null, DateTime? endTime = null,
+													long? offset = null, long? count = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список пользователей и групп, которые текущий пользователь скрыл из
 		/// ленты новостей.
 		/// </summary>
+		/// <param name="token"></param>
 		/// <returns> Возвращает результат выполнения метода. </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/newsfeed.getBanned
 		/// </remarks>
-		Task<NewsBannedList> GetBannedAsync();
+		Task<NewsBannedList> GetBannedAsync(CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список пользователей и групп, которые текущий пользователь скрыл из
@@ -110,13 +112,14 @@ namespace VkNet.Abstractions
 		/// вернуть.
 		/// </param>
 		/// <param name="nameCase"> Падеж для склонения имени и фамилии пользователя. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает результат выполнения метода.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/newsfeed.getBanned
 		/// </remarks>
-		Task<NewsBannedExList> GetBannedExAsync(UsersFields fields = null, NameCase nameCase = null);
+		Task<NewsBannedExList> GetBannedExAsync(UsersFields fields = null, NameCase nameCase = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Запрещает показывать новости от заданных пользователей и групп в ленте новостей
@@ -132,13 +135,14 @@ namespace VkNet.Abstractions
 		/// которых необходимо
 		/// скрыть из ленты новостей текущего пользователя.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает результат выполнения метода.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/newsfeed.addBan
 		/// </remarks>
-		Task<bool> AddBanAsync(IEnumerable<long> userIds, IEnumerable<long> groupIds);
+		Task<bool> AddBanAsync(IEnumerable<long> userIds, IEnumerable<long> groupIds, CancellationToken token = default);
 
 		/// <summary>
 		/// Разрешает показывать новости от заданных пользователей и групп в ленте новостей
@@ -152,13 +156,14 @@ namespace VkNet.Abstractions
 		/// Идентификаторы сообществ, новости от которых необходимо
 		/// вернуть в ленту.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает результат выполнения метода.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/newsfeed.deleteBan
 		/// </remarks>
-		Task<bool> DeleteBanAsync(IEnumerable<long> userIds, IEnumerable<long> groupIds);
+		Task<bool> DeleteBanAsync(IEnumerable<long> userIds, IEnumerable<long> groupIds, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет скрыть объект из ленты новостей.
@@ -169,13 +174,14 @@ namespace VkNet.Abstractions
 		/// сообщество).
 		/// </param>
 		/// <param name="itemId"> Идентификатор объекта. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает результат выполнения метода.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/newsfeed.ignoreItem
 		/// </remarks>
-		Task<bool> IgnoreItemAsync(NewsObjectTypes type, long ownerId, long itemId);
+		Task<bool> IgnoreItemAsync(NewsObjectTypes type, long ownerId, long itemId, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет вернуть ранее скрытый объект в ленту новостей.
@@ -187,23 +193,25 @@ namespace VkNet.Abstractions
 		/// сообщество).
 		/// </param>
 		/// <param name="itemId"> Идентификатор объекта. </param>
+		/// <param name="token"></param>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/newsfeed.unignoreItem
 		/// </remarks>
-		Task<bool> UnignoreItemAsync(NewsObjectTypes type, long ownerId, long itemId);
+		Task<bool> UnignoreItemAsync(NewsObjectTypes type, long ownerId, long itemId, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает результаты поиска по статусам. Новости возвращаются в порядке от
 		/// более новых к более старым.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает результат выполнения метода.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/newsfeed.search
 		/// </remarks>
-		Task<NewsSearchResult> SearchAsync(NewsFeedSearchParams @params);
+		Task<NewsSearchResult> SearchAsync(NewsFeedSearchParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает пользовательские списки новостей.
@@ -213,13 +221,15 @@ namespace VkNet.Abstractions
 		/// <c> true </c> — вернуть дополнительную информацию о списке (значения source_ids
 		/// и no_reposts).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Метод возвращает список объектов пользовательских списков.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/newsfeed.getLists
 		/// </remarks>
-		Task<VkCollection<NewsUserListItem>> GetListsAsync(IEnumerable<long> listIds, bool? extended = null);
+		Task<VkCollection<NewsUserListItem>> GetListsAsync(IEnumerable<long> listIds, bool? extended = null,
+															CancellationToken token = default);
 
 		/// <summary>
 		/// Метод позволяет создавать или редактировать пользовательские списки для
@@ -239,25 +249,28 @@ namespace VkNet.Abstractions
 		/// Нужно ли отображать копии постов в списке (
 		/// <c> true </c> — не нужно).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает Идентификатор списка.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/newsfeed.saveList
 		/// </remarks>
-		Task<long> SaveListAsync(string title, IEnumerable<long> sourceIds, long? listId = null, bool? noReposts = null);
+		Task<long> SaveListAsync(string title, IEnumerable<long> sourceIds, long? listId = null, bool? noReposts = null,
+								CancellationToken token = default);
 
 		/// <summary>
 		/// Метод позволяет удалить пользовательский список новостей
 		/// </summary>
 		/// <param name="listId"> Числовой идентификатор списка . </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/newsfeed.deleteList
 		/// </remarks>
-		Task<bool> DeleteListAsync(long listId);
+		Task<bool> DeleteListAsync(long listId, CancellationToken token = default);
 
 		/// <summary>
 		/// Отписывает текущего пользователя от комментариев к заданному объекту.
@@ -266,15 +279,16 @@ namespace VkNet.Abstractions
 		/// Тип объекта, от комментариев к которому необходимо
 		/// отписаться.
 		/// </param>
-		/// <param name="ownerId"> Идентификатор владельца объекта. </param>
 		/// <param name="itemId"> Идентификатор объекта. </param>
+		/// <param name="ownerId"> Идентификатор владельца объекта. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/newsfeed.unsubscribe
 		/// </remarks>
-		Task<bool> UnsubscribeAsync(CommentObjectType type, long itemId, long? ownerId = null);
+		Task<bool> UnsubscribeAsync(CommentObjectType type, long itemId, long? ownerId = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает сообщества и пользователей, на которые текущему пользователю
@@ -302,15 +316,14 @@ namespace VkNet.Abstractions
 		/// сообществ. список слов, разделенных через запятую (Список слов, разделенных
 		/// через запятую).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Список объектов пользователей и групп.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/newsfeed.getSuggestedSources
 		/// </remarks>
-		Task<NewsSuggestions> GetSuggestedSourcesAsync(long? offset = null
-														, long? count = null
-														, bool? shuffle = null
-														, UsersFields fields = null);
+		Task<NewsSuggestions> GetSuggestedSourcesAsync(long? offset = null, long? count = null, bool? shuffle = null,
+														UsersFields fields = null, CancellationToken token = default);
 	}
 }
