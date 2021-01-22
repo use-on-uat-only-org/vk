@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 using VkNet.Enums.Filters;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
 using VkNet.Model.Group;
-using VkNet.Model.RequestParams;
 using VkNet.Model.RequestParams.Groups;
 using VkNet.Model.Results.Groups;
 using VkNet.Utils;
@@ -31,13 +31,14 @@ namespace VkNet.Abstractions
 		/// Возможно пойду. 0 —
 		/// Точно пойду. По умолчанию 0. строка (Строка).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успешного вступления метод вернёт 1.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.join
 		/// </remarks>
-		Task<bool> JoinAsync(long? groupId, bool? notSure = null);
+		Task<bool> JoinAsync(long? groupId, bool? notSure = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет покинуть сообщество.
@@ -47,19 +48,21 @@ namespace VkNet.Abstractions
 		/// (Положительное число,
 		/// обязательный параметр).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.leave
 		/// </remarks>
-		Task<bool> LeaveAsync(long groupId);
+		Task<bool> LeaveAsync(long groupId, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список сообществ указанного пользователя.
 		/// </summary>
 		/// <param name="params"> Входные параметры выборки. </param>
 		/// <param name="skipAuthorization"> Если <c> true </c>, то пропустить авторизацию </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает список идентификаторов сообществ id, в
 		/// которых состоит пользователь user_id.
@@ -68,7 +71,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.get
 		/// </remarks>
-		Task<VkCollection<Group>> GetAsync(GroupsGetParams @params, bool skipAuthorization = false);
+		Task<VkCollection<Group>> GetAsync(GroupsGetParams @params, bool skipAuthorization = false, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает информацию о заданном сообществе или о нескольких сообществах.
@@ -94,6 +97,7 @@ namespace VkNet.Abstractions
 		/// разделенных через запятую).
 		/// </param>
 		/// <param name="skipAuthorization"> Если <c> true </c>, то пропустить авторизацию </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает массив объектов group.
 		/// </returns>
@@ -101,13 +105,14 @@ namespace VkNet.Abstractions
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.getById
 		/// </remarks>
 		Task<ReadOnlyCollection<Group>> GetByIdAsync(IEnumerable<string> groupIds, string groupId, GroupsFields fields,
-													bool skipAuthorization = false);
+													bool skipAuthorization = false, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список участников сообщества.
 		/// </summary>
 		/// <param name="params"> Входные параметры выборки. </param>
 		/// <param name="skipAuthorization"> Если <c> true </c>, то пропустить авторизацию </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает общее количество участников сообщества count и список
 		/// идентификаторов пользователей items.
@@ -122,7 +127,8 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.getMembers
 		/// </remarks>
-		Task<VkCollection<User>> GetMembersAsync(GroupsGetMembersParams @params, bool skipAuthorization = false);
+		Task<VkCollection<User>> GetMembersAsync(GroupsGetMembersParams @params, bool skipAuthorization = false,
+												CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает информацию о том, является ли пользователь участником сообщества.
@@ -147,6 +153,7 @@ namespace VkNet.Abstractions
 		/// (Флаг, может принимать значения 1 или 0).
 		/// </param>
 		/// <param name="skipAuthorization"> Если <c> true </c>, то пропустить авторизацию </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// возвращает <c> true </c> в случае, если пользователь с идентификатором user_id
 		/// является участником сообщества с
@@ -166,34 +173,36 @@ namespace VkNet.Abstractions
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.isMember
 		/// </remarks>
 		Task<ReadOnlyCollection<GroupMember>> IsMemberAsync(string groupId, long? userId, IEnumerable<long> userIds, bool? extended,
-															bool skipAuthorization = false);
+															bool skipAuthorization = false, CancellationToken token = default);
 
 		/// <summary>
 		/// Осуществляет поиск сообществ по заданной подстроке.
 		/// </summary>
 		/// <param name="params"> Входные параметры выборки. </param>
 		/// <param name="skipAuthorization"> Если <c> true </c>, то пропустить авторизацию </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает список объектов group.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.search
 		/// </remarks>
-		Task<VkCollection<Group>> SearchAsync(GroupsSearchParams @params, bool skipAuthorization = false);
+		Task<VkCollection<Group>> SearchAsync(GroupsSearchParams @params, bool skipAuthorization = false,
+											CancellationToken token = default);
 
 		/// <summary>
 		/// Данный метод возвращает список приглашений в сообщества и встречи текущего
 		/// пользователя.
 		/// </summary>
-		/// <param name="offset">
-		/// Смещение, необходимое для выборки определённого подмножества приглашений.
-		/// положительное число
-		/// (Положительное число).
-		/// </param>
 		/// <param name="count">
 		/// Количество приглашений, которое необходимо вернуть. положительное число, по
 		/// умолчанию 20
 		/// (Положительное число, по умолчанию 20).
+		/// </param>
+		/// <param name="offset">
+		/// Смещение, необходимое для выборки определённого подмножества приглашений.
+		/// положительное число
+		/// (Положительное число).
 		/// </param>
 		/// <param name="extended">
 		/// 1 — вернуть дополнительную информацию о пользователях, отправлявших
@@ -201,6 +210,7 @@ namespace VkNet.Abstractions
 		/// 0. флаг, может принимать значения 1 или 0 (Флаг, может принимать значения 1 или
 		/// 0).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает список объектов сообществ с
 		/// дополнительным полем invited_by, содержащим
@@ -212,19 +222,20 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.getInvites
 		/// </remarks>
-		Task<VkCollection<Group>> GetInvitesAsync(long? count, long? offset, bool? extended = null);
+		Task<VkCollection<Group>> GetInvitesAsync(long? count, long? offset, bool? extended = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Добавляет пользователя в черный список сообщества.
 		/// </summary>
 		/// <param name="params"> Входные параметры выборки. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.banUser
 		/// </remarks>
-		Task<bool> BanUserAsync(GroupsBanUserParams @params);
+		Task<bool> BanUserAsync(GroupsBanUserParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список забаненных пользователей в сообществе.
@@ -258,6 +269,7 @@ namespace VkNet.Abstractions
 		/// разделенных через запятую).
 		/// </param>
 		/// <param name="ownerId"> целое число </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает список объектов user с дополнительным
 		/// полем ban_info.
@@ -268,11 +280,11 @@ namespace VkNet.Abstractions
 		/// Unixtime.
 		/// положительное число reason причина добавления пользователя в черный список.
 		/// Возможные значения:
-		/// 0 — другое (по умолчанию);
+		/// 0 — другое (по умолчанию);
 		/// 1 — спам;
-		/// 2 — оскорбление участников;
-		/// 3 — нецензурные выражения;
-		/// 4 — сообщения не по теме.
+		/// 2 — оскорбление участников;
+		/// 3 — нецензурные выражения;
+		/// 4 — сообщения не по теме.
 		/// int (числовое значение) comment текст комментария.
 		/// строка end_date дата окончания блокировки (0 — блокировка вечная).
 		/// int (числовое значение).
@@ -281,7 +293,8 @@ namespace VkNet.Abstractions
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.getBanned
 		/// </remarks>
 		Task<VkCollection<GetBannedResult>> GetBannedAsync(long groupId, long? offset = null, long? count = null,
-															GroupsFields fields = null, long? ownerId = null);
+															GroupsFields fields = null, long? ownerId = null,
+															CancellationToken token = default);
 
 		/// <summary>
 		/// Убирает пользователя из черного списка сообщества.
@@ -291,39 +304,26 @@ namespace VkNet.Abstractions
 		/// Идентификатор пользователя, которого нужно убрать из
 		/// черного списка
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns> После успешного выполнения возвращает <c> true </c>. </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.unbanUser
 		/// </remarks>
-		[Obsolete(ObsoleteText.UnbanUserAsync, true)]
-		Task<bool> UnbanUserAsync(long groupId, long userId);
-
-		/// <summary>
-		/// Убирает пользователя из черного списка сообщества.
-		/// </summary>
-		/// <param name="groupId"> Идентификатор сообщества </param>
-		/// <param name="userId">
-		/// Идентификатор пользователя, которого нужно убрать из
-		/// черного списка
-		/// </param>
-		/// <returns> После успешного выполнения возвращает <c> true </c>. </returns>
-		/// <remarks>
-		/// Страница документации ВКонтакте http://vk.com/dev/groups.unbanUser
-		/// </remarks>
-		Task<bool> UnbanAsync(long groupId, long userId);
+		Task<bool> UnbanAsync(long groupId, long userId, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет назначить/разжаловать руководителя в сообществе или изменить уровень
 		/// его полномочий.
 		/// </summary>
 		/// <param name="params"> Входные параметры выборки. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.editManager
 		/// </remarks>
-		Task<bool> EditManagerAsync(GroupsEditManagerParams @params);
+		Task<bool> EditManagerAsync(GroupsEditManagerParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет получать данные, необходимые для отображения страницы редактирования
@@ -334,6 +334,7 @@ namespace VkNet.Abstractions
 		/// число, обязательный
 		/// параметр (Положительное число, обязательный параметр).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успешного выполнения метод вернет объект, содержащий данные
 		/// сообщества, которые позволят отобразить форму
@@ -342,19 +343,20 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.getSettings
 		/// </remarks>
-		Task<GroupsEditParams> GetSettingsAsync(ulong groupId);
+		Task<GroupsEditParams> GetSettingsAsync(ulong groupId, CancellationToken token = default);
 
 		/// <summary>
 		/// Редактирует сообщество.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успеха возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.edit
 		/// </remarks>
-		Task<bool> EditAsync(GroupsEditParams @params);
+		Task<bool> EditAsync(GroupsEditParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет редактировать информацию о месте группы.
@@ -367,13 +369,14 @@ namespace VkNet.Abstractions
 		/// отредактировать.
 		/// </param>
 		/// <param name="place"> Местоположение. </param>
+		/// <param name="token"></param>
 		/// <remarks>
 		/// Для того, чтобы воспользоваться этим методом Вы должны быть администратором
 		/// группы.
 		/// Страница документации ВКонтакте https://vk.com/dev/groups.editPlace
 		/// </remarks>
 		[Obsolete(ObsoleteText.Obsolete)]
-		Task<bool> EditPlaceAsync(long groupId, Place place = null);
+		Task<bool> EditPlaceAsync(long groupId, Place place = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список пользователей, которые были приглашены в группу.
@@ -409,12 +412,13 @@ namespace VkNet.Abstractions
 		/// предложный – abl. По умолчанию nom.
 		/// строка (Строка).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns> </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.getInvitedUsers
 		/// </remarks>
 		Task<VkCollection<User>> GetInvitedUsersAsync(long groupId, long? offset = null, long? count = null, UsersFields fields = null,
-													NameCase nameCase = null);
+													NameCase nameCase = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет приглашать друзей в группу.
@@ -429,19 +433,14 @@ namespace VkNet.Abstractions
 		/// положительное число,
 		/// обязательный параметр (Положительное число, обязательный параметр).
 		/// </param>
-		/// <param name="captchaSid"> Идентификатор капчи </param>
-		/// <param name="captchaKey"> Код введенный пользователем </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.invite
 		/// </remarks>
-		Task<bool> InviteAsync(long groupId, long userId);
-
-		/// <inheritdoc cref="IGroupsCategoryAsync.InviteAsync(long,long)" />
-		[Obsolete(ObsoleteText.CaptchaNeeded, true)]
-		Task<bool> InviteAsync(long groupId, long userId, long? captchaSid, string captchaKey);
+		Task<bool> InviteAsync(long groupId, long userId, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет добавлять ссылки в сообщество.
@@ -456,6 +455,7 @@ namespace VkNet.Abstractions
 		/// обязательный параметр).
 		/// </param>
 		/// <param name="text"> Текст ссылки строка (Строка). </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успешного выполнения возвращает объект со следующими полями:
 		/// id — идентификатор ссылки;
@@ -469,7 +469,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.addLink
 		/// </remarks>
-		Task<ExternalLink> AddLinkAsync(long groupId, Uri link, string text);
+		Task<ExternalLink> AddLinkAsync(long groupId, Uri link, string text, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет удалить ссылки из сообщества.
@@ -484,13 +484,14 @@ namespace VkNet.Abstractions
 		/// обязательный параметр
 		/// (Положительное число, обязательный параметр).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успешного выполнения метод возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.deleteLink
 		/// </remarks>
-		Task<bool> DeleteLinkAsync(long groupId, ulong linkId);
+		Task<bool> DeleteLinkAsync(long groupId, ulong linkId, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет редактировать ссылки в сообществе.
@@ -506,13 +507,14 @@ namespace VkNet.Abstractions
 		/// число, обязательный параметр).
 		/// </param>
 		/// <param name="text"> Новое описание ссылки строка (Строка). </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успешного редактирования ссылки метод возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.editLink
 		/// </remarks>
-		Task<bool> EditLinkAsync(long groupId, ulong linkId, string text);
+		Task<bool> EditLinkAsync(long groupId, ulong linkId, string text, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет менять местоположение ссылки в списке.
@@ -532,13 +534,14 @@ namespace VkNet.Abstractions
 		/// – если ссылку нужно
 		/// разместить в начале списка. положительное число (Положительное число).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успешного выполнение метод возвращает 1.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.reorderLink
 		/// </remarks>
-		Task<bool> ReorderLinkAsync(long groupId, long linkId, long? after);
+		Task<bool> ReorderLinkAsync(long groupId, long linkId, long? after, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет исключить пользователя из группы или отклонить заявку на вступление.
@@ -548,13 +551,14 @@ namespace VkNet.Abstractions
 		/// пользователя.
 		/// </param>
 		/// <param name="userId"> Идентификатор пользователя, которого нужно исключить. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте https://vk.com/dev/groups.removeUser
 		/// </remarks>
-		Task<bool> RemoveUserAsync(long groupId, long userId);
+		Task<bool> RemoveUserAsync(long groupId, long userId, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет одобрить заявку в группу от пользователя.
@@ -567,13 +571,14 @@ namespace VkNet.Abstractions
 		/// Идентификатор пользователя, заявку которого необходимо
 		/// одобрить.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте https://vk.com/dev/groups.approveRequest
 		/// </remarks>
-		Task<bool> ApproveRequestAsync(long groupId, long userId);
+		Task<bool> ApproveRequestAsync(long groupId, long userId, CancellationToken token = default);
 
 		/// <summary>
 		/// Создает новое сообщество.
@@ -605,6 +610,7 @@ namespace VkNet.Abstractions
 		/// Категория публичной страницы (только для type =
 		/// public).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает идентификатор созданного сообщества.
 		/// </returns>
@@ -612,7 +618,7 @@ namespace VkNet.Abstractions
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.create
 		/// </remarks>
 		Task<Group> CreateAsync(string title, string description = null, GroupType type = null, GroupSubType? subtype = null,
-								uint? publicCategory = null);
+								uint? publicCategory = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список заявок на вступление в сообщество.
@@ -647,6 +653,7 @@ namespace VkNet.Abstractions
 		/// запятую (Список строк, разделенных
 		/// через запятую).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает список идентификаторов пользователей, отправивших заявки на
 		/// вступление в сообщество.
@@ -656,7 +663,8 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.getRequests
 		/// </remarks>
-		Task<VkCollection<User>> GetRequestsAsync(long groupId, long? offset = null, long? count = null, UsersFields fields = null);
+		Task<VkCollection<User>> GetRequestsAsync(long groupId, long? offset = null, long? count = null, UsersFields fields = null,
+												CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список сообществ выбранной категории каталога.
@@ -671,6 +679,7 @@ namespace VkNet.Abstractions
 		/// положительное число,
 		/// максимальное значение 99 (Положительное число, максимальное значение 99).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает список объектов сообществ в соответствии с выбранной категорией
 		/// каталога.
@@ -678,7 +687,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.getCatalog
 		/// </remarks>
-		Task<VkCollection<Group>> GetCatalogAsync(ulong? categoryId = null, ulong? subcategoryId = null);
+		Task<VkCollection<Group>> GetCatalogAsync(ulong? categoryId = null, ulong? subcategoryId = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список категорий для каталога сообществ.
@@ -696,6 +705,7 @@ namespace VkNet.Abstractions
 		/// доступен начиная с версии 5.37 (Флаг, может
 		/// принимать значения 1 или 0, по умолчанию 0, доступен начиная с версии 5.37).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает поле enabled (0 — каталог недоступен для
 		/// пользователя, 1 — каталог доступен),
@@ -714,7 +724,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.getCatalogInfo
 		/// </remarks>
-		Task<GroupsCatalogInfo> GetCatalogInfoAsync(bool? extended = null, bool? subcategories = null);
+		Task<GroupsCatalogInfo> GetCatalogInfoAsync(bool? extended = null, bool? subcategories = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Добавляет сервер для Callback API в сообщество.
@@ -723,6 +733,7 @@ namespace VkNet.Abstractions
 		/// <param name="url"> URL сервера. </param>
 		/// <param name="title"> Название сервера. </param>
 		/// <param name="secretKey"> Секретный ключ. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает идентификатор добавленного сервера в поле
 		/// server_id (integer).
@@ -730,20 +741,22 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.addCallbackServer
 		/// </remarks>
-		Task<long> AddCallbackServerAsync(ulong groupId, string url, string title, string secretKey = null);
+		Task<long> AddCallbackServerAsync(ulong groupId, string url, string title, string secretKey = null,
+										CancellationToken token = default);
 
 		/// <summary>
 		/// Удаляет сервер для Callback API из сообщества.
 		/// </summary>
 		/// <param name="groupId"> Идентификатор сообщества. </param>
 		/// <param name="serverId"> идентификатор сервера, который нужно удалить. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.deleteCallbackServer
 		/// </remarks>
-		Task<bool> DeleteCallbackServerAsync(ulong groupId, ulong serverId);
+		Task<bool> DeleteCallbackServerAsync(ulong groupId, ulong serverId, CancellationToken token = default);
 
 		/// <summary>
 		/// Редактирует данные сервера для Callback API в сообществе.
@@ -756,19 +769,22 @@ namespace VkNet.Abstractions
 		/// <param name="url"> URL сервера. </param>
 		/// <param name="title"> Название сервера. </param>
 		/// <param name="secretKey"> Секретный ключ. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.editCallbackServer
 		/// </remarks>
-		Task<bool> EditCallbackServerAsync(ulong groupId, ulong serverId, string url, string title, string secretKey);
+		Task<bool> EditCallbackServerAsync(ulong groupId, ulong serverId, string url, string title, string secretKey,
+											CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет получить строку, необходимую для подтверждения адреса сервера в
 		/// Callback API.
 		/// </summary>
 		/// <param name="groupId"> Идентификатор сообщества. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает строку, которую необходимо использовать в качестве ответа на
 		/// уведомление с типом "confirmation"
@@ -780,7 +796,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.editCallbackServer
 		/// </remarks>
-		Task<string> GetCallbackConfirmationCodeAsync(ulong groupId);
+		Task<string> GetCallbackConfirmationCodeAsync(ulong groupId, CancellationToken token = default);
 
 		/// <summary>
 		/// Получает информацию о серверах для Callback API в сообществе.
@@ -790,6 +806,7 @@ namespace VkNet.Abstractions
 		/// Идентификаторы серверов, данные о которых нужно получить.
 		/// По умолчанию возвращаются все серверы.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает число серверов в поле count (integer) и массив объектов items с
 		/// данными о серверах.
@@ -797,18 +814,20 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.getCallbackServers
 		/// </remarks>
-		Task<VkCollection<CallbackServerItem>> GetCallbackServersAsync(ulong groupId, IEnumerable<ulong> serverIds = null);
+		Task<VkCollection<CallbackServerItem>> GetCallbackServersAsync(ulong groupId, IEnumerable<ulong> serverIds = null,
+																		CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет получить настройки уведомлений Callback API для сообщества.
 		/// </summary>
 		/// <param name="groupId"> Идентификатор сообщества. </param>
 		/// <param name="serverId"> Идентификатор сервера. </param>
+		/// <param name="token"></param>
 		/// <returns> </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.getCallbackSettings
 		/// </remarks>
-		Task<CallbackSettings> GetCallbackSettingsAsync(ulong groupId, ulong serverId);
+		Task<CallbackSettings> GetCallbackSettingsAsync(ulong groupId, ulong serverId, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет задать настройки уведомлений о событиях в Callback API.
@@ -817,13 +836,14 @@ namespace VkNet.Abstractions
 		/// Параметры настройки уведомлений о событиях в Callback
 		/// API.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.setCallbackSettings
 		/// </remarks>
-		Task<bool> SetCallbackSettingsAsync(CallbackServerParams @params);
+		Task<bool> SetCallbackSettingsAsync(CallbackServerParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает данные для подключения к Bots Longpoll API.
@@ -831,6 +851,7 @@ namespace VkNet.Abstractions
 		/// <param name="groupId">
 		/// Идентификатор сообщества. положительное число, обязательный параметр
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает объект, который содержит следующие поля:
 		/// key (string) — ключ;
@@ -840,7 +861,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.getLongPollServer
 		/// </remarks>
-		Task<LongPollServerResponse> GetLongPollServerAsync(ulong groupId);
+		Task<LongPollServerResponse> GetLongPollServerAsync(ulong groupId, CancellationToken token = default);
 
 		/// <summary>
 		/// Выключает статус «онлайн» в сообществе.
@@ -848,13 +869,14 @@ namespace VkNet.Abstractions
 		/// <param name="groupId">
 		/// Идентификатор сообщества. положительное число, обязательный параметр
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает 1.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.disableOnline
 		/// </remarks>
-		Task<bool> DisableOnlineAsync(ulong groupId);
+		Task<bool> DisableOnlineAsync(ulong groupId, CancellationToken token = default);
 
 		/// <summary>
 		/// Включает статус «онлайн» в сообществе.
@@ -862,25 +884,27 @@ namespace VkNet.Abstractions
 		/// <param name="groupId">
 		/// Идентификатор сообщества. положительное число, обязательный параметр
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает 1.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.enableOnline
 		/// </remarks>
-		Task<bool> EnableOnlineAsync(ulong groupId);
+		Task<bool> EnableOnlineAsync(ulong groupId, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращаем обновления событий группы
 		/// </summary>
 		/// <param name="params"> Параметры запроса к BotsLongPoll API </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Новые события в группе
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте https://vk.com/dev/bots_longpoll
 		/// </remarks>
-		Task<BotsLongPollHistoryResponse> GetBotsLongPollHistoryAsync(BotsLongPollHistoryParams @params);
+		Task<BotsLongPollHistoryResponse> GetBotsLongPollHistoryAsync(BotsLongPollHistoryParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет добавить адрес в сообщество.
@@ -891,13 +915,14 @@ namespace VkNet.Abstractions
 		/// <param name="params">
 		/// Входные параметры запроса.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Данные о добавленном адресе сообщества
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.addAddress
 		/// </remarks>
-		Task<AddressResult> AddAddressAsync(AddAddressParams @params);
+		Task<AddressResult> AddAddressAsync(AddAddressParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет отредактировать адрес в сообществе.
@@ -908,13 +933,14 @@ namespace VkNet.Abstractions
 		/// <param name="params">
 		/// Входные параметры запроса.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Данные об адресе отредактированного сообщества
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.editAddress
 		/// </remarks>
-		Task<AddressResult> EditAddressAsync(EditAddressParams @params);
+		Task<AddressResult> EditAddressAsync(EditAddressParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет удалить адрес в сообществе.
@@ -925,13 +951,14 @@ namespace VkNet.Abstractions
 		/// <param name="addressId">
 		/// Id адреса положительное число, обязательный параметр
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.deleteAddress
 		/// </remarks>
-		Task<bool> DeleteAddressAsync(ulong groupId, ulong addressId);
+		Task<bool> DeleteAddressAsync(ulong groupId, ulong addressId, CancellationToken token = default);
 
 		/// <summary>
 		/// Получить данные об адресах.
@@ -939,13 +966,14 @@ namespace VkNet.Abstractions
 		/// <param name="params">
 		/// Входные параметры запроса.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Коллекция адресов сообщества
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.getAddresses
 		/// </remarks>
-		Task<VkCollection<AddressResult>> GetAddressesAsync(GetAddressesParams @params);
+		Task<VkCollection<AddressResult>> GetAddressesAsync(GetAddressesParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Получает информацию о статусе «онлайн» в сообществе.
@@ -953,6 +981,7 @@ namespace VkNet.Abstractions
 		/// <param name="groupId">
 		/// Идентификатор сообщества. положительное число, обязательный параметр
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает объект, который содержит поля:
 		/// status — статус сообщества. Возможные значения:
@@ -964,11 +993,12 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.getOnlineStatus
 		/// </remarks>
-		Task<OnlineStatus> GetOnlineStatusAsync(ulong groupId);
+		Task<OnlineStatus> GetOnlineStatusAsync(ulong groupId, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает настройки прав для ключа доступа сообщества.
 		/// </summary>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает объект, который содержит поля:
 		/// mask (integer) — битовая маска ключа доступа;
@@ -980,7 +1010,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.getTokenPermissions
 		/// </remarks>
-		Task<TokenPermissionsResult> GetTokenPermissionsAsync();
+		Task<TokenPermissionsResult> GetTokenPermissionsAsync(CancellationToken token = default);
 
 		/// <summary>
 		/// Задаёт настройки для Bots Long Poll API в сообществе.
@@ -988,13 +1018,14 @@ namespace VkNet.Abstractions
 		/// <param name="params">
 		/// Входные параметры запроса.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает 1.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.setLongPollSettings
 		/// </remarks>
-		Task<bool> SetLongPollSettingsAsync(SetLongPollSettingsParams @params);
+		Task<bool> SetLongPollSettingsAsync(SetLongPollSettingsParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Получает настройки Bots Longpoll API для сообщества.
@@ -1002,6 +1033,7 @@ namespace VkNet.Abstractions
 		/// <param name="groupId">
 		/// Идентификатор сообщества. положительное число, обязательный параметр
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает объект, который содержит следующие поля:
 		/// is_enabled (boolean) — true, если Bots Longpoll включен в сообществе.
@@ -1052,6 +1084,6 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/groups.getLongPollSettings
 		/// </remarks>
-		Task<GetLongPollSettingsResult> GetLongPollSettingsAsync(ulong groupId);
+		Task<GetLongPollSettingsResult> GetLongPollSettingsAsync(ulong groupId, CancellationToken token = default);
 	}
 }
