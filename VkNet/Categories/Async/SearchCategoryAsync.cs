@@ -11,7 +11,7 @@ namespace VkNet.Categories
 	public partial class SearchCategory
 	{
 		/// <inheritdoc />
-		public Task<VkCollection<SearchHintsItem>> GetHintsAsync(SearchGetHintsParams @params, CancellationToken token)
+		public Task<VkCollection<SearchHintsItem>> GetHintsAsync(SearchGetHintsParams @params, CancellationToken token = default)
 		{
 			return TypeHelper.TryInvokeMethodAsync(() => GetHints(@params: @params), token);
 		}

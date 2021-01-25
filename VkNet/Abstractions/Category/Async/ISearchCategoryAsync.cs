@@ -22,6 +22,6 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте https://vk.com/dev/search.getHints
 		/// </remarks>
-		Task<VkCollection<SearchHintsItem>> GetHintsAsync(SearchGetHintsParams @params, CancellationToken token);
+		Task<VkCollection<SearchHintsItem>> GetHintsAsync(SearchGetHintsParams @params, CancellationToken token = default);
 	}
 }
