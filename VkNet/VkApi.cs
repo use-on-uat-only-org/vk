@@ -253,10 +253,10 @@ namespace VkNet
 		}
 
 		/// <inheritdoc />
-		public Task<VkResponse> CallAsync(string methodName, VkParameters parameters, bool skipAuthorization = false)
+		public Task<VkResponse> CallAsync(string methodName, VkParameters parameters, bool skipAuthorization = false,
+										CancellationToken token = default)
 		{
-			var task = TypeHelper.TryInvokeMethodAsync(() =>
-				Call(methodName, parameters, skipAuthorization));
+			var task = TypeHelper.TryInvokeMethodAsync(() => Call(methodName, parameters, skipAuthorization), token);
 
 			task.ConfigureAwait(false);
 
@@ -264,10 +264,10 @@ namespace VkNet
 		}
 
 		/// <inheritdoc />
-		public Task<T> CallAsync<T>(string methodName, VkParameters parameters, bool skipAuthorization = false)
+		public Task<T> CallAsync<T>(string methodName, VkParameters parameters, bool skipAuthorization = false,
+									CancellationToken token = default)
 		{
-			var task = TypeHelper.TryInvokeMethodAsync(() =>
-				Call<T>(methodName, parameters, skipAuthorization));
+			var task = TypeHelper.TryInvokeMethodAsync(() => Call<T>(methodName, parameters, skipAuthorization), token);
 
 			task.ConfigureAwait(false);
 
@@ -331,10 +331,10 @@ namespace VkNet
 
 		/// <inheritdoc />
 		[CanBeNull]
-		public Task<string> InvokeAsync(string methodName, IDictionary<string, string> parameters, bool skipAuthorization = false)
+		public Task<string> InvokeAsync(string methodName, IDictionary<string, string> parameters, bool skipAuthorization = false,
+										CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() =>
-				Invoke(methodName, parameters, skipAuthorization));
+			return TypeHelper.TryInvokeMethodAsync(() => Invoke(methodName, parameters, skipAuthorization), token);
 		}
 
 		/// <inheritdoc />
