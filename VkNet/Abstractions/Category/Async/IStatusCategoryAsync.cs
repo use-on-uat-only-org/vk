@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using VkNet.Model;
 
 namespace VkNet.Abstractions
@@ -20,6 +21,7 @@ namespace VkNet.Abstractions
 		/// число (Положительное
 		/// число).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успеха возвращается статус пользователдя или сообщества.
 		/// </returns>
@@ -28,7 +30,7 @@ namespace VkNet.Abstractions
 		/// содержащей Settings.Status
 		/// Страница документации ВКонтакте http://vk.com/dev/status.get
 		/// </remarks>
-		Task<Status> GetAsync(long userId, long? groupId = null);
+		Task<Status> GetAsync(long userId, long? groupId = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Устанавливает новый статус текущему пользователю.
@@ -43,6 +45,7 @@ namespace VkNet.Abstractions
 		/// статус устанавливается
 		/// текущему пользователю.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает true, если статус был успешно установлен, false в
 		/// противном случае.
@@ -52,6 +55,6 @@ namespace VkNet.Abstractions
 		/// содержащей Settings.Status
 		/// Страница документации ВКонтакте http://vk.com/dev/status.set
 		/// </remarks>
-		Task<bool> SetAsync(string text, long? groupId = null);
+		Task<bool> SetAsync(string text, long? groupId = null, CancellationToken token = default);
 	}
 }
