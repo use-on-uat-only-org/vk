@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 using VkNet.Model;
 using VkNet.Model.RequestParams;
@@ -13,39 +14,41 @@ namespace VkNet.Categories
 	public partial class PrettyCardsCategory
 	{
 		/// <inheritdoc />
-		public Task<PrettyCardsCreateResult> CreateAsync(PrettyCardsCreateParams @params)
+		public Task<PrettyCardsCreateResult> CreateAsync(PrettyCardsCreateParams @params, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>Create(@params: @params));
+			return TypeHelper.TryInvokeMethodAsync(() => Create(@params: @params), token);
 		}
 
 		/// <inheritdoc />
-		public Task<PrettyCardsDeleteResult> DeleteAsync(PrettyCardsDeleteParams @params)
+		public Task<PrettyCardsDeleteResult> DeleteAsync(PrettyCardsDeleteParams @params, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>Delete(@params: @params));
+			return TypeHelper.TryInvokeMethodAsync(() => Delete(@params: @params), token);
 		}
 
 		/// <inheritdoc />
-		public Task<PrettyCardsEditResult> EditAsync(PrettyCardsEditParams @params)
+		public Task<PrettyCardsEditResult> EditAsync(PrettyCardsEditParams @params, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>Edit(@params: @params));
+			return TypeHelper.TryInvokeMethodAsync(() => Edit(@params: @params), token);
 		}
 
 		/// <inheritdoc />
-		public Task<VkCollection<PrettyCardsGetByIdResult>> GetAsync(PrettyCardsGetParams @params)
+		public Task<VkCollection<PrettyCardsGetByIdResult>> GetAsync(PrettyCardsGetParams @params, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>Get(@params: @params));
+			return TypeHelper.TryInvokeMethodAsync(() => Get(@params: @params), token);
 		}
 
 		/// <inheritdoc />
-		public Task<ReadOnlyCollection<PrettyCardsGetByIdResult>> GetByIdAsync(PrettyCardsGetByIdParams @params)
+		public Task<ReadOnlyCollection<PrettyCardsGetByIdResult>> GetByIdAsync(PrettyCardsGetByIdParams @params,
+																				CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>GetById(@params: @params));
+			return TypeHelper.TryInvokeMethodAsync(() => GetById(@params: @params), token);
 		}
 
+		/// <param name="token"></param>
 		/// <inheritdoc />
-		public Task<Uri> GetUploadUrlAsync()
+		public Task<Uri> GetUploadUrlAsync(CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: GetUploadUrl);
+			return TypeHelper.TryInvokeMethodAsync(GetUploadUrl, token);
 		}
 	}
 }
