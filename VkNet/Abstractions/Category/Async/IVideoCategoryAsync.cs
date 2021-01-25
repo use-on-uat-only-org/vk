@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 using VkNet.Enums;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
 using VkNet.Model.Attachments;
-using VkNet.Model.RequestParams;
 using VkNet.Model.RequestParams.Video;
 using VkNet.Utils;
 
@@ -20,6 +20,7 @@ namespace VkNet.Abstractions
 		/// Возвращает информацию о видеозаписях.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает список объектов видеозаписей с
 		/// дополнительным полем comments, содержащим
@@ -48,30 +49,24 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/video.get
 		/// </remarks>
-		Task<VkCollection<Video>> GetAsync(VideoGetParams @params);
+		Task<VkCollection<Video>> GetAsync(VideoGetParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Редактирует данные видеозаписи.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/video.edit
 		/// </remarks>
-		Task<bool> EditAsync(VideoEditParams @params);
+		Task<bool> EditAsync(VideoEditParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Добавляет видеозапись в список пользователя.
 		/// </summary>
-		/// <param name="targetId">
-		/// Идентификатор пользователя или сообщества, в которое нужно добавить видео.
-		/// Обратите внимание, идентификатор сообщества в параметре target_id необходимо
-		/// указывать со знаком "-" — например,
-		/// target_id=-1 соответствует идентификатору сообщества ВКонтакте API (club1)
-		/// целое число (Целое число).
-		/// </param>
 		/// <param name="videoId">
 		/// Идентификатор видеозаписи. положительное число, обязательный параметр
 		/// (Положительное число,
@@ -86,18 +81,27 @@ namespace VkNet.Abstractions
 		/// обязательный параметр (Целое число,
 		/// обязательный параметр).
 		/// </param>
+		/// <param name="targetId">
+		/// Идентификатор пользователя или сообщества, в которое нужно добавить видео.
+		/// Обратите внимание, идентификатор сообщества в параметре target_id необходимо
+		/// указывать со знаком "-" — например,
+		/// target_id=-1 соответствует идентификатору сообщества ВКонтакте API (club1)
+		/// целое число (Целое число).
+		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/video.add
 		/// </remarks>
-		Task<long> AddAsync(long videoId, long ownerId, long? targetId = null);
+		Task<long> AddAsync(long videoId, long ownerId, long? targetId = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает адрес сервера (необходимый для загрузки) и данные видеозаписи.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает объект, который имеет поля upload_url, video_id, title, description,
 		/// owner_id.
@@ -106,7 +110,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/video.save
 		/// </remarks>
-		Task<Video> SaveAsync(VideoSaveParams @params);
+		Task<Video> SaveAsync(VideoSaveParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Удаляет видеозапись со страницы пользователя.
@@ -133,13 +137,14 @@ namespace VkNet.Abstractions
 		/// target_id=-1 соответствует идентификатору сообщества ВКонтакте API (club1)
 		/// целое число (Целое число).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/video.delete
 		/// </remarks>
-		Task<bool> DeleteAsync(long videoId, long? ownerId = null, long? targetId = null);
+		Task<bool> DeleteAsync(long videoId, long? ownerId = null, long? targetId = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Восстанавливает удаленную видеозапись.
@@ -158,18 +163,20 @@ namespace VkNet.Abstractions
 		/// умолчанию идентификатор текущего
 		/// пользователя (Целое число, по умолчанию идентификатор текущего пользователя).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/video.restore
 		/// </remarks>
-		Task<bool> RestoreAsync(long videoId, long? ownerId = null);
+		Task<bool> RestoreAsync(long videoId, long? ownerId = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список видеозаписей в соответствии с заданным критерием поиска.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает список объектов видеозаписей.
 		/// Если в Вашем приложении используется  прямая авторизация, возвращается
@@ -181,7 +188,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/video.search
 		/// </remarks>
-		Task<VkCollection<Video>> SearchAsync(VideoSearchParams @params);
+		Task<VkCollection<Video>> SearchAsync(VideoSearchParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список альбомов видеозаписей пользователя или сообщества.
@@ -217,6 +224,7 @@ namespace VkNet.Abstractions
 		/// умолчанию 0
 		/// (Флаг, может принимать значения 1 или 0, по умолчанию 0).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает общее количество альбомов с
 		/// видеозаписями, и массив объектов album, каждый из
@@ -229,23 +237,25 @@ namespace VkNet.Abstractions
 		/// Страница документации ВКонтакте http://vk.com/dev/video.getAlbums
 		/// </remarks>
 		Task<VkCollection<VideoAlbum>> GetAlbumsAsync(long? ownerId = null, long? offset = null, long? count = null, bool? extended = null,
-													bool? needSystem = null);
+													bool? needSystem = null,
+													CancellationToken token = default);
 
 		/// <summary>
 		/// Создает пустой альбом видеозаписей.
 		/// </summary>
+		/// <param name="title"> Название альбома. строка (Строка). </param>
 		/// <param name="groupId">
 		/// Идентификатор сообщества (если необходимо создать альбом в сообществе).
 		/// положительное число
 		/// (Положительное число).
 		/// </param>
-		/// <param name="title"> Название альбома. строка (Строка). </param>
 		/// <param name="privacy">
 		/// Уровень доступа к альбому в специальном формате.
 		/// Приватность доступна для альбомов с видео в профиле пользователя. список строк,
 		/// разделенных через запятую (Список
 		/// строк, разделенных через запятую).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает  идентификатор созданного альбома
 		/// (album_id).
@@ -253,16 +263,12 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/video.addAlbum
 		/// </remarks>
-		Task<long> AddAlbumAsync(string title, long? groupId = null, IEnumerable<Privacy> privacy = null);
+		Task<long> AddAlbumAsync(string title, long? groupId = null, IEnumerable<Privacy> privacy = null,
+								CancellationToken token = default);
 
 		/// <summary>
 		/// Редактирует название альбома видеозаписей.
 		/// </summary>
-		/// <param name="groupId">
-		/// Идентификатор сообщества (если нужно отредактировать альбом, принадлежащий
-		/// сообществу).
-		/// положительное число (Положительное число).
-		/// </param>
 		/// <param name="albumId">
 		/// Идентификатор альбома. положительное число, обязательный параметр
 		/// (Положительное число,
@@ -272,43 +278,52 @@ namespace VkNet.Abstractions
 		/// Новое название для альбома. строка, обязательный параметр (Строка, обязательный
 		/// параметр).
 		/// </param>
+		/// <param name="groupId">
+		/// Идентификатор сообщества (если нужно отредактировать альбом, принадлежащий
+		/// сообществу).
+		/// положительное число (Положительное число).
+		/// </param>
 		/// <param name="privacy">
 		/// Уровень доступа к альбому в специальном формате.
 		/// Приватность доступна для альбомов с видео в профиле пользователя. целое число
 		/// (Целое число).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/video.editAlbum
 		/// </remarks>
-		Task<bool> EditAlbumAsync(long albumId, string title, long? groupId = null, Privacy privacy = null);
+		Task<bool> EditAlbumAsync(long albumId, string title, long? groupId = null, Privacy privacy = null,
+								CancellationToken token = default);
 
 		/// <summary>
 		/// Удаляет альбом видеозаписей.
 		/// </summary>
+		/// <param name="albumId">
+		/// Идентификатор альбома. положительное число
+		/// (Положительное число).
+		/// </param>
 		/// <param name="groupId">
 		/// Идентификатор сообщества (если альбом, который необходимо удалить, принадлежит
 		/// сообществу).
 		/// положительное число (Положительное число).
 		/// </param>
-		/// <param name="albumId">
-		/// Идентификатор альбома. положительное число
-		/// (Положительное число).
-		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/video.deleteAlbum
 		/// </remarks>
-		Task<bool> DeleteAlbumAsync(long albumId, long? groupId = null);
+		Task<bool> DeleteAlbumAsync(long albumId, long? groupId = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список комментариев к видеозаписи.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает общее количество комментариев и массив
 		/// объектов comment, каждый из которых
@@ -334,45 +349,52 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/video.getComments
 		/// </remarks>
-		Task<VkCollection<Comment>> GetCommentsAsync(VideoGetCommentsParams @params);
+		Task<VkCollection<Comment>> GetCommentsAsync(VideoGetCommentsParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Cоздает новый комментарий к видеозаписи.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает идентификатор созданного комментария.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/video.createComment
 		/// </remarks>
-		Task<long> CreateCommentAsync(VideoCreateCommentParams @params);
+		Task<long> CreateCommentAsync(VideoCreateCommentParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Удаляет комментарий к видеозаписи.
 		/// </summary>
+		/// <param name="commentId">
+		/// Идентификатор комментария. целое число, обязательный параметр (Целое число,
+		/// обязательный
+		/// параметр).
+		/// </param>
 		/// <param name="ownerId">
 		/// Идентификатор пользователя или сообщества, которому принадлежит видеозапись.
 		/// целое число, по
 		/// умолчанию идентификатор текущего пользователя (Целое число, по умолчанию
 		/// идентификатор текущего пользователя).
 		/// </param>
-		/// <param name="commentId">
-		/// Идентификатор комментария. целое число, обязательный параметр (Целое число,
-		/// обязательный
-		/// параметр).
-		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/video.deleteComment
 		/// </remarks>
-		Task<bool> DeleteCommentAsync(long commentId, long? ownerId);
+		Task<bool> DeleteCommentAsync(long commentId, long? ownerId, CancellationToken token = default);
 
 		/// <summary>
 		/// Восстанавливает удаленный комментарий к видеозаписи.
 		/// </summary>
+		/// <param name="commentId">
+		/// Идентификатор удаленного комментария. целое число, обязательный параметр (Целое
+		/// число,
+		/// обязательный параметр).
+		/// </param>
 		/// <param name="ownerId">
 		/// Идентификатор пользователя или сообщества, которому принадлежит видеозапись.
 		/// Обратите внимание,
@@ -382,11 +404,7 @@ namespace VkNet.Abstractions
 		/// умолчанию идентификатор текущего
 		/// пользователя (Целое число, по умолчанию идентификатор текущего пользователя).
 		/// </param>
-		/// <param name="commentId">
-		/// Идентификатор удаленного комментария. целое число, обязательный параметр (Целое
-		/// число,
-		/// обязательный параметр).
-		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c> (0, если комментарий с
 		/// таким идентификатором не является
@@ -395,20 +413,11 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/video.restoreComment
 		/// </remarks>
-		Task<bool> RestoreCommentAsync(long commentId, long? ownerId);
+		Task<bool> RestoreCommentAsync(long commentId, long? ownerId, CancellationToken token = default);
 
 		/// <summary>
 		/// Изменяет текст комментария к видеозаписи.
 		/// </summary>
-		/// <param name="ownerId">
-		/// Идентификатор пользователя или сообщества, которому принадлежит видеозапись.
-		/// Обратите внимание,
-		/// идентификатор сообщества в параметре owner_id необходимо указывать со знаком
-		/// "-" — например, owner_id=-1
-		/// соответствует идентификатору сообщества ВКонтакте API (club1)  целое число, по
-		/// умолчанию идентификатор текущего
-		/// пользователя (Целое число, по умолчанию идентификатор текущего пользователя).
-		/// </param>
 		/// <param name="commentId">
 		/// Идентификатор комментария. целое число, обязательный параметр (Целое число,
 		/// обязательный
@@ -418,6 +427,15 @@ namespace VkNet.Abstractions
 		/// Новый текст комментария (является обязательным, если не задан параметр
 		/// attachments). строка
 		/// (Строка).
+		/// </param>
+		/// <param name="ownerId">
+		/// Идентификатор пользователя или сообщества, которому принадлежит видеозапись.
+		/// Обратите внимание,
+		/// идентификатор сообщества в параметре owner_id необходимо указывать со знаком
+		/// "-" — например, owner_id=-1
+		/// соответствует идентификатору сообщества ВКонтакте API (club1)  целое число, по
+		/// умолчанию идентификатор текущего
+		/// пользователя (Целое число, по умолчанию идентификатор текущего пользователя).
 		/// </param>
 		/// <param name="attachments">
 		/// Новый список объектов, приложенных к комментарию и разделённых символом ",".
@@ -438,22 +456,19 @@ namespace VkNet.Abstractions
 		/// разделенных через запятую (Список
 		/// строк, разделенных через запятую).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/video.editComment
 		/// </remarks>
-		Task<bool> EditCommentAsync(long commentId, string message, long? ownerId = null, IEnumerable<MediaAttachment> attachments = null);
+		Task<bool> EditCommentAsync(long commentId, string message, long? ownerId = null, IEnumerable<MediaAttachment> attachments = null,
+									CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет пожаловаться на видеозапись.
 		/// </summary>
-		/// <param name="ownerId">
-		/// Идентификатор пользователя или сообщества, которому принадлежит видеозапись.
-		/// целое число,
-		/// обязательный параметр (Целое число, обязательный параметр).
-		/// </param>
 		/// <param name="videoId">
 		/// Идентификатор видеозаписи. положительное число, обязательный параметр
 		/// (Положительное число,
@@ -469,31 +484,38 @@ namespace VkNet.Abstractions
 		/// 5 – материал для взрослых
 		/// 6 – оскорбление положительное число (Положительное число).
 		/// </param>
+		/// <param name="ownerId">
+		/// Идентификатор пользователя или сообщества, которому принадлежит видеозапись.
+		/// целое число,
+		/// обязательный параметр (Целое число, обязательный параметр).
+		/// </param>
 		/// <param name="comment"> Комментарий для жалобы. строка (Строка). </param>
 		/// <param name="searchQuery">
 		/// Поисковой запрос, если видеозапись была найдена
 		/// через поиск. строка (Строка).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/video.report
 		/// </remarks>
-		Task<bool> ReportAsync(long videoId, ReportReason reason, long? ownerId, string comment = null, string searchQuery = null);
+		Task<bool> ReportAsync(long videoId, ReportReason reason, long? ownerId, string comment = null, string searchQuery = null,
+								CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет пожаловаться на комментарий к видеозаписи.
 		/// </summary>
-		/// <param name="ownerId">
-		/// Идентификатор владельца видеозаписи, к которой оставлен комментарий. целое
-		/// число, обязательный
-		/// параметр (Целое число, обязательный параметр).
-		/// </param>
 		/// <param name="commentId">
 		/// Идентификатор комментария. положительное число, обязательный параметр
 		/// (Положительное число,
 		/// обязательный параметр).
+		/// </param>
+		/// <param name="ownerId">
+		/// Идентификатор владельца видеозаписи, к которой оставлен комментарий. целое
+		/// число, обязательный
+		/// параметр (Целое число, обязательный параметр).
 		/// </param>
 		/// <param name="reason">
 		/// Тип жалобы:
@@ -505,27 +527,29 @@ namespace VkNet.Abstractions
 		/// 5 – материал для взрослых
 		/// 6 – оскорбление положительное число (Положительное число).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/video.reportComment
 		/// </remarks>
-		Task<bool> ReportCommentAsync(long commentId, long ownerId, ReportReason reason);
+		Task<bool> ReportCommentAsync(long commentId, long ownerId, ReportReason reason, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет получить информацию об альбоме с видео.
 		/// </summary>
+		/// <param name="albumId">
+		/// Идентификатор альбома. целое число, обязательный параметр (Целое число,
+		/// обязательный параметр).
+		/// </param>
 		/// <param name="ownerId">
 		/// Идентификатор пользователя или сообщества, которому принадлежит альбом. целое
 		/// число, по умолчанию
 		/// идентификатор текущего пользователя (Целое число, по умолчанию идентификатор
 		/// текущего пользователя).
 		/// </param>
-		/// <param name="albumId">
-		/// Идентификатор альбома. целое число, обязательный параметр (Целое число,
-		/// обязательный параметр).
-		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает объект, который содержит следующие поля:
 		/// id — идентификатор альбома;
@@ -539,11 +563,16 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/video.getAlbumById
 		/// </remarks>
-		Task<VideoAlbum> GetAlbumByIdAsync(long albumId, long? ownerId = null);
+		Task<VideoAlbum> GetAlbumByIdAsync(long albumId, long? ownerId = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет изменить порядок альбомов с видео.
 		/// </summary>
+		/// <param name="albumId">
+		/// Идентификатор альбома, который нужно переместить. положительное число,
+		/// обязательный параметр
+		/// (Положительное число, обязательный параметр).
+		/// </param>
 		/// <param name="ownerId">
 		/// Идентификатор пользователя или сообщества, которому принадлежит альбом.
 		/// Обратите внимание,
@@ -552,11 +581,6 @@ namespace VkNet.Abstractions
 		/// соответствует идентификатору сообщества ВКонтакте API (club1)  целое число, по
 		/// умолчанию идентификатор текущего
 		/// пользователя (Целое число, по умолчанию идентификатор текущего пользователя).
-		/// </param>
-		/// <param name="albumId">
-		/// Идентификатор альбома, который нужно переместить. положительное число,
-		/// обязательный параметр
-		/// (Положительное число, обязательный параметр).
 		/// </param>
 		/// <param name="before">
 		/// Идентификатор альбома, перед которым нужно поместить текущий. положительное
@@ -568,29 +592,49 @@ namespace VkNet.Abstractions
 		/// число (Положительное
 		/// число).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/video.reorderAlbums
 		/// </remarks>
-		Task<bool> ReorderAlbumsAsync(long albumId, long? ownerId, long? before, long? after);
+		Task<bool> ReorderAlbumsAsync(long albumId, long? ownerId, long? before, long? after, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет переместить видеозапись в альбоме.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/video.reorderVideos
 		/// </remarks>
-		Task<bool> ReorderVideosAsync(VideoReorderVideosParams @params);
+		Task<bool> ReorderVideosAsync(VideoReorderVideosParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет добавить видеозапись в альбом.
 		/// </summary>
+		/// <param name="ownerId">
+		/// Идентификатор владельца видеозаписи.
+		/// Обратите внимание, идентификатор сообщества в параметре owner_id необходимо
+		/// указывать со знаком "-" — например,
+		/// owner_id=-1 соответствует идентификатору сообщества ВКонтакте API (club1)
+		/// целое число, обязательный параметр
+		/// (Целое число, обязательный параметр).
+		/// </param>
+		/// <param name="videoId">
+		/// Идентификатор видеозаписи. положительное число, обязательный параметр
+		/// (Положительное число,
+		/// обязательный параметр).
+		/// </param>
+		/// <param name="albumIds">
+		/// Идентификаторы альбомов, в которые нужно добавить видео. список целых чисел,
+		/// разделенных
+		/// запятыми (Список целых чисел, разделенных запятыми).
+		/// </param>
 		/// <param name="targetId">
 		/// Идентификатор владельца альбома, в который нужно добавить видео.
 		/// Обратите внимание, идентификатор сообщества в параметре target_id необходимо
@@ -605,53 +649,20 @@ namespace VkNet.Abstractions
 		/// списку
 		/// видеозаписей «без альбома»). целое число (Целое число).
 		/// </param>
-		/// <param name="albumIds">
-		/// Идентификаторы альбомов, в которые нужно добавить видео. список целых чисел,
-		/// разделенных
-		/// запятыми (Список целых чисел, разделенных запятыми).
-		/// </param>
-		/// <param name="ownerId">
-		/// Идентификатор владельца видеозаписи.
-		/// Обратите внимание, идентификатор сообщества в параметре owner_id необходимо
-		/// указывать со знаком "-" — например,
-		/// owner_id=-1 соответствует идентификатору сообщества ВКонтакте API (club1)
-		/// целое число, обязательный параметр
-		/// (Целое число, обязательный параметр).
-		/// </param>
-		/// <param name="videoId">
-		/// Идентификатор видеозаписи. положительное число, обязательный параметр
-		/// (Положительное число,
-		/// обязательный параметр).
-		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/video.addToAlbum
 		/// </remarks>
-		Task<VkCollection<ulong>> AddToAlbumAsync(long ownerId, long videoId, IEnumerable<string> albumIds, long? targetId = null, long? albumId = null);
+		Task<VkCollection<ulong>> AddToAlbumAsync(long ownerId, long videoId, IEnumerable<string> albumIds, long? targetId = null,
+												long? albumId = null,
+												CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет убрать видеозапись из альбома.
 		/// </summary>
-		/// <param name="targetId">
-		/// Идентификатор владельца альбома. Обратите внимание, идентификатор сообщества в
-		/// параметре
-		/// target_id необходимо указывать со знаком "-" — например, target_id=-1
-		/// соответствует идентификатору сообщества
-		/// ВКонтакте API (club1)  целое число, по умолчанию идентификатор текущего
-		/// пользователя (Целое число, по умолчанию
-		/// идентификатор текущего пользователя).
-		/// </param>
-		/// <param name="albumId">
-		/// Идентификатор альбома, из которого нужно убрать видео. целое число (Целое
-		/// число).
-		/// </param>
-		/// <param name="albumIds">
-		/// Идентификаторы альбомов, из которых нужно убрать видео. список целых чисел,
-		/// разделенных запятыми
-		/// (Список целых чисел, разделенных запятыми).
-		/// </param>
 		/// <param name="ownerId">
 		/// Идентификатор владельца видеозаписи. Обратите внимание, идентификатор
 		/// сообщества в параметре
@@ -665,6 +676,25 @@ namespace VkNet.Abstractions
 		/// (Положительное число,
 		/// обязательный параметр).
 		/// </param>
+		/// <param name="albumIds">
+		/// Идентификаторы альбомов, из которых нужно убрать видео. список целых чисел,
+		/// разделенных запятыми
+		/// (Список целых чисел, разделенных запятыми).
+		/// </param>
+		/// <param name="targetId">
+		/// Идентификатор владельца альбома. Обратите внимание, идентификатор сообщества в
+		/// параметре
+		/// target_id необходимо указывать со знаком "-" — например, target_id=-1
+		/// соответствует идентификатору сообщества
+		/// ВКонтакте API (club1)  целое число, по умолчанию идентификатор текущего
+		/// пользователя (Целое число, по умолчанию
+		/// идентификатор текущего пользователя).
+		/// </param>
+		/// <param name="albumId">
+		/// Идентификатор альбома, из которого нужно убрать видео. целое число (Целое
+		/// число).
+		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
@@ -672,7 +702,8 @@ namespace VkNet.Abstractions
 		/// Страница документации ВКонтакте http://vk.com/dev/video.removeFromAlbum
 		/// </remarks>
 		Task<bool> RemoveFromAlbumAsync(long ownerId, long videoId, IEnumerable<string> albumIds, long? targetId = null,
-										long? albumId = null);
+										long? albumId = null,
+										CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список альбомов, в которых находится видеозапись.
@@ -705,6 +736,7 @@ namespace VkNet.Abstractions
 		/// значения 1 или 0, по
 		/// умолчанию 0 (Флаг, может принимать значения 1 или 0, по умолчанию 0).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает список идентификаторов альбомов, в которых видеозапись находится у
 		/// пользователя или сообщества с
@@ -715,7 +747,8 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/video.getAlbumsByVideo
 		/// </remarks>
-		Task<VkCollection<VideoAlbum>> GetAlbumsByVideoAsync(long? targetId, long ownerId, long videoId, bool? extended);
+		Task<VkCollection<VideoAlbum>> GetAlbumsByVideoAsync(long? targetId, long ownerId, long videoId, bool? extended,
+															CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет получить представление каталога видео.
@@ -781,7 +814,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/video.getCatalog
 		/// </remarks>
-		Task<ReadOnlyCollection<VideoCatalog>> GetCatalogAsync(VideoGetCatalogParams @params);
+		Task<ReadOnlyCollection<VideoCatalog>> GetCatalogAsync(VideoGetCatalogParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет получить отдельный блок видеокаталога.
@@ -808,6 +841,7 @@ namespace VkNet.Abstractions
 		/// принимать значения 1 или 0, по
 		/// умолчанию 0).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает массив элементов блока видеокаталога и
 		/// поле next для текущего блока.
@@ -848,8 +882,8 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/video.getCatalogSection
 		/// </remarks>
-		Task<ReadOnlyCollection<VideoCatalogItem>> GetCatalogSectionAsync(string sectionId, string from, long? count = null,
-																		bool? extended = null);
+		Task<ReadOnlyCollection<VideoCatalogItem>> GetCatalogSectionAsync(string sectionId, string @from, long? count = null,
+																		bool? extended = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Скрывает для пользователя раздел видеокаталога.
@@ -859,12 +893,13 @@ namespace VkNet.Abstractions
 		/// video.getCatalog
 		/// обязательный параметр, целое число (Обязательный параметр, целое число).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/video.hideCatalogSection
 		/// </remarks>
-		Task<bool> HideCatalogSectionAsync(long sectionId);
+		Task<bool> HideCatalogSectionAsync(long sectionId, CancellationToken token = default);
 	}
 }
