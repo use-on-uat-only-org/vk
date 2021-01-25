@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using VkNet.Model;
 using VkNet.Model.RequestParams.Auth;
@@ -23,7 +24,8 @@ namespace VkNet.Infrastructure.Authorization.ImplicitFlow.Forms
 		/// </summary>
 		/// <param name="url">Url запроса</param>
 		/// <param name="authParams">Параметры авторизации.</param>
+		/// <param name="token"></param>
 		/// <returns>Содержимое ответа от vk</returns>
-		Task<AuthorizationFormResult> ExecuteAsync(Uri url, IApiAuthParams authParams);
+		Task<AuthorizationFormResult> ExecuteAsync(Uri url, IApiAuthParams authParams, CancellationToken token = default);
 	}
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using VkNet.Abstractions.Utils;
 using VkNet.Exception;
@@ -25,13 +26,13 @@ namespace VkNet.Infrastructure.Authorization.ImplicitFlow.Forms
 		public abstract ImplicitFlowPageType GetPageType();
 
 		/// <inheritdoc />
-		public async Task<AuthorizationFormResult> ExecuteAsync(Uri url, IApiAuthParams authParams)
+		public async Task<AuthorizationFormResult> ExecuteAsync(Uri url, IApiAuthParams authParams, CancellationToken token = default)
 		{
-			var form = await _htmlParser.GetFormAsync(url).ConfigureAwait(false);
+			var form = await _htmlParser.GetFormAsync(url, token).ConfigureAwait(false);
 
 			FillFormFields(form, authParams);
 
-			var response = await _restClient.PostAsync(new Uri(form.Action), form.Fields).ConfigureAwait(false);
+			var response = await _restClient.PostAsync(new Uri(form.Action), form.Fields, token).ConfigureAwait(false);
 
 			if (!response.IsSuccess)
 			{

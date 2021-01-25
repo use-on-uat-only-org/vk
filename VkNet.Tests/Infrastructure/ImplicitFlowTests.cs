@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Moq;
 using Moq.AutoMock;
@@ -11,7 +12,6 @@ using VkNet.Exception;
 using VkNet.Infrastructure;
 using VkNet.Infrastructure.Authorization.ImplicitFlow;
 using VkNet.Infrastructure.Authorization.ImplicitFlow.Forms;
-using VkNet.Model;
 using VkNet.Model.RequestParams.Auth;
 using VkNet.Model.Results.Auth;
 using VkNet.Utils;
@@ -67,7 +67,8 @@ namespace VkNet.Tests.Infrastructure
 
 			mocker.Setup<IVkApiVersionManager, string>(x => x.Version).Returns("5.92");
 
-			mocker.Setup<IAuthorizationForm, Task<AuthorizationFormResult>>(x => x.ExecuteAsync(It.IsAny<Uri>(), It.IsAny<IApiAuthParams>()))
+			mocker.Setup<IAuthorizationForm, Task<AuthorizationFormResult>>(x =>
+					x.ExecuteAsync(It.IsAny<Uri>(), It.IsAny<IApiAuthParams>(), It.IsAny<CancellationToken>()))
 				.ReturnsAsync(new AuthorizationFormResult
 				{
 					ResponseUrl = new Uri("https://m.vk.com/login?act=authcheck&m=442"),
