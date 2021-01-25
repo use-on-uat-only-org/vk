@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
+using System.Threading;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 using VkNet.Abstractions.Core;
@@ -87,7 +88,7 @@ namespace VkNet.Utils
 		/// <inheritdoc />
 		public Uri CreateAuthorizeUrl()
 		{
-			_logger?.LogDebug("Построение url для авторизации.");
+			_logger?.LogDebug("Построение url для авторизации");
 			var builder = new StringBuilder("https://oauth.vk.com/authorize?");
 
 			builder.Append($"client_id={_authParams.ApplicationId}&");
@@ -180,24 +181,25 @@ namespace VkNet.Utils
 		{
 			if (UriHasAccessToken(webCallResult.RequestUri))
 			{
-				_logger?.LogDebug("Запрос: " + webCallResult.RequestUri);
+				_logger?.LogDebug($"Запрос: {webCallResult.RequestUri}");
 
 				return webCallResult.RequestUri;
 			}
 
-			if (UriHasAccessToken(webCallResult.RequestUri))
+			if (!UriHasAccessToken(webCallResult.RequestUri))
 			{
-				_logger?.LogDebug("Ответ: " + webCallResult.RequestUri);
-
-				return webCallResult.RequestUri;
+				return null;
 			}
 
-			return null;
+			_logger?.LogDebug($"Ответ: {webCallResult.RequestUri}");
+
+			return webCallResult.RequestUri;
+
 		}
 
 		private VkAuthorization2 OldValidate(string validateUrl, string phoneNumber)
 		{
-			return OldValidateAsync(validateUrl, phoneNumber).ConfigureAwait(false).GetAwaiter().GetResult();
+			return OldValidateAsync(validateUrl, phoneNumber, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
 		}
 	}
 }

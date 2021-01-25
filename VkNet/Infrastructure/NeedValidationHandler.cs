@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using VkNet.Abstractions.Core;
 using VkNet.Model;
@@ -22,7 +23,7 @@ namespace VkNet.Infrastructure
 		}
 
 		/// <inheritdoc />
-		public Task<AuthorizationResult> ValidateAsync(string validateUrl)
+		public Task<AuthorizationResult> ValidateAsync(string validateUrl, CancellationToken token = default)
 		{
 			/*if (string.IsNullOrWhiteSpace(validateUrl))
 			{
