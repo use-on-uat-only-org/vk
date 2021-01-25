@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
@@ -14,8 +15,9 @@ namespace VkNet.Utils
 	/// <inheritdoc />
 	public partial class Browser
 	{
+		/// <param name="token"></param>
 		/// <inheritdoc />
-		public async Task<AuthorizationResult> AuthorizeAsync()
+		public async Task<AuthorizationResult> AuthorizeAsync(CancellationToken token = default)
 		{
 			LoginPasswordError = 0;
 			var authorizeUrlResult = await OpenAuthDialogAsync().ConfigureAwait(false);

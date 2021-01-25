@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Moq;
 using Moq.AutoMock;
@@ -24,7 +25,6 @@ namespace VkNet.Tests
 	/// <summary>
 	/// Базовый класс для тестирования категорий методов.
 	/// </summary>
-
 	public abstract class BaseTest : IDisposable
 	{
 		protected readonly AutoMocker Mocker = new AutoMocker();
@@ -67,7 +67,7 @@ namespace VkNet.Tests
 				Phone = "89510000000"
 			});
 
-			Mocker.Setup<IAuthorizationFlow, Task<AuthorizationResult>>(o => o.AuthorizeAsync())
+			Mocker.Setup<IAuthorizationFlow, Task<AuthorizationResult>>(o => o.AuthorizeAsync(It.IsAny<CancellationToken>()))
 				.ReturnsAsync(new AuthorizationResult
 				{
 					AccessToken = "token",

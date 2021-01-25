@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
@@ -8,7 +9,6 @@ using VkNet.Abstractions.Authorization;
 using VkNet.Abstractions.Core;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Exception;
-using VkNet.Model;
 using VkNet.Model.RequestParams.Auth;
 using VkNet.Model.Results.Auth;
 using VkNet.Utils;
@@ -48,8 +48,9 @@ namespace VkNet.Infrastructure.Authorization.ImplicitFlow
 			_vkAuthorization = vkAuthorization;
 		}
 
+		/// <param name="token"></param>
 		/// <inheritdoc />
-		public async Task<AuthorizationResult> AuthorizeAsync()
+		public async Task<AuthorizationResult> AuthorizeAsync(CancellationToken token = default)
 		{
 			_logger?.LogDebug("Валидация данных.");
 			ValidateAuthorizationParameters();
