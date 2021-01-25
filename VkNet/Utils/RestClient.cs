@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
@@ -30,25 +30,19 @@ namespace VkNet.Utils
 		public HttpClient HttpClient { get; }
 
 		/// <inheritdoc />
-		[Obsolete("Use HttpClient to configure proxy. Documentation reference https://github.com/vknet/vk/wiki/Proxy-Configuration", true)]
-		public IWebProxy Proxy { get; set; }
-
-		/// <inheritdoc />
-		[Obsolete("Use HttpClient to configure timeout. Documentation reference https://github.com/vknet/vk/wiki/Proxy-Configuration", true)]
-		public TimeSpan Timeout { get; set; }
-
-		/// <inheritdoc />
-		public Task<HttpResponse<string>> GetAsync(Uri uri, IEnumerable<KeyValuePair<string, string>> parameters)
+		public Task<HttpResponse<string>> GetAsync(Uri uri, IEnumerable<KeyValuePair<string, string>> parameters,
+													CancellationToken token = default)
 		{
 			var url = Url.Combine(uri.ToString(), Url.QueryFrom(parameters.ToArray()));
 
 			_logger?.LogDebug($"GET request: {url}");
 
-			return CallAsync(() => HttpClient.GetAsync(new Uri(url)));
+			return CallAsync(() => HttpClient.GetAsync(new Uri(url), token));
 		}
 
 		/// <inheritdoc />
-		public Task<HttpResponse<string>> PostAsync(Uri uri, IEnumerable<KeyValuePair<string, string>> parameters)
+		public Task<HttpResponse<string>> PostAsync(Uri uri, IEnumerable<KeyValuePair<string, string>> parameters,
+													CancellationToken token = default)
 		{
 			if (_logger != null)
 			{
@@ -58,7 +52,7 @@ namespace VkNet.Utils
 
 			var content = new FormUrlEncodedContent(parameters);
 
-			return CallAsync(() => HttpClient.PostAsync(uri, content));
+			return CallAsync(() => HttpClient.PostAsync(uri, content, token));
 		}
 
 		/// <inheritdoc />

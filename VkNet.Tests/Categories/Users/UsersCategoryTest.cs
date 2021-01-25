@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Moq;
 using NUnit.Framework;
 using VkNet.Enums;
 using VkNet.Enums.Filters;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Exception;
-using VkNet.Model.RequestParams;
 using VkNet.Model.RequestParams.Users;
 using VkNet.Tests.Helper;
 using VkNet.Tests.Infrastructure;
@@ -15,7 +15,6 @@ using VkNet.Tests.Infrastructure;
 namespace VkNet.Tests.Categories.Users
 {
 	[TestFixture]
-
 	public class UsersCategoryTest : CategoryBaseTest
 	{
 		protected override string Folder => "Users";
@@ -294,7 +293,7 @@ namespace VkNet.Tests.Categories.Users
 		{
 			Mock.Get(Api.RestClient)
 				.Setup(f =>
-					f.PostAsync(It.IsAny<Uri>(), It.IsAny<IEnumerable<KeyValuePair<string, string>>>()))
+					f.PostAsync(It.IsAny<Uri>(), It.IsAny<IEnumerable<KeyValuePair<string, string>>>(), It.IsAny<CancellationToken>()))
 				.Throws(new VkApiException("The remote name could not be resolved: 'api.vk.com'"));
 
 			var ex = Assert.Throws<VkApiException>(() => Api.Users.Get(new long[]

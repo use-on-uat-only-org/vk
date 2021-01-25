@@ -99,7 +99,8 @@ namespace VkNet.Tests
 
 			Mocker.Setup<IRestClient, Task<HttpResponse<string>>>(x =>
 					x.PostAsync(It.Is<Uri>(s => s == new Uri(Url)),
-						It.IsAny<IEnumerable<KeyValuePair<string, string>>>()))
+						It.IsAny<IEnumerable<KeyValuePair<string, string>>>(),
+						It.IsAny<CancellationToken>()))
 				.Callback(Callback)
 				.Returns(() =>
 				{
@@ -112,7 +113,8 @@ namespace VkNet.Tests
 				});
 
 			Mocker.Setup<IRestClient, Task<HttpResponse<string>>>(x => x.PostAsync(It.Is<Uri>(s => string.IsNullOrWhiteSpace(Url)),
-					It.IsAny<IEnumerable<KeyValuePair<string, string>>>()))
+					It.IsAny<IEnumerable<KeyValuePair<string, string>>>(),
+					It.IsAny<CancellationToken>()))
 				.Throws<ArgumentException>();
 
 			Api = Mocker.CreateInstance<VkApi>();
