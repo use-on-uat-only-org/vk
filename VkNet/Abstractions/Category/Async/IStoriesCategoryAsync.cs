@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using VkNet.Model;
 using VkNet.Model.Attachments;
@@ -19,13 +20,14 @@ namespace VkNet.Abstractions.Category
 		/// <param name = "ownersIds">
 		/// Список идентификаторов источников. список целых чисел, разделенных запятыми, обязательный параметр
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает 1.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/stories.banOwner
 		/// </remarks>
-		Task<bool> BanOwnerAsync(IEnumerable<long> ownersIds);
+		Task<bool> BanOwnerAsync(IEnumerable<long> ownersIds, CancellationToken token = default);
 
 		/// <summary>
 		/// Удаляет историю.
@@ -36,13 +38,14 @@ namespace VkNet.Abstractions.Category
 		/// <param name = "storyId">
 		/// Идентификатор истории. положительное число, обязательный параметр
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает 1.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/stories.delete
 		/// </remarks>
-		Task<bool> DeleteAsync(long ownerId, ulong storyId);
+		Task<bool> DeleteAsync(long ownerId, ulong storyId, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает истории, доступные для текущего пользователя.
@@ -53,6 +56,7 @@ namespace VkNet.Abstractions.Category
 		/// <param name = "extended">
 		/// 1 — возвращать в ответе дополнительную информацию о профилях пользователей. флаг, может принимать значения 1 или 0, по умолчанию 0
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает объект, содержащий число подборок в поле count и массив подборок историй  в поле items. Каждая подборка — массив историй от одного владельца.
 		/// Если был задан параметр extended=1, дополнительно возвращает массив объектов пользователей в поле profiles (array) и сообществ в поле groups (array).
@@ -60,7 +64,7 @@ namespace VkNet.Abstractions.Category
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/stories.get
 		/// </remarks>
-		Task<StoryResult<IEnumerable<Story>>> GetAsync(long? ownerId = null, bool? extended = null);
+		Task<StoryResult<IEnumerable<Story>>> GetAsync(long? ownerId = null, bool? extended = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список источников историй, скрытых из ленты текущего пользователя.
@@ -71,6 +75,7 @@ namespace VkNet.Abstractions.Category
 		/// <param name = "extended">
 		/// 1 — возвращать расширенную информацию о пользователях и сообществах. флаг, может принимать значения 1 или 0
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает общее количество скрытых источников в поле count (integer) и их идентификаторы в массиве items. Если extended = 1, items содержит два поля:
 		/// profiles (array) — массив объектов, описывающих пользователей;
@@ -79,7 +84,7 @@ namespace VkNet.Abstractions.Category
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/stories.getBanned
 		/// </remarks>
-		Task<StoryResult<long>> GetBannedAsync(IEnumerable<string> fields = null, bool? extended = null);
+		Task<StoryResult<long>> GetBannedAsync(IEnumerable<string> fields = null, bool? extended = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает информацию об истории по её идентификатору.
@@ -89,12 +94,13 @@ namespace VkNet.Abstractions.Category
 		/// Пример значения stories:
 		/// 93388_21539,93388_20904 список слов, разделенных через запятую, обязательный параметр
 		/// </param>
-		/// <param name = "fields">
-		/// Дополнительные поля профилей и сообществ, которые необходимо вернуть в ответе. список слов, разделенных через запятую
-		/// </param>
 		/// <param name = "extended">
 		/// 1 — возвращать в ответе дополнительную информацию о пользователях. флаг, может принимать значения 1 или 0, по умолчанию 0
 		/// </param>
+		/// <param name = "fields">
+		/// Дополнительные поля профилей и сообществ, которые необходимо вернуть в ответе. список слов, разделенных через запятую
+		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает объект, содержащий число историй в поле count и массив объектов историй  в поле items.
 		/// Если был задан параметр extended = 1, дополнительно возвращает массив объектов  пользователей в поле profiles и объектов сообществ в поле groups.
@@ -102,7 +108,8 @@ namespace VkNet.Abstractions.Category
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/stories.getById
 		/// </remarks>
-		Task<StoryResult<Story>> GetByIdAsync(IEnumerable<string> stories, bool? extended = null, IEnumerable<string> fields = null);
+		Task<StoryResult<Story>> GetByIdAsync(IEnumerable<string> stories, bool? extended = null, IEnumerable<string> fields = null,
+											CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет получить адрес для загрузки истории с фотографией.
@@ -110,6 +117,7 @@ namespace VkNet.Abstractions.Category
 		/// <param name = "params">
 		/// Входные параметры запроса.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает объект, содержащий следующие поля:
 		/// upload_url (string) — адрес сервера для загрузки файла;
@@ -118,7 +126,7 @@ namespace VkNet.Abstractions.Category
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/stories.getPhotoUploadServer
 		/// </remarks>
-		Task<StoryServerUrl> GetPhotoUploadServerAsync(GetPhotoUploadServerParams @params);
+		Task<StoryServerUrl> GetPhotoUploadServerAsync(GetPhotoUploadServerParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет получить ответы на историю.
@@ -132,12 +140,13 @@ namespace VkNet.Abstractions.Category
 		/// <param name = "accessKey">
 		/// Ключ доступа для приватного объекта. строка
 		/// </param>
-		/// <param name = "fields">
-		/// Дополнительные поля профилей и сообществ, которые необходимо вернуть в ответе. список слов, разделенных через запятую
-		/// </param>
 		/// <param name = "extended">
 		/// 1 — возвращать дополнительную информацию о профилях и сообществах. флаг, может принимать значения 1 или 0, по умолчанию
 		/// </param>
+		/// <param name = "fields">
+		/// Дополнительные поля профилей и сообществ, которые необходимо вернуть в ответе. список слов, разделенных через запятую
+		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает объект, содержащий число подборок в поле count и массив подборок историй  в поле items. Каждая подборка — массив историй от одного владельца.
 		/// Если был задан параметр extended=1, дополнительно возвращает массив объектов пользователей в поле profiles (array) и сообществ в поле groups (array).
@@ -145,7 +154,9 @@ namespace VkNet.Abstractions.Category
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/stories.getReplies
 		/// </remarks>
-		Task<StoryResult<IEnumerable<Story>>> GetRepliesAsync(long ownerId, ulong storyId, string accessKey = null, bool? extended = null, IEnumerable<string> fields = null);
+		Task<StoryResult<IEnumerable<Story>>> GetRepliesAsync(long ownerId, ulong storyId, string accessKey = null, bool? extended = null,
+															IEnumerable<string> fields = null,
+															CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает статистику истории.
@@ -156,6 +167,7 @@ namespace VkNet.Abstractions.Category
 		/// <param name = "storyId">
 		/// Идентификатор истории. положительное число, обязательный параметр
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает объект, который содержит следующие поля:
 		/// views (object) — просмотры. Содержит поля:
@@ -183,7 +195,7 @@ namespace VkNet.Abstractions.Category
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/stories.getStats
 		/// </remarks>
-		Task<StoryStatsResult> GetStatsAsync(long ownerId, ulong storyId);
+		Task<StoryStatsResult> GetStatsAsync(long ownerId, ulong storyId, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет получить адрес для загрузки видеозаписи в историю.
@@ -191,6 +203,7 @@ namespace VkNet.Abstractions.Category
 		/// <param name = "params">
 		/// Входные параметры запроса.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает объект, содержащий следующие поля:
 		/// upload_url (string) — адрес сервера для загрузки файла;
@@ -199,7 +212,7 @@ namespace VkNet.Abstractions.Category
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/stories.getVideoUploadServer
 		/// </remarks>
-		Task<StoryServerUrl> GetVideoUploadServerAsync(GetVideoUploadServerParams @params);
+		Task<StoryServerUrl> GetVideoUploadServerAsync(GetVideoUploadServerParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список пользователей, просмотревших историю.
@@ -216,13 +229,15 @@ namespace VkNet.Abstractions.Category
 		/// <param name = "offset">
 		/// Сдвиг для получения определённого подмножества результатов.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает объект, содержащий число результатов в поле count и идентификаторы пользователей в поле items (array).
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/stories.getViewers
 		/// </remarks>
-		Task<VkCollection<long>> GetViewersAsync(long ownerId, ulong storyId, ulong? count = null, ulong? offset = null);
+		Task<VkCollection<long>> GetViewersAsync(long ownerId, ulong storyId, ulong? count = null, ulong? offset = null,
+												CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает расширенный список пользователей, просмотревших историю.
@@ -239,13 +254,15 @@ namespace VkNet.Abstractions.Category
 		/// <param name = "offset">
 		/// Сдвиг для получения определённого подмножества результатов.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает объект, содержащий число результатов в поле count и обЪекты пользователей в поле items (array).
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/stories.getViewers
 		/// </remarks>
-		Task<VkCollection<User>> GetViewersExtendedAsync(long ownerId, ulong storyId, ulong? count = null, ulong? offset = null);
+		Task<VkCollection<User>> GetViewersExtendedAsync(long ownerId, ulong storyId, ulong? count = null, ulong? offset = null,
+														CancellationToken token = default);
 
 		/// <summary>
 		/// Скрывает все ответы автора за последние сутки на истории текущего пользователя.
@@ -253,13 +270,14 @@ namespace VkNet.Abstractions.Category
 		/// <param name = "ownerId">
 		/// Идентификатор пользователя, ответы от которого нужно скрыть. целое число, обязательный параметр
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает 1.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/stories.hideAllReplies
 		/// </remarks>
-		Task<bool> HideAllRepliesAsync(long ownerId);
+		Task<bool> HideAllRepliesAsync(long ownerId, CancellationToken token = default);
 
 		/// <summary>
 		/// Скрывает ответ на историю.
@@ -273,13 +291,14 @@ namespace VkNet.Abstractions.Category
 		/// <param name = "accessKey">
 		/// Ключ доступа к приватному объекту. строка
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает 1.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/stories.hideReply
 		/// </remarks>
-		Task<bool> HideReplyAsync(long ownerId, ulong storyId, string accessKey = null);
+		Task<bool> HideReplyAsync(long ownerId, ulong storyId, string accessKey = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет вернуть пользователя или сообщество в список отображаемых историй в ленте.
@@ -287,12 +306,13 @@ namespace VkNet.Abstractions.Category
 		/// <param name = "ownersIds">
 		/// Список идентификаторов владельцев историй, разделённых запятой. список целых чисел, разделенных запятыми, обязательный параметр
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает 1.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/stories.unbanOwner
 		/// </remarks>
-		Task<bool> UnbanOwnerAsync(IEnumerable<long> ownersIds);
+		Task<bool> UnbanOwnerAsync(IEnumerable<long> ownersIds, CancellationToken token = default);
 	}
 }
