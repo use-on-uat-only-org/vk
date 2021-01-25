@@ -98,11 +98,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/widgets.getPages
 		/// </remarks>
-		Task<VkCollection<WidgetPage>> GetPagesAsync(long? widgetApiId = null
-													, string order = null
-													, string period = null
-													, ulong? offset = null
-													, ulong? count = null,
-													CancellationToken token = default);
+		Task<VkCollection<WidgetPage>> GetPagesAsync(long? widgetApiId = null, string order = null, string period = null,
+													ulong? offset = null, ulong? count = null, CancellationToken token = default);
 	}
 }
