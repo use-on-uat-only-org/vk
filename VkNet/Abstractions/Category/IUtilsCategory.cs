@@ -12,10 +12,10 @@ namespace VkNet.Abstractions
 	/// <inheritdoc cref="IUtilsCategoryAsync"/>
 	public interface IUtilsCategory : IUtilsCategoryAsync
 	{
-		/// <inheritdoc cref="IUtilsCategoryAsync.CheckLinkAsync(string)"/>
+		/// <inheritdoc cref="IUtilsCategoryAsync.CheckLinkAsync(string,System.Threading.CancellationToken)"/>
 		LinkAccessType CheckLink([NotNull] string url);
 
-		/// <inheritdoc cref="IUtilsCategoryAsync.CheckLinkAsync(Uri)"/>
+		/// <inheritdoc cref="IUtilsCategoryAsync.CheckLinkAsync(System.Uri,System.Threading.CancellationToken)"/>
 		LinkAccessType CheckLink([NotNull] Uri url);
 
 		/// <inheritdoc cref="IUtilsCategoryAsync.ResolveScreenNameAsync"/>
