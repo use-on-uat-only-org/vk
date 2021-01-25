@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 using VkNet.Model;
 using VkNet.Model.RequestParams;
@@ -10,20 +11,16 @@ namespace VkNet.Categories
 	public partial class WidgetsCategory
 	{
 		/// <inheritdoc />
-		public Task<VkCollection<Comment>> GetCommentsAsync(GetCommentsParams getCommentsParams)
+		public Task<VkCollection<Comment>> GetCommentsAsync(GetCommentsParams getCommentsParams, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>GetComments(getCommentsParams: getCommentsParams));
+			return TypeHelper.TryInvokeMethodAsync(() => GetComments(getCommentsParams: getCommentsParams), token);
 		}
 
 		/// <inheritdoc />
-		public Task<VkCollection<WidgetPage>> GetPagesAsync(long? widgetApiId = null
-																, string order = null
-																, string period = null
-																, ulong? offset = null
-																, ulong? count = null)
+		public Task<VkCollection<WidgetPage>> GetPagesAsync(long? widgetApiId = null, string order = null, string period = null,
+															ulong? offset = null, ulong? count = null, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-					GetPages(widgetApiId: widgetApiId, order: order, period: period, offset: offset, count: count));
+			return TypeHelper.TryInvokeMethodAsync(() => GetPages(widgetApiId, order, period, offset, count), token);
 		}
 	}
 }

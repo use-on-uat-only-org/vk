@@ -115,12 +115,8 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/wall.getById
 		/// </remarks>
-		Task<WallGetObject> GetByIdAsync(IEnumerable<string> posts
-										, bool? extended = null
-										, long? copyHistoryDepth = null
-										, ProfileFields fields = null
-										, bool skipAuthorization = false,
-										CancellationToken token = default);
+		Task<WallGetObject> GetByIdAsync(IEnumerable<string> posts, bool? extended = null, long? copyHistoryDepth = null,
+										ProfileFields fields = null, bool skipAuthorization = false, CancellationToken token = default);
 
 		/// <summary>
 		/// Публикует новую запись на своей или чужой стене.
@@ -627,7 +623,5 @@ namespace VkNet.Abstractions
 		Task<WallGetCommentResult> GetCommentAsync(int ownerId, int commentId, bool? extended = null, string fields = null,
 													bool skipAuthorization = false,
 													CancellationToken token = default);
-
-
 	}
 }
