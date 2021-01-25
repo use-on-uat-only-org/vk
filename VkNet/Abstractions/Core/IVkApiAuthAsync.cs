@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
-using VkNet.Model;
 using VkNet.Model.RequestParams.Auth;
 
 namespace VkNet.Abstractions
@@ -9,12 +9,13 @@ namespace VkNet.Abstractions
 	public interface IVkApiAuthAsync : IVkApiAuth
 	{
 		/// <inheritdoc cref="IVkApiAuth.Authorize(IApiAuthParams)"/>
-		Task AuthorizeAsync(IApiAuthParams @params);
+		Task AuthorizeAsync(IApiAuthParams @params, CancellationToken token = default);
 
 		/// <inheritdoc cref="IVkApiAuth.RefreshToken"/>
-		Task RefreshTokenAsync(Func<string> code = null);
+		Task RefreshTokenAsync(Func<string> code = null, CancellationToken token = default);
 
+		/// <param name="token"></param>
 		/// <inheritdoc cref="IVkApiAuth.LogOut"/>
-		Task LogOutAsync();
+		Task LogOutAsync(CancellationToken token = default);
 	}
 }

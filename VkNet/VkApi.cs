@@ -195,7 +195,7 @@ namespace VkNet
 		}
 
 		/// <inheritdoc />
-		public Task AuthorizeAsync(IApiAuthParams @params)
+		public Task AuthorizeAsync(IApiAuthParams @params, CancellationToken token = default)
 		{
 			return TypeHelper.TryInvokeMethodAsync(() => Authorize(@params), CancellationToken.None);
 		}
@@ -225,15 +225,16 @@ namespace VkNet
 		}
 
 		/// <inheritdoc />
-		public Task RefreshTokenAsync(Func<string> code = null)
+		public Task RefreshTokenAsync(Func<string> code = null, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() => RefreshToken(code), CancellationToken.None);
+			return TypeHelper.TryInvokeMethodAsync(() => RefreshToken(code), token);
 		}
 
+		/// <param name="token"></param>
 		/// <inheritdoc />
-		public Task LogOutAsync()
+		public Task LogOutAsync(CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(LogOut, CancellationToken.None);
+			return TypeHelper.TryInvokeMethodAsync(LogOut, token);
 		}
 
 		/// <inheritdoc />
