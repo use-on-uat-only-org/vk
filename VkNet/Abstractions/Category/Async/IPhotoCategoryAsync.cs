@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 using VkNet.Enums;
 using VkNet.Model;
 using VkNet.Model.Attachments;
-using VkNet.Model.RequestParams;
 using VkNet.Model.RequestParams.Photo;
 using VkNet.Utils;
 
@@ -20,51 +19,56 @@ namespace VkNet.Abstractions
 		/// Создает пустой альбом для фотографий.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает объект PhotoAlbum
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.createAlbum
 		/// </remarks>
-		Task<PhotoAlbum> CreateAlbumAsync(PhotoCreateAlbumParams @params);
+		Task<PhotoAlbum> CreateAlbumAsync(PhotoCreateAlbumParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Редактирует данные альбома для фотографий пользователя.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.editAlbum
 		/// </remarks>
-		Task<bool> EditAlbumAsync(PhotoEditAlbumParams @params);
+		Task<bool> EditAlbumAsync(PhotoEditAlbumParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список альбомов пользователя или сообщества.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
 		/// <param name="skipAuthorization"> Если <c> true </c>, то пропустить авторизацию </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает список объектов PhotoAlbum
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.getAlbums
 		/// </remarks>
-		Task<VkCollection<PhotoAlbum>> GetAlbumsAsync(PhotoGetAlbumsParams @params, bool skipAuthorization = false);
+		Task<VkCollection<PhotoAlbum>> GetAlbumsAsync(PhotoGetAlbumsParams @params, bool skipAuthorization = false,
+													CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список фотографий в альбоме.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
 		/// <param name="skipAuthorization"> Если <c> true </c>, то пропустить авторизацию </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает список объектов Photo
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.get
 		/// </remarks>
-		Task<VkCollection<Photo>> GetAsync(PhotoGetParams @params, bool skipAuthorization = false);
+		Task<VkCollection<Photo>> GetAsync(PhotoGetParams @params, bool skipAuthorization = false, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает количество доступных альбомов пользователя или сообщества.
@@ -80,6 +84,7 @@ namespace VkNet.Abstractions
 		/// целое число (Целое
 		/// число).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает количество альбомов с учетом настроек
 		/// приватности.
@@ -87,7 +92,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.getAlbumsCount
 		/// </remarks>
-		Task<int> GetAlbumsCountAsync(long? userId = null, long? groupId = null);
+		Task<int> GetAlbumsCountAsync(long? userId = null, long? groupId = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает информацию о фотографиях по их идентификаторам.
@@ -127,6 +132,7 @@ namespace VkNet.Abstractions
 		/// значения 1 или 0 (Флаг, может принимать значения 1 или 0).
 		/// </param>
 		/// <param name="skipAuthorization"> Если <c> true </c>, то пропустить авторизацию </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает массив объектов photo.
 		/// Если к фотографии прикреплено местоположение, также возвращаются поля lat и
@@ -148,10 +154,8 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.getById
 		/// </remarks>
-		Task<ReadOnlyCollection<Photo>> GetByIdAsync(IEnumerable<string> photos
-													, bool? extended = null
-													, bool? photoSizes = null
-													, bool skipAuthorization = false);
+		Task<ReadOnlyCollection<Photo>> GetByIdAsync(IEnumerable<string> photos, bool? extended = null, bool? photoSizes = null,
+													bool skipAuthorization = false, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает адрес сервера для загрузки фотографий.
@@ -162,11 +166,12 @@ namespace VkNet.Abstractions
 		/// загрузить фотографию в
 		/// альбом сообщества). целое число (Целое число).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns> После успешного выполнения возвращает объект UploadServerInfo </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.getUploadServer
 		/// </remarks>
-		Task<UploadServerInfo> GetUploadServerAsync(long albumId, long? groupId = null);
+		Task<UploadServerInfo> GetUploadServerAsync(long albumId, long? groupId = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает адрес сервера для загрузки главной фотографии на страницу
@@ -181,6 +186,7 @@ namespace VkNet.Abstractions
 		/// текущего пользователя (Целое число, по
 		/// умолчанию идентификатор текущего пользователя).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает объект с единственным полем upload_url.
 		/// </returns>
@@ -188,7 +194,7 @@ namespace VkNet.Abstractions
 		/// Страница документации ВКонтакте
 		/// http://vk.com/dev/photos.getOwnerPhotoUploadServer
 		/// </remarks>
-		Task<UploadServerInfo> GetOwnerPhotoUploadServerAsync(long? ownerId = null);
+		Task<UploadServerInfo> GetOwnerPhotoUploadServerAsync(long? ownerId = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет получить адрес для загрузки фотографий мультидиалогов.
@@ -211,13 +217,15 @@ namespace VkNet.Abstractions
 		/// 200
 		/// (Положительное число, минимальное значение 200).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает объект с единственным полем upload_url.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.getChatUploadServer
 		/// </remarks>
-		Task<UploadServerInfo> GetChatUploadServerAsync(ulong chatId, ulong? cropX = null, ulong? cropY = null, ulong? cropWidth = null);
+		Task<UploadServerInfo> GetChatUploadServerAsync(ulong chatId, ulong? cropX = null, ulong? cropY = null, ulong? cropWidth = null,
+														CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет сохранить главную фотографию пользователя или сообщества.
@@ -226,8 +234,7 @@ namespace VkNet.Abstractions
 		/// Параметр, возвращаемый в результате загрузки фотографии
 		/// на сервер.
 		/// </param>
-		/// <param name="captchaSid"> Идентификатор капчи </param>
-		/// <param name="captchaKey"> текст, который ввел пользователь </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает объект, содержащий поля photo_hash и
 		/// photo_src (при работе через VK.api метод
@@ -240,16 +247,16 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.saveOwnerPhoto
 		/// </remarks>
-		Task<Photo> SaveOwnerPhotoAsync(string response);
-
-		/// <inheritdoc cref="IPhotoCategoryAsync.SaveOwnerPhotoAsync(string)" />
-		[Obsolete(ObsoleteText.CaptchaNeeded, true)]
-		Task<Photo> SaveOwnerPhotoAsync(string response, long? captchaSid, string captchaKey);
+		Task<Photo> SaveOwnerPhotoAsync(string response, CancellationToken token = default);
 
 		/// <summary>
 		/// Сохраняет фотографии после успешной загрузки на URI, полученный методом
 		/// photos.getWallUploadServer.
 		/// </summary>
+		/// <param name="response">
+		/// Параметр, возвращаемый в результате загрузки фотографии
+		/// на сервер
+		/// </param>
 		/// <param name="userId">
 		/// Идентификатор пользователя, на стену которого нужно
 		/// сохранить фотографию
@@ -258,11 +265,8 @@ namespace VkNet.Abstractions
 		/// Идентификатор сообщества, на стену которого нужно
 		/// сохранить фотографию
 		/// </param>
-		/// <param name="response">
-		/// Параметр, возвращаемый в результате загрузки фотографии
-		/// на сервер
-		/// </param>
 		/// <param name="caption"> Описание загружаемой фотографии </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает массив, содержащий объект с загруженной
 		/// фотографией.
@@ -270,7 +274,8 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.saveWallPhoto
 		/// </remarks>
-		Task<ReadOnlyCollection<Photo>> SaveWallPhotoAsync(string response, ulong? userId, ulong? groupId = null, string caption = null);
+		Task<ReadOnlyCollection<Photo>> SaveWallPhotoAsync(string response, ulong? userId, ulong? groupId = null, string caption = null,
+															CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает адрес сервера для загрузки фотографии на стену пользователя или
@@ -281,6 +286,7 @@ namespace VkNet.Abstractions
 		/// «минус»). целое число
 		/// (Целое число).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает объект с полями upload_url, album_id,
 		/// user_id.
@@ -288,7 +294,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.getWallUploadServer
 		/// </remarks>
-		Task<UploadServerInfo> GetWallUploadServerAsync(long? groupId = null);
+		Task<UploadServerInfo> GetWallUploadServerAsync(long? groupId = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает адрес сервера для загрузки фотографии в личное сообщение
@@ -298,12 +304,13 @@ namespace VkNet.Abstractions
 		/// Идентификатор назначения (для загрузки фотографии в
 		/// сообщениях сообществ).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns> После успешного выполнения возвращает объект UploadServerInfo </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте
 		/// http://vk.com/dev/photos.getMessagesUploadServer
 		/// </remarks>
-		Task<UploadServerInfo> GetMessagesUploadServerAsync(long peerId);
+		Task<UploadServerInfo> GetMessagesUploadServerAsync(long peerId, CancellationToken token = default);
 
 		/// <summary>
 		/// Сохраняет фотографию после успешной загрузки на URI, полученный методом
@@ -313,6 +320,7 @@ namespace VkNet.Abstractions
 		/// Параметр, возвращаемый в результате загрузки фотографии
 		/// на сервер
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает массив с загруженной фотографией,
 		/// возвращённый объект имеет поля id,
@@ -323,7 +331,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.saveMessagesPhoto
 		/// </remarks>
-		Task<ReadOnlyCollection<Photo>> SaveMessagesPhotoAsync(string response);
+		Task<ReadOnlyCollection<Photo>> SaveMessagesPhotoAsync(string response, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает адрес сервера для загрузки обложки сообщества.
@@ -353,16 +361,14 @@ namespace VkNet.Abstractions
 		/// (Положительное
 		/// число).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns> После успешного выполнения возвращает объект UploadServerInfo </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте
 		/// http://vk.com/dev/photos.getOwnerCoverPhotoUploadServer
 		/// </remarks>
-		Task<UploadServerInfo> GetOwnerCoverPhotoUploadServerAsync(long groupId
-																	, long? cropX = null
-																	, long? cropY = null
-																	, long? cropX2 = 795L
-																	, long? cropY2 = 200L);
+		Task<UploadServerInfo> GetOwnerCoverPhotoUploadServerAsync(long groupId, long? cropX = null, long? cropY = null, long? cropX2 = 795,
+																	long? cropY2 = 200, CancellationToken token = default);
 
 		/// <summary>
 		/// Сохраняет фотографию после успешной загрузки на URI, полученный методом
@@ -372,6 +378,7 @@ namespace VkNet.Abstractions
 		/// Параметр, возвращаемый в результате загрузки фотографии
 		/// на сервер
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает массив, содержащий объект с загруженной
 		/// фотографией.
@@ -379,7 +386,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.saveOwnerCoverPhoto
 		/// </remarks>
-		Task<GroupCover> SaveOwnerCoverPhotoAsync(string response);
+		Task<GroupCover> SaveOwnerCoverPhotoAsync(string response, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет пожаловаться на фотографию.
@@ -405,13 +412,14 @@ namespace VkNet.Abstractions
 		/// 6 — оскорбление.
 		/// положительное число (Положительное число).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.report
 		/// </remarks>
-		Task<bool> ReportAsync(long ownerId, ulong photoId, ReportReason reason);
+		Task<bool> ReportAsync(long ownerId, ulong photoId, ReportReason reason, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет пожаловаться на комментарий к фотографии.
@@ -437,38 +445,41 @@ namespace VkNet.Abstractions
 		/// 6 — оскорбление.
 		/// положительное число (Положительное число).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.reportComment
 		/// </remarks>
-		Task<bool> ReportCommentAsync(long ownerId, ulong commentId, ReportReason reason);
+		Task<bool> ReportCommentAsync(long ownerId, ulong commentId, ReportReason reason, CancellationToken token = default);
 
 		/// <summary>
 		/// Осуществляет поиск изображений по местоположению или описанию.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
 		/// <param name="skipAuthorization"> Если <c> true </c>, то пропустить авторизацию </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает список объектов фотографий.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.search
 		/// </remarks>
-		Task<VkCollection<Photo>> SearchAsync(PhotoSearchParams @params, bool skipAuthorization = false);
+		Task<VkCollection<Photo>> SearchAsync(PhotoSearchParams @params, bool skipAuthorization = false, CancellationToken token = default);
 
 		/// <summary>
 		/// Сохраняет фотографии после успешной загрузки.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает список объектов Photo
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.save
 		/// </remarks>
-		Task<ReadOnlyCollection<Photo>> SaveAsync(PhotoSaveParams @params);
+		Task<ReadOnlyCollection<Photo>> SaveAsync(PhotoSaveParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет скопировать фотографию в альбом "Сохраненные фотографии".
@@ -487,38 +498,31 @@ namespace VkNet.Abstractions
 		/// Специальный код доступа для приватных фотографий
 		/// строка (Строка).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает идентификатор созданной фотографии.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.copy
 		/// </remarks>
-		Task<long> CopyAsync(long ownerId, ulong photoId, string accessKey = null);
+		Task<long> CopyAsync(long ownerId, ulong photoId, string accessKey = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Изменяет описание у выбранной фотографии.
 		/// </summary>
 		/// <param name="params"> Входные параметры выборки. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.edit
 		/// </remarks>
-		Task<bool> EditAsync(PhotoEditParams @params);
+		Task<bool> EditAsync(PhotoEditParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Переносит фотографию из одного альбома в другой.
 		/// </summary>
-		/// <param name="ownerId">
-		/// Идентификатор пользователя или сообщества, которому принадлежит фотография.
-		/// Обратите внимание,
-		/// идентификатор сообщества в параметре owner_id необходимо указывать со знаком
-		/// "-" — например, owner_id=-1
-		/// соответствует идентификатору сообщества ВКонтакте API (club1)  целое число, по
-		/// умолчанию идентификатор текущего
-		/// пользователя (Целое число, по умолчанию идентификатор текущего пользователя).
-		/// </param>
 		/// <param name="targetAlbumId">
 		/// Идентификатор альбома, в который нужно переместить фотографию. целое число,
 		/// обязательный
@@ -529,17 +533,6 @@ namespace VkNet.Abstractions
 		/// параметр (Целое
 		/// число, обязательный параметр).
 		/// </param>
-		/// <returns>
-		/// После успешного выполнения возвращает <c> true </c>.
-		/// </returns>
-		/// <remarks>
-		/// Страница документации ВКонтакте http://vk.com/dev/photos.move
-		/// </remarks>
-		Task<bool> MoveAsync(long targetAlbumId, ulong photoId, long? ownerId = null);
-
-		/// <summary>
-		/// Делает фотографию обложкой альбома.
-		/// </summary>
 		/// <param name="ownerId">
 		/// Идентификатор пользователя или сообщества, которому принадлежит фотография.
 		/// Обратите внимание,
@@ -549,23 +542,49 @@ namespace VkNet.Abstractions
 		/// умолчанию идентификатор текущего
 		/// пользователя (Целое число, по умолчанию идентификатор текущего пользователя).
 		/// </param>
+		/// <param name="token"></param>
+		/// <returns>
+		/// После успешного выполнения возвращает <c> true </c>.
+		/// </returns>
+		/// <remarks>
+		/// Страница документации ВКонтакте http://vk.com/dev/photos.move
+		/// </remarks>
+		Task<bool> MoveAsync(long targetAlbumId, ulong photoId, long? ownerId = null, CancellationToken token = default);
+
+		/// <summary>
+		/// Делает фотографию обложкой альбома.
+		/// </summary>
 		/// <param name="photoId">
 		/// Идентификатор фотографии. Фотография должна находиться в альбоме album_id.
 		/// целое число,
 		/// обязательный параметр (Целое число, обязательный параметр).
 		/// </param>
+		/// <param name="ownerId">
+		/// Идентификатор пользователя или сообщества, которому принадлежит фотография.
+		/// Обратите внимание,
+		/// идентификатор сообщества в параметре owner_id необходимо указывать со знаком
+		/// "-" — например, owner_id=-1
+		/// соответствует идентификатору сообщества ВКонтакте API (club1)  целое число, по
+		/// умолчанию идентификатор текущего
+		/// пользователя (Целое число, по умолчанию идентификатор текущего пользователя).
+		/// </param>
 		/// <param name="albumId"> Идентификатор альбома. целое число (Целое число). </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.makeCover
 		/// </remarks>
-		Task<bool> MakeCoverAsync(ulong photoId, long? ownerId = null, long? albumId = null);
+		Task<bool> MakeCoverAsync(ulong photoId, long? ownerId = null, long? albumId = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Меняет порядок альбома в списке альбомов пользователя.
 		/// </summary>
+		/// <param name="albumId">
+		/// Идентификатор альбома. целое число, обязательный параметр (Целое число,
+		/// обязательный параметр).
+		/// </param>
 		/// <param name="ownerId">
 		/// Идентификатор пользователя или сообщества, которому принадлежит альбом.
 		/// Обратите внимание,
@@ -575,10 +594,6 @@ namespace VkNet.Abstractions
 		/// умолчанию идентификатор текущего
 		/// пользователя (Целое число, по умолчанию идентификатор текущего пользователя).
 		/// </param>
-		/// <param name="albumId">
-		/// Идентификатор альбома. целое число, обязательный параметр (Целое число,
-		/// обязательный параметр).
-		/// </param>
 		/// <param name="before">
 		/// Идентификатор альбома, перед которым следует поместить альбом. целое число
 		/// (Целое число).
@@ -587,17 +602,24 @@ namespace VkNet.Abstractions
 		/// Идентификатор альбома, после которого следует поместить альбом. целое число
 		/// (Целое число).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.reorderAlbums
 		/// </remarks>
-		Task<bool> ReorderAlbumsAsync(long albumId, long? ownerId = null, long? before = null, long? after = null);
+		Task<bool> ReorderAlbumsAsync(long albumId, long? ownerId = null, long? before = null, long? after = null,
+									CancellationToken token = default);
 
 		/// <summary>
 		/// Меняет порядок фотографии в списке фотографий альбома пользователя.
 		/// </summary>
+		/// <param name="photoId">
+		/// Идентификатор фотографии. целое число, обязательный параметр (Целое число,
+		/// обязательный
+		/// параметр).
+		/// </param>
 		/// <param name="ownerId">
 		/// Идентификатор пользователя или сообщества, которому принадлежит фотография.
 		/// Обратите внимание,
@@ -606,11 +628,6 @@ namespace VkNet.Abstractions
 		/// соответствует идентификатору сообщества ВКонтакте API (club1)  целое число, по
 		/// умолчанию идентификатор текущего
 		/// пользователя (Целое число, по умолчанию идентификатор текущего пользователя).
-		/// </param>
-		/// <param name="photoId">
-		/// Идентификатор фотографии. целое число, обязательный параметр (Целое число,
-		/// обязательный
-		/// параметр).
 		/// </param>
 		/// <param name="before">
 		/// Идентификатор фотографии, перед которой следует поместить фотографию. Если
@@ -622,19 +639,22 @@ namespace VkNet.Abstractions
 		/// параметр не указан,
 		/// фотография будет помещена первой. целое число (Целое число).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.reorderPhotos
 		/// </remarks>
-		Task<bool> ReorderPhotosAsync(ulong photoId, long? ownerId = null, long? before = null, long? after = null);
+		Task<bool> ReorderPhotosAsync(ulong photoId, long? ownerId = null, long? before = null, long? after = null,
+									CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает все фотографии пользователя или сообщества в антихронологическом
 		/// порядке.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает список объектов Photo
 		/// <remarks>
@@ -650,19 +670,20 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.getAll
 		/// </remarks>
-		Task<VkCollection<Photo>> GetAllAsync(PhotoGetAllParams @params);
+		Task<VkCollection<Photo>> GetAllAsync(PhotoGetAllParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список фотографий, на которых отмечен пользователь.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает список объектов photo.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.getUserPhotos
 		/// </remarks>
-		Task<VkCollection<Photo>> GetUserPhotosAsync(PhotoGetUserPhotosParams @params);
+		Task<VkCollection<Photo>> GetUserPhotosAsync(PhotoGetUserPhotosParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Удаляет указанный альбом для фотографий у текущего пользователя.
@@ -677,17 +698,23 @@ namespace VkNet.Abstractions
 		/// число (Целое
 		/// число, положительное число).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.deleteAlbum
 		/// </remarks>
-		Task<bool> DeleteAlbumAsync(long albumId, long? groupId = null);
+		Task<bool> DeleteAlbumAsync(long albumId, long? groupId = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Удаление фотографии на сайте.
 		/// </summary>
+		/// <param name="photoId">
+		/// Идентификатор фотографии. положительное число, обязательный параметр
+		/// (Положительное число,
+		/// обязательный параметр).
+		/// </param>
 		/// <param name="ownerId">
 		/// Идентификатор пользователя или сообщества, которому принадлежит фотография.
 		/// Обратите внимание,
@@ -697,22 +724,23 @@ namespace VkNet.Abstractions
 		/// умолчанию идентификатор текущего
 		/// пользователя (Целое число, по умолчанию идентификатор текущего пользователя).
 		/// </param>
-		/// <param name="photoId">
-		/// Идентификатор фотографии. положительное число, обязательный параметр
-		/// (Положительное число,
-		/// обязательный параметр).
-		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.delete
 		/// </remarks>
-		Task<bool> DeleteAsync(ulong photoId, long? ownerId = null);
+		Task<bool> DeleteAsync(ulong photoId, long? ownerId = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Восстанавливает удаленную фотографию.
 		/// </summary>
+		/// <param name="photoId">
+		/// Идентификатор фотографии. положительное число, обязательный параметр
+		/// (Положительное число,
+		/// обязательный параметр).
+		/// </param>
 		/// <param name="ownerId">
 		/// Идентификатор пользователя или сообщества, которому принадлежит фотография.
 		/// Обратите внимание,
@@ -722,31 +750,18 @@ namespace VkNet.Abstractions
 		/// умолчанию идентификатор текущего
 		/// пользователя (Целое число, по умолчанию идентификатор текущего пользователя).
 		/// </param>
-		/// <param name="photoId">
-		/// Идентификатор фотографии. положительное число, обязательный параметр
-		/// (Положительное число,
-		/// обязательный параметр).
-		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.restore
 		/// </remarks>
-		Task<bool> RestoreAsync(ulong photoId, long? ownerId = null);
+		Task<bool> RestoreAsync(ulong photoId, long? ownerId = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Подтверждает отметку на фотографии.
 		/// </summary>
-		/// <param name="ownerId">
-		/// Идентификатор пользователя или сообщества, которому принадлежит фотография.
-		/// Обратите внимание,
-		/// идентификатор сообщества в параметре owner_id необходимо указывать со знаком
-		/// "-" — например, owner_id=-1
-		/// соответствует идентификатору сообщества ВКонтакте API (club1)  целое число, по
-		/// умолчанию идентификатор текущего
-		/// пользователя (Целое число, по умолчанию идентификатор текущего пользователя).
-		/// </param>
 		/// <param name="photoId">
 		/// Идентификатор фотографии. обязательный параметр
 		/// (Обязательный параметр).
@@ -756,25 +771,36 @@ namespace VkNet.Abstractions
 		/// число, обязательный
 		/// параметр).
 		/// </param>
+		/// <param name="ownerId">
+		/// Идентификатор пользователя или сообщества, которому принадлежит фотография.
+		/// Обратите внимание,
+		/// идентификатор сообщества в параметре owner_id необходимо указывать со знаком
+		/// "-" — например, owner_id=-1
+		/// соответствует идентификатору сообщества ВКонтакте API (club1)  целое число, по
+		/// умолчанию идентификатор текущего
+		/// пользователя (Целое число, по умолчанию идентификатор текущего пользователя).
+		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.confirmTag
 		/// </remarks>
-		Task<bool> ConfirmTagAsync(ulong photoId, ulong tagId, long? ownerId = null);
+		Task<bool> ConfirmTagAsync(ulong photoId, ulong tagId, long? ownerId = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список комментариев к фотографии.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает список объектов Comment
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.getComments
 		/// </remarks>
-		Task<VkCollection<Comment>> GetCommentsAsync(PhotoGetCommentsParams @params);
+		Task<VkCollection<Comment>> GetCommentsAsync(PhotoGetCommentsParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает отсортированный в антихронологическом порядке список всех
@@ -782,29 +808,36 @@ namespace VkNet.Abstractions
 		/// альбомам пользователя.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает список объектов Comment
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.getAllComments
 		/// </remarks>
-		Task<VkCollection<Comment>> GetAllCommentsAsync(PhotoGetAllCommentsParams @params);
+		Task<VkCollection<Comment>> GetAllCommentsAsync(PhotoGetAllCommentsParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Создает новый комментарий к фотографии.
 		/// </summary>
 		/// <param name="params"> Входные параметры выборки. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает идентификатор созданного комментария.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.createComment
 		/// </remarks>
-		Task<long> CreateCommentAsync(PhotoCreateCommentParams @params);
+		Task<long> CreateCommentAsync(PhotoCreateCommentParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Удаляет комментарий к фотографии.
 		/// </summary>
+		/// <param name="commentId">
+		/// Идентификатор комментария. целое число, обязательный параметр (Целое число,
+		/// обязательный
+		/// параметр).
+		/// </param>
 		/// <param name="ownerId">
 		/// Идентификатор пользователя или сообщества, которому принадлежит фотография.
 		/// Обратите внимание,
@@ -814,11 +847,7 @@ namespace VkNet.Abstractions
 		/// умолчанию идентификатор текущего
 		/// пользователя (Целое число, по умолчанию идентификатор текущего пользователя).
 		/// </param>
-		/// <param name="commentId">
-		/// Идентификатор комментария. целое число, обязательный параметр (Целое число,
-		/// обязательный
-		/// параметр).
-		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c> (0, если комментарий не
 		/// найден).
@@ -826,11 +855,16 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.deleteComment
 		/// </remarks>
-		Task<bool> DeleteCommentAsync(ulong commentId, long? ownerId = null);
+		Task<bool> DeleteCommentAsync(ulong commentId, long? ownerId = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Восстанавливает удаленный комментарий к фотографии.
 		/// </summary>
+		/// <param name="commentId">
+		/// Идентификатор удаленного комментария. целое число, обязательный параметр (Целое
+		/// число,
+		/// обязательный параметр).
+		/// </param>
 		/// <param name="ownerId">
 		/// Идентификатор пользователя или сообщества, которому принадлежит фотография.
 		/// Обратите внимание,
@@ -840,11 +874,7 @@ namespace VkNet.Abstractions
 		/// умолчанию идентификатор текущего
 		/// пользователя (Целое число, по умолчанию идентификатор текущего пользователя).
 		/// </param>
-		/// <param name="commentId">
-		/// Идентификатор удаленного комментария. целое число, обязательный параметр (Целое
-		/// число,
-		/// обязательный параметр).
-		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c> (0, если комментарий с
 		/// таким идентификатором не является
@@ -853,22 +883,22 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.restoreComment
 		/// </remarks>
-		Task<long> RestoreCommentAsync(ulong commentId, long? ownerId = null);
+		Task<long> RestoreCommentAsync(ulong commentId, long? ownerId = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Изменяет текст комментария к фотографии.
 		/// </summary>
+		/// <param name="commentId"> Идентификатор комментария </param>
+		/// <param name="message">
+		/// Новый текст комментария (является обязательным, если не задан параметр
+		/// attachments)
+		/// </param>
 		/// <param name="ownerId">
 		/// Идентификатор пользователя или сообщества, которому принадлежит фотография.
 		/// Обратите внимание,
 		/// идентификатор сообщества в параметре owner_id необходимо указывать со знаком
 		/// "-" — например, owner_id=-1
 		/// соответствует идентификатору сообщества ВКонтакте API (club1)
-		/// </param>
-		/// <param name="commentId"> Идентификатор комментария </param>
-		/// <param name="message">
-		/// Новый текст комментария (является обязательным, если не задан параметр
-		/// attachments)
 		/// </param>
 		/// <param name="attachments">
 		/// Новый список объектов, приложенных к комментарию и разделённых символом ",".
@@ -889,15 +919,22 @@ namespace VkNet.Abstractions
 		/// Параметр является обязательным, если не задан параметр message. список строк,
 		/// разделенных через запятую
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns> После успешного выполнения возвращает true. </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.editComment
 		/// </remarks>
-		Task<bool> EditCommentAsync(ulong commentId, string message, long? ownerId = null, IEnumerable<MediaAttachment> attachments = null);
+		Task<bool> EditCommentAsync(ulong commentId, string message, long? ownerId = null, IEnumerable<MediaAttachment> attachments = null,
+									CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список отметок на фотографии.
 		/// </summary>
+		/// <param name="photoId">
+		/// Идентификатор фотографии. целое число, обязательный параметр (Целое число,
+		/// обязательный
+		/// параметр).
+		/// </param>
 		/// <param name="ownerId">
 		/// Идентификатор пользователя или сообщества, которому принадлежит фотография.
 		/// Обратите внимание,
@@ -907,16 +944,12 @@ namespace VkNet.Abstractions
 		/// умолчанию идентификатор текущего
 		/// пользователя (Целое число, по умолчанию идентификатор текущего пользователя).
 		/// </param>
-		/// <param name="photoId">
-		/// Идентификатор фотографии. целое число, обязательный параметр (Целое число,
-		/// обязательный
-		/// параметр).
-		/// </param>
 		/// <param name="accessKey">
 		/// Строковой ключ доступа, который може быть получен при получении объекта
 		/// фотографии. строка
 		/// (Строка).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает массив объектов tag, каждый из которых
 		/// содержит следующие поля:
@@ -933,23 +966,34 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.getTags
 		/// </remarks>
-		Task<ReadOnlyCollection<Tag>> GetTagsAsync(ulong photoId, long? ownerId = null, string accessKey = null);
+		Task<ReadOnlyCollection<Tag>> GetTagsAsync(ulong photoId, long? ownerId = null, string accessKey = null,
+													CancellationToken token = default);
 
 		/// <summary>
 		/// Добавляет отметку на фотографию.
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает идентификатор созданной отметки (tag id).
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.putTag
 		/// </remarks>
-		Task<ulong> PutTagAsync(PhotoPutTagParams @params);
+		Task<ulong> PutTagAsync(PhotoPutTagParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Удаляет отметку с фотографии.
 		/// </summary>
+		/// <param name="tagId">
+		/// Идентификатор отметки. целое число, обязательный параметр (Целое число,
+		/// обязательный параметр).
+		/// </param>
+		/// <param name="photoId">
+		/// Идентификатор фотографии. целое число, обязательный параметр (Целое число,
+		/// обязательный
+		/// параметр).
+		/// </param>
 		/// <param name="ownerId">
 		/// Идентификатор пользователя или сообщества, которому принадлежит фотография.
 		/// Обратите внимание,
@@ -959,22 +1003,14 @@ namespace VkNet.Abstractions
 		/// умолчанию идентификатор текущего
 		/// пользователя (Целое число, по умолчанию идентификатор текущего пользователя).
 		/// </param>
-		/// <param name="photoId">
-		/// Идентификатор фотографии. целое число, обязательный параметр (Целое число,
-		/// обязательный
-		/// параметр).
-		/// </param>
-		/// <param name="tagId">
-		/// Идентификатор отметки. целое число, обязательный параметр (Целое число,
-		/// обязательный параметр).
-		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.removeTag
 		/// </remarks>
-		Task<bool> RemoveTagAsync(ulong tagId, ulong photoId, long? ownerId = null);
+		Task<bool> RemoveTagAsync(ulong tagId, ulong photoId, long? ownerId = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список фотографий, на которых есть непросмотренные отметки.
@@ -990,13 +1026,14 @@ namespace VkNet.Abstractions
 		/// по умолчанию 20 (Положительное число, максимальное значение 100, по умолчанию
 		/// 20).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает список объектов Photo
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.getNewTags
 		/// </remarks>
-		Task<VkCollection<Photo>> GetNewTagsAsync(uint? offset = null, uint? count = null);
+		Task<VkCollection<Photo>> GetNewTagsAsync(uint? offset = null, uint? count = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает адрес сервера для загрузки фотографии товаров сообщества.
@@ -1025,17 +1062,15 @@ namespace VkNet.Abstractions
 		/// 200
 		/// (Положительное число, минимальное значение 200).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает объект с единственным полем upload_url.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.getMarketUploadServer
 		/// </remarks>
-		Task<UploadServerInfo> GetMarketUploadServerAsync(long groupId
-														, bool? mainPhoto = null
-														, long? cropX = null
-														, long? cropY = null
-														, long? cropWidth = null);
+		Task<UploadServerInfo> GetMarketUploadServerAsync(long groupId, bool? mainPhoto = null, long? cropX = null, long? cropY = null,
+														long? cropWidth = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает адрес сервера для загрузки фотографии подборки товаров в сообществе.
@@ -1045,6 +1080,7 @@ namespace VkNet.Abstractions
 		/// товаров. целое
 		/// число (Целое число).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// .
 		/// </returns>
@@ -1052,7 +1088,7 @@ namespace VkNet.Abstractions
 		/// Страница документации ВКонтакте
 		/// http://vk.com/dev/photos.getMarketAlbumUploadServer
 		/// </remarks>
-		Task<UploadServerInfo> GetMarketAlbumUploadServerAsync(long groupId);
+		Task<UploadServerInfo> GetMarketAlbumUploadServerAsync(long groupId, CancellationToken token = default);
 
 		/// <summary>
 		/// Сохраняет фотографии после успешной загрузки на URI, полученный методом
@@ -1068,6 +1104,7 @@ namespace VkNet.Abstractions
 		/// обязательный параметр
 		/// (строка, обязательный параметр).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает массив, содержащий объект с загруженной
 		/// фотографией.
@@ -1075,7 +1112,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.saveMarketPhoto
 		/// </remarks>
-		Task<ReadOnlyCollection<Photo>> SaveMarketPhotoAsync(long groupId, string response);
+		Task<ReadOnlyCollection<Photo>> SaveMarketPhotoAsync(long groupId, string response, CancellationToken token = default);
 
 		/// <summary>
 		/// Сохраняет фотографии после успешной загрузки на URI, полученный методом
@@ -1091,6 +1128,7 @@ namespace VkNet.Abstractions
 		/// обязательный параметр
 		/// (строка, обязательный параметр).
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// После успешного выполнения возвращает массив, содержащий объект с загруженной
 		/// фотографией.
@@ -1098,6 +1136,6 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/photos.saveMarketAlbumPhoto
 		/// </remarks>
-		Task<ReadOnlyCollection<Photo>> SaveMarketAlbumPhotoAsync(long groupId, string response);
+		Task<ReadOnlyCollection<Photo>> SaveMarketAlbumPhotoAsync(long groupId, string response, CancellationToken token = default);
 	}
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 using VkNet.Enums;
 using VkNet.Model;
@@ -15,324 +16,292 @@ namespace VkNet.Categories
 	public partial class PhotoCategory
 	{
 		/// <inheritdoc />
-		public Task<PhotoAlbum> CreateAlbumAsync(PhotoCreateAlbumParams @params)
+		public Task<PhotoAlbum> CreateAlbumAsync(PhotoCreateAlbumParams @params, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => CreateAlbum(@params: @params));
+			return TypeHelper.TryInvokeMethodAsync(func: () => CreateAlbum(@params: @params), token: token);
 		}
 
 		/// <inheritdoc />
-		public Task<bool> EditAlbumAsync(PhotoEditAlbumParams @params)
+		public Task<bool> EditAlbumAsync(PhotoEditAlbumParams @params, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => EditAlbum(@params: @params));
+			return TypeHelper.TryInvokeMethodAsync(func: () => EditAlbum(@params: @params), token: token);
 		}
 
 		/// <inheritdoc />
-		public Task<VkCollection<PhotoAlbum>> GetAlbumsAsync(PhotoGetAlbumsParams @params, bool skipAuthorization = false)
+		public Task<VkCollection<PhotoAlbum>> GetAlbumsAsync(PhotoGetAlbumsParams @params, bool skipAuthorization = false,
+															CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				GetAlbums(@params, skipAuthorization));
+			return TypeHelper.TryInvokeMethodAsync(func: () => GetAlbums(@params, skipAuthorization), token: token);
 		}
 
 		/// <inheritdoc />
-		public Task<VkCollection<Photo>> GetAsync(PhotoGetParams @params, bool skipAuthorization = false)
+		public Task<VkCollection<Photo>> GetAsync(PhotoGetParams @params, bool skipAuthorization = false, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => Get(@params, skipAuthorization));
+			return TypeHelper.TryInvokeMethodAsync(func: () => Get(@params, skipAuthorization), token: token);
 		}
 
 		/// <inheritdoc />
-		public Task<int> GetAlbumsCountAsync(long? userId = null, long? groupId = null)
+		public Task<int> GetAlbumsCountAsync(long? userId = null, long? groupId = null, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => GetAlbumsCount(userId, groupId));
+			return TypeHelper.TryInvokeMethodAsync(func: () => GetAlbumsCount(userId, groupId), token: token);
 		}
 
 		/// <inheritdoc />
-		public Task<ReadOnlyCollection<Photo>> GetByIdAsync(IEnumerable<string> photos
-															, bool? extended = null
-															, bool? photoSizes = null
-															, bool skipAuthorization = false)
+		public Task<ReadOnlyCollection<Photo>> GetByIdAsync(IEnumerable<string> photos, bool? extended = null, bool? photoSizes = null,
+															bool skipAuthorization = false, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				GetById(photos, extended, photoSizes, skipAuthorization));
+			return TypeHelper.TryInvokeMethodAsync(func: () => GetById(photos, extended, photoSizes, skipAuthorization), token: token);
 		}
 
 		/// <inheritdoc />
-		public Task<UploadServerInfo> GetUploadServerAsync(long albumId, long? groupId = null)
+		public Task<UploadServerInfo> GetUploadServerAsync(long albumId, long? groupId = null, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => GetUploadServer(albumId, groupId));
+			return TypeHelper.TryInvokeMethodAsync(func: () => GetUploadServer(albumId, groupId), token: token);
 		}
 
 		/// <inheritdoc />
-		public Task<UploadServerInfo> GetOwnerPhotoUploadServerAsync(long? ownerId = null)
+		public Task<UploadServerInfo> GetOwnerPhotoUploadServerAsync(long? ownerId = null, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => GetOwnerPhotoUploadServer(ownerId: ownerId));
+			return TypeHelper.TryInvokeMethodAsync(func: () => GetOwnerPhotoUploadServer(ownerId: ownerId), token: token);
 		}
 
 		/// <inheritdoc />
-		public Task<UploadServerInfo> GetChatUploadServerAsync(ulong chatId
-																, ulong? cropX = null
-																, ulong? cropY = null
-																, ulong? cropWidth = null)
+		public Task<UploadServerInfo> GetChatUploadServerAsync(ulong chatId, ulong? cropX = null, ulong? cropY = null,
+																ulong? cropWidth = null, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				GetChatUploadServer(chatId, cropX, cropY, cropWidth));
+			return TypeHelper.TryInvokeMethodAsync(func: () => GetChatUploadServer(chatId, cropX, cropY, cropWidth), token: token);
 		}
 
 		/// <inheritdoc />
-		public Task<Photo> SaveOwnerPhotoAsync(string response)
+		public Task<Photo> SaveOwnerPhotoAsync(string response, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				SaveOwnerPhoto(response));
+			return TypeHelper.TryInvokeMethodAsync(func: () => SaveOwnerPhoto(response), token: token);
 		}
 
 		/// <inheritdoc />
-		[Obsolete(ObsoleteText.CaptchaNeeded, true)]
-		public Task<Photo> SaveOwnerPhotoAsync(string response, long? captchaSid, string captchaKey)
+		public Task<ReadOnlyCollection<Photo>> SaveWallPhotoAsync(string response, ulong? userId, ulong? groupId = null,
+																string caption = null, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				SaveOwnerPhoto(response, captchaSid, captchaKey));
+			return TypeHelper.TryInvokeMethodAsync(() => SaveWallPhoto(response, userId, groupId, caption), token);
 		}
 
 		/// <inheritdoc />
-		public Task<ReadOnlyCollection<Photo>> SaveWallPhotoAsync(string response
-																, ulong? userId
-																, ulong? groupId = null
-																, string caption = null)
+		public Task<UploadServerInfo> GetWallUploadServerAsync(long? groupId = null, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				SaveWallPhoto(response, userId, groupId, caption));
+			return TypeHelper.TryInvokeMethodAsync(() => GetWallUploadServer(groupId: groupId), token);
 		}
 
 		/// <inheritdoc />
-		public Task<UploadServerInfo> GetWallUploadServerAsync(long? groupId = null)
+		public Task<UploadServerInfo> GetMessagesUploadServerAsync(long peerId, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => GetWallUploadServer(groupId: groupId));
+			return TypeHelper.TryInvokeMethodAsync(() => GetMessagesUploadServer(peerId: peerId), token);
 		}
 
 		/// <inheritdoc />
-		public Task<UploadServerInfo> GetMessagesUploadServerAsync(long peerId)
+		public Task<ReadOnlyCollection<Photo>> SaveMessagesPhotoAsync(string response, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => GetMessagesUploadServer(peerId: peerId));
+			return TypeHelper.TryInvokeMethodAsync(() => SaveMessagesPhoto(response: response), token);
 		}
 
 		/// <inheritdoc />
-		public Task<ReadOnlyCollection<Photo>> SaveMessagesPhotoAsync(string response)
+		public Task<UploadServerInfo> GetOwnerCoverPhotoUploadServerAsync(long groupId, long? cropX = null, long? cropY = null,
+																		long? cropX2 = 795L, long? cropY2 = 200L,
+																		CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => SaveMessagesPhoto(response: response));
+			return TypeHelper.TryInvokeMethodAsync(() => GetOwnerCoverPhotoUploadServer(groupId, cropX, cropY, cropX2, cropY2), token);
 		}
 
 		/// <inheritdoc />
-		public Task<UploadServerInfo> GetOwnerCoverPhotoUploadServerAsync(long groupId
-																		, long? cropX = null
-																		, long? cropY = null
-																		, long? cropX2 = 795L
-																		, long? cropY2 = 200L)
+		public Task<GroupCover> SaveOwnerCoverPhotoAsync(string response, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				GetOwnerCoverPhotoUploadServer(groupId, cropX, cropY, cropX2, cropY2));
+			return TypeHelper.TryInvokeMethodAsync(() => SaveOwnerCoverPhoto(response: response), token);
 		}
 
 		/// <inheritdoc />
-		public Task<GroupCover> SaveOwnerCoverPhotoAsync(string response)
+		public Task<bool> ReportAsync(long ownerId, ulong photoId, ReportReason reason, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => SaveOwnerCoverPhoto(response: response));
+			return TypeHelper.TryInvokeMethodAsync(() => Report(ownerId, photoId, reason), token);
 		}
 
 		/// <inheritdoc />
-		public Task<bool> ReportAsync(long ownerId, ulong photoId, ReportReason reason)
+		public Task<bool> ReportCommentAsync(long ownerId, ulong commentId, ReportReason reason, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => Report(ownerId, photoId, reason));
+			return TypeHelper.TryInvokeMethodAsync(() => ReportComment(ownerId, commentId, reason), token);
 		}
 
 		/// <inheritdoc />
-		public Task<bool> ReportCommentAsync(long ownerId, ulong commentId, ReportReason reason)
+		public Task<VkCollection<Photo>> SearchAsync(PhotoSearchParams @params, bool skipAuthorization = false,
+													CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				ReportComment(ownerId, commentId, reason));
+			return TypeHelper.TryInvokeMethodAsync(() => Search(@params, skipAuthorization), token);
 		}
 
 		/// <inheritdoc />
-		public Task<VkCollection<Photo>> SearchAsync(PhotoSearchParams @params, bool skipAuthorization = false)
+		public Task<ReadOnlyCollection<Photo>> SaveAsync(PhotoSaveParams @params, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				Search(@params, skipAuthorization));
+			return TypeHelper.TryInvokeMethodAsync(() => Save(@params: @params), token);
 		}
 
 		/// <inheritdoc />
-		public Task<ReadOnlyCollection<Photo>> SaveAsync(PhotoSaveParams @params)
+		public Task<long> CopyAsync(long ownerId, ulong photoId, string accessKey = null, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => Save(@params: @params));
+			return TypeHelper.TryInvokeMethodAsync(() => Copy(ownerId, photoId, accessKey), token);
 		}
 
 		/// <inheritdoc />
-		public Task<long> CopyAsync(long ownerId, ulong photoId, string accessKey = null)
+		public Task<bool> EditAsync(PhotoEditParams @params, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				Copy(ownerId, photoId, accessKey));
+			return TypeHelper.TryInvokeMethodAsync(() => Edit(@params: @params), token);
 		}
 
 		/// <inheritdoc />
-		public Task<bool> EditAsync(PhotoEditParams @params)
+		public Task<bool> MoveAsync(long targetAlbumId, ulong photoId, long? ownerId = null, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => Edit(@params: @params));
+			return TypeHelper.TryInvokeMethodAsync(() => Move(targetAlbumId, photoId, ownerId), token);
 		}
 
 		/// <inheritdoc />
-		public Task<bool> MoveAsync(long targetAlbumId, ulong photoId, long? ownerId = null)
+		public Task<bool> MakeCoverAsync(ulong photoId, long? ownerId = null, long? albumId = null, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				Move(targetAlbumId, photoId, ownerId));
+			return TypeHelper.TryInvokeMethodAsync(() => MakeCover(photoId, ownerId, albumId), token);
 		}
 
 		/// <inheritdoc />
-		public Task<bool> MakeCoverAsync(ulong photoId, long? ownerId = null, long? albumId = null)
+		public Task<bool> ReorderAlbumsAsync(long albumId, long? ownerId = null, long? before = null, long? after = null,
+											CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				MakeCover(photoId, ownerId, albumId));
+			return TypeHelper.TryInvokeMethodAsync(() => ReorderAlbums(albumId, ownerId, before, after), token);
 		}
 
 		/// <inheritdoc />
-		public Task<bool> ReorderAlbumsAsync(long albumId, long? ownerId = null, long? before = null, long? after = null)
+		public Task<bool> ReorderPhotosAsync(ulong photoId, long? ownerId = null, long? before = null, long? after = null,
+											CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				ReorderAlbums(albumId, ownerId, before, after));
+			return TypeHelper.TryInvokeMethodAsync(() => ReorderPhotos(photoId, ownerId, before, after), token);
 		}
 
 		/// <inheritdoc />
-		public Task<bool> ReorderPhotosAsync(ulong photoId, long? ownerId = null, long? before = null, long? after = null)
+		public Task<VkCollection<Photo>> GetAllAsync(PhotoGetAllParams @params, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				ReorderPhotos(photoId, ownerId, before, after));
+			return TypeHelper.TryInvokeMethodAsync(() => GetAll(@params: @params), token);
 		}
 
 		/// <inheritdoc />
-		public Task<VkCollection<Photo>> GetAllAsync(PhotoGetAllParams @params)
+		public Task<VkCollection<Photo>> GetUserPhotosAsync(PhotoGetUserPhotosParams @params, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => GetAll(@params: @params));
+			return TypeHelper.TryInvokeMethodAsync(() => GetUserPhotos(@params: @params), token);
 		}
 
 		/// <inheritdoc />
-		public Task<VkCollection<Photo>> GetUserPhotosAsync(PhotoGetUserPhotosParams @params)
+		public Task<bool> DeleteAlbumAsync(long albumId, long? groupId = null, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => GetUserPhotos(@params: @params));
+			return TypeHelper.TryInvokeMethodAsync(() => DeleteAlbum(albumId, groupId), token);
 		}
 
 		/// <inheritdoc />
-		public Task<bool> DeleteAlbumAsync(long albumId, long? groupId = null)
+		public Task<bool> DeleteAsync(ulong photoId, long? ownerId = null, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => DeleteAlbum(albumId, groupId));
+			return TypeHelper.TryInvokeMethodAsync(() => Delete(photoId, ownerId), token);
 		}
 
 		/// <inheritdoc />
-		public Task<bool> DeleteAsync(ulong photoId, long? ownerId = null)
+		public Task<bool> RestoreAsync(ulong photoId, long? ownerId = null, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => Delete(photoId, ownerId));
+			return TypeHelper.TryInvokeMethodAsync(() => Restore(photoId, ownerId), token);
 		}
 
 		/// <inheritdoc />
-		public Task<bool> RestoreAsync(ulong photoId, long? ownerId = null)
+		public Task<bool> ConfirmTagAsync(ulong photoId, ulong tagId, long? ownerId = null, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => Restore(photoId, ownerId));
+			return TypeHelper.TryInvokeMethodAsync(() => ConfirmTag(photoId, tagId, ownerId), token);
 		}
 
 		/// <inheritdoc />
-		public Task<bool> ConfirmTagAsync(ulong photoId, ulong tagId, long? ownerId = null)
+		public Task<VkCollection<Comment>> GetCommentsAsync(PhotoGetCommentsParams @params, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				ConfirmTag(photoId, tagId, ownerId));
+			return TypeHelper.TryInvokeMethodAsync(() => GetComments(@params: @params), token);
 		}
 
 		/// <inheritdoc />
-		public Task<VkCollection<Comment>> GetCommentsAsync(PhotoGetCommentsParams @params)
+		public Task<VkCollection<Comment>> GetAllCommentsAsync(PhotoGetAllCommentsParams @params, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => GetComments(@params: @params));
+			return TypeHelper.TryInvokeMethodAsync(() => GetAllComments(@params: @params), token);
 		}
 
 		/// <inheritdoc />
-		public Task<VkCollection<Comment>> GetAllCommentsAsync(PhotoGetAllCommentsParams @params)
+		public Task<long> CreateCommentAsync(PhotoCreateCommentParams @params, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => GetAllComments(@params: @params));
+			return TypeHelper.TryInvokeMethodAsync(() => CreateComment(@params: @params), token);
 		}
 
 		/// <inheritdoc />
-		public Task<long> CreateCommentAsync(PhotoCreateCommentParams @params)
+		public Task<bool> DeleteCommentAsync(ulong commentId, long? ownerId = null, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => CreateComment(@params: @params));
+			return TypeHelper.TryInvokeMethodAsync(() => DeleteComment(commentId, ownerId), token);
 		}
 
 		/// <inheritdoc />
-		public Task<bool> DeleteCommentAsync(ulong commentId, long? ownerId = null)
+		public Task<long> RestoreCommentAsync(ulong commentId, long? ownerId = null, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => DeleteComment(commentId, ownerId));
+			return TypeHelper.TryInvokeMethodAsync(() => RestoreComment(commentId, ownerId), token);
 		}
 
 		/// <inheritdoc />
-		public Task<long> RestoreCommentAsync(ulong commentId, long? ownerId = null)
+		public Task<bool> EditCommentAsync(ulong commentId, string message, long? ownerId = null,
+											IEnumerable<MediaAttachment> attachments = null, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => RestoreComment(commentId, ownerId));
+			return TypeHelper.TryInvokeMethodAsync(() => EditComment(commentId, message, ownerId, attachments), token);
 		}
 
 		/// <inheritdoc />
-		public Task<bool> EditCommentAsync(ulong commentId
-											, string message
-											, long? ownerId = null
-											, IEnumerable<MediaAttachment> attachments = null)
+		public Task<ReadOnlyCollection<Tag>> GetTagsAsync(ulong photoId, long? ownerId = null, string accessKey = null,
+														CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				EditComment(commentId, message, ownerId, attachments));
+			return TypeHelper.TryInvokeMethodAsync(() => GetTags(photoId, ownerId, accessKey), token);
 		}
 
 		/// <inheritdoc />
-		public Task<ReadOnlyCollection<Tag>> GetTagsAsync(ulong photoId, long? ownerId = null, string accessKey = null)
+		public Task<ulong> PutTagAsync(PhotoPutTagParams @params, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				GetTags(photoId, ownerId, accessKey));
+			return TypeHelper.TryInvokeMethodAsync(() => PutTag(@params: @params), token);
 		}
 
 		/// <inheritdoc />
-		public Task<ulong> PutTagAsync(PhotoPutTagParams @params)
+		public Task<bool> RemoveTagAsync(ulong tagId, ulong photoId, long? ownerId = null, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => PutTag(@params: @params));
+			return TypeHelper.TryInvokeMethodAsync(() => RemoveTag(tagId, photoId, ownerId), token);
 		}
 
 		/// <inheritdoc />
-		public Task<bool> RemoveTagAsync(ulong tagId, ulong photoId, long? ownerId = null)
+		public Task<VkCollection<Photo>> GetNewTagsAsync(uint? offset = null, uint? count = null, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => RemoveTag(tagId, photoId, ownerId));
+			return TypeHelper.TryInvokeMethodAsync(() => GetNewTags(offset, count), token);
 		}
 
 		/// <inheritdoc />
-		public Task<VkCollection<Photo>> GetNewTagsAsync(uint? offset = null, uint? count = null)
+		public Task<UploadServerInfo> GetMarketUploadServerAsync(long groupId, bool? mainPhoto = null, long? cropX = null,
+																long? cropY = null, long? cropWidth = null,
+																CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => GetNewTags(offset, count));
+			return TypeHelper.TryInvokeMethodAsync(() => GetMarketUploadServer(groupId, mainPhoto, cropX, cropY, cropWidth), token);
 		}
 
 		/// <inheritdoc />
-		public Task<UploadServerInfo> GetMarketUploadServerAsync(long groupId
-																, bool? mainPhoto = null
-																, long? cropX = null
-																, long? cropY = null
-																, long? cropWidth = null)
+		public Task<UploadServerInfo> GetMarketAlbumUploadServerAsync(long groupId, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				GetMarketUploadServer(groupId, mainPhoto, cropX, cropY, cropWidth));
+			return TypeHelper.TryInvokeMethodAsync(() => GetMarketAlbumUploadServer(groupId: groupId), token);
 		}
 
 		/// <inheritdoc />
-		public Task<UploadServerInfo> GetMarketAlbumUploadServerAsync(long groupId)
+		public Task<ReadOnlyCollection<Photo>> SaveMarketPhotoAsync(long groupId, string response, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => GetMarketAlbumUploadServer(groupId: groupId));
+			return TypeHelper.TryInvokeMethodAsync(() => SaveMarketPhoto(groupId, response), token);
 		}
 
 		/// <inheritdoc />
-		public Task<ReadOnlyCollection<Photo>> SaveMarketPhotoAsync(long groupId, string response)
+		public Task<ReadOnlyCollection<Photo>> SaveMarketAlbumPhotoAsync(long groupId, string response, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => SaveMarketPhoto(groupId, response));
-		}
-
-		/// <inheritdoc />
-		public Task<ReadOnlyCollection<Photo>> SaveMarketAlbumPhotoAsync(long groupId, string response)
-		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => SaveMarketAlbumPhoto(groupId, response));
+			return TypeHelper.TryInvokeMethodAsync(() => SaveMarketAlbumPhoto(groupId, response), token);
 		}
 	}
 }
