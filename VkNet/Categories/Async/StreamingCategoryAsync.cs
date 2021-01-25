@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
@@ -10,38 +11,37 @@ namespace VkNet.Categories
 	/// <inheritdoc />
 	public partial class StreamingCategory
 	{
+		/// <param name="token"></param>
 		/// <inheritdoc />
-		public Task<StreamingServerUrl> GetServerUrlAsync()
+		public Task<StreamingServerUrl> GetServerUrlAsync(CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>GetServerUrl());
+			return TypeHelper.TryInvokeMethodAsync(GetServerUrl, token);
+		}
+
+		/// <param name="token"></param>
+		/// <inheritdoc />
+		public Task<StreamingSettings> GetSettingsAsync(CancellationToken token = default)
+		{
+			return TypeHelper.TryInvokeMethodAsync(GetSettings, token);
 		}
 
 		/// <inheritdoc />
-		public Task<StreamingSettings> GetSettingsAsync()
+		public Task<ReadOnlyCollection<StreamingStats>> GetStatsAsync(string type, string interval, DateTime? startTime = null,
+																	DateTime? endTime = null, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>GetSettings());
+			return TypeHelper.TryInvokeMethodAsync(() => GetStats(type, interval, startTime, endTime), token);
 		}
 
 		/// <inheritdoc />
-		public Task<ReadOnlyCollection<StreamingStats>> GetStatsAsync(string type
-																			, string interval
-																			, DateTime? startTime = null
-																			, DateTime? endTime = null)
+		public Task<bool> SetSettingsAsync(MonthlyLimit monthlyTier, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-					GetStats(type: type, interval: interval, startTime: startTime, endTime: endTime));
+			return TypeHelper.TryInvokeMethodAsync(() => SetSettings(monthlyTier: monthlyTier), token);
 		}
 
 		/// <inheritdoc />
-		public Task<bool> SetSettingsAsync(MonthlyLimit monthlyTier)
+		public Task<string> GetStemAsync(string word, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>SetSettings(monthlyTier: monthlyTier));
-		}
-
-		/// <inheritdoc />
-		public Task<string> GetStemAsync(string word)
-		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => GetStem(word: word));
+			return TypeHelper.TryInvokeMethodAsync(() => GetStem(word: word), token);
 		}
 	}
 }
