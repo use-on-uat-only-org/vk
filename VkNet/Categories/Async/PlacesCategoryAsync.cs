@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 using VkNet.Model;
-using VkNet.Model.RequestParams;
 using VkNet.Model.RequestParams.Places;
 using VkNet.Utils;
 
@@ -12,40 +12,40 @@ namespace VkNet.Categories
 	public partial class PlacesCategory
 	{
 		/// <inheritdoc />
-		public Task<long> AddAsync(PlacesAddParams placesAddParams)
+		public Task<long> AddAsync(PlacesAddParams placesAddParams, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => Add(placesAddParams: placesAddParams));
+			return TypeHelper.TryInvokeMethodAsync(() => Add(placesAddParams: placesAddParams), token);
 		}
 
 		/// <inheritdoc />
-		public Task<long> CheckinAsync(PlacesCheckinParams placesCheckinParams)
+		public Task<long> CheckinAsync(PlacesCheckinParams placesCheckinParams, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => Checkin(placesCheckinParams: placesCheckinParams));
+			return TypeHelper.TryInvokeMethodAsync(() => Checkin(placesCheckinParams: placesCheckinParams), token);
 		}
 
 		/// <inheritdoc />
-		public Task<ReadOnlyCollection<Place>> GetByIdAsync(IEnumerable<ulong> places)
+		public Task<ReadOnlyCollection<Place>> GetByIdAsync(IEnumerable<ulong> places, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => GetById(places: places));
+			return TypeHelper.TryInvokeMethodAsync(() => GetById(places: places), token);
 		}
 
 		/// <inheritdoc />
-		public Task<VkCollection<Checkin>> GetCheckinsAsync(PlacesGetCheckinsParams placesGetCheckinsParams)
+		public Task<VkCollection<Checkin>> GetCheckinsAsync(PlacesGetCheckinsParams placesGetCheckinsParams, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: () =>
-				GetCheckins(placesGetCheckinsParams: placesGetCheckinsParams));
+			return TypeHelper.TryInvokeMethodAsync(() => GetCheckins(placesGetCheckinsParams: placesGetCheckinsParams), token);
+		}
+
+		/// <param name="token"></param>
+		/// <inheritdoc />
+		public Task<ReadOnlyCollection<PlaceType>> GetTypesAsync(CancellationToken token = default)
+		{
+			return TypeHelper.TryInvokeMethodAsync(GetTypes, token);
 		}
 
 		/// <inheritdoc />
-		public Task<ReadOnlyCollection<PlaceType>> GetTypesAsync()
+		public Task<VkCollection<Place>> SearchAsync(PlacesSearchParams placesSearchParams, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(func: GetTypes);
-		}
-
-		/// <inheritdoc />
-		public Task<VkCollection<Place>> SearchAsync(PlacesSearchParams placesSearchParams)
-		{
-			return TypeHelper.TryInvokeMethodAsync(func: () => Search(placesSearchParams: placesSearchParams));
+			return TypeHelper.TryInvokeMethodAsync(() => Search(placesSearchParams: placesSearchParams), token);
 		}
 	}
 }
