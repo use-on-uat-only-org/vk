@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
 using JetBrains.Annotations;
@@ -27,7 +28,7 @@ namespace VkNet.Infrastructure.Authorization.ImplicitFlow
 		}
 
 		/// <inheritdoc />
-		public async Task<VkHtmlFormResult> GetFormAsync(Uri url)
+		public async Task<VkHtmlFormResult> GetFormAsync(Uri url, CancellationToken token = default)
 		{
 			var response = await _restClient.PostAsync(url, Enumerable.Empty<KeyValuePair<string, string>>());
 
