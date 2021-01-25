@@ -20,5 +20,8 @@ namespace VkNet.Abstractions
 
 		/// <inheritdoc cref="IPodcastsCategoryAsync.SearchAsync"/>
 		PodcastsSearchResult Search(PodcastsSearchParams @params);
+
+		/// <inheritdoc cref="IPodcastsCategoryAsync.SearchPodcastAsync"/>
+		PodcastsSearchResult SearchPodcast(PodcastsSearchParams @params);
 	}
 }
