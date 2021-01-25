@@ -353,9 +353,9 @@ namespace VkNet
 		}
 
 		/// <inheritdoc />
-		public Task<VkResponse> CallLongPollAsync(string server, VkParameters parameters)
+		public Task<VkResponse> CallLongPollAsync(string server, VkParameters parameters, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() => CallLongPoll(server, parameters));
+			return TypeHelper.TryInvokeMethodAsync(() => CallLongPoll(server, parameters), token);
 		}
 
 		/// <inheritdoc />
@@ -383,10 +383,9 @@ namespace VkNet
 		}
 
 		/// <inheritdoc />
-		public Task<string> InvokeLongPollAsync(string server, Dictionary<string, string> parameters)
+		public Task<string> InvokeLongPollAsync(string server, Dictionary<string, string> parameters, CancellationToken token = default)
 		{
-			return TypeHelper.TryInvokeMethodAsync(() =>
-				InvokeLongPoll(server, parameters));
+			return TypeHelper.TryInvokeMethodAsync(() => InvokeLongPoll(server, parameters), token);
 		}
 
 		/// <inheritdoc cref="IDisposable" />
