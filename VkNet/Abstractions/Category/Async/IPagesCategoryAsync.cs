@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 using VkNet.Enums;
 using VkNet.Model;
 using VkNet.Model.Attachments;
-using VkNet.Model.RequestParams;
 using VkNet.Model.RequestParams.Pages;
 
 namespace VkNet.Abstractions
@@ -18,6 +18,7 @@ namespace VkNet.Abstractions
 		/// Возвращает информацию о вики-странице..
 		/// </summary>
 		/// <param name="params"> Параметры запроса. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает информацию о вики-странице в виде объекта page.
 		/// Если был задан параметр need_source равный 1, дополнительно будет возвращено
@@ -28,26 +29,28 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте http://vk.com/dev/pages.get
 		/// </remarks>
-		Task<Page> GetAsync(PagesGetParams @params);
+		Task<Page> GetAsync(PagesGetParams @params, CancellationToken token = default);
 
 		/// <summary>
 		/// Сохраняет текст вики-страницы.
 		/// </summary>
 		/// <param name="text"> Новый текст страницы в вики-формате. </param>
-		/// <param name="pageId"> Идентификатор вики-страницы. </param>
 		/// <param name="groupId">
 		/// Идентификатор сообщества, которому принадлежит
 		/// вики-страница.
 		/// </param>
 		/// <param name="userId"> Идентификатор пользователя, создавшего вики-страницу. </param>
 		/// <param name="title"> Название вики-страницы. </param>
+		/// <param name="pageId"> Идентификатор вики-страницы. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успеха возвращает id созданной страницы.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте https://vk.com/dev/pages.save
 		/// </remarks>
-		Task<long> SaveAsync(string text, long groupId, long userId, string title, long? pageId);
+		Task<long> SaveAsync(string text, long groupId, long userId, string title, long? pageId,
+							CancellationToken token = default);
 
 		/// <summary>
 		/// Сохраняет новые настройки доступа на чтение и редактирование вики-страницы.
@@ -60,17 +63,15 @@ namespace VkNet.Abstractions
 		/// <param name="userId"> Идентификатор пользователя, создавшего вики-страницу. </param>
 		/// <param name="view"> Значение настройки доступа на чтение. </param>
 		/// <param name="edit"> Значение настройки доступа на редактирование. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успеха возвращает id страницы, доступ к которой был отредактирован.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте https://vk.com/dev/pages.saveAccess
 		/// </remarks>
-		Task<long> SaveAccessAsync(long pageId
-									, long groupId
-									, long? userId = null
-									, AccessPages view = AccessPages.All
-									, AccessPages edit = AccessPages.Leaders);
+		Task<long> SaveAccessAsync(long pageId, long groupId, long? userId = null, AccessPages view = AccessPages.All,
+									AccessPages edit = AccessPages.Leaders, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список всех старых версий вики-страницы.
@@ -81,6 +82,7 @@ namespace VkNet.Abstractions
 		/// вики-страница.
 		/// </param>
 		/// <param name="userId"> Идентификатор пользователя, создавшего вики-страницу. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает массив объектов page_version, имеющих следующую структуру.
 		/// id — идентификатор версии страницы;
@@ -92,7 +94,7 @@ namespace VkNet.Abstractions
 		/// <remarks>
 		/// Страница документации ВКонтакте https://vk.com/dev/pages.getHistory
 		/// </remarks>
-		Task<ReadOnlyCollection<PageVersion>> GetHistoryAsync(long pageId, long groupId, long? userId = null);
+		Task<ReadOnlyCollection<PageVersion>> GetHistoryAsync(long pageId, long groupId, long? userId = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает список вики-страниц в группе.
@@ -101,13 +103,14 @@ namespace VkNet.Abstractions
 		/// Идентификатор сообщества, которому принадлежит
 		/// вики-страница.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает массив объектов вики-страниц.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте https://vk.com/dev/pages.getTitles
 		/// </remarks>
-		Task<ReadOnlyCollection<Page>> GetTitlesAsync(long groupId);
+		Task<ReadOnlyCollection<Page>> GetTitlesAsync(long groupId, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает текст одной из старых версий страницы.
@@ -122,13 +125,14 @@ namespace VkNet.Abstractions
 		/// вики-страницы.
 		/// </param>
 		/// <param name="userId"> Идентификатор пользователя, который создал страницу. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// Возвращает объект вики-страницы.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте https://vk.com/dev/pages.getVersion
 		/// </remarks>
-		Task<Page> GetVersionAsync(long versionId, long groupId, bool needHtml = false, long? userId = null);
+		Task<Page> GetVersionAsync(long versionId, long groupId, bool needHtml = false, long? userId = null, CancellationToken token = default);
 
 		/// <summary>
 		/// Возвращает html-представление вики-разметки.
@@ -138,13 +142,14 @@ namespace VkNet.Abstractions
 		/// Идентификатор группы, в контексте которой
 		/// интерпретируется данная страница.
 		/// </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// В случае успеха возвращает экранированный html, соответствующий вики-разметке.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте https://vk.com/dev/pages.parseWiki
 		/// </remarks>
-		Task<string> ParseWikiAsync(string text, ulong groupId);
+		Task<string> ParseWikiAsync(string text, ulong groupId, CancellationToken token = default);
 
 		/// <summary>
 		/// Позволяет очистить кеш отдельных внешних страниц, которые могут быть
@@ -155,12 +160,13 @@ namespace VkNet.Abstractions
 		/// доступные по кнопке "Предпросмотр".
 		/// </summary>
 		/// <param name="url"> URL. </param>
+		/// <param name="token"></param>
 		/// <returns>
 		/// При удачной очистке кеша – метод возвращает <c> true </c>.
 		/// </returns>
 		/// <remarks>
 		/// Страница документации ВКонтакте https://vk.com/dev/pages.clearCache
 		/// </remarks>
-		Task<bool> ClearCacheAsync(Uri url);
+		Task<bool> ClearCacheAsync(Uri url, CancellationToken token = default);
 	}
 }
