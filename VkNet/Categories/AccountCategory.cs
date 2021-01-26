@@ -6,7 +6,6 @@ using VkNet.Abstractions;
 using VkNet.Enums.Filters;
 using VkNet.Model;
 using VkNet.Model.Account;
-using VkNet.Model.RequestParams;
 using VkNet.Model.RequestParams.Account;
 using VkNet.Model.Results.Account;
 using VkNet.Utils;
@@ -79,13 +78,13 @@ namespace VkNet.Categories
 			return _vk.Call("account.registerDevice",
 				new VkParameters
 				{
-					{ "token", @params.Token }
-					, { "device_model", @params.DeviceModel }
-					, { "device_year", @params.DeviceYear }
-					, { "device_id", @params.DeviceId }
-					, { "system_version", @params.SystemVersion }
-					, { "settings", JsonConvert.SerializeObject(@params.Settings) }
-					, { "sandbox", @params.Sandbox }
+					{ "token", @params.Token },
+					{ "device_model", @params.DeviceModel },
+					{ "device_year", @params.DeviceYear },
+					{ "device_id", @params.DeviceId },
+					{ "system_version", @params.SystemVersion },
+					{ "settings", JsonConvert.SerializeObject(@params.Settings) },
+					{ "sandbox", @params.Sandbox }
 				});
 		}
 
@@ -256,6 +255,9 @@ namespace VkNet.Categories
 		}
 
 		/// <inheritdoc />
+		/// <remarks>
+		/// TODO: Помазать тестами и убрать приведение к User
+		/// </remarks>
 		[Pure]
 		public AccountSaveProfileInfoParams GetProfileInfo()
 		{
@@ -310,24 +312,24 @@ namespace VkNet.Categories
 				VkErrors.ThrowIfNumberIsNegative(expr: () => @params.City.Id);
 			}
 
-
-			var response = _vk.Call("account.saveProfileInfo", new VkParameters
-			{
-				{ "first_name", @params.FirstName }
-				, { "last_name", @params.LastName }
-				, { "maiden_name", @params.MaidenName }
-				, { "screen_name", @params.ScreenName }
-				, { "sex", @params.Sex }
-				, { "relation", @params.Relation }
-				, { "relation_partner_id", @params.RelationPartner?.Id }
-				, { "bdate", @params.BirthDate }
-				, { "bdate_visibility", @params.BirthdayVisibility }
-				, { "home_town", @params.HomeTown }
-				, { "country_id", @params.Country?.Id }
-				, { "city_id", @params.City?.Id }
-				, { "status", @params.Status }
-				, { "phone", @params.Phone }
-			});
+			var response = _vk.Call("account.saveProfileInfo",
+				new VkParameters
+				{
+					{ "first_name", @params.FirstName },
+					{ "last_name", @params.LastName },
+					{ "maiden_name", @params.MaidenName },
+					{ "screen_name", @params.ScreenName },
+					{ "sex", @params.Sex },
+					{ "relation", @params.Relation },
+					{ "relation_partner_id", @params.RelationPartner?.Id },
+					{ "bdate", @params.BirthDate },
+					{ "bdate_visibility", @params.BirthdayVisibility },
+					{ "home_town", @params.HomeTown },
+					{ "country_id", @params.Country?.Id },
+					{ "city_id", @params.City?.Id },
+					{ "status", @params.Status },
+					{ "phone", @params.Phone }
+				});
 
 			changeNameRequest = null;
 
