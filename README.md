@@ -15,7 +15,7 @@
 
 # Как использовать
 ### Добавьте пакет в ваш проект:
-**Package Manager.**
+**Package Manager**
 ``` powershell
 PM> Install-Package VkNet
 ```
@@ -45,7 +45,7 @@ PM> Install-Package VkNet
 - [Moq](https://github.com/moq/moq4) - The most popular and friendly mocking framework for .NET
 - [SonarAnalyzer.CSharp](https://www.sonarlint.org/visualstudio/) - Analyzers which spot bugs and code smells in your code. 
 
-# Помощь проекту
+# Помощь проекту..
 - [![На счет в банке](https://bpurl.biz/Jb)](https://money.alfabank.ru/p2p/web/transfer/minyutin)
 - [![PayPal](https://img.shields.io/badge/PayPal-donate-red.svg)](https://www.paypal.me/InyutinMaxim)
 - Также вы можете помочь проекту `Pull Request`'ом
