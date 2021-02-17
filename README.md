@@ -15,7 +15,7 @@
 
 # Как использовать
 ### Добавьте пакет в ваш проект:
-**Package Manager**
+**Package Manager.**
 ``` powershell
 PM> Install-Package VkNet
 ```
